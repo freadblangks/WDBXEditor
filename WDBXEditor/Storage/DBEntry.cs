@@ -497,47 +497,105 @@ namespace WDBXEditor.Storage
 		}
 
 		/// <summary>
-		/// Uses MysqlBulkCopy to import the data directly into a database
+		/// Uses MysqlBulkCopy to import the data directly into a database.
 		/// </summary>
-		/// <param name="connectionstring"></param>
-		public void ToSQLTable(string connectionstring)
+		/// <param name="connectionString">The connection string used to open the MySQL connection.</param>
+		public void ToSQLTable(string connectionString)
+		{
+			using (var connection = new MySqlConnection(connectionString))
+			{
+				try
+				{
+					connection.Open();
+				}
+				catch (Exception ex)
+				{
+					string debugMessage = $"Error opening SQL connection: {ex.Message}";
+					Debug.WriteLine(debugMessage, "Error");
+
+					// Throwing a different exception message because I didn't write this code
+					// and I think it might get displayed in the UI.
+					throw new Exception("   Incorrect MySQL login details.");
+				}
+
+				ToSQLTable(connection);
+			}
+		}
+
+
+		/// <summary>
+		/// Uses MysqlBulkCopy to import the data directly into a database.
+		/// </summary>
+		/// <param name="connection">A <see cref="MySqlConnection"/> object for interacting with a SQL server instance.</param>
+		public void ToSQLTable(MySqlConnection connection)
 		{
 			string tableName = $"db_{TableStructure.Name}_{Build}";
+
+			var sb = new StringBuilder();
+			sb.AppendLine("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
+			sb.AppendLine($"DROP TABLE IF EXISTS `{tableName}`; ");
+			sb.AppendLine($"CREATE TABLE `{tableName}` ({Data.Columns.ToSql(Key)}) ENGINE=MyISAM DEFAULT CHARACTER SET = utf8 COLLATE = utf8_unicode_ci; ");
 
 			// This allows the user to get around the "secure_file_priv" setting in MySQL.
 			// If a value has been provided for this appSetting, we load from that directory instead.
 			string mySqlSecureFilePrivDirectory = GetMySqlSecureFilePrivSetting();
 			string stagingDirectory = (!string.IsNullOrWhiteSpace(mySqlSecureFilePrivDirectory)) ? mySqlSecureFilePrivDirectory : TEMP_FOLDER;
 			string csvName = Path.Combine(stagingDirectory, tableName + ".csv");
-			StringBuilder sb = new StringBuilder();
-			sb.AppendLine("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
-			sb.AppendLine($"DROP TABLE IF EXISTS `{tableName}`; ");
-			sb.AppendLine($"CREATE TABLE `{tableName}` ({Data.Columns.ToSql(Key)}) ENGINE=MyISAM DEFAULT CHARACTER SET = utf8 COLLATE = utf8_unicode_ci; ");
 
-			using (StreamWriter csv = new StreamWriter(csvName))
-				csv.Write(ToCSV());
-
-			using (MySqlConnection connection = new MySqlConnection(connectionstring))
+			// Write data to a temporary CSV file to be loaded into SQL.
+			using (var csv = new StreamWriter(csvName))
 			{
-				connection.Open();
-
-				using (MySqlCommand command = new MySqlCommand(sb.ToString(), connection))
-					command.ExecuteNonQuery();
-
-				new MySqlBulkLoader(connection)
-				{
-					TableName = $"`{tableName}`",
-					FieldTerminator = ",",
-					LineTerminator = "\r\n",
-					NumberOfLinesToSkip = 1,
-					FileName = csvName,
-					FieldQuotationCharacter = '"',
-					CharacterSet = "UTF8"
-				}.Load();
+				csv.Write(ToCSV());
 			}
 
-			try { File.Delete(csvName); }
-			catch { }
+			// Open the connection if it's closed.
+			// In the event that it's in a non-closed state other
+			// than Open, who KNOWS what's gonna happen!
+			//
+			// TODO: Move this to its own method and implement
+			// handling for the other states.
+			if (connection.State == ConnectionState.Closed)
+			{
+				try
+				{
+					connection.Open();
+				}
+				catch (Exception ex)
+				{
+					string debugMessage = $"Error opening SQL connection: {ex.Message}";
+					Debug.WriteLine(debugMessage, "Error");
+
+					// Just going to assume this is why we're throwing cause that's
+					// what we're doing everywhere else (AAAAAAAAAAAAAAAAAAAAAAAAAAAAA).
+					throw new Exception("   Incorrect MySQL login details.");
+				}
+			}
+
+			using (var command = new MySqlCommand(sb.ToString(), connection))
+			{
+				command.ExecuteNonQuery();
+			}
+
+			new MySqlBulkLoader(connection)
+			{
+				TableName = $"`{tableName}`",
+				FieldTerminator = ",",
+				LineTerminator = "\r\n",
+				NumberOfLinesToSkip = 1,
+				FileName = csvName,
+				FieldQuotationCharacter = '"',
+				CharacterSet = "UTF8"
+			}.Load();
+
+			try
+			{
+				File.Delete(csvName);
+			}
+			catch (Exception ex)
+			{
+				string message = $"Error deleting temporary file '{csvName}': {ex.Message}";
+				Debug.WriteLine(message, "Warning");
+			}
 		}
 
 		/// <summary>
@@ -786,13 +844,13 @@ namespace WDBXEditor.Storage
 
 		public bool ImportSQL(UpdateMode mode, string connectionstring, string table, out string error, string columns = "*")
 		{
-			error = string.Empty;
+			error = "";
 			DataTable importTable = Data.Clone(); //Clone table structure to help with mapping
 			Parallel.For(0, importTable.Columns.Count, c => importTable.Columns[c].AllowDBNull = true); //Allow null values
 
-			using (MySqlConnection connection = new MySqlConnection(connectionstring))
-			using (MySqlCommand command = new MySqlCommand($"SELECT {columns} FROM `{table}`", connection))
-			using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+			using (var connection = new MySqlConnection(connectionstring))
+			using (var command = new MySqlCommand($"SELECT {columns} FROM `{table}`", connection))
+			using (var adapter = new MySqlDataAdapter(command))
 			{
 				try
 				{
@@ -806,13 +864,13 @@ namespace WDBXEditor.Storage
 				}
 				catch (Exception ex)
 				{
-					System.Diagnostics.Debug.WriteLine(ex.Message);
+					Debug.WriteLine(ex.Message);
 					return false;
 				}
 			}
 
-			//Replace DBNulls with default value
-			var defaultVals = importTable.Columns.Cast<DataColumn>().Select(x => x.DefaultValue).ToArray();
+			// Replace DBNulls with default value.
+			object[] defaultVals = importTable.Columns.Cast<DataColumn>().Select(x => x.DefaultValue).ToArray();
 			Parallel.For(0, importTable.Rows.Count, r =>
 			{
 				for (int i = 0; i < importTable.Columns.Count; i++)
@@ -885,11 +943,11 @@ namespace WDBXEditor.Storage
 			{
 				case UpdateMode.Insert:
 					//Insert all rows where the ID doesn't already exist already into the existing datatable
-					var rows = Data.Except(importTable, Key);
-					var source = Data.Copy();
+					IEnumerable<object[]> rows = Data.Except(importTable, Key);
+					DataTable source = Data.Copy();
 
 					source.BeginLoadData();
-					foreach (var r in rows)
+					foreach (object[] r in rows)
 						source.Rows.Add(r);
 					source.EndLoadData();
 
@@ -905,10 +963,10 @@ namespace WDBXEditor.Storage
 
 				case UpdateMode.Update:
 					//Insert all the missing existing rows into the new dataset then change the datatable
-					var rows2 = importTable.Except(Data, Key);
+					IEnumerable<object[]> rows2 = importTable.Except(Data, Key);
 
 					importTable.BeginLoadData();
-					foreach (var r in rows2)
+					foreach (object[] r in rows2)
 						importTable.Rows.Add(r);
 					importTable.EndLoadData();
 

@@ -50,10 +50,24 @@ namespace WDBXEditor.Common
 			Unk,
 		}
 
+		/// <summary>
+		/// Contains the different update strategies when importing a CSV or SQL table.
+		/// </summary>
 		public enum UpdateMode
 		{
+			/// <summary>
+			/// Import new records only ("Import New" in the UI).
+			/// </summary>
 			Insert,
+
+			/// <summary>
+			/// Import new records and update any existing ones that are different ("Update Existing" in the UI).
+			/// </summary>
 			Update,
+
+			/// <summary>
+			/// Replace all data for the currently loaded DBC ("Override All" in the UI).
+			/// </summary>
 			Replace
 		}
 

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,14 +11,19 @@ using System.Threading.Tasks;
 using WDBXEditor.Archives.CASC.Handlers;
 using WDBXEditor.Archives.MPQ;
 using WDBXEditor.Common;
+using WDBXEditor.Reader;
 using WDBXEditor.Storage;
 using static WDBXEditor.Common.Constants;
 
 namespace WDBXEditor.ConsoleHandler
 {
-    class ConsoleCommands
+    /// <summary>
+    /// Class containing implementations for console commands.
+    /// </summary>
+    public class ConsoleCommands
     {
         #region Load
+
         /// <summary>
         /// Loads a file into the console
         /// <para>load -f "*.dbc" -s ".mpq/wow dir" -b 11802</para>
@@ -26,7 +32,7 @@ namespace WDBXEditor.ConsoleHandler
         /// 
         public static void LoadCommand(string[] args)
         {
-            var pmap = ConsoleManager.ParseCommand(args);
+            Dictionary<string, string> pmap = ConsoleManager.ParseCommand(args);
             string file = ParamCheck<string>(pmap, "-f");
             string filename = Path.GetFileName(file);
             string filenoext = Path.GetFileNameWithoutExtension(file);
@@ -34,29 +40,33 @@ namespace WDBXEditor.ConsoleHandler
             int build = ParamCheck<int>(pmap, "-b");
             SourceType sType = GetSourceType(source);
 
-            //Check file exists if loaded from the filesystem
+            // Check file exists if loaded from the filesystem.
             if (!File.Exists(file) && sType == SourceType.File)
-                throw new Exception($"   File not found {file}.");
+			{
+                throw new Exception($"   File not found '{file}'.");
+            }
 
-            //Check the required definition exists
+            // Check the required definition exists.
             var def = Database.Definitions.Tables.FirstOrDefault(x => x.Build == build && x.Name.Equals(filenoext, IGNORECASE));
             if (def == null)
+			{
                 throw new Exception($"   Could not find definition for {Path.GetFileName(file)} build {build}.");
+            }
 
             Database.BuildNumber = build;
-            var dic = new ConcurrentDictionary<string, MemoryStream>();
+            var fileStreams = new ConcurrentDictionary<string, MemoryStream>();
             string error = string.Empty;
 
             switch (sType)
             {
                 case SourceType.MPQ:
                     Console.WriteLine("Loading from MPQ archive...");
-                    using (MpqArchive archive = new MpqArchive(source, FileAccess.Read))
+                    using (var archive = new MpqArchive(source, FileAccess.Read))
                     {
                         string line = string.Empty;
                         bool loop = true;
                         using (MpqFileStream listfile = archive.OpenFile("(listfile)"))
-                        using (StreamReader sr = new StreamReader(listfile))
+                        using (var sr = new StreamReader(listfile))
                         {
                             while ((line = sr.ReadLine()) != null && loop)
                             {
@@ -65,9 +75,9 @@ namespace WDBXEditor.ConsoleHandler
                                     loop = false;
                                     var ms = new MemoryStream();
                                     archive.OpenFile(line).CopyTo(ms);
-                                    dic.TryAdd(filename, ms);
+                                    fileStreams.TryAdd(filename, ms);
 
-                                    error = Database.LoadFiles(dic).Result.FirstOrDefault();
+                                    error = Database.LoadFiles(fileStreams).Result.FirstOrDefault();
                                 }
                             }
                         }
@@ -79,14 +89,15 @@ namespace WDBXEditor.ConsoleHandler
                     {
                         string fullname = filename;
                         if (!fullname.StartsWith("DBFilesClient", IGNORECASE))
+						{
                             fullname = "DBFilesClient\\" + filename; //Ensure we have the current file name structure
+                        }
 
                         var stream = casc.ReadFile(fullname);
                         if (stream != null)
                         {
-                            dic.TryAdd(filename, stream);
-
-                            error = Database.LoadFiles(dic).Result.FirstOrDefault();
+                            fileStreams.TryAdd(filename, stream);
+                            error = Database.LoadFiles(fileStreams).Result.FirstOrDefault();
                         }
                     }
                     break;
@@ -95,13 +106,17 @@ namespace WDBXEditor.ConsoleHandler
                     break;
             }
 
-            dic.Clear();
+            fileStreams.Clear();
 
             if (!string.IsNullOrWhiteSpace(error))
+			{
                 throw new Exception("   " + error);
+            }
 
             if (Database.Entries.Count == 0)
+			{
                 throw new Exception("   File could not be loaded.");
+            }
 
             Console.WriteLine($"{Path.GetFileName(file)} loaded.");
             Console.WriteLine("");
@@ -109,7 +124,7 @@ namespace WDBXEditor.ConsoleHandler
 
         public static void ExtractCommand(string[] args)
         {
-            var pmap = ConsoleManager.ParseCommand(args);
+            Dictionary<string, string> pmap = ConsoleManager.ParseCommand(args);
             string filter = ParamCheck<string>(pmap, "-f", false);
             string source = ParamCheck<string>(pmap, "-s");
             string output = ParamCheck<string>(pmap, "-o");
@@ -121,17 +136,16 @@ namespace WDBXEditor.ConsoleHandler
             string regexfilter = "(" + Regex.Escape(filter).Replace(@"\*", @".*").Replace(@"\?", ".") + ")";
             Func<string, bool> TypeCheck = t => Path.GetExtension(t).ToLower() == ".dbc" || Path.GetExtension(t).ToLower() == ".db2";
 
-            
-            var dic = new ConcurrentDictionary<string, MemoryStream>();
+            var fileStreams = new ConcurrentDictionary<string, MemoryStream>();
             switch (sType)
             {
                 case SourceType.MPQ:
                     Console.WriteLine("Loading from MPQ archive...");
-                    using (MpqArchive archive = new MpqArchive(source, FileAccess.Read))
+                    using (var archive = new MpqArchive(source, FileAccess.Read))
                     {
                         string line = string.Empty;
                         using (MpqFileStream listfile = archive.OpenFile("(listfile)"))
-                        using (StreamReader sr = new StreamReader(listfile))
+                        using (var sr = new StreamReader(listfile))
                         {
                             while ((line = sr.ReadLine()) != null)
                             {
@@ -139,7 +153,7 @@ namespace WDBXEditor.ConsoleHandler
                                 {
                                     var ms = new MemoryStream();
                                     archive.OpenFile(line).CopyTo(ms);
-                                    dic.TryAdd(Path.GetFileName(line), ms);
+                                    fileStreams.TryAdd(Path.GetFileName(line), ms);
                                 }
                             }
                         }
@@ -149,24 +163,31 @@ namespace WDBXEditor.ConsoleHandler
                     Console.WriteLine("Loading from CASC directory...");
                     using (var casc = new CASCHandler(source))
                     {
-                        var files = Constants.ClientDBFileNames.Where(x => Regex.IsMatch(Path.GetFileName(x), regexfilter, RegexOptions.Compiled | RegexOptions.IgnoreCase));
-                        foreach(var file in files)
+                        var fileNames = Constants.ClientDBFileNames.Where(x => Regex.IsMatch(Path.GetFileName(x), regexfilter, RegexOptions.Compiled | RegexOptions.IgnoreCase));
+                        foreach(string fileName in fileNames)
                         {
-                            var stream = casc.ReadFile(file);
+                            var stream = casc.ReadFile(fileName);
                             if (stream != null)
-                                dic.TryAdd(Path.GetFileName(file), stream);
+							{
+                                fileStreams.TryAdd(Path.GetFileName(fileName), stream);
+                            }
+                                
                         }
                     }
                     break;
             }
 
-            if (dic.Count == 0)
+            if (fileStreams.Count == 0)
+			{
                 throw new Exception("   No matching files found.");
+            }
 
             if (!Directory.Exists(output))
+			{
                 Directory.CreateDirectory(output);
+            }
 
-            foreach(var d in dic)
+            foreach(KeyValuePair<string, MemoryStream> d in fileStreams)
             {
                 using (var fs = new FileStream(Path.Combine(output, d.Key), FileMode.Create))
                 {
@@ -175,7 +196,7 @@ namespace WDBXEditor.ConsoleHandler
                 }
             }
 
-            dic.Clear();
+            fileStreams.Clear();
 
             Console.WriteLine($"   Successfully extracted files.");
             Console.WriteLine("");
@@ -183,6 +204,7 @@ namespace WDBXEditor.ConsoleHandler
         #endregion
         
         #region Export
+
         /// <summary>
         /// Exports a file to either SQL, JSON or CSV
         /// <para>-export -f "*.dbc" -s ".mpq/wow dir" -b 11802 -o "*.sql|*.csv"</para>
@@ -190,14 +212,14 @@ namespace WDBXEditor.ConsoleHandler
         /// <param name="args"></param>
         public static void ExportArgCommand(string[] args)
         {
-            var pmap = ConsoleManager.ParseCommand(args);
+            Dictionary<string, string> pmap = ConsoleManager.ParseCommand(args);
             string output = ParamCheck<string>(pmap, "-o");
             OutputType oType = GetOutputType(output);
 
             LoadCommand(args);
 
-            var entry = Database.Entries[0];
-            using (FileStream fs = new FileStream(output, FileMode.Create))
+            DBEntry entry = Database.Entries[0];
+            using (var fs = new FileStream(output, FileMode.Create))
             {
                 byte[] data = new byte[0];
                 switch (oType)
@@ -222,6 +244,7 @@ namespace WDBXEditor.ConsoleHandler
         #endregion
         
         #region SQL Dump
+
         /// <summary>
         /// Exports a file directly into a SQL database
         /// <para>-sqldump -f "*.dbc" -s ".mpq/wow dir" -b 11802 -c "Server=myServerAddress;Database=myDataBase;Uid=myUsername;Pwd=myPassword;"</para>
@@ -229,48 +252,121 @@ namespace WDBXEditor.ConsoleHandler
         /// <param name="args"></param>
         public static void SqlDumpArgCommand(string[] args)
         {
-            var pmap = ConsoleManager.ParseCommand(args);
+            Dictionary<string, string> pmap = ConsoleManager.ParseCommand(args);
             string connection = ParamCheck<string>(pmap, "-c");
 
             LoadCommand(args);
 
-            var entry = Database.Entries[0];
-            using (MySqlConnection conn = new MySqlConnection(connection))
+            DBEntry entry = Database.Entries[0];
+            using (var conn = new MySqlConnection(connection))
             {
-                try
-                {
-                    conn.Open();
-                }
-                catch { throw new Exception("   Incorrect MySQL login details."); }
-
                 entry.ToSQLTable(connection);
 
                 Console.WriteLine($"Successfully exported to {conn.Database}.");
             }
         }
 
-        #endregion  
+        #endregion
+
+        #region SQL Import
+
+        /// <summary>
+        /// Imports a DBC file from a SQL database table.
+        /// <para>-sqlimport -f "*.dbc" -b 11802 -c "Server=myServerAddress;Database=myDataBase;Uid=myUsername;Pwd=myPassword;" -t "table_name" -u "insert/update/replace" -w "true"</para>
+        /// </summary>
+        /// <param name="args"></param>
+        public static void SqlImportArgCommand(string[] args)
+		{
+            Dictionary<string, string> pmap = ConsoleManager.ParseCommand(args);
+            string filePath = ParamCheck<string>(pmap, "-f", required: true);
+            string connectionString = ParamCheck<string>(pmap, "-c");
+            UpdateMode updateMode = ParamCheck<UpdateMode>(pmap, "-u");
+            string tableName = ParamCheck<string>(pmap, "-t");
+            bool writeChangesToFile = ParamCheck<bool>(pmap, "-w");
+
+            LoadCommand(args);
+
+            DBEntry entry = Database.Entries[0];
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                }
+                catch (Exception ex)
+                {
+                    string debugMessage = $"Error opening SQL connection: {ex.Message}";
+                    Debug.WriteLine(debugMessage, "Error");
+
+                    // Just going to assume this is why we're throwing cause that's
+                    // what we're doing everywhere else (AAAAAAAAAAAAAAAAAAAAAAAAAAAAA).
+                    throw new Exception("   Incorrect MySQL login details.");
+                }
+
+                // TODO: Eventually add support for multiple files through an MPQ or CASC file.
+                string errorMessage;
+                if (!entry.ImportSQL(updateMode, connectionString, tableName, out errorMessage))
+				{
+                    throw new Exception("Error importing data from SQL", new IOException(errorMessage));
+				}
+
+                Console.WriteLine($"'{tableName}' successfully imported from {conn.Database}.");
+
+                if (writeChangesToFile)
+				{
+                    try
+					{
+                        new DBReader().Write(entry, filePath);
+                    }
+                    catch (Exception ex)
+					{
+                        throw new Exception($"Error writing changes to file '{filePath}'", ex);
+					}
+
+                    Console.WriteLine($"Changes successfully written to '{filePath}'.");
+                }
+            }
+        }
+
+        #endregion
 
         #region Helpers
+
         private static T ParamCheck<T>(Dictionary<string, string> map, string field, bool required = true)
         {
+            T retVal = default;
             if (map.ContainsKey(field))
             {
                 try
                 {
-                    return (T)Convert.ChangeType(map[field], typeof(T));
+                    if (typeof(T).IsEnum)
+					{
+                        retVal = (T)Enum.Parse(typeof(T), map[field], true);
+					}
+                    else
+					{
+                        retVal = (T)Convert.ChangeType(map[field], typeof(T));
+                    }
                 }
                 catch
                 {
-                    if (required) throw new Exception($"   Parameter {field} is invalid");
+                    if (required)
+					{
+                        throw new Exception($"   Parameter {field} is invalid");
+                    }
                 }
             }
-
-            if (required)
+            else if (required)
+			{
                 throw new Exception($"   Missing parameter '{field}'");
+            }
+            else
+			{
+                object defaultval = (typeof(T) == typeof(string) ? (object)string.Empty : (object)0);
+                retVal = (T)Convert.ChangeType(defaultval, typeof(T));
+            }
 
-            object defaultval = (typeof(T) == typeof(string) ? (object)string.Empty : (object)0);
-            return (T)Convert.ChangeType(defaultval, typeof(T));
+            return retVal;
         }
 
         private static SourceType GetSourceType(string source)
