@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WDBXEditor.Common;
 using WDBXEditor.Storage;
 
 namespace WDBXEditor.ConsoleHandler
@@ -27,6 +29,9 @@ namespace WDBXEditor.ConsoleHandler
         {
             try
             {
+                if (!Directory.Exists(Constants.TEMP_FOLDER))
+                    Directory.CreateDirectory(Constants.TEMP_FOLDER);
+
                 command = command.ToLower();
                 if (CommandHandlers.ContainsKey(command))
                 {

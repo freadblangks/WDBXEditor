@@ -24,6 +24,7 @@ using System.Security.AccessControl;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using CompressionType = WDBXEditor.Common.Constants.CompressionType;
+using System.Configuration;
 
 namespace WDBXEditor.Storage
 {
@@ -502,7 +503,12 @@ namespace WDBXEditor.Storage
 		public void ToSQLTable(string connectionstring)
 		{
 			string tableName = $"db_{TableStructure.Name}_{Build}";
-			string csvName = Path.Combine(TEMP_FOLDER, tableName + ".csv");
+
+			// This allows the user to get around the "secure_file_priv" setting in MySQL.
+			// If a value has been provided for this appSetting, we load from that directory instead.
+			string mySqlSecureFilePrivDirectory = GetMySqlSecureFilePrivSetting();
+			string stagingDirectory = (!string.IsNullOrWhiteSpace(mySqlSecureFilePrivDirectory)) ? mySqlSecureFilePrivDirectory : TEMP_FOLDER;
+			string csvName = Path.Combine(stagingDirectory, tableName + ".csv");
 			StringBuilder sb = new StringBuilder();
 			sb.AppendLine("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
 			sb.AppendLine($"DROP TABLE IF EXISTS `{tableName}`; ");
@@ -924,6 +930,11 @@ namespace WDBXEditor.Storage
 		{
 			this.Data?.Dispose();
 			this.Data = null;
+		}
+
+		private string GetMySqlSecureFilePrivSetting()
+		{
+			return ConfigurationManager.AppSettings["MySqlSecureFilePrivPath"];
 		}
 	}
 }
