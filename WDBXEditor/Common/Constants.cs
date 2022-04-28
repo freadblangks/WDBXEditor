@@ -10,6 +10,9 @@ using System.Net;
 
 namespace WDBXEditor.Common
 {
+	/// <summary>
+	/// Class for general constants.
+	/// </summary>
 	public static class Constants
 	{
 		public const string VERSION = "1.1.9.a";
@@ -30,24 +33,90 @@ namespace WDBXEditor.Common
 			Compressed = 0x10,
 		}
 
+		/// <summary>
+		/// Contains the codes (based on IETF language tags) used to identify different supported languages and locales.
+		/// </summary>
 		public enum TextWowEnum
 		{
-			enUS,
-			enGB,
-			koKR,
-			frFR,
-			deDE,
-			enCN,
-			zhCN,
-			enTW,
-			zhTW,
-			esES,
-			esMX,
-			ruRU,
-			ptPT,
-			ptBR,
-			itIT,
-			Unk,
+			/// <summary>
+			/// United States English.
+			/// </summary>
+			enUS = 0,
+
+			/// <summary>
+			/// British English.
+			/// </summary>
+			enGB = 1,
+
+			/// <summary>
+			/// Korean.
+			/// </summary>
+			koKR = 2,
+
+			/// <summary>
+			/// French.
+			/// </summary>
+			frFR = 3,
+
+			/// <summary>
+			/// German.
+			/// </summary>
+			deDE = 4,
+
+			/// <summary>
+			/// Chinese client displaying English.
+			/// </summary>
+			enCN = 5,
+
+			/// <summary>
+			/// Chinese.
+			/// </summary>
+			zhCN = 6,
+
+			/// <summary>
+			/// Taiwanese client displaying English.
+			/// </summary>
+			enTW = 7,
+
+			/// <summary>
+			/// Taiwanese.
+			/// </summary>
+			zhTW = 8,
+
+			/// <summary>
+			/// Peninsular (European) Spanish.
+			/// </summary>
+			esES = 9,
+
+			/// <summary>
+			/// Mexican Spanish.
+			/// </summary>
+			esMX = 10,
+
+			/// <summary>
+			/// Russian.
+			/// </summary>
+			ruRU = 11,
+
+			/// <summary>
+			/// European Portuguese.
+			/// </summary>
+			ptPT = 12,
+
+			/// <summary>
+			/// Brazilian Portuguese.
+			/// </summary>
+			ptBR = 13,
+
+			/// <summary>
+			/// Italian.
+			/// </summary>
+			itIT = 14,
+
+			/// <summary>
+			/// Unknown.
+			/// </summary>
+			Unk = 15,
 		}
 
 		/// <summary>
@@ -58,48 +127,134 @@ namespace WDBXEditor.Common
 			/// <summary>
 			/// Import new records only ("Import New" in the UI).
 			/// </summary>
-			Insert,
+			Insert = 0,
 
 			/// <summary>
 			/// Import new records and update any existing ones that are different ("Update Existing" in the UI).
 			/// </summary>
-			Update,
+			Update = 1,
 
 			/// <summary>
 			/// Replace all data for the currently loaded DBC ("Override All" in the UI).
 			/// </summary>
-			Replace
+			Replace = 2
 		}
 
+		/// <summary>
+		/// Import flags used by CSV import.
+		/// </summary>
 		public enum ImportFlags
 		{
-			None,
-			FixIds,
-			TakeNewest
+			// TODO: Determine if the [Flags] attribute can be added to this for clarity.
+
+			/// <summary>
+			/// No flags set. This is not an option in the UI and exists purely as a default value.
+			/// </summary>
+			None = 0,
+
+			/// <summary>
+			/// Flag indicating that duplicate IDs are to be handled by assigning the row a new ID.
+			/// </summary>
+			FixIds = 1,
+
+			/// <summary>
+			/// Flag indicating that duplicate IDs are to be handled by taking the newer row.
+			/// </summary>
+			TakeNewest = 2
 		}
 
+		/// <summary>
+		/// The type of compression used to store data in a DBC, DB2, or ADB file.
+		/// </summary>
 		public enum CompressionType
 		{
+			// TODO: Provide actually helpful explanations for these.
+
+			/// <summary>
+			/// No compression used.
+			/// </summary>
 			None = 0,
+
+			/// <summary>
+			/// Immediate compression.
+			/// </summary>
 			Immediate = 1,
+
+			/// <summary>
+			/// Sparse compression.
+			/// </summary>
 			Sparse = 2,
+
+			/// <summary>
+			/// Pallet compression.
+			/// </summary>
 			Pallet = 3,
+
+			/// <summary>
+			/// Pallet Array compression.
+			/// </summary>
 			PalletArray = 4,
+
+			/// <summary>
+			/// Signed Immediate compression.
+			/// </summary>
 			SignedImmediate = 5
 		}
 
+		/// <summary>
+		/// Contains the name used to identify each expansion.
+		/// </summary>
 		public enum Expansion
 		{
-			Alpha,
-			Beta,
-			Classic,
-			TBC,
-			WotLK,
-			Cata,
-			MoP,
-			WoD,
-			Legion,
-			BfA
+			/// <summary>
+			/// The Friends and Family Alpha.
+			/// </summary>
+			Alpha = 0,
+
+			/// <summary>
+			/// The original beta version of WoW.
+			/// </summary>
+			Beta = 1,
+
+			/// <summary>
+			/// WoW Classic, also known as "Vanilla".
+			/// </summary>
+			Classic = 2,
+
+			/// <summary>
+			/// The Burning Crusade.
+			/// </summary>
+			TBC = 3,
+
+			/// <summary>
+			/// Wrath of the Lich King.
+			/// </summary>
+			WotLK = 4,
+
+			/// <summary>
+			/// Cataclysm.
+			/// </summary>
+			Cata = 5,
+
+			/// <summary>
+			/// Mists of Pandaria.
+			/// </summary>
+			MoP = 6,
+
+			/// <summary>
+			/// Warlords of Draenor.
+			/// </summary>
+			WoD = 7,
+
+			/// <summary>
+			/// Legion.
+			/// </summary>
+			Legion = 8,
+
+			/// <summary>
+			/// Battle for Azeroth.
+			/// </summary>
+			BfA = 9
 		}
 
 		public enum ExpansionFinalBuild
@@ -175,14 +330,20 @@ namespace WDBXEditor.Common
 			string lastText = $"{first.Value} ({build})";
 
 			if (build <= first.Key)
+			{
 				return lastText; //First build
+			}
 			else if (build >= last.Key)
+			{
 				return $"{last.Value} ({build})"; //Last build
+			}
 
 			foreach (var b in Builds)
 			{
 				if (build < b.Key)
+				{
 					return lastText;
+				}
 
 				lastText = $"{b.Value} ({build})";
 			}
@@ -1758,7 +1919,9 @@ namespace WDBXEditor.Common
 
 					using (WebResponse resp = await req.GetResponseAsync())
 					using (FileStream fs = File.Create(listfile))
+					{
 						resp.GetResponseStream().CopyTo(fs);
+					}
 					req.Abort();
 				}
 				catch { return; }
