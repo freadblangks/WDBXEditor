@@ -215,6 +215,7 @@
       <DependentUpon>DropdownCheckList.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\Enums\CompressionType.cs" />
+    <Compile Include="Common\Enums\Expansion.cs" />
     <Compile Include="Common\Enums\ImportFlags.cs" />
     <Compile Include="Common\Enums\TextWowEnum.cs" />
     <Compile Include="Common\Enums\UpdateMode.cs" />

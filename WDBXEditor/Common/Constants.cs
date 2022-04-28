@@ -7,6 +7,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Windows.Forms;
 using System.Net;
+using WDBXEditor.Common.Enums;
 
 namespace WDBXEditor.Common
 {
@@ -31,62 +32,6 @@ namespace WDBXEditor.Common
 			IndexMap = 0x4,
 			Unknown = 0x8,
 			Compressed = 0x10,
-		}
-
-		/// <summary>
-		/// Contains the name used to identify each expansion.
-		/// </summary>
-		public enum Expansion
-		{
-			/// <summary>
-			/// The Friends and Family Alpha.
-			/// </summary>
-			Alpha = 0,
-
-			/// <summary>
-			/// The original beta version of WoW.
-			/// </summary>
-			Beta = 1,
-
-			/// <summary>
-			/// WoW Classic, also known as "Vanilla".
-			/// </summary>
-			Classic = 2,
-
-			/// <summary>
-			/// The Burning Crusade.
-			/// </summary>
-			TBC = 3,
-
-			/// <summary>
-			/// Wrath of the Lich King.
-			/// </summary>
-			WotLK = 4,
-
-			/// <summary>
-			/// Cataclysm.
-			/// </summary>
-			Cata = 5,
-
-			/// <summary>
-			/// Mists of Pandaria.
-			/// </summary>
-			MoP = 6,
-
-			/// <summary>
-			/// Warlords of Draenor.
-			/// </summary>
-			WoD = 7,
-
-			/// <summary>
-			/// Legion.
-			/// </summary>
-			Legion = 8,
-
-			/// <summary>
-			/// Battle for Azeroth.
-			/// </summary>
-			BfA = 9
 		}
 
 		public enum ExpansionFinalBuild
@@ -126,6 +71,7 @@ namespace WDBXEditor.Common
 		#endregion
 
 		#region Client Builds
+
 		public static bool IsBuild(int build, Expansion expansion)
 		{
 			switch (expansion)

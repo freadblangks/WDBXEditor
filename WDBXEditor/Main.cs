@@ -17,6 +17,7 @@ using System.Text.RegularExpressions;
 using System.Net;
 using System.Web.Script.Serialization;
 using WDBXEditor.Reader.FileTypes;
+using WDBXEditor.Common.Enums;
 
 namespace WDBXEditor
 {
