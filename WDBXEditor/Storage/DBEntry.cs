@@ -25,6 +25,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using CompressionType = WDBXEditor.Common.Constants.CompressionType;
 using System.Configuration;
+using WDBXEditor.Common.Enums;
 
 namespace WDBXEditor.Storage
 {

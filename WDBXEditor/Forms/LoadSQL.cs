@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static WDBXEditor.Common.Constants;
+using WDBXEditor.Common.Enums;
 
 namespace WDBXEditor
 {

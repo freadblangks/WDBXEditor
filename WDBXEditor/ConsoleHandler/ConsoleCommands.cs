@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using WDBXEditor.Archives.CASC.Handlers;
 using WDBXEditor.Archives.MPQ;
 using WDBXEditor.Common;
+using WDBXEditor.Common.Enums;
 using WDBXEditor.Reader;
 using WDBXEditor.Storage;
 using static WDBXEditor.Common.Constants;

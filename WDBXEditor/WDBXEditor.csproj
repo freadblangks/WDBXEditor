@@ -214,6 +214,7 @@
     <Compile Include="Common\DropdownCheckList.Designer.cs">
       <DependentUpon>DropdownCheckList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\Enums\UpdateMode.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\FloatUtil.cs" />
     <Compile Include="Common\FormHandler.cs" />

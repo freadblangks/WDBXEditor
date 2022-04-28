@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using static WDBXEditor.Common.Constants;
 using System.Threading.Tasks;
+using WDBXEditor.Common.Enums;
 
 namespace WDBXEditor
 {
