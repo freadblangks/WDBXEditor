@@ -11,7 +11,7 @@
 		Alpha = 0,
 
 		/// <summary>
-		/// The original beta version of WoW.
+		/// The Closed Beta.
 		/// </summary>
 		Beta = 1,
 
