@@ -58,33 +58,52 @@ namespace WDBXEditor.Common
 
 		#region Client Builds
 
+		/// <summary>
+		/// Checks if a client build number belongs to a particular expansion.
+		/// </summary>
+		/// <param name="build">The client build number.</param>
+		/// <param name="expansion">The expansion.</param>
+		/// <returns>True if the build number belongs to the expansion. Otherwise, false.</returns>
 		public static bool IsBuild(int build, Expansion expansion)
 		{
+			bool retVal = false;
 			switch (expansion)
 			{
 				case Expansion.Alpha:
-					return build <= (int)ExpansionFinalBuild.Alpha;
+					retVal = build <= (int)ExpansionFinalBuild.Alpha;
+					break;
 				case Expansion.Beta:
-					return build > (int)ExpansionFinalBuild.Alpha && build <= (int)ExpansionFinalBuild.Beta;
+					retVal = build > (int)ExpansionFinalBuild.Alpha && build <= (int)ExpansionFinalBuild.Beta;
+					break;
 				case Expansion.Classic:
-					return build > (int)ExpansionFinalBuild.Beta && build <= (int)ExpansionFinalBuild.Classic;
+					retVal = build > (int)ExpansionFinalBuild.Beta && build <= (int)ExpansionFinalBuild.Classic;
+					break;
 				case Expansion.TBC:
-					return build > (int)ExpansionFinalBuild.Classic && build <= (int)ExpansionFinalBuild.TBC;
+					retVal = build > (int)ExpansionFinalBuild.Classic && build <= (int)ExpansionFinalBuild.TBC;
+					break;
 				case Expansion.WotLK:
-					return build > (int)ExpansionFinalBuild.TBC && build <= (int)ExpansionFinalBuild.WotLK;
+					retVal = build > (int)ExpansionFinalBuild.TBC && build <= (int)ExpansionFinalBuild.WotLK;
+					break;
 				case Expansion.Cata:
-					return build > (int)ExpansionFinalBuild.WotLK && build <= (int)ExpansionFinalBuild.Cata;
+					retVal = build > (int)ExpansionFinalBuild.WotLK && build <= (int)ExpansionFinalBuild.Cata;
+					break;
 				case Expansion.MoP:
-					return build > (int)ExpansionFinalBuild.Cata && build <= (int)ExpansionFinalBuild.MoP;
+					retVal = build > (int)ExpansionFinalBuild.Cata && build <= (int)ExpansionFinalBuild.MoP;
+					break;
 				case Expansion.WoD:
-					return build > (int)ExpansionFinalBuild.MoP && build <= (int)ExpansionFinalBuild.WoD;
+					retVal = build > (int)ExpansionFinalBuild.MoP && build <= (int)ExpansionFinalBuild.WoD;
+					break;
 				case Expansion.Legion:
-					return build > (int)ExpansionFinalBuild.WoD && build <= (int)ExpansionFinalBuild.Legion;
+					retVal = build > (int)ExpansionFinalBuild.WoD && build <= (int)ExpansionFinalBuild.Legion;
+					break;
 				case Expansion.BfA:
-					return build > (int)ExpansionFinalBuild.Legion;
+					retVal = build > (int)ExpansionFinalBuild.Legion;
+					break;
+				default:
+					break;
 			}
 
-			return false;
+			return retVal;
 		}
 
 		public static string BuildText(int build)
