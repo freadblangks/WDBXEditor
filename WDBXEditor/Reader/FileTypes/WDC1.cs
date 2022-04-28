@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WDBXEditor.Common.Enums;
 using WDBXEditor.Storage;
 using static WDBXEditor.Common.Constants;
 

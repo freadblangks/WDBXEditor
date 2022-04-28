@@ -23,7 +23,7 @@ using System.IO.MemoryMappedFiles;
 using System.Security.AccessControl;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using CompressionType = WDBXEditor.Common.Constants.CompressionType;
+using CompressionType = WDBXEditor.Common.Enums.CompressionType;
 using System.Configuration;
 using WDBXEditor.Common.Enums;
 
