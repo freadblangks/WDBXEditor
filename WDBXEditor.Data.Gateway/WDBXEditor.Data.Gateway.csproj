@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WBDXEditor.Common.Utility\WDBXEditor.Common.Utility.csproj" />
+    <ProjectReference Include="..\WDBXEditor.Data.Contracts\WDBXEditor.Data.Contracts.csproj" />
+    <ProjectReference Include="..\WDBXEditor.Data.Services\WDBXEditor.Data.Services.csproj" />
+    <ProjectReference Include="..\WDBXEditor.Data\WDBXEditor.Data.csproj" />
+  </ItemGroup>
+
+</Project>
