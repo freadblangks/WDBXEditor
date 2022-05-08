@@ -16,7 +16,7 @@ namespace WDBXEditor.Data.Gateway.Gateways
 			string connectionString = "Server=localhost;Database=acore_world;Uid=root;Pwd=";
 			var worldContext = new MySqlContext(connectionString);
 			var itemTemplateService = new ItemTemplateService(worldContext);
-			CompleteItemTemplate result = itemTemplateService.ReadItemTemplate(17);
+			CompleteItemTemplate result = itemTemplateService.ReadItemTemplate(56810);
 			List<CompleteItemTemplate> results = itemTemplateService.ReadItemTemplates();
 			Console.WriteLine(result);
 		}
