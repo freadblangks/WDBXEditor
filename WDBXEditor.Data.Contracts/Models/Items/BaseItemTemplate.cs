@@ -276,7 +276,7 @@ namespace WDBXEditor.Data.Contracts.Models.Items
 		/// -1	=> Just a placeholder until proper data is found in the WDBs.
 		/// </summary>
 		[MySqlColumnName("VerifiedBuild")]
-		public short? VerifiedBuild { get; internal set; } = 0;
+		public short VerifiedBuild { get; internal set; } = 0;
 
 		/// <summary>
 		/// UNKNOWN

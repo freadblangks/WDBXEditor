@@ -8,11 +8,15 @@ namespace WDBXEditor.Data.Contracts.Attributes
 	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
 	public class AllowEnumConversionOverrideAttribute : Attribute
 	{
-		public readonly bool AllowOverride;
-
 		public AllowEnumConversionOverrideAttribute(bool allowOverride)
 		{
 			AllowOverride = allowOverride;
 		}
+
+		/// <summary>
+		/// True if the associated property or field allows for overriding of enum checking.
+		/// Otherwise, false.
+		/// </summary>
+		public bool AllowOverride { get; private set; }
 	}
 }

@@ -8,11 +8,18 @@ namespace WDBXEditor.Data.Contracts.Attributes
 	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
 	public class EnumTypeAttribute : Attribute
 	{
-		public readonly Type AssociatedType;
-
+		/// <summary>
+		/// Initializes a new instance of <see cref="EnumTypeAttribute"/>.
+		/// </summary>
+		/// <param name="associatedType">The Enum type for the values in the Field or Property to be checked against.</param>
 		public EnumTypeAttribute(Type associatedType)
 		{
 			AssociatedType = associatedType;
 		}
+
+		/// <summary>
+		/// The enum type associated with the Field or Property.
+		/// </summary>
+		public Type AssociatedType { get; private set; }
 	}
 }

@@ -1,11 +1,13 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using WDBXEditor.Common.Utility.Types.Primitives;
 using WDBXEditor.Data.Contexts;
 using WDBXEditor.Data.Contracts.Models.Items;
 using WDBXEditor.Data.Contracts.Models.Items.Submodels;
 using WDBXEditor.Data.Contracts.Models.Items.Submodels.Requirements;
+using WDBXEditor.Data.Helpers.Mapping;
 using WDBXEditor.Data.Services.Interfaces;
 
 namespace WDBXEditor.Data.Services
@@ -177,7 +179,9 @@ namespace WDBXEditor.Data.Services
                 new MySqlParameter("@EntryId", MySqlDbType.Int32) { Value = entryId }
             };
 
-            CompleteItemTemplate result = _worldContext.ExecuteSqlStatementAsObject(sql, dataReader => ConvertReadResponseToItemTemplate(dataReader), sqlParameters);
+            //CompleteItemTemplate result = _worldContext.ExecuteSqlStatementAsObject(sql, dataReader => ConvertReadResponseToItemTemplate(dataReader), sqlParameters);
+            var mapper = new SqlDataMapper<CompleteItemTemplate>();
+            CompleteItemTemplate result = _worldContext.ExecuteSqlStatementAsObject(sql, dataReader => mapper.MapSqlDataRow(dataReader), sqlParameters);
 
             return result;
         }
@@ -562,7 +566,7 @@ namespace WDBXEditor.Data.Services
                 MinMoneyLoot = (uint)dataReader["minMoneyLoot"],
                 MaxMoneyLoot = (uint)dataReader["maxMoneyLoot"],
                 FlagsCustomMask = (uint)dataReader["flagsCustom"],
-                VerifiedBuild = (short?)dataReader["VerifiedBuild"]
+                VerifiedBuild = (short)dataReader["VerifiedBuild"]
             };
 
             return itemTemplate;

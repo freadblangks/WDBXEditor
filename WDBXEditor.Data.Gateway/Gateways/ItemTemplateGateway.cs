@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Reflection;
 using System.Collections.Generic;
 using WDBXEditor.Data.Contexts;
+using WDBXEditor.Data.Contracts.Attributes;
 using WDBXEditor.Data.Contracts.Models.Items;
 using WDBXEditor.Data.Gateway.Gateways.Interfaces;
 using WDBXEditor.Data.Services;
@@ -14,7 +16,8 @@ namespace WDBXEditor.Data.Gateway.Gateways
 			string connectionString = "Server=localhost;Database=acore_world;Uid=root;Pwd=";
 			var worldContext = new MySqlContext(connectionString);
 			var itemTemplateService = new ItemTemplateService(worldContext);
-			List<CompleteItemTemplate> result = itemTemplateService.ReadItemTemplates();
+			CompleteItemTemplate result = itemTemplateService.ReadItemTemplate(17);
+			List<CompleteItemTemplate> results = itemTemplateService.ReadItemTemplates();
 			Console.WriteLine(result);
 		}
 	}

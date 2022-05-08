@@ -18,27 +18,31 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Extended.Shell",
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Data", "WDBXEditor.Data\WDBXEditor.Data.csproj", "{8376C1A3-BAB8-4410-8D9F-6E1C224ED05D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8ABDEE92-A775-4317-842B-95AD2C1A9CC8} = {8ABDEE92-A775-4317-842B-95AD2C1A9CC8}
+		{9F5AA9E3-78B7-46E2-9F59-72E853EA1926} = {9F5AA9E3-78B7-46E2-9F59-72E853EA1926}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Extended.Api.NUnit", "WDBXEditor.Extended.Api.NUnit\WDBXEditor.Extended.Api.NUnit.csproj", "{81EB76A2-E605-4DD0-8F29-A6986B5FAF0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WDBXEditor.Data.NUnit", "WDBXEditor.Data.NUnit\WDBXEditor.Data.NUnit.csproj", "{1BF72F9F-03F3-4BDF-B686-C2D4647C835F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Data.NUnit", "WDBXEditor.Data.NUnit\WDBXEditor.Data.NUnit.csproj", "{1BF72F9F-03F3-4BDF-B686-C2D4647C835F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WDBXEditor.Data.Services", "WDBXEditor.Data.Services\WDBXEditor.Data.Services.csproj", "{F38DA859-B210-4877-909C-830D7E5A0D4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Data.Services", "WDBXEditor.Data.Services\WDBXEditor.Data.Services.csproj", "{F38DA859-B210-4877-909C-830D7E5A0D4E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9F5AA9E3-78B7-46E2-9F59-72E853EA1926} = {9F5AA9E3-78B7-46E2-9F59-72E853EA1926}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WDBXEditor.Data.Contracts", "WDBXEditor.Data.Contracts\WDBXEditor.Data.Contracts.csproj", "{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Data.Contracts", "WDBXEditor.Data.Contracts\WDBXEditor.Data.Contracts.csproj", "{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9F5AA9E3-78B7-46E2-9F59-72E853EA1926} = {9F5AA9E3-78B7-46E2-9F59-72E853EA1926}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WDBXEditor.Data.Gateway", "WDBXEditor.Data.Gateway\WDBXEditor.Data.Gateway.csproj", "{1CCC27FB-D346-4246-83DC-BBEF5E81EBA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Data.Gateway", "WDBXEditor.Data.Gateway\WDBXEditor.Data.Gateway.csproj", "{1CCC27FB-D346-4246-83DC-BBEF5E81EBA6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9F5AA9E3-78B7-46E2-9F59-72E853EA1926} = {9F5AA9E3-78B7-46E2-9F59-72E853EA1926}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WDBXEditor.Common.Utility", "WBDXEditor.Common.Utility\WDBXEditor.Common.Utility.csproj", "{9F5AA9E3-78B7-46E2-9F59-72E853EA1926}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Common.Utility", "WBDXEditor.Common.Utility\WDBXEditor.Common.Utility.csproj", "{9F5AA9E3-78B7-46E2-9F59-72E853EA1926}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
