@@ -164,7 +164,7 @@ namespace WDBXEditor.Data.Contracts.Models.Items
 		/// <summary>
 		/// The spells cast, triggered, or taught by the item.
 		/// </summary>
-		[CompoundField]
+		[CompoundField(5)]
 		public ItemSpell[] Spells { get; set; } = new ItemSpell[5];
 
 		/// <summary>
@@ -284,7 +284,5 @@ namespace WDBXEditor.Data.Contracts.Models.Items
 		/// TODO: Figure out what this does and then make sure it's in the right class.
 		[MySqlColumnName("ArmorDamageModifier")]
 		public float ArmorDamageModifier { get; internal set; } = 0;
-
-
 	}
 }

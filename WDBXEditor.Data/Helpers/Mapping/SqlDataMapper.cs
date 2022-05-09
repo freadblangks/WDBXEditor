@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using WDBXEditor.Common.Utility.Extensions;
 using WDBXEditor.Common.Utility.Types.Primitives;
 using WDBXEditor.Data.Contracts.Attributes;
@@ -14,17 +15,21 @@ namespace WDBXEditor.Data.Helpers.Mapping
 {
 	public class SqlDataMapper<T> where T : new()
 	{
-		private const string _MYSQL_DATA_TYPE_NAME_MEDIUM_INT = "mediumint";
-		private const string _MYSQL_DATA_TYPE_NAME_MEDIUM_INT_UNSIGNED = "mediumint unsigned";
+		private const string _TEMPLATED_NUMBER_PATTERN = "\\[\\d:\\d+\\]";
 
 		private readonly Dictionary<string, Action<MySqlDataReader, T>> MapFunctions = new Dictionary<string, Action<MySqlDataReader, T>>();
 
 		/// <summary>
 		/// Initializes a new instance of <see cref="SqlDataMapper{T}"/>.
 		/// </summary>
-		public SqlDataMapper()
+		public SqlDataMapper()  
 		{
-			PopulateMapFunctionsDict();
+			PopulateMapFunctionsDict(-1);
+		}
+
+		private SqlDataMapper(int instanceNumber)
+		{
+			PopulateMapFunctionsDict(instanceNumber);
 		}
 
 		public T MapSqlDataRow(MySqlDataReader reader)
@@ -33,7 +38,7 @@ namespace WDBXEditor.Data.Helpers.Mapping
 			foreach (var propertyInfo in typeof(T).GetProperties())
 			{
 				// TODO: Add the case here for array-type properties.
-				if (!propertyInfo.PropertyType.IsArray && (propertyInfo.HasCustomAttribute(typeof(MySqlColumnNameAttribute)) || propertyInfo.HasCustomAttribute(typeof(CompoundFieldAttribute))))
+				if (propertyInfo.HasCustomAttribute(typeof(MySqlColumnNameAttribute)) || propertyInfo.HasCustomAttribute(typeof(CompoundFieldAttribute)) || propertyInfo.HasCustomAttribute(typeof(MySqlColumnNameTemplateAttribute)))
 				{
 					MapFunctions[propertyInfo.Name](reader, result);
 				}
@@ -41,14 +46,13 @@ namespace WDBXEditor.Data.Helpers.Mapping
 
 			return result;
 		}
-
-		private void PopulateMapFunctionsDict()
+		private void PopulateMapFunctionsDict(int instanceNumber)
 		{
 			foreach (var propertyInfo in typeof(T).GetProperties())
 			{
-				if (!propertyInfo.PropertyType.IsArray && (propertyInfo.HasCustomAttribute(typeof(MySqlColumnNameAttribute)) || propertyInfo.HasCustomAttribute(typeof(CompoundFieldAttribute))))
+				if (propertyInfo.HasCustomAttribute(typeof(MySqlColumnNameAttribute)) || propertyInfo.HasCustomAttribute(typeof(CompoundFieldAttribute)) || propertyInfo.HasCustomAttribute(typeof(MySqlColumnNameTemplateAttribute)))
 				{
-					Action<MySqlDataReader, T> mapFunction = BuildMapFunction(propertyInfo);
+					Action<MySqlDataReader, T> mapFunction = BuildMapFunction(propertyInfo, instanceNumber);
 					MapFunctions.Add(propertyInfo.Name, mapFunction);
 				}
 				
@@ -61,44 +65,125 @@ namespace WDBXEditor.Data.Helpers.Mapping
 		/// <typeparam name="U">The type that the built function should return. This should match the type for <paramref name="propertyInfo"/>.</typeparam>
 		/// <param name="propertyInfo">An instance of <see cref="PropertyInfo"/> representing the property the returned function should return a value for.</param>
 		/// <returns>A function to read a value from a MySqlDataReader and return the result as type <typeparamref name="U"/>.</returns>
-		private Action<MySqlDataReader, T> BuildMapFunction(PropertyInfo propertyInfo)
+		private Action<MySqlDataReader, T> BuildMapFunction(PropertyInfo propertyInfo, int instanceNumber = -1)
 		{
 			Action<MySqlDataReader, T> mapFunction = null;
 
-			// If the property is marked as a [CompoundField], it's a reference type whose properties need to be populated.
-			// So, we'll create an inner SqlDataMapper<T> that we'll use to define the functions to set its properties.
-			if (propertyInfo.HasCustomAttribute(typeof(CompoundFieldAttribute)))
+			try
 			{
-				// Create a new instance of SqlDataMapper<T>, where T is the type of the property marked as [CompoundField].
-				dynamic innerDataMapper = Activator.CreateInstance(GetType().GetGenericTypeDefinition().MakeGenericType(new Type[] { propertyInfo.PropertyType }));
-				mapFunction = (reader, submodelInstance) =>
+				// If the property is marked as a [CompoundField], it's a reference type whose properties need to be populated.
+				// So, we'll create an inner SqlDataMapper<T> that we'll use to define the functions to set its properties.
+				if (propertyInfo.HasCustomAttribute(typeof(CompoundFieldAttribute)))
 				{
-					propertyInfo.SetValue(submodelInstance, innerDataMapper.MapSqlDataRow(reader));
-				};
+					mapFunction = GetMapFunctionForCompoundField(propertyInfo);
+				}
 
+				else if (propertyInfo.HasCustomAttribute(typeof(MySqlColumnNameTemplateAttribute)))
+				{
+					mapFunction = GetMapFunctionForPropertyWithTemplatedMySqlColumnName(propertyInfo, instanceNumber);
+				}
+
+				// If the property has the [MySqlColumnName()] attribute, we know it's a property containing a value type
+				// that maps to only one column in table.
+				else if (propertyInfo.HasCustomAttribute(typeof(MySqlColumnNameAttribute)))
+				{
+					string mySqlColumnName = propertyInfo.GetCustomAttributePropertyValue<MySqlColumnNameAttribute, string>("Name");
+					mapFunction = GetMapFunctionForValueType(propertyInfo, mySqlColumnName);
+				}
+			}
+			catch (InvalidDataModelException ex)
+			{
+				// TODO: Add link to documentation on the standards to this error message.
+				string errorMessage = $"A map function could not be generated for {propertyInfo.DeclaringType.FullName}.{propertyInfo.Name} because it or the containing class is in violation of this project's data model standards. See inner exception for details.";
+				throw new InvalidDataModelException(errorMessage, ex);
+			}
+			catch (Exception ex)
+			{
+				string errorMessage = $"A map function could not be generated for {propertyInfo.DeclaringType.FullName}.{propertyInfo.Name}.";
+				throw new SqlDataMapperException(errorMessage, ex);
 			}
 
-			// If the property has the [MySqlColumnName()] attribute, we know it's a property containing a value type
-			// that maps to only one column in table.
-			else if (propertyInfo.HasCustomAttribute(typeof(MySqlColumnNameAttribute)))
-			{
-				string mySqlColumnName = propertyInfo.GetCustomAttributePropertyValue<MySqlColumnNameAttribute, string>("Name");
-				Type targetPropertyType = propertyInfo.PropertyType;
+			return mapFunction;
+		}
 
-				// This gets us a reference to GetDataReaderFieldConversionFunction where the TTarget typeparam has been set as targetPropertyType.
-				// Because typing in C# is an actual nightmare sometimes.
-				MethodInfo getDataReaderConversionFunction = GetType().GetMethod(nameof(GetDataReaderFieldConversionFunction), BindingFlags.NonPublic | BindingFlags.Static)
-					.MakeGenericMethod(new Type[] { targetPropertyType });
+		private Action<MySqlDataReader, T> GetMapFunctionForCompoundField(PropertyInfo propertyInfo)
+		{
+			Action<MySqlDataReader, T> mapFunction = null;
+
+			if (propertyInfo.PropertyType.ImplementsInterface<ICollection>())
+			{
+				Type elementType = propertyInfo.PropertyType.GetElementType();
+				int collectionSize = propertyInfo.GetCustomAttributePropertyValue<CompoundFieldAttribute, int>(nameof(CompoundFieldAttribute.NumberOfInstances));
 
 				mapFunction = (reader, modelInstance) =>
 				{
-					// TODO: Figure out if we can move this line out of the mapFunction.
-					dynamic conversionFunction = getDataReaderConversionFunction.Invoke(this, new object[] { targetPropertyType });
-
-					// Use reflection to set the value of the property.
-					propertyInfo.SetValue(modelInstance, conversionFunction(reader[mySqlColumnName]));
+					// Create a new instance of SqlDataMapper<T>, where T is the type of the collection-type property's contents.
+					// For example, if the property was of type int[], T would be int.
+					dynamic collectionInstance = Activator.CreateInstance(propertyInfo.PropertyType, new object[] { collectionSize });
+					for (int i = 0; i < collectionSize; ++i)
+					{
+						dynamic innerDataMapper = Activator.CreateInstance(GetType().GetGenericTypeDefinition().MakeGenericType(new Type[] { elementType }), BindingFlags.NonPublic | BindingFlags.Instance, null, new object[] { i + 1 }, null, null);
+						collectionInstance[i] = innerDataMapper.MapSqlDataRow(reader);
+					}
+					propertyInfo.SetValue(modelInstance, collectionInstance);
 				};
 			}
+			else
+			{
+				// Create a new instance of SqlDataMapper<T>, where T is the type of the property marked as [CompoundField].
+				dynamic innerDataMapper = Activator.CreateInstance(GetType().GetGenericTypeDefinition().MakeGenericType(new Type[] { propertyInfo.PropertyType }));
+				mapFunction = (reader, modelInstance) =>
+				{
+					propertyInfo.SetValue(modelInstance, innerDataMapper.MapSqlDataRow(reader));
+				};
+			}
+
+			return mapFunction;
+		}
+
+		private Action<MySqlDataReader, T> GetMapFunctionForPropertyWithTemplatedMySqlColumnName(PropertyInfo propertyInfo, int instanceNumber)
+		{
+			Action<MySqlDataReader, T> mapFunction = null;
+
+			// It's a collection of value types.
+			if (propertyInfo.PropertyType.ImplementsInterface<ICollection>())
+			{
+				throw new NotImplementedException("Collections of value types are not currently supported for mapping.");
+			}
+
+			// It's a property of a [CompoundField] in a collection.
+			else
+			{
+				if (instanceNumber == -1)
+				{
+					string errorMessage = $"{nameof(MySqlColumnNameTemplateAttribute)} is only allowed on Field and Properties that are either on a submodel used as a Field/Property that's marked with {nameof(CompoundFieldAttribute)}, or on a Field/Property whose type is a collection.";
+					throw new InvalidDataModelException(errorMessage);
+				}
+				string mySqlColumnName = BuildMySqlColumnNameFromTemplate(propertyInfo.GetCustomAttributePropertyValue<MySqlColumnNameTemplateAttribute, string>("TemplateString"), instanceNumber);
+				mapFunction = GetMapFunctionForValueType(propertyInfo, mySqlColumnName);
+			}
+
+			return mapFunction;
+		}
+
+		private Action<MySqlDataReader, T> GetMapFunctionForValueType(PropertyInfo propertyInfo, string mySqlColumnName)
+		{
+			Action<MySqlDataReader, T> mapFunction = null;
+			Type targetPropertyType = propertyInfo.PropertyType;
+
+			// This gets us a reference to GetDataReaderFieldConversionFunction where the TTarget typeparam has been set as targetPropertyType.
+			// Because typing in C# is an actual nightmare sometimes.
+			MethodInfo getDataReaderConversionFunction = GetType().GetMethod(nameof(GetDataReaderFieldConversionFunction), BindingFlags.NonPublic | BindingFlags.Static)
+				.MakeGenericMethod(new Type[] { targetPropertyType });
+
+			mapFunction = (reader, modelInstance) =>
+			{
+				// TODO: Figure out if we can move this line out of the mapFunction.
+				dynamic conversionFunction = getDataReaderConversionFunction.Invoke(this, new object[] { targetPropertyType });
+
+				// Use reflection to set the value of the property.
+				propertyInfo.SetValue(modelInstance, conversionFunction(reader[mySqlColumnName]));
+			};
 
 			return mapFunction;
 		}
@@ -134,8 +219,12 @@ namespace WDBXEditor.Data.Helpers.Mapping
 				result = valueToConvert => (TTarget)Convert.ChangeType(valueToConvert, typeof(TTarget));
 			}
 
-
 			return result;
+		}
+
+		private static string BuildMySqlColumnNameFromTemplate(string templateString, int instanceNumber)
+		{
+			return Regex.Replace(templateString, _TEMPLATED_NUMBER_PATTERN, instanceNumber.ToString());
 		}
 	}
 }

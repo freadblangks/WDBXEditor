@@ -21,7 +21,7 @@ namespace WDBXEditor.Data.Contracts.Models.Items
 		/// An array of <see cref="ItemDamageDefinition"/> objects defining the damage dealt
 		/// by the item if it's a weapon.
 		/// </summary>
-		[CompoundField]
+		[CompoundField(2)]
 		public ItemDamageDefinition[] DamageDefinitions { get; set; } = new ItemDamageDefinition[2];
 
 		/// <summary>

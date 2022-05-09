@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using WDBXEditor.Common.Utility.Types.Primitives;
 using WDBXEditor.Data.Contexts;
 using WDBXEditor.Data.Contracts.Models.Items;
@@ -334,8 +335,19 @@ namespace WDBXEditor.Data.Services
                 ";
 
             #endregion
-
-            List<CompleteItemTemplate> itemTemplates = _worldContext.ExecuteSqlStatementAsList<CompleteItemTemplate>(sql, dataReader => ConvertReadResponseToItemTemplate(dataReader));
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            var mapper = new SqlDataMapper<CompleteItemTemplate>();
+            List<CompleteItemTemplate> itemTemplates = _worldContext.ExecuteSqlStatementAsList<CompleteItemTemplate>(sql, dataReader => mapper.MapSqlDataRow(dataReader));
+            stopwatch.Stop();
+            Console.WriteLine($"Read table using dynamic SQL mapping in {stopwatch.Elapsed}");
+            itemTemplates.Clear();
+            itemTemplates.TrimExcess();
+            stopwatch.Reset();
+            stopwatch.Start();
+            itemTemplates = _worldContext.ExecuteSqlStatementAsList<CompleteItemTemplate>(sql, dataReader => ConvertReadResponseToItemTemplate(dataReader));
+            stopwatch.Stop();
+            Console.WriteLine($"Read table using static SQL mapping in {stopwatch.Elapsed}");
             return itemTemplates;
         }
 

@@ -44,6 +44,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Data.Gateway", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Common.Utility", "WBDXEditor.Common.Utility\WDBXEditor.Common.Utility.csproj", "{9F5AA9E3-78B7-46E2-9F59-72E853EA1926}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WDBXEditor.Common.Utility.NUnit", "WDBXEditor.Common.Utility.NUnit\WDBXEditor.Common.Utility.NUnit.csproj", "{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -140,6 +142,14 @@ Global
 		{9F5AA9E3-78B7-46E2-9F59-72E853EA1926}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F5AA9E3-78B7-46E2-9F59-72E853EA1926}.Release|x64.ActiveCfg = Release|Any CPU
 		{9F5AA9E3-78B7-46E2-9F59-72E853EA1926}.Release|x64.Build.0 = Release|Any CPU
+		{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}.Debug|x64.Build.0 = Debug|Any CPU
+		{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}.Release|x64.ActiveCfg = Release|Any CPU
+		{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

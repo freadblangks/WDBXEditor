@@ -24,7 +24,7 @@ namespace WDBXEditor.Data.Contracts.Models.Items
 		/// <summary>
 		/// An array of stat modifications made by the item when equipped.
 		/// </summary>
-		[CompoundField]
+		[CompoundField(10)]
 		public ItemStat[] Stats { get; set; } = new ItemStat[10];
 
 		// TODO: Figure out these two stats.
@@ -88,7 +88,7 @@ namespace WDBXEditor.Data.Contracts.Models.Items
 		/// <summary>
 		/// An array of objects defining the gem socks on the item.
 		/// </summary>
-		[CompoundField]
+		[CompoundField(3)]
 		public ItemSocketDefinition[] SocketDefinitions { get; set; } = new ItemSocketDefinition[3];
 
 		/// <summary>
