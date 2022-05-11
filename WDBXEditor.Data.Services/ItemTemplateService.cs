@@ -25,7 +25,7 @@ namespace WDBXEditor.Data.Services
 			_worldContext = worldContext;
 		}
 
-		public CompleteItemTemplate ReadItemTemplate(int entryId)
+		public CompleteItemTemplate ReadItemTemplate(UInt24 entryId)
 		{
 			#region Long Boi
 			string sql = @"

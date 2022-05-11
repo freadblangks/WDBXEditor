@@ -1,4 +1,5 @@
-﻿using WDBXEditor.Data.Contracts.Models.Items;
+﻿using WDBXEditor.Common.Utility.Types.Primitives;
+using WDBXEditor.Data.Contracts.Models.Items;
 
 namespace WDBXEditor.Data.Services.Interfaces
 {
@@ -7,6 +8,6 @@ namespace WDBXEditor.Data.Services.Interfaces
 	/// </summary>
 	public interface IItemTemplateService
 	{
-		CompleteItemTemplate ReadItemTemplate(int entryId);
+		CompleteItemTemplate ReadItemTemplate(UInt24 entryId);
 	}
 }

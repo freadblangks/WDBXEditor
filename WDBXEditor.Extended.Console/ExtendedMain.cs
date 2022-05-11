@@ -10,7 +10,7 @@ namespace WDBXEditor.Extended.Shell
 		public static void Main(string[] args)
 		{
 			Console.WriteLine("Hello good world");
-			var api = new ItemTemplateApi();
+			var api = new ItemTemplateManager();
 			api.TestGetItemTemplate();
 		}
 	}
