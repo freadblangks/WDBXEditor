@@ -1,9 +1,9 @@
 ﻿using WDBXEditor.Common.Utility.Types.Primitives;
 using WDBXEditor.Data.Contracts.Models.Items;
 
-namespace WDBXEditor.Data.Gateway.Gateways.Interfaces
+namespace WDBXEditor.Data.Repository.Repositories.Interfaces
 {
-	public interface IItemTemplateGateway
+	public interface IItemTemplateRepository
 	{
 		void TestGetItemTemplate();
 

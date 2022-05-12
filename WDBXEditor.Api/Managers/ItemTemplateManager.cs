@@ -2,13 +2,14 @@ using System;
 using WDBXEditor.Common.Utility.Types.Primitives;
 using WDBXEditor.Data.Contracts.Models.Items;
 using WDBXEditor.Data.Gateway.Gateways;
-using WDBXEditor.Data.Gateway.Gateways.Interfaces;
+using WDBXEditor.Data.Repository.Repositories.Interfaces;
+using WDBXEditor.Extended.Api.Managers.Interfaces;
 
-namespace WDBXEditor.Extended.Api
+namespace WDBXEditor.Extended.Api.Managers
 {
-	public class ItemTemplateManager
+	public class ItemTemplateManager : IItemTemplateManager
 	{
-		private IItemTemplateGateway _itemTemplateGateway;
+		private IItemTemplateRepository _itemTemplateGateway;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ItemTemplateManager"/> class.

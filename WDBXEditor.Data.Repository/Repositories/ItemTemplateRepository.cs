@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using WDBXEditor.Data.Contexts;
 using WDBXEditor.Data.Contracts.Attributes;
 using WDBXEditor.Data.Contracts.Models.Items;
-using WDBXEditor.Data.Gateway.Gateways.Interfaces;
 using WDBXEditor.Data.Services;
 using WDBXEditor.Data.Services.Interfaces;
 using WDBXEditor.Common.Utility.Types.Primitives;
+using WDBXEditor.Data.Repository.Repositories.Interfaces;
 
-namespace WDBXEditor.Data.Gateway.Gateways
+namespace WDBXEditor.Data.Repository.Repositories
 {
-	public class ItemTemplateGateway : IItemTemplateGateway
+	public class ItemTemplateRepository : IItemTemplateRepository
 	{
 		private IItemTemplateService _itemTemplateService;
 
-		public ItemTemplateGateway()
+		public ItemTemplateRepository()
 		{
 			string connectionString = "Server=localhost;Database=acore_world;Uid=root;Pwd=";
 			var worldContext = new MySqlContext(connectionString);

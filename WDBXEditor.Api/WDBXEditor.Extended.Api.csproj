@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WDBXEditor.Data.Contracts\WDBXEditor.Data.Contracts.csproj" />
-    <ProjectReference Include="..\WDBXEditor.Data.Gateway\WDBXEditor.Data.Gateway.csproj" />
+    <ProjectReference Include="..\WDBXEditor.Data.Gateway\WDBXEditor.Data.Repository.csproj" />
     <ProjectReference Include="..\WDBXEditor\WDBXEditor.csproj" />
   </ItemGroup>
 
