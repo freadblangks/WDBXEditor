@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using WDBXEditor.Extended.Api;
+using WDBXEditor.Extended.Api.Managers;
 
 namespace WDBXEditor.Extended.Shell
 {

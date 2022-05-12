@@ -1,7 +1,7 @@
 using System;
 using WDBXEditor.Common.Utility.Types.Primitives;
 using WDBXEditor.Data.Contracts.Models.Items;
-using WDBXEditor.Data.Gateway.Gateways;
+using WDBXEditor.Data.Repository.Repositories;
 using WDBXEditor.Data.Repository.Repositories.Interfaces;
 using WDBXEditor.Extended.Api.Managers.Interfaces;
 
@@ -16,7 +16,7 @@ namespace WDBXEditor.Extended.Api.Managers
 		/// </summary>
 		public ItemTemplateManager()
 		{
-			_itemTemplateGateway = new ItemTemplateGateway();
+			_itemTemplateGateway = new ItemTemplateRepository();
 		}
 
 		public void TestGetItemTemplate()

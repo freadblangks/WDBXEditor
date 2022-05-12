@@ -7,6 +7,9 @@ namespace WDBXEditor.Data.Services
 {
 	public class DbcService : IDbcService
 	{
-		void ImportDbc(string name);
+		void ImportDbc(string name)
+		{
+
+		}
 	}
 }
