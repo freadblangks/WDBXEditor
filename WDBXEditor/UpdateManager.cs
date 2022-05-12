@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using WDBXEditor.Common;
 using System.IO.Compression;
+using System.Text.Json;
 
 namespace WDBXEditor
 {
@@ -42,9 +41,8 @@ namespace WDBXEditor
 					client.Headers["User-Agent"] = userAgent + Constants.VERSION;
 
 					string json = await client.DownloadStringTaskAsync(releaseAPI);
-					var serializer = new JavaScriptSerializer();
 
-					GithubReleaseModel model = serializer.Deserialize<GithubReleaseModel>(json);
+					GithubReleaseModel model = JsonSerializer.Deserialize<GithubReleaseModel>(json);
 					if (model != null && model.tag_name != Constants.VERSION)
 					{
 						string text = $"An update is available.\r\n Click \"Yes\" to upgrade to {model.tag_name}. (This will restart the application)";

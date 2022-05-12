@@ -16,16 +16,13 @@ using System.Text.RegularExpressions;
 using static WDBXEditor.Common.Extensions;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
-using System.Web.Script.Serialization;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO.MemoryMappedFiles;
-using System.Security.AccessControl;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using CompressionType = WDBXEditor.Common.Enums.CompressionType;
 using System.Configuration;
 using WDBXEditor.Common.Enums;
+using System.Text.Json;
 
 namespace WDBXEditor.Storage
 {
@@ -221,7 +218,7 @@ namespace WDBXEditor.Storage
 				return;
 
 			using (FileStream fs = new FileStream(Path.Combine(TEMP_FOLDER, Tag + ".cache"), FileMode.Open))
-			using (var mmf = MemoryMappedFile.CreateFromFile(fs, Tag, fs.Length, MemoryMappedFileAccess.ReadWrite, null, HandleInheritability.None, false))
+			using (var mmf = MemoryMappedFile.CreateFromFile(fs, Tag, fs.Length, MemoryMappedFileAccess.ReadWrite, HandleInheritability.None, false))
 			using (var stream = mmf.CreateViewStream(0, fs.Length, MemoryMappedFileAccess.Read))
 			{
 				var formatter = new BinaryFormatter();
@@ -696,7 +693,9 @@ namespace WDBXEditor.Storage
 				Rows.Add(row);
 			});
 
-			return new JavaScriptSerializer() { MaxJsonLength = int.MaxValue }.Serialize(Rows);
+			// TODO: Figure out an alternative to the max length setting here.
+			return JsonSerializer.Serialize(Rows);
+			//return new JavaScriptSerializer() { MaxJsonLength = int.MaxValue }.Serialize(Rows);
 		}
 
 		#endregion

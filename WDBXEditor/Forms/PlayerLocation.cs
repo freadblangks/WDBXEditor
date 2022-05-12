@@ -6,8 +6,9 @@ using static WDBXEditor.Common.Constants;
 using System.Collections.Generic;
 using System.IO;
 using System.Globalization;
-using System.Web.Script.Serialization;
 using WDBXEditor.Reader;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace WDBXEditor.Forms
 {
@@ -54,7 +55,8 @@ namespace WDBXEditor.Forms
                 try
                 {
                     string json = File.ReadAllText(OFFSET_MAP_PATH);
-                    var offsets = new JavaScriptSerializer().Deserialize<List<OffsetMap>>(json);
+                    var offsets = JsonSerializer.Deserialize<List<OffsetMap>>(json);
+                    //var offsets = JsonConvert.DeserializeObject<List<OffsetMap>>(json);
                     offsetmaps.UnionWith(offsets);
                 }
                 catch
@@ -103,7 +105,7 @@ namespace WDBXEditor.Forms
 
         private void SaveBuilds()
         {
-            string json = new JavaScriptSerializer().Serialize(offsetmaps);
+            string json = JsonSerializer.Serialize(offsetmaps);
             using (var fs = File.CreateText(OFFSET_MAP_PATH))
                 fs.Write(json);
 
