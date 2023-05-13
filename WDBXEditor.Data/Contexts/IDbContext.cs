@@ -244,6 +244,21 @@ namespace WDBXEditor.Data.Contexts
 		T ExecuteSqlStatementAsObject<T>(string sqlStatement, Func<MySqlDataReader, T> converter, IEnumerable<MySqlParameter> parameters, int timeoutValue);
 
 		/// <summary>
+		/// Executes a bulk load operation with the provided settings.
+		/// </summary>
+		/// <param name="settings">The settings for the bulk load operation.</param>
+		/// <returns>The number of rows inserted.</returns>
+		int ExecuteSqlBulkLoad(MySqlBulkLoadSettings settings);
+
+		/// <summary>
+		/// Executes a bulk load operation with the provided settings and timeout value.
+		/// </summary>
+		/// <param name="settings">The settings for the bulk load operation.</param>
+		/// <param name="timeoutValue">The timeout (in seconds) for the bulk load operation.</param>
+		/// <returns>The number of rows inserted.</returns>
+		int ExecuteSqlBulkLoad(MySqlBulkLoadSettings settings, int timeoutValue);
+
+		/// <summary>
 		/// Closes the underlying connection and drops the handle to any in-progress SQL command.
 		/// </summary>
 		void ReleaseConnection();

@@ -41,13 +41,13 @@ namespace WDBXEditor.ConsoleHandler
             int build = ParamCheck<int>(pmap, "-b");
             SourceType sType = GetSourceType(source);
 
-            // Check file exists if loaded from the filesystem.
+            // Check that file exists if loaded from the filesystem.
             if (!File.Exists(file) && sType == SourceType.File)
 			{
                 throw new Exception($"   File not found '{file}'.");
             }
 
-            // Check the required definition exists.
+            // Check that the required definition exists.
             var def = Database.Definitions.Tables.FirstOrDefault(x => x.Build == build && x.Name.Equals(filenoext, IGNORECASE));
             if (def == null)
 			{

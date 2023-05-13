@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WDBXEditor", "WDBXEditor\WDBXEditor.csproj", "{E1F42B5C-7A40-4539-AD92-E24CAD7041F5}"
 EndProject
@@ -45,6 +45,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Common.Utility", "WBDXEditor.Common.Utility\WDBXEditor.Common.Utility.csproj", "{9F5AA9E3-78B7-46E2-9F59-72E853EA1926}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Common.Utility.NUnit", "WDBXEditor.Common.Utility.NUnit\WDBXEditor.Common.Utility.NUnit.csproj", "{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Core", "WDBXEditor.Core\WDBXEditor.Core.csproj", "{95A770B7-A12F-427E-A87F-249B982E514A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{4B1124A8-2A44-4454-887D-64A8CBB45546}"
+	ProjectSection(SolutionItems) = preProject
+		Configuration\appsettings.json = Configuration\appsettings.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acmil.PowerShell", "Acmil.PowerShell\Acmil.PowerShell.csproj", "{3AD4AAA6-A74E-464B-A40B-2258BBAA14FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -150,6 +159,22 @@ Global
 		{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}.Release|x64.ActiveCfg = Release|Any CPU
 		{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}.Release|x64.Build.0 = Release|Any CPU
+		{95A770B7-A12F-427E-A87F-249B982E514A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95A770B7-A12F-427E-A87F-249B982E514A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95A770B7-A12F-427E-A87F-249B982E514A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{95A770B7-A12F-427E-A87F-249B982E514A}.Debug|x64.Build.0 = Debug|Any CPU
+		{95A770B7-A12F-427E-A87F-249B982E514A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95A770B7-A12F-427E-A87F-249B982E514A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95A770B7-A12F-427E-A87F-249B982E514A}.Release|x64.ActiveCfg = Release|Any CPU
+		{95A770B7-A12F-427E-A87F-249B982E514A}.Release|x64.Build.0 = Release|Any CPU
+		{3AD4AAA6-A74E-464B-A40B-2258BBAA14FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AD4AAA6-A74E-464B-A40B-2258BBAA14FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AD4AAA6-A74E-464B-A40B-2258BBAA14FF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3AD4AAA6-A74E-464B-A40B-2258BBAA14FF}.Debug|x64.Build.0 = Debug|Any CPU
+		{3AD4AAA6-A74E-464B-A40B-2258BBAA14FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AD4AAA6-A74E-464B-A40B-2258BBAA14FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AD4AAA6-A74E-464B-A40B-2258BBAA14FF}.Release|x64.ActiveCfg = Release|Any CPU
+		{3AD4AAA6-A74E-464B-A40B-2258BBAA14FF}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

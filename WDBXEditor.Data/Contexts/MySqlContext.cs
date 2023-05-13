@@ -251,6 +251,53 @@ namespace WDBXEditor.Data.Contexts
 
 		#endregion
 
+		#region Bulk Load
+
+		public int ExecuteSqlBulkLoad(MySqlBulkLoadSettings settings)
+		{
+			return ExecuteSqlBulkLoad(settings, -1);
+		}
+
+		public int ExecuteSqlBulkLoad(MySqlBulkLoadSettings settings, int timeoutValue)
+		{
+			ValidateMySqlBulkLoadSettings(settings);
+			timeoutValue = SanitizeCommandTimeout(timeoutValue);
+
+			int rowsInserted = 0;
+			try
+			{
+				// TODO: Wrap this in a retry.
+				// That will likely require adding a new type of policy to somehow clean up
+				// after a partially finished bulk load.
+				EnsureOpenConnection();
+				var bulkLoader = new MySqlBulkLoader(_connection)
+				{
+					TableName = settings.TableName,
+					FieldTerminator = settings.FieldTerminator,
+					LineTerminator = settings.LineTerminator,
+					NumberOfLinesToSkip = settings.NumberOfLinesToSkip,
+					FileName = settings.FilePath,
+					FieldQuotationCharacter = settings.FieldQuotationCharacter,
+					CharacterSet = settings.CharacterSet,
+					Timeout = timeoutValue
+				};
+
+				rowsInserted = bulkLoader.Load();
+			}
+			catch (Exception ex)
+			{
+				throw new SqlBulkLoadException("Error during SQL Bulk Load operation", ex);
+			}
+			finally
+			{
+				ReleaseConnection();
+			}
+
+			return rowsInserted;
+		}
+
+		#endregion
+
 		#region Execute As List
 
 		public List<T> ExecuteSqlStatementAsList<T>(string sqlStatement, Func<MySqlDataReader, T> converter)
@@ -711,6 +758,22 @@ namespace WDBXEditor.Data.Contexts
 		}
 
 		#endregion
+
+		private void ValidateMySqlBulkLoadSettings(MySqlBulkLoadSettings settings)
+		{
+			if (string.IsNullOrWhiteSpace(settings.TableName))
+			{
+				throw new ArgumentNullException(nameof(MySqlBulkLoadSettings.TableName));
+			}
+			else if (string.IsNullOrWhiteSpace(settings.FieldTerminator))
+			{
+				throw new ArgumentNullException(nameof(MySqlBulkLoadSettings.FieldTerminator));
+			}
+			else if (string.IsNullOrWhiteSpace(settings.FilePath))
+			{
+				throw new ArgumentNullException(nameof(MySqlBulkLoadSettings.FilePath));
+			}
+		}
 
 		private int SanitizeCommandTimeout(int potentialTimeout)
 		{

@@ -44,7 +44,7 @@ namespace WDBXEditor.Data.Constants
 		};
 
 		/// <summary>
-		/// MySql error codes that incidate a command timeout.
+		/// MySql error codes that indicate a command timeout.
 		/// </summary>
 		public static readonly HashSet<int> COMMAND_TIMEOUT_ERROR_CODES = new HashSet<int>
 		{
