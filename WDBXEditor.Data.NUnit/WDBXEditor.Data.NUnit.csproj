@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Acmil.Data\Acmil.Data.csproj" />
-    <ProjectReference Include="..\WDBXEditor.Data\Acmil.Data.csproj" />
   </ItemGroup>
 
 </Project>

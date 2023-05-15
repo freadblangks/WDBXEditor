@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Acmil.Data.Contracts\Acmil.Data.Contracts.csproj" />
     <ProjectReference Include="..\Acmil.Data.Services\Acmil.Data.Services.csproj" />
-    <ProjectReference Include="..\WDBXEditor.Data.Contracts\Acmil.Data.Contracts.csproj" />
     <ProjectReference Include="..\WDBXEditor\WDBXEditor.csproj" />
   </ItemGroup>
 

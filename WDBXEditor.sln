@@ -16,11 +16,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Extended.Api.NUn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Data.NUnit", "WDBXEditor.Data.NUnit\WDBXEditor.Data.NUnit.csproj", "{1BF72F9F-03F3-4BDF-B686-C2D4647C835F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acmil.Data.Contracts", "WDBXEditor.Data.Contracts\Acmil.Data.Contracts.csproj", "{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{9F5AA9E3-78B7-46E2-9F59-72E853EA1926} = {9F5AA9E3-78B7-46E2-9F59-72E853EA1926}
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Common.Utility", "WBDXEditor.Common.Utility\WDBXEditor.Common.Utility.csproj", "{9F5AA9E3-78B7-46E2-9F59-72E853EA1926}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Common.Utility.NUnit", "WDBXEditor.Common.Utility.NUnit\WDBXEditor.Common.Utility.NUnit.csproj", "{6E7F0EFB-A22B-4410-AC9C-E55DEF183BCF}"
@@ -39,6 +34,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acmil.Core", "Acmil.Core\Acmil.Core.csproj", "{3BB59EF2-017C-46D5-8D58-F80E69A53DC4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acmil.Data", "Acmil.Data\Acmil.Data.csproj", "{A6CFDD05-2F51-4C2E-A5EA-B8CFC069B092}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acmil.Data.Contracts", "Acmil.Data.Contracts\Acmil.Data.Contracts.csproj", "{9EBD1E85-B05F-4518-8CC1-746B8BD6D3BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,14 +85,6 @@ Global
 		{1BF72F9F-03F3-4BDF-B686-C2D4647C835F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1BF72F9F-03F3-4BDF-B686-C2D4647C835F}.Release|x64.ActiveCfg = Release|Any CPU
 		{1BF72F9F-03F3-4BDF-B686-C2D4647C835F}.Release|x64.Build.0 = Release|Any CPU
-		{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}.Debug|x64.Build.0 = Debug|Any CPU
-		{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}.Release|x64.ActiveCfg = Release|Any CPU
-		{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}.Release|x64.Build.0 = Release|Any CPU
 		{9F5AA9E3-78B7-46E2-9F59-72E853EA1926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9F5AA9E3-78B7-46E2-9F59-72E853EA1926}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F5AA9E3-78B7-46E2-9F59-72E853EA1926}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -152,6 +141,14 @@ Global
 		{A6CFDD05-2F51-4C2E-A5EA-B8CFC069B092}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A6CFDD05-2F51-4C2E-A5EA-B8CFC069B092}.Release|x64.ActiveCfg = Release|Any CPU
 		{A6CFDD05-2F51-4C2E-A5EA-B8CFC069B092}.Release|x64.Build.0 = Release|Any CPU
+		{9EBD1E85-B05F-4518-8CC1-746B8BD6D3BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EBD1E85-B05F-4518-8CC1-746B8BD6D3BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EBD1E85-B05F-4518-8CC1-746B8BD6D3BB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9EBD1E85-B05F-4518-8CC1-746B8BD6D3BB}.Debug|x64.Build.0 = Debug|Any CPU
+		{9EBD1E85-B05F-4518-8CC1-746B8BD6D3BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EBD1E85-B05F-4518-8CC1-746B8BD6D3BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EBD1E85-B05F-4518-8CC1-746B8BD6D3BB}.Release|x64.ActiveCfg = Release|Any CPU
+		{9EBD1E85-B05F-4518-8CC1-746B8BD6D3BB}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
