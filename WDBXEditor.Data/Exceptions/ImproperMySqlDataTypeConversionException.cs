@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace WDBXEditor.Data.Exceptions
+namespace Acmil.Data.Exceptions
 {
 	/// <summary>
 	/// Represents an error caused by an attempt to invalidly cast a value from MySQL or store it in a field that would cause data loss.

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Acmil.Data.Helpers.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using WDBXEditor.Data.Helpers.Interfaces;
 
-namespace WDBXEditor.Data.Helpers
+namespace Acmil.Data.Helpers
 {
 	public class DbConfigHelper
 	{
@@ -80,6 +80,6 @@ namespace WDBXEditor.Data.Helpers
 		/// The number of milliseconds to wait after a connection timeout before re-running the query.
 		/// </summary>
 		public static int ConnectionTimeoutBaseWaitDurationInMilliseconds => DEFAULT_CONNECTION_TIMEOUT_WAIT_DURATION_IN_MILLISECONDS;
-		
+
 	}
 }

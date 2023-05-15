@@ -1,11 +1,11 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Acmil.Data.Helpers.Connections.Dtos;
+using Acmil.Data.Helpers.Connections.Interfaces;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using WDBXEditor.Data.Helpers.Connections.Dtos;
-using WDBXEditor.Data.Helpers.Connections.Interfaces;
 
-namespace WDBXEditor.Data.Helpers.Connections
+namespace Acmil.Data.Helpers.Connections
 {
 	public class MySqlConnectionInfoFactory : IMySqlConnectionInfoFactory
 	{
@@ -57,7 +57,7 @@ namespace WDBXEditor.Data.Helpers.Connections
 			_enricher.RegisterLogin(loginProvider);
 		}
 
-		
+
 
 		private MySqlConnectionInfo GetMySqlConnectionInfo(string connectionString, MySqlConnectionOverrides overrides)
 		{

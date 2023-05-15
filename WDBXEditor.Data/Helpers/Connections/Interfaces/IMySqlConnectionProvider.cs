@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 
-namespace WDBXEditor.Data.Helpers.Connections.Interfaces
+namespace Acmil.Data.Helpers.Connections.Interfaces
 {
 	/// <summary>
 	/// Provider for obtaining <see cref="MySqlConnection"/> instances.

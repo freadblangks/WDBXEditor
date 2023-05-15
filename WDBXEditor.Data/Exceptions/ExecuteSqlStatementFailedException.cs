@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace WDBXEditor.Data.Exceptions
+namespace Acmil.Data.Exceptions
 {
 	/// <summary>
 	/// Represents an error that caused the execution of a SQL statement to fail.

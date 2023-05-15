@@ -1,7 +1,7 @@
-﻿using System;
-using WDBXEditor.Data.Helpers.Connections.Dtos;
+﻿using Acmil.Data.Helpers.Connections.Dtos;
+using System;
 
-namespace WDBXEditor.Data.Helpers.Connections.Interfaces
+namespace Acmil.Data.Helpers.Connections.Interfaces
 {
 	/// <summary>
 	/// Cache for <see cref="MySqlConnectionInfo"/> instances.

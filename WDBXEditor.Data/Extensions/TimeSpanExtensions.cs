@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Acmil.Data.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WDBXEditor.Data.Extensions
+namespace Acmil.Data.Extensions
 {
 	/// <summary>
 	/// Class for <see cref="TimeSpan"/> extension methods.

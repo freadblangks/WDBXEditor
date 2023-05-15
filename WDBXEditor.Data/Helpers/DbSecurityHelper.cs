@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Acmil.Data.Helpers.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using WDBXEditor.Data.Helpers.Interfaces;
 
-namespace WDBXEditor.Data.Helpers
+namespace Acmil.Data.Helpers
 {
 	public class DbSecurityHelper : IDbSecurityHelper
 	{

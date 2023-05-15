@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WDBXEditor.Data\WDBXEditor.Data.csproj" />
+    <ProjectReference Include="..\WDBXEditor.Data\Acmil.Data.csproj" />
   </ItemGroup>
 
 </Project>

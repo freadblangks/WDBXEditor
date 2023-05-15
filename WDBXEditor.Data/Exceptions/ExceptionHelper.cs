@@ -1,11 +1,11 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Acmil.Data.Constants;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WDBXEditor.Data.Constants;
 
-namespace WDBXEditor.Data.Exceptions
+namespace Acmil.Data.Exceptions
 {
 	/// <summary>
 	/// Helper class for interacting with exceptions.

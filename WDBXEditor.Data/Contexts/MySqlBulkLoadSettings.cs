@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WDBXEditor.Data.Contexts
+namespace Acmil.Data.Contexts
 {
 	/// <summary>
 	/// Settings for a MySQL bulk-load operation.

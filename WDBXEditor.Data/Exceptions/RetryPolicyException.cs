@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WDBXEditor.Data.Exceptions
+namespace Acmil.Data.Exceptions
 {
 	/// <summary>
 	/// Represents an error thrown during a retry.

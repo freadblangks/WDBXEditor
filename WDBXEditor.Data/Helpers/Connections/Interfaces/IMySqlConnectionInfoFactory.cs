@@ -1,6 +1,7 @@
-﻿using WDBXEditor.Data.Helpers.Connections.Dtos;
+﻿using Acmil.Data.Helpers.Connections;
+using Acmil.Data.Helpers.Connections.Dtos;
 
-namespace WDBXEditor.Data.Helpers.Connections.Interfaces
+namespace Acmil.Data.Helpers.Connections.Interfaces
 {
 	/// <summary>
 	/// Factory for getting and creating <see cref="MySqlConnectionInfo"/> instances.

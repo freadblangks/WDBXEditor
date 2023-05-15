@@ -1,4 +1,9 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Acmil.Data.Contexts.QueryRetry;
+using Acmil.Data.Exceptions;
+using Acmil.Data.Helpers;
+using Acmil.Data.Helpers.Connections;
+using Acmil.Data.Helpers.Connections.Interfaces;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,14 +11,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Threading.Tasks;
-using WDBXEditor.Data.Contexts.QueryRetry;
-using WDBXEditor.Data.Exceptions;
-using WDBXEditor.Data.Helpers;
-using WDBXEditor.Data.Helpers.Connections;
-using WDBXEditor.Data.Helpers.Connections.Interfaces;
-using WDBXEditor.Data.Helpers.Interfaces;
 
-namespace WDBXEditor.Data.Contexts
+namespace Acmil.Data.Contexts
 {
 	/// <summary>
 	/// Database context for interacting with a MySQL Server instance.
@@ -181,7 +180,7 @@ namespace WDBXEditor.Data.Contexts
 			parameters ??= new MySqlParameter[] { };
 			timeoutValue = SanitizeCommandTimeout(timeoutValue);
 
-			
+
 			object retVal = null;
 			try
 			{
@@ -755,7 +754,7 @@ namespace WDBXEditor.Data.Contexts
 
 		private int SanitizeCommandTimeout(int potentialTimeout)
 		{
-			return (potentialTimeout > 0) ? potentialTimeout : DbConfigHelper.DefaultCommandTimeout;
+			return potentialTimeout > 0 ? potentialTimeout : DbConfigHelper.DefaultCommandTimeout;
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Acmil.Data.Exceptions;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,9 +10,8 @@ using System.Text.RegularExpressions;
 using WDBXEditor.Common.Utility.Extensions;
 using WDBXEditor.Common.Utility.Types.Primitives;
 using WDBXEditor.Data.Contracts.Attributes;
-using WDBXEditor.Data.Exceptions;
 
-namespace WDBXEditor.Data.Helpers.Mapping
+namespace Acmil.Data.Helpers.Mapping
 {
 	public class SqlDataMapper<T> where T : new()
 	{
@@ -22,7 +22,7 @@ namespace WDBXEditor.Data.Helpers.Mapping
 		/// <summary>
 		/// Initializes a new instance of <see cref="SqlDataMapper{T}"/>.
 		/// </summary>
-		public SqlDataMapper()  
+		public SqlDataMapper()
 		{
 			PopulateMapFunctionsDict(-1);
 		}
@@ -55,7 +55,7 @@ namespace WDBXEditor.Data.Helpers.Mapping
 					Action<MySqlDataReader, T> mapFunction = BuildMapFunction(propertyInfo, instanceNumber);
 					MapFunctions.Add(propertyInfo.Name, mapFunction);
 				}
-				
+
 			}
 		}
 
@@ -205,7 +205,7 @@ namespace WDBXEditor.Data.Helpers.Mapping
 			}
 
 			Func<object, TTarget> result;
-			
+
 			if (targetType == typeof(Int24))
 			{
 				result = valueToConvert => (TTarget)(object)(Int24)(int)Convert.ChangeType(valueToConvert, typeof(int));

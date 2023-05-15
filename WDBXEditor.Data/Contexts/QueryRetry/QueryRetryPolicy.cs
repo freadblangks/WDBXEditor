@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Acmil.Data.Exceptions;
+using Acmil.Data.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using WDBXEditor.Data.Exceptions;
-using WDBXEditor.Data.Extensions;
 
-namespace WDBXEditor.Data.Contexts.QueryRetry
+namespace Acmil.Data.Contexts.QueryRetry
 {
 	/// <summary>
 	/// Utility class for wrapping a SQL query with several retry behaviors.
@@ -96,8 +96,8 @@ namespace WDBXEditor.Data.Contexts.QueryRetry
 			{
 				_queryLogic = Failover(
 					_queryLogic,
-					() => default,	// Unused.
-					ex => { handler.Invoke(); return false; }	// "Always return false, but with side effects."
+					() => default,  // Unused.
+					ex => { handler.Invoke(); return false; }   // "Always return false, but with side effects."
 				);
 				_types |= QueryPolicyTypes.OnAny;
 			}
@@ -274,7 +274,7 @@ namespace WDBXEditor.Data.Contexts.QueryRetry
 
 		private bool IsCancelledEvent(Exception ex)
 		{
-			ex = (ex is RetryPolicyException) ? ex.InnerException : ex;
+			ex = ex is RetryPolicyException ? ex.InnerException : ex;
 			bool isCancelled = ExceptionHelper.IsCancelledEvent(ex);
 			if (isCancelled)
 			{
@@ -286,7 +286,7 @@ namespace WDBXEditor.Data.Contexts.QueryRetry
 
 		private bool IsDeadlockError(Exception ex, QueryRetrySettings config, ref int numberOfTries)
 		{
-			ex = (ex is RetryPolicyException) ? ex.InnerException : ex;
+			ex = ex is RetryPolicyException ? ex.InnerException : ex;
 			return ExceptionHelper.IsDeadlockException(ex) && config.CanRetry() && LogDeadlockEvent(ex, config, ref numberOfTries);
 		}
 
@@ -299,7 +299,7 @@ namespace WDBXEditor.Data.Contexts.QueryRetry
 
 		private bool IsCommandTimeoutError(Exception ex, CommandTimeoutQueryRetrySettings config, TimeSpan duration, ref int numberOfTries)
 		{
-			ex = (ex is RetryPolicyException) ? ex.InnerException : ex;
+			ex = ex is RetryPolicyException ? ex.InnerException : ex;
 			return ExceptionHelper.IsExecutionTimeoutException(ex)
 				&& config.CanRetry()
 				&& config.IsValidRetryDuration(duration)
@@ -308,7 +308,7 @@ namespace WDBXEditor.Data.Contexts.QueryRetry
 
 		private bool IsConnectionTimeoutError(Exception ex, QueryRetrySettings config, TimeoutType timeoutType, ref int numberOfTries)
 		{
-			ex = (ex is RetryPolicyException) ? ex.InnerException : ex;
+			ex = ex is RetryPolicyException ? ex.InnerException : ex;
 			TimeoutType? type = GetTimeoutType(ex);
 			bool isMatchingTimeout = type.HasValue && type.Value == timeoutType;
 			return isMatchingTimeout && config.CanRetry() && LogTimeoutEvent(ex, config, ref numberOfTries, timeoutType);
@@ -338,7 +338,7 @@ namespace WDBXEditor.Data.Contexts.QueryRetry
 
 		private bool IsQueryHintError(Exception ex)
 		{
-			ex = (ex is RetryPolicyException) ? ex.InnerException : ex;
+			ex = ex is RetryPolicyException ? ex.InnerException : ex;
 			bool isQueryHint = ExceptionHelper.IsQueryHintException(ex);
 			if (isQueryHint)
 			{

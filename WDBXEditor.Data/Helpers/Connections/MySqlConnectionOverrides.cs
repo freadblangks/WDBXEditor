@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Data.Helpers.Connections
+﻿namespace Acmil.Data.Helpers.Connections
 {
 	/// <summary>
 	/// Class used for creating instances of <see cref="MySqlConnectionInfo"/> using different values than the default.

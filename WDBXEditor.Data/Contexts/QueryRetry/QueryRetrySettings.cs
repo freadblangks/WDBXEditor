@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Acmil.Data.Extensions;
+using System;
 using System.Linq;
-using WDBXEditor.Data.Extensions;
 
-namespace WDBXEditor.Data.Contexts.QueryRetry
+namespace Acmil.Data.Contexts.QueryRetry
 {
 	/// <summary>
 	/// Object containing retry count and wait duration settings for errors encountered executing SQL statements.

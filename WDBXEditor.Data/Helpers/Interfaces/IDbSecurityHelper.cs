@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace WDBXEditor.Data.Helpers.Interfaces
+namespace Acmil.Data.Helpers.Interfaces
 {
 	/// <summary>
 	/// Helper that provides methods for ensuring safe execution of SQL commands.

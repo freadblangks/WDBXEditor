@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Reflection;
-using System.Collections.Generic;
-using WDBXEditor.Data.Contexts;
-using WDBXEditor.Data.Contracts.Attributes;
 using WDBXEditor.Data.Contracts.Models.Items;
 using WDBXEditor.Data.Repositories;
 using WDBXEditor.Common.Utility.Types.Primitives;
 using System.Security;
-using WDBXEditor.Data.Helpers;
 using WDBXEditor.Data.Repositories.Interfaces;
 using WDBXEditor.Data.Services.Interfaces;
+using Acmil.Data.Helpers;
 
 namespace WDBXEditor.Data.Services
 {
@@ -31,7 +27,6 @@ namespace WDBXEditor.Data.Services
         public void TestGetItemTemplate()
         {
             CompleteItemTemplate result = _itemTemplateRepository.ReadItemTemplate(56810);
-            //List<CompleteItemTemplate> results = _itemTemplateService.ReadItemTemplates();
             Console.WriteLine(result);
         }
 

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Acmil.Data.Contexts;
+using System;
 using System.Collections.Generic;
 using System.Security;
 using System.Text;
-using WDBXEditor.Data.Contexts;
 
-namespace WDBXEditor.Data.Helpers.Interfaces
+namespace Acmil.Data.Helpers.Interfaces
 {
 	/// <summary>
 	/// Interface defining a factory class for creating implementations of <see cref="IDbContext"/>.

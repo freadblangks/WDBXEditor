@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Data.Helpers.Connections.Interfaces
+﻿namespace Acmil.Data.Helpers.Connections.Interfaces
 {
 	/// <summary>
 	/// Factory for obtaining implementations of <see cref="IMySqlConnectionProvider"/>.

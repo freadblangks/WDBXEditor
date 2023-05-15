@@ -1,7 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 
-namespace WDBXEditor.Data.Helpers.Connections.Dtos
+namespace Acmil.Data.Helpers.Connections.Dtos
 {
 	/// <summary>
 	/// A class representing parsed information for connecting to a MySQL database.

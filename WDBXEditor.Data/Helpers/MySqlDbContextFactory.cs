@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Acmil.Data.Contexts;
+using Acmil.Data.Helpers.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
-using WDBXEditor.Data.Contexts;
-using WDBXEditor.Data.Helpers.Interfaces;
 
-namespace WDBXEditor.Data.Helpers
+namespace Acmil.Data.Helpers
 {
 	/// <summary>
 	/// Factory class for creating instances of <see cref="MySqlContext"/>.

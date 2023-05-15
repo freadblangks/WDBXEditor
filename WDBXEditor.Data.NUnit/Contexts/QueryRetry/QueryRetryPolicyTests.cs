@@ -1,10 +1,8 @@
-﻿using NUnit.Framework;
+﻿using Acmil.Data.Constants;
+using Acmil.Data.Contexts.QueryRetry;
+using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using WDBXEditor.Data.Constants;
-using WDBXEditor.Data.Contexts.QueryRetry;
 using WDBXEditor.Data.NUnit.TestHelpers;
 
 namespace WDBXEditor.Data.NUnit.Contexts.QueryRetry

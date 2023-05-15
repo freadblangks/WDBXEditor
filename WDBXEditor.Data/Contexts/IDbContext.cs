@@ -5,7 +5,7 @@ using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WDBXEditor.Data.Contexts
+namespace Acmil.Data.Contexts
 {
 	/// <summary>
 	/// Interface describing a database context.
@@ -38,7 +38,7 @@ namespace WDBXEditor.Data.Contexts
 		/// <param name="timeoutValue">A timeout value (in seconds) for the query.</param>
 		/// <returns>The number of rows affected.</returns>
 		int ExecuteNonQuerySqlStatement(string sqlStatement, int timeoutValue);
-		
+
 		/// <summary>
 		/// Executes a parameterized SQL statement against the connection.
 		/// </summary>

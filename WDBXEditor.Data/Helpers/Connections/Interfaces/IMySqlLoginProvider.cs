@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Data.Helpers.Connections.Interfaces
+﻿namespace Acmil.Data.Helpers.Connections.Interfaces
 {
 	/// <summary>
 	/// Provider for getting username and password information for non-defaul SQL logins.

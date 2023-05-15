@@ -1,8 +1,8 @@
-﻿using System;
-using WDBXEditor.Data.Helpers.Connections.Dtos;
-using WDBXEditor.Data.Helpers.Connections.Interfaces;
+﻿using Acmil.Data.Helpers.Connections.Dtos;
+using Acmil.Data.Helpers.Connections.Interfaces;
+using System;
 
-namespace WDBXEditor.Data.Helpers.Connections
+namespace Acmil.Data.Helpers.Connections
 {
 	/// <summary>
 	/// Factory class for obtaining implementations of <see cref="IMySqlConnectionProvider"/>.

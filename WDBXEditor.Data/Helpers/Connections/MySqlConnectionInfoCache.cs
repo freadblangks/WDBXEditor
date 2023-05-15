@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Acmil.Data.Helpers.Connections.Dtos;
+using Acmil.Data.Helpers.Connections.Interfaces;
+using System;
 using System.Collections.Concurrent;
-using WDBXEditor.Data.Helpers.Connections.Dtos;
-using WDBXEditor.Data.Helpers.Connections.Interfaces;
 
-namespace WDBXEditor.Data.Helpers.Connections
+namespace Acmil.Data.Helpers.Connections
 {
 	/// <summary>
 	/// Cache for <see cref="MySqlConnectionInfo"/> instances.

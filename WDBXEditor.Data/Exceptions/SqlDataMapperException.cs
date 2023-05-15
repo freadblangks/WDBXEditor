@@ -1,8 +1,8 @@
+using Acmil.Data.Helpers.Mapping;
 using System;
 using System.Runtime.Serialization;
-using WDBXEditor.Data.Helpers.Mapping;
 
-namespace WDBXEditor.Data.Exceptions
+namespace Acmil.Data.Exceptions
 {
 	/// <summary>
 	/// Represents a generic error thrown by an instance of <see cref="SqlDataMapper{T}"/>.

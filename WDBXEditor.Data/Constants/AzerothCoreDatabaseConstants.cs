@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Data.Constants
+﻿namespace Acmil.Data.Constants
 {
 	/// <summary>
 	/// Class for constants relating to the AzerothCore databases.

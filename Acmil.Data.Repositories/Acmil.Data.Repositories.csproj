@@ -7,7 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WBDXEditor.Common.Utility\WDBXEditor.Common.Utility.csproj" />
     <ProjectReference Include="..\WDBXEditor.Data.Contracts\WDBXEditor.Data.Contracts.csproj" />
-    <ProjectReference Include="..\WDBXEditor.Data\WDBXEditor.Data.csproj" />
+    <ProjectReference Include="..\WDBXEditor.Data\Acmil.Data.csproj" />
   </ItemGroup>
 
 </Project>

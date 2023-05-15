@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Acmil.Data.Helpers.Connections.Interfaces;
+using System;
 using System.Configuration;
-using WDBXEditor.Data.Helpers.Connections.Interfaces;
 
-namespace WDBXEditor.Data.Helpers.Connections
+namespace Acmil.Data.Helpers.Connections
 {
 	/// <summary>
 	/// Class for reading login info from this project's app.config.

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace WDBXEditor.Data.Exceptions
+namespace Acmil.Data.Exceptions
 {
 	/// <summary>
 	/// Represents an error caused by a model or submodel whose structure does not follow the expected rules for a model or submodel in the Extended WDBX Editor project.

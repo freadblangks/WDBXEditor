@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace WDBXEditor.Data.Exceptions
+namespace Acmil.Data.Exceptions
 {
 	/// <summary>
 	/// Represents an error encountered during execution of a SQL Bulk Load operation.

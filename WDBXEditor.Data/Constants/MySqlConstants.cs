@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WDBXEditor.Data.Constants
+namespace Acmil.Data.Constants
 {
 	/// <summary>
 	/// Class for constants relating to MySQL.

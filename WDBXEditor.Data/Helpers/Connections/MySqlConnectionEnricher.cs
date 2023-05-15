@@ -1,9 +1,9 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Acmil.Data.Helpers.Connections.Interfaces;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Concurrent;
-using WDBXEditor.Data.Helpers.Connections.Interfaces;
 
-namespace WDBXEditor.Data.Helpers.Connections
+namespace Acmil.Data.Helpers.Connections
 {
 	/// <summary>
 	/// Class used for inserting values into MySQL connection strings.
