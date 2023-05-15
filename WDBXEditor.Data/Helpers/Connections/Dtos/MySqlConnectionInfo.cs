@@ -38,7 +38,7 @@ namespace WDBXEditor.Data.Helpers.Connections.Dtos
 		/// <exception cref="ArgumentNullException">Thrown when <paramref name="connectionStringBuilder"/> is null.</exception>
 		public MySqlConnectionInfo(MySqlConnectionStringBuilder connectionStringBuilder)
 		{
-			if (connectionStringBuilder == null)
+			if (connectionStringBuilder is null)
 			{
 				throw new ArgumentNullException(nameof(connectionStringBuilder));
 			}

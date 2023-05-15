@@ -19,7 +19,7 @@ namespace WDBXEditor.Data.Contracts.Models.Items
 
 		/// <summary>
 		/// An ID that indicates which Item Class the Item Template belongs to.
-		/// For possible values see <see cref="ItemClass"/>.
+		/// For supported values see <see cref="ItemClass"/>.
 		/// </summary>
 		[MySqlColumnName("class")]
 		[EnumType(typeof(ItemClass))]

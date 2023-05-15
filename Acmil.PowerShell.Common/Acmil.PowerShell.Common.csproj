@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -11,10 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="OutputTypes\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\WDBXEditor.Api\WDBXEditor.Extended.Api.csproj" />
     <ProjectReference Include="..\WDBXEditor.Data.Contracts\WDBXEditor.Data.Contracts.csproj" />
   </ItemGroup>
 

@@ -54,5 +54,14 @@ namespace WDBXEditor.Data.Constants
 			13417,	// The wait_timeout period was exceeded, the idle time since last command was too long
 			13730	// 'wait_timeout' period of %s seconds was exceeded for %s. The idle time since last command was too long
 		};
+
+		public static readonly HashSet<int> AUTHENTICATION_FAILURE_ERROR_CODES = new HashSet<int>
+		{
+			1044,	// User was denied access to a particular database.
+			1045,	// User was denied access.
+			1698,	// User was set up to authenticate using something like the the "auth_socket" plugin, but a login was attempted using a password.
+			3879,	// User was denied access to a particular database.
+			3955,	// User was denied access because of too many consecutive failed logins.
+		};
 	}
 }

@@ -44,12 +44,12 @@ namespace WDBXEditor.Data.Helpers.Connections
 
 		public void RegisterLogin(IMySqlLoginProvider loginProvider)
 		{
-			if (loginProvider == null)
+			if (loginProvider is null)
 			{
 				throw new ArgumentNullException(nameof(loginProvider));
 			}
 
-			if (loginProvider.Username == null)
+			if (loginProvider.Username is null)
 			{
 				throw new ArgumentNullException(nameof(loginProvider.Username));
 			}

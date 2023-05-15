@@ -8,6 +8,8 @@ using WDBXEditor.Data.Services;
 using WDBXEditor.Data.Services.Interfaces;
 using WDBXEditor.Common.Utility.Types.Primitives;
 using WDBXEditor.Data.Repository.Repositories.Interfaces;
+using System.Security;
+using WDBXEditor.Data.Helpers;
 
 namespace WDBXEditor.Data.Repository.Repositories
 {
@@ -15,11 +17,18 @@ namespace WDBXEditor.Data.Repository.Repositories
 	{
 		private IItemTemplateService _itemTemplateService;
 
-		public ItemTemplateRepository()
+		// TODO: Pass these in with a DTO.
+		public ItemTemplateRepository(string hostname, string username, SecureString password)
 		{
-			string connectionString = "Server=localhost;Database=acore_world;Uid=root;Pwd=";
-			var worldContext = new MySqlContext(connectionString);
-			_itemTemplateService = new ItemTemplateService(worldContext);
+			_itemTemplateService = new ItemTemplateService(hostname, username, password, new MySqlDbContextFactory());
+		}
+
+		public ItemTemplateRepository(IItemTemplateService itemTemplateService)
+		{
+			_itemTemplateService = itemTemplateService;
+			//string connectionString = "Server=localhost;Database=acore_world;Uid=root;Pwd=";
+			//var worldContext = new MySqlContext(connectionString);
+			//_itemTemplateService = new ItemTemplateService(worldContext);
 		}
 
 		public void TestGetItemTemplate()

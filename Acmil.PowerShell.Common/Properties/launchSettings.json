@@ -1,0 +1,22 @@
+{
+  "profiles": {
+    "Acmil.PowerShell": {
+      "commandName": "Project"
+    },
+    "Initialize-Acmil": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "commandLineArgs": "-NoLogo -NoExit -Command \"Import-Module  'D:\\Sourcecode\\Me\\WDBXEditor\\Acmil.PowerShell.Common\\bin\\Debug\\net6.0\\Acmil.PowerShell.Common.psd1'\"; $connectionInfo = Initialize-Acmil;\""
+    },
+    "Generic Cmdlet": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "commandLineArgs": "-NoLogo -NoExit -Command \"Import-Module  'D:\\Sourcecode\\Me\\WDBXEditor\\Acmil.PowerShell.Common\\bin\\Debug\\net6.0\\Acmil.PowerShell.Common.psd1' -Force\"; $connectionInfo = Initialize-Acmil;\""
+    },
+    "PowerShell 7 Only": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "commandLineArgs": "-NoLogo -NoExit"
+    }
+  }
+}

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Threading.Tasks;
 using WDBXEditor.Data.Contexts.QueryRetry;
 using WDBXEditor.Data.Exceptions;
@@ -41,30 +43,6 @@ namespace WDBXEditor.Data.Contexts
 		/// <param name="connectionString">A connection string for connecting to the MySQL server instance.</param>
 		public MySqlContext(string connectionString)
 		{
-			SetProvider(MySqlConnectionProviderFactory.Instance, connectionString);
-		}
-
-		//public MySqlContext(MySqlConnection connection, IDbConfigHelper configHelper)
-		//{
-		//	_connection = connection;
-		//	_configHelper = configHelper;
-		//}
-
-		/// <summary>
-		/// Initializes a new instance of <see cref="MySqlConnection"/>.
-		/// </summary>
-		/// <param name="serverHostname">The hostname for the instance of MySQL server to connect to.</param>
-		/// <param name="userId">The user ID to connect with.</param>
-		/// <param name="password">The password for the user.</param>
-		/// <param name="database">(Optional) The name of the database to connect to</param>
-		public MySqlContext(string serverHostname, string userId, string password, string database = "")
-		{
-			string connectionString = $"Server={serverHostname};Uid={userId};Pwd={password}";
-
-			if (!string.IsNullOrWhiteSpace(database))
-			{
-				connectionString += $";Database={database}";
-			}
 			SetProvider(MySqlConnectionProviderFactory.Instance, connectionString);
 		}
 
@@ -487,7 +465,7 @@ namespace WDBXEditor.Data.Contexts
 
 		private void EnsureConnection(bool includeDatabase)
 		{
-			if (_connection == null)
+			if (_connection is null)
 			{
 				_connection = _mySqlConnectionProvider.GetConnection(includeDatabase);
 			}
@@ -495,12 +473,12 @@ namespace WDBXEditor.Data.Contexts
 
 		private void EnsureOpenConnection()
 		{
-			if (_connection.State == System.Data.ConnectionState.Broken)
+			if (_connection.State == ConnectionState.Broken)
 			{
 				_connection.Close();
 			}
 
-			if (_connection.State == System.Data.ConnectionState.Closed)
+			if (_connection.State == ConnectionState.Closed)
 			{
 				_connection.Open();
 				if (_mySqlConnectionProvider.ChangeDatabaseOnConnectionReOpen)

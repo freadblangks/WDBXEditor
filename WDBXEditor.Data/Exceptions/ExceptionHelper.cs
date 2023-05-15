@@ -126,6 +126,29 @@ namespace WDBXEditor.Data.Exceptions
 		}
 
 		/// <summary>
+		/// Checks if an exception is indicative of a MySQL error caused by failed authentication.
+		/// </summary>
+		/// <param name="ex">The exception to check.</param>
+		/// <returns>True if an exception is indicative of a MySQL error caused by failed authentication. Otherwise, false.</returns>
+		public static bool IsAuthenticationException(Exception ex)
+		{
+			bool retVal = false;
+			if (ex is MySqlException sqlException)
+			{
+				if (MySqlConstants.AUTHENTICATION_FAILURE_ERROR_CODES.Contains(sqlException.Number))
+				{
+					retVal = true;
+				}
+				else if (sqlException.InnerException != null && sqlException.InnerException is MySqlException innerSqlException)
+				{
+					retVal = MySqlConstants.AUTHENTICATION_FAILURE_ERROR_CODES.Contains(innerSqlException.Number);
+				}
+			}
+
+			return retVal;
+		}
+
+		/// <summary>
 		/// Throws a new more-specific Exception based on the type of exception thrown.
 		/// </summary>
 		/// <param name="ex">The exception to wrap.</param>
@@ -151,7 +174,11 @@ namespace WDBXEditor.Data.Exceptions
 		private static Exception CreateWrappedException(Exception ex, string executedSql, IEnumerable<MySqlParameter> parameters)
 		{
 			Exception retVal;
-			if (IsDeadlockException(ex))
+			if (IsAuthenticationException(ex))
+			{
+				retVal = new MySqlAuthenticationException(ex.Message, ex);
+			}
+			else if (IsDeadlockException(ex))
 			{
 				retVal = new MySqlDeadlockException(ex.Message, ex);
 			}
@@ -166,7 +193,5 @@ namespace WDBXEditor.Data.Exceptions
 
 			return retVal;
 		}
-
-		
 	}
 }

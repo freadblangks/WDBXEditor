@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WDBXEditor.Common.Utility.Types.Primitives;
+﻿using WDBXEditor.Common.Utility.Types.Primitives;
 using WDBXEditor.Data.Contracts.Attributes;
 using WDBXEditor.Data.Contracts.Models.General.Enums;
 using WDBXEditor.Data.Contracts.Models.Items.Enums;
