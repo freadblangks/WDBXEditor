@@ -1,5 +1,8 @@
 ﻿using Acmil.Data.Constants;
 using Acmil.Data.Contexts;
+using Acmil.Data.Contracts.Models.Items;
+using Acmil.Data.Contracts.Models.Items.Submodels;
+using Acmil.Data.Contracts.Models.Items.Submodels.Requirements;
 using Acmil.Data.Helpers.Interfaces;
 using Acmil.Data.Helpers.Mapping;
 using MySql.Data.MySqlClient;
@@ -8,9 +11,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security;
 using WDBXEditor.Common.Utility.Types.Primitives;
-using WDBXEditor.Data.Contracts.Models.Items;
-using WDBXEditor.Data.Contracts.Models.Items.Submodels;
-using WDBXEditor.Data.Contracts.Models.Items.Submodels.Requirements;
 using WDBXEditor.Data.Repositories.Interfaces;
 
 namespace WDBXEditor.Data.Repositories

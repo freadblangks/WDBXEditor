@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WDBXEditor.Common.Utility.Types.Primitives;
-using WDBXEditor.Data.Contracts.Attributes;
+﻿using WDBXEditor.Common.Utility.Types.Primitives;
+using Acmil.Data.Contracts.Attributes;
 
-namespace WDBXEditor.Data.Contracts.Models.Items
+namespace Acmil.Data.Contracts.Models.Items
 {
 	/// <summary>
 	/// Item template for an item that starts a quest.

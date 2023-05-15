@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WDBXEditor.Data.Contracts.Attributes
+namespace Acmil.Data.Contracts.Attributes
 {
 	/// <summary>
 	/// Specifies that the field or property has not been implemented.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WDBXEditor.Data.Contracts.Attributes
+namespace Acmil.Data.Contracts.Attributes
 {
 	/// <summary>
 	/// Specifies the Enum Type that values in the Property or Field should be checked against.

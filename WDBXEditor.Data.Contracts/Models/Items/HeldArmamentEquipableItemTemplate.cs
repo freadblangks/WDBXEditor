@@ -1,9 +1,9 @@
-﻿using WDBXEditor.Common.Utility.Types.Primitives;
-using WDBXEditor.Data.Contracts.Attributes;
-using WDBXEditor.Data.Contracts.Models.Items.Enums;
-using WDBXEditor.Data.Contracts.Models.Items.Submodels;
+﻿using Acmil.Data.Contracts.Models.Items.Enums;
+using Acmil.Data.Contracts.Models.Items.Submodels;
+using WDBXEditor.Common.Utility.Types.Primitives;
+using Acmil.Data.Contracts.Attributes;
 
-namespace WDBXEditor.Data.Contracts.Models.Items
+namespace Acmil.Data.Contracts.Models.Items
 {
 	/// <summary>
 	/// Item template for equipable items that are held by the character, instead of worn.

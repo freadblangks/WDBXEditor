@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Data.Contracts.Models.Items.Enums
+﻿namespace Acmil.Data.Contracts.Models.Items.Enums
 {
 	/// <summary>
 	/// Different faction reputation ranks an item can require.

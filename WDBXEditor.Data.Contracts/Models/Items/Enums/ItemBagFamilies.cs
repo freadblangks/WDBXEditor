@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WDBXEditor.Data.Contracts.Models.Items.Enums
+namespace Acmil.Data.Contracts.Models.Items.Enums
 {
 	/// <summary>
 	/// The different types of Bag Families.

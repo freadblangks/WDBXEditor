@@ -1,10 +1,10 @@
-﻿using WDBXEditor.Common.Utility.Types.Primitives;
-using WDBXEditor.Data.Contracts.Attributes;
-using WDBXEditor.Data.Contracts.Models.Items.Enums;
-using WDBXEditor.Data.Contracts.Models.Items.Enums.SubClasses;
-using WDBXEditor.Data.Contracts.Models.Items.Submodels;
+﻿using Acmil.Data.Contracts.Attributes;
+using Acmil.Data.Contracts.Models.Items.Enums;
+using Acmil.Data.Contracts.Models.Items.Enums.SubClasses;
+using Acmil.Data.Contracts.Models.Items.Submodels;
+using WDBXEditor.Common.Utility.Types.Primitives;
 
-namespace WDBXEditor.Data.Contracts.Models.Items
+namespace Acmil.Data.Contracts.Models.Items
 {
 	/// <summary>
 	/// The base class from which all ItemTemplate classes inherit.

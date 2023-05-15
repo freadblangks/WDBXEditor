@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Data.Contracts.Models.Items.Enums
+﻿namespace Acmil.Data.Contracts.Models.Items.Enums
 {
 	/// <summary>
 	/// The different possible colors for a gem socket on an item.

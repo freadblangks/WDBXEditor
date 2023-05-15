@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Data.Contracts.Models.Items.Enums
+﻿namespace Acmil.Data.Contracts.Models.Items.Enums
 {
 	/// <summary>
 	/// The slot(s) in which an item can be equipped.

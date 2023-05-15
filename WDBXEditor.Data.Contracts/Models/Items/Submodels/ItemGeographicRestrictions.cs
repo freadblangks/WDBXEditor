@@ -1,7 +1,7 @@
 ﻿using WDBXEditor.Common.Utility.Types.Primitives;
-using WDBXEditor.Data.Contracts.Attributes;
+using Acmil.Data.Contracts.Attributes;
 
-namespace WDBXEditor.Data.Contracts.Models.Items.Submodels
+namespace Acmil.Data.Contracts.Models.Items.Submodels
 {
 	/// <summary>
 	/// Object containing data about geographic areas an item is restricted to.

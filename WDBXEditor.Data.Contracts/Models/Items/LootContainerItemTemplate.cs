@@ -1,6 +1,6 @@
-﻿using WDBXEditor.Data.Contracts.Attributes;
+﻿using Acmil.Data.Contracts.Attributes;
 
-namespace WDBXEditor.Data.Contracts.Models.Items
+namespace Acmil.Data.Contracts.Models.Items
 {
 	/// <summary>
 	/// Item template for items that open a loot window when used.

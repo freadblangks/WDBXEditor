@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace WDBXEditor.Data.Contracts.Models.Items
+
+namespace Acmil.Data.Contracts.Models.Items
 {
 	/// <summary>
 	/// An object representing an Item Template.

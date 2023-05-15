@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Acmil.Data.Contracts.IO.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using WDBXEditor.Data.Contracts.IO.Enums;
 
 namespace WDBXEditor.Extended.Api.Managers.Interfaces
 {

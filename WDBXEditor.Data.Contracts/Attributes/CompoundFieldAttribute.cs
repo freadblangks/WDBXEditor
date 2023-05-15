@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WDBXEditor.Data.Contracts.Attributes
+namespace Acmil.Data.Contracts.Attributes
 {
 	/// <summary>
 	/// Specifies that a Field or Property maps to multiple columns in MySQL.

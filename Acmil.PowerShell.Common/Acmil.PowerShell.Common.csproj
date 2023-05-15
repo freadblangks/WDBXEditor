@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WDBXEditor.Api\WDBXEditor.Extended.Api.csproj" />
-    <ProjectReference Include="..\WDBXEditor.Data.Contracts\WDBXEditor.Data.Contracts.csproj" />
+    <ProjectReference Include="..\WDBXEditor.Data.Contracts\Acmil.Data.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

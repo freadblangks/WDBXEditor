@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WDBXEditor.Data.Contracts.Models.Items.Enums
+namespace Acmil.Data.Contracts.Models.Items.Enums
 {
 	/// <summary>
 	/// More flags that are used to defined specific aspects of an item's behavior.

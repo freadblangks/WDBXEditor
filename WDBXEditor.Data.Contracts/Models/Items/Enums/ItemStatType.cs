@@ -1,6 +1,6 @@
-﻿using WDBXEditor.Data.Contracts.Attributes;
+﻿using Acmil.Data.Contracts.Attributes;
 
-namespace WDBXEditor.Data.Contracts.Models.Items.Enums
+namespace Acmil.Data.Contracts.Models.Items.Enums
 {
 	/// <summary>
 	/// The stat bonuses that can be granted by an equipped item.

@@ -1,7 +1,7 @@
-﻿using WDBXEditor.Data.Contracts.Attributes;
-using WDBXEditor.Data.Contracts.Models.Items.Enums;
+﻿using Acmil.Data.Contracts.Models.Items.Enums;
+using Acmil.Data.Contracts.Attributes;
 
-namespace WDBXEditor.Data.Contracts.Models.Items.Submodels
+namespace Acmil.Data.Contracts.Models.Items.Submodels
 {
 	/// <summary>
 	/// Object representing a stat modification provided by an equipped item.

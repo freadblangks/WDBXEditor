@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WDBXEditor.Data.Contracts.Attributes;
+﻿using Acmil.Data.Contracts.Attributes;
 
-namespace WDBXEditor.Data.Contracts.Models.Items.Submodels
+namespace Acmil.Data.Contracts.Models.Items.Submodels
 {
 	/// <summary>
 	/// Object containing the different levels of magic resistance

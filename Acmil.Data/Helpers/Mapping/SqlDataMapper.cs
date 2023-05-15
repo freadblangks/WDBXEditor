@@ -1,4 +1,5 @@
-﻿using Acmil.Data.Exceptions;
+﻿using Acmil.Data.Contracts.Attributes;
+using Acmil.Data.Exceptions;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
@@ -9,7 +10,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using WDBXEditor.Common.Utility.Extensions;
 using WDBXEditor.Common.Utility.Types.Primitives;
-using WDBXEditor.Data.Contracts.Attributes;
 
 namespace Acmil.Data.Helpers.Mapping
 {

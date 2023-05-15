@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Data.Contracts.Models.Items.Enums
+﻿namespace Acmil.Data.Contracts.Models.Items.Enums
 {
 	/// <summary>
 	/// The possible damage types for a melee weapon to deal on hit.

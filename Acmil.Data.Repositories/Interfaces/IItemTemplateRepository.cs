@@ -1,5 +1,5 @@
-﻿using WDBXEditor.Common.Utility.Types.Primitives;
-using WDBXEditor.Data.Contracts.Models.Items;
+﻿using Acmil.Data.Contracts.Models.Items;
+using WDBXEditor.Common.Utility.Types.Primitives;
 
 namespace WDBXEditor.Data.Repositories.Interfaces
 {

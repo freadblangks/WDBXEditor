@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Data.Contracts.Models.Items.Enums
+﻿namespace Acmil.Data.Contracts.Models.Items.Enums
 {
 	/// <summary>
 	/// Different types of food that an item can be. This is used for feeding Hunter pets.

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Acmil.Data.Contracts.Models.Items.Enums;
+using System;
 
-namespace WDBXEditor.Data.Contracts.Models.Items.Enums.SubClasses
+namespace Acmil.Data.Contracts.Models.Items.Enums.SubClasses
 {
 	/// <summary>
 	/// Subclasses of the <see cref="ItemClass.Projectile"/> item class.

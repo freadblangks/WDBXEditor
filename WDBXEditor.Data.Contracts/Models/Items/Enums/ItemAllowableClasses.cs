@@ -1,7 +1,7 @@
 ﻿using System;
-using WDBXEditor.Data.Contracts.Attributes;
+using Acmil.Data.Contracts.Attributes;
 
-namespace WDBXEditor.Data.Contracts.Models.Items.Enums
+namespace Acmil.Data.Contracts.Models.Items.Enums
 {
 	/// <summary>
 	/// The character class(es) an item is usable by.

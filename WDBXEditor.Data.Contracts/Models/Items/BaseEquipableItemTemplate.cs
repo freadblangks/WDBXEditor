@@ -1,7 +1,7 @@
-﻿using WDBXEditor.Data.Contracts.Attributes;
-using WDBXEditor.Data.Contracts.Models.Items.Enums;
+﻿using Acmil.Data.Contracts.Attributes;
+using Acmil.Data.Contracts.Models.Items.Enums;
 
-namespace WDBXEditor.Data.Contracts.Models.Items
+namespace Acmil.Data.Contracts.Models.Items
 {
 	/// <summary>
 	/// Base class for equipable item templates.

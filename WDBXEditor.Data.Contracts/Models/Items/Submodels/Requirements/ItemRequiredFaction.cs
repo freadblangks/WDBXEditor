@@ -1,7 +1,7 @@
-﻿using WDBXEditor.Data.Contracts.Attributes;
-using WDBXEditor.Data.Contracts.Models.Items.Enums;
+﻿using Acmil.Data.Contracts.Models.Items.Enums;
+using Acmil.Data.Contracts.Attributes;
 
-namespace WDBXEditor.Data.Contracts.Models.Items.Submodels.Requirements
+namespace Acmil.Data.Contracts.Models.Items.Submodels.Requirements
 {
 	/// <summary>
 	/// Object representing a reputation requirement for an item.

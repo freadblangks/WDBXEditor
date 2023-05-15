@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Acmil.Data.Contracts.Models.Items;
+using Acmil.Data.Contracts.Models.Items.Enums;
+using System.Collections.Generic;
 using WDBXEditor.Common.Utility.Types.Primitives;
-using WDBXEditor.Data.Contracts.Models.Items;
-using WDBXEditor.Data.Contracts.Models.Items.Enums;
 
 namespace WDBXEditor.Extended.Api.Managers.Interfaces
 {

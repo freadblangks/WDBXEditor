@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WDBXEditor.Data.Contracts.Attributes
+namespace Acmil.Data.Contracts.Attributes
 {
 	/// <summary>
 	/// Specifies whether enum value checking can be toggled for the field or property.

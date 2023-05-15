@@ -1,7 +1,7 @@
-﻿using System;
-using WDBXEditor.Data.Contracts.Models.Items.Enums.SubClasses;
+﻿using Acmil.Data.Contracts.Models.Items.Enums.SubClasses;
+using System;
 
-namespace WDBXEditor.Data.Contracts.Models.Items.Enums
+namespace Acmil.Data.Contracts.Models.Items.Enums
 {
 	/// <summary>
 	/// Classes that an item can be categorized as.

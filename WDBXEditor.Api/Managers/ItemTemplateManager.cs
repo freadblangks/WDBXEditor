@@ -1,15 +1,15 @@
+using Acmil.Data.Contracts.Models.Items;
 using System;
 using System.Collections.Generic;
 using System.Security;
 using WDBXEditor.Common.Utility.Types.Primitives;
-using WDBXEditor.Data.Contracts.Models.Items;
 using WDBXEditor.Data.Services;
 using WDBXEditor.Data.Services.Interfaces;
 using WDBXEditor.Extended.Api.Managers.Interfaces;
 
 namespace WDBXEditor.Extended.Api.Managers
 {
-    public class ItemTemplateManager : IItemTemplateManager
+	public class ItemTemplateManager : IItemTemplateManager
 	{
 		private IItemTemplateService _itemTemplateService;
 

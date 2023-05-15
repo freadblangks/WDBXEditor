@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Extended.Api.NUn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Data.NUnit", "WDBXEditor.Data.NUnit\WDBXEditor.Data.NUnit.csproj", "{1BF72F9F-03F3-4BDF-B686-C2D4647C835F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WDBXEditor.Data.Contracts", "WDBXEditor.Data.Contracts\WDBXEditor.Data.Contracts.csproj", "{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acmil.Data.Contracts", "WDBXEditor.Data.Contracts\Acmil.Data.Contracts.csproj", "{8ABDEE92-A775-4317-842B-95AD2C1A9CC8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9F5AA9E3-78B7-46E2-9F59-72E853EA1926} = {9F5AA9E3-78B7-46E2-9F59-72E853EA1926}
 	EndProjectSection

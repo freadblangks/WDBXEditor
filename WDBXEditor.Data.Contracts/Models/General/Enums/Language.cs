@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Data.Contracts.Models.General.Enums
+﻿namespace Acmil.Data.Contracts.Models.General.Enums
 {
 	/// <summary>
 	/// The in-world languages of World of Warcraft.

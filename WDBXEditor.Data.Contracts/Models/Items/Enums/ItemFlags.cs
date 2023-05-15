@@ -1,7 +1,7 @@
 ﻿using System;
-using WDBXEditor.Data.Contracts.Attributes;
+using Acmil.Data.Contracts.Attributes;
 
-namespace WDBXEditor.Data.Contracts.Models.Items.Enums
+namespace Acmil.Data.Contracts.Models.Items.Enums
 {
 	/// <summary>
 	/// Flags that are used to defined specific aspects of an item's behavior.

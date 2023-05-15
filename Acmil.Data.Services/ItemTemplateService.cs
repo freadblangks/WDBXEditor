@@ -1,15 +1,15 @@
 ﻿using System;
-using WDBXEditor.Data.Contracts.Models.Items;
 using WDBXEditor.Data.Repositories;
 using WDBXEditor.Common.Utility.Types.Primitives;
 using System.Security;
 using WDBXEditor.Data.Repositories.Interfaces;
 using WDBXEditor.Data.Services.Interfaces;
 using Acmil.Data.Helpers;
+using Acmil.Data.Contracts.Models.Items;
 
 namespace WDBXEditor.Data.Services
 {
-    public class ItemTemplateService : IItemTemplateService
+	public class ItemTemplateService : IItemTemplateService
     {
         private IItemTemplateRepository _itemTemplateRepository;
 

@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Data.Contracts.IO.Enums
+﻿namespace Acmil.Data.Contracts.IO.Enums
 {
 	/// <summary>
 	/// Contains the different update strategies when importing a CSV or SQL table.

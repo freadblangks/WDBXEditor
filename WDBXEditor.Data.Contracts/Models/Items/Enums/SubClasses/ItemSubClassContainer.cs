@@ -1,4 +1,6 @@
-﻿namespace WDBXEditor.Data.Contracts.Models.Items.Enums.SubClasses
+﻿using Acmil.Data.Contracts.Models.Items.Enums;
+
+namespace Acmil.Data.Contracts.Models.Items.Enums.SubClasses
 {
 	/// <summary>
 	/// Subclasses of the <see cref="ItemClass.Container"/> item class.

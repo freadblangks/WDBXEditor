@@ -1,6 +1,6 @@
-﻿using WDBXEditor.Data.Contracts.Attributes;
+﻿using Acmil.Data.Contracts.Attributes;
 
-namespace WDBXEditor.Data.Contracts.Models.Items.Submodels.Requirements
+namespace Acmil.Data.Contracts.Models.Items.Submodels.Requirements
 {
 	/// <summary>
 	/// Object representing a required skill to use an item.

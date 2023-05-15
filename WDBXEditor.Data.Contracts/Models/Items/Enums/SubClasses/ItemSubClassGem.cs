@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Data.Contracts.Models.Items.Enums.SubClasses
+﻿namespace Acmil.Data.Contracts.Models.Items.Enums.SubClasses
 {
 	/// <summary>
 	/// Subclasses of the <see cref="ItemClass.Gem"/> item class.
