@@ -12,19 +12,19 @@ using WDBXEditor.Data.Contracts.Models.Items.Submodels;
 using WDBXEditor.Data.Contracts.Models.Items.Submodels.Requirements;
 using WDBXEditor.Data.Helpers.Interfaces;
 using WDBXEditor.Data.Helpers.Mapping;
-using WDBXEditor.Data.Services.Interfaces;
+using WDBXEditor.Data.Repositories.Interfaces;
 
-namespace WDBXEditor.Data.Services
+namespace WDBXEditor.Data.Repositories
 {
 	/// <summary>
-	/// Service for interacting with Item Templates.
+	/// Repository class for interacting with Item Templates.
 	/// </summary>
-	public class ItemTemplateService : IItemTemplateService
+	public class ItemTemplateRepository : IItemTemplateRepository
 	{
 		private IDbContext _worldContext;
 
 		// TODO: Update this to use a DTO instead of individual connection params.
-		public ItemTemplateService(string hostname, string username, SecureString password, IDbContextFactory dbContextFactory)
+		public ItemTemplateRepository(string hostname, string username, SecureString password, IDbContextFactory dbContextFactory)
 		{
 			_worldContext = dbContextFactory.GetContext(
 				hostname,

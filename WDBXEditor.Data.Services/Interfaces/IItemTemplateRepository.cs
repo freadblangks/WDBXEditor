@@ -1,12 +1,12 @@
 ﻿using WDBXEditor.Common.Utility.Types.Primitives;
 using WDBXEditor.Data.Contracts.Models.Items;
 
-namespace WDBXEditor.Data.Services.Interfaces
+namespace WDBXEditor.Data.Repositories.Interfaces
 {
 	/// <summary>
-	/// Service for interacting with Item Templates.
+	/// Interface describing a repository class for interacting with Item Templates.
 	/// </summary>
-	public interface IItemTemplateService
+	public interface IItemTemplateRepository
 	{
 		CompleteItemTemplate ReadItemTemplate(UInt24 entryId);
 	}

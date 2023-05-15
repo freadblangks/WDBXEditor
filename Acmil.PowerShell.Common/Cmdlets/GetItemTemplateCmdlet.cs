@@ -4,7 +4,6 @@ using Acmil.PowerShell.Common.OutputTypes;
 using System.Management.Automation;
 using WDBXEditor.Common.Utility.Types.Primitives;
 using WDBXEditor.Data.Contracts.Models.Items;
-using WDBXEditor.Data.Repository.Repositories;
 using WDBXEditor.Extended.Api.Managers;
 using WDBXEditor.Extended.Api.Managers.Interfaces;
 

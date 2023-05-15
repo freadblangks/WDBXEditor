@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-	    <_Parameter1>WDBXEditor.Data.Services</_Parameter1>
+	    <_Parameter1>WDBXEditor.Data.Repositories</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
 
