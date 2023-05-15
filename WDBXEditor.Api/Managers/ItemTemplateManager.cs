@@ -32,11 +32,6 @@ namespace WDBXEditor.Extended.Api.Managers
 			_itemTemplateService.TestGetItemTemplate();
 		}
 
-		//public CompleteItemTemplate GetCompleteItemTemplate(uint entryId)
-		//{
-		//	return _itemTemplateGateway.GetCompleteItemTemplateById((UInt24)entryId);
-		//}
-
 		public CompleteItemTemplate GetCompleteItemTemplate(UInt24 entryId)
 		{
 			return _itemTemplateService.GetCompleteItemTemplateById(entryId);

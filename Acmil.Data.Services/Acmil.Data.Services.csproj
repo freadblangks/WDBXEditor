@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Acmil.Data.Repositories\Acmil.Data.Repositories.csproj" />
     <ProjectReference Include="..\WBDXEditor.Common.Utility\WDBXEditor.Common.Utility.csproj" />
     <ProjectReference Include="..\WDBXEditor.Data.Contracts\WDBXEditor.Data.Contracts.csproj" />
-    <ProjectReference Include="..\WDBXEditor.Data.Services\Acmil.Data.Repositories.csproj" />
     <ProjectReference Include="..\WDBXEditor.Data\WDBXEditor.Data.csproj" />
   </ItemGroup>
 

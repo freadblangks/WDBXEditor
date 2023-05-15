@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Acmil.Data.Services\Acmil.Data.Services.csproj" />
     <ProjectReference Include="..\WDBXEditor.Data.Contracts\WDBXEditor.Data.Contracts.csproj" />
-    <ProjectReference Include="..\WDBXEditor.Data.Repository\Acmil.Data.Services.csproj" />
     <ProjectReference Include="..\WDBXEditor\WDBXEditor.csproj" />
   </ItemGroup>
 
