@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Acmil.Core.Archives.CASC.Constants;
+using Acmil.Core.Archives.CASC.Structures;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using WDBXEditor.Core.Archives.CASC.Constants;
-using WDBXEditor.Core.Archives.CASC.Structures;
 
-namespace WDBXEditor.Core.Archives.CASC.Handlers
+namespace Acmil.Core.Archives.CASC.Handlers
 {
 	public class RootFile
 	{

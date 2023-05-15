@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Collections.Specialized;
 using System.IO;
 using System.Net;
-using WDBXEditor.Core.Common.Enums;
+using Acmil.Core.Common.Enums;
 
-namespace WDBXEditor.Core.Common
+namespace Acmil.Core.Common
 {
 	/// <summary>
 	/// Class for general constants.
@@ -463,7 +463,7 @@ namespace WDBXEditor.Core.Common
 		#endregion
 
 		#region File Types
-		public static string FileRegexPattern => $"^(.{ SupportedFileTypes["All Files"].Replace(";*.", "|.*.") })$";
+		public static string FileRegexPattern => $"^(.{SupportedFileTypes["All Files"].Replace(";*.", "|.*.")})$";
 
 		public static readonly Dictionary<string, string> SupportedFileTypes = new Dictionary<string, string>()
 		{

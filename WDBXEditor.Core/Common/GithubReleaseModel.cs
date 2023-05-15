@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WDBXEditor.Core.Common
+namespace Acmil.Core.Common
 {
 	public class GithubReleaseModel
 	{

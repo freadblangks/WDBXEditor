@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace WDBXEditor.Core.Exceptions
+namespace Acmil.Core.Exceptions
 {
 	/// <summary>
 	/// Represents an error caused by a missing definition.

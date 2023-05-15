@@ -3,11 +3,11 @@ using System.Linq;
 using System.Text;
 using System.Collections.Generic;
 using System;
-using WDBXEditor.Core.Reader.FileTypes;
-using WDBXEditor.Core.Storage;
-using WDBXEditor.Core.Reader.Enums;
+using Acmil.Core.Reader.FileTypes;
+using Acmil.Core.Reader.Enums;
+using Acmil.Core.Storage;
 
-namespace WDBXEditor.Core.Reader
+namespace Acmil.Core.Reader
 {
 	public class DBHeader
 	{

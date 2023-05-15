@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WDBXEditor.Core.Archives.CASC.Constants
+namespace Acmil.Core.Archives.CASC.Constants
 {
 	[Flags]
 	public enum Locales : uint

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WDBXEditor.Core.Resources {
+namespace Acmil.Core.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace WDBXEditor.Core.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WDBXEditor.Core.Resources.Definitions", typeof(Definitions).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Acmil.Core.Resources.Definitions", typeof(Definitions).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

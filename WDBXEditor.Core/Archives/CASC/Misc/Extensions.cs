@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace WDBXEditor.Core.Archives.CASC.Misc
+namespace Acmil.Core.Archives.CASC.Misc
 {
 	public static class Extensions
 	{

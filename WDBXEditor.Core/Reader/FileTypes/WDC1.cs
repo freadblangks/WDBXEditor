@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Acmil.Core.Common.Enums;
+using Acmil.Core.Reader.Enums;
+using Acmil.Core.Storage;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Core.Common.Enums;
-using WDBXEditor.Core.Reader.Enums;
-using WDBXEditor.Core.Storage;
 
-namespace WDBXEditor.Core.Reader.FileTypes
+namespace Acmil.Core.Reader.FileTypes
 {
 	public class WDC1 : WDB6
 	{
@@ -473,7 +473,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 			// Write the field_structure bits
 			for (int i = 0; i < FieldStructure.Count; i++)
 			{
-				if ((HasIndexTable && i == 0) || (RelationShipData != null && i == FieldStructure.Count - 1))
+				if (HasIndexTable && i == 0 || RelationShipData != null && i == FieldStructure.Count - 1)
 				{
 					continue;
 				}
@@ -589,7 +589,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 					{
 						continue;
 					}
-						
+
 					CompressionType compression = ColumnMeta[fieldIndex].CompressionType;
 
 					// Copy records still store the sparse data.
@@ -654,7 +654,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 				short size = (short)(pos + bitStream.Offset - offset);
 
 				// Matches itemsparse padding.
-				if (isSparse) 
+				if (isSparse)
 				{
 					int remaining = size % 8 == 0 ? 0 : 8 - size % 8;
 					if (remaining > 0)
@@ -677,7 +677,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 			}
 
 			// Write to the filestream.
-			bitStream.CopyStreamTo(writer.BaseStream); 
+			bitStream.CopyStreamTo(writer.BaseStream);
 			bitStream.Dispose();
 
 			// OffsetTable / StringTable, either or.
@@ -756,7 +756,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 				{
 					writer.WriteArray(meta.PalletValues.SelectMany(x => x).ToArray());
 				}
-					
+
 			}
 			PalletDataSize = (int)(writer.BaseStream.Position - pos);
 

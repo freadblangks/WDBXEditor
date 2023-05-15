@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace WDBXEditor.Core.Archives.MPQ.Native
+namespace Acmil.Core.Archives.MPQ.Native
 {
 	[UnmanagedFunctionPointer(CallingConvention.Winapi)]
 	internal delegate void SFILE_DOWNLOAD_CALLBACK(IntPtr pvUserData, ulong byteOffset, uint dwTotalBytes);

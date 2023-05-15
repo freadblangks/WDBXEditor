@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WDBXEditor.Core.Archives.MPQ.Native
+namespace Acmil.Core.Archives.MPQ.Native
 {
 	internal sealed class MpqFileSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
 	{

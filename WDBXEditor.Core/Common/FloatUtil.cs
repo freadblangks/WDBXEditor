@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WDBXEditor.Core.Common
+namespace Acmil.Core.Common
 {
 	/// <summary>
 	/// android-apktool

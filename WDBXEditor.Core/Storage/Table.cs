@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
-using static WDBXEditor.Core.Common.Constants;
+using static Acmil.Core.Common.Constants;
 
 
-namespace WDBXEditor.Core.Storage
+namespace Acmil.Core.Storage
 {
 	[Serializable]
 	public class Table

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Acmil.Core.Archives.CASC.Handlers;
+using Acmil.Core.Archives.MPQ;
+using Acmil.Core.Storage;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,13 +9,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using WDBXEditor.Core.Archives.CASC.Handlers;
-using WDBXEditor.Core.Archives.MPQ;
-using WDBXEditor.Core.Storage;
 using WDBXEditor.Data.Contracts.IO.Enums;
-using static WDBXEditor.Core.Common.Constants;
+using static Acmil.Core.Common.Constants;
 
-namespace WDBXEditor.Core.ConsoleHandler
+namespace Acmil.Core.ConsoleHandler
 {
 	/// <summary>
 	/// Class containing implementations for console commands.
@@ -357,7 +357,7 @@ namespace WDBXEditor.Core.ConsoleHandler
 			}
 			else
 			{
-				object defaultval = typeof(T) == typeof(string) ? string.Empty : (object)0;
+				object defaultval = typeof(T) == typeof(string) ? string.Empty : 0;
 				retVal = (T)Convert.ChangeType(defaultval, typeof(T));
 			}
 

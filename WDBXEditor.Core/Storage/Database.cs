@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using static WDBXEditor.Core.Common.Constants;
 using System.Threading.Tasks.Dataflow;
 using System.Data;
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using WDBXEditor.Core.Reader;
-using System.Resources;
-using System.Reflection;
 using System.Collections;
 using WDBXEditor.Common.Utility.Interfaces;
 using WDBXEditor.Common.Utility.Logging.Interfaces;
 using WDBXEditor.Common.Utility;
+using Acmil.Core.Reader;
 
-namespace WDBXEditor.Core.Storage
+namespace Acmil.Core.Storage
 {
 	public class Database
 	{
@@ -156,7 +153,7 @@ namespace WDBXEditor.Core.Storage
 			foreach (KeyValuePair<string, MemoryStream> stream in streams)
 			{
 				// Wait synchronously for the block to accept.
-				await batchBlock.SendAsync(stream); 
+				await batchBlock.SendAsync(stream);
 			}
 
 			batchBlock.Complete();
@@ -199,7 +196,7 @@ namespace WDBXEditor.Core.Storage
 			foreach (int i in Enumerable.Range(0, Entries.Count))
 			{
 				// Wait synchronously for the block to accept.
-				await batchBlock.SendAsync(i); 
+				await batchBlock.SendAsync(i);
 			}
 
 			batchBlock.Complete();

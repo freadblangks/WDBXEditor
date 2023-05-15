@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Acmil.Core.Storage;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Core.Storage;
 
-namespace WDBXEditor.Core.Reader.FileTypes
+namespace Acmil.Core.Reader.FileTypes
 {
 	public class WDB2 : DBHeader
 	{
@@ -55,7 +55,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 			Tuple<int, int> minmax = entry.MinMax();
 
 			//Irrelevant if header doesn't use this.
-			if (MaxId == 0) 
+			if (MaxId == 0)
 			{
 				minmax = new Tuple<int, int>(0, 0);
 			}

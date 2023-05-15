@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Acmil.Core.Reader.Enums;
+using Acmil.Core.Storage;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Core.Reader.Enums;
-using WDBXEditor.Core.Storage;
 
-namespace WDBXEditor.Core.Reader.FileTypes
+namespace Acmil.Core.Reader.FileTypes
 {
 	public class WCH5 : DBHeader
 	{
@@ -205,7 +205,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 		public override void WriteOffsetMap(BinaryWriter writer, DBEntry entry, List<Tuple<int, short>> OffsetMap, int record_offset = 0)
 		{
 			// Scrub to after header
-			writer.Scrub(OffsetMapOffset); 
+			writer.Scrub(OffsetMapOffset);
 
 			// Write the offset map.
 			List<int> ids = entry.GetPrimaryKeys().ToList();

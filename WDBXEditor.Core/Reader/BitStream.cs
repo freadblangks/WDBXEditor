@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WDBXEditor.Core.Reader
+namespace Acmil.Core.Reader
 {
 	public class BitStream : IDisposable
 	{

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace WDBXEditor.Core.Archives.CASC.Misc
+namespace Acmil.Core.Archives.CASC.Misc
 {
 	public class ByteArrayComparer : IEqualityComparer, IEqualityComparer<object>
 	{

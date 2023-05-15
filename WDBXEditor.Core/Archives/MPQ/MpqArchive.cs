@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Acmil.Core.Archives.MPQ.Native;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.IO.MemoryMappedFiles;
-using WDBXEditor.Core.Archives.MPQ.Native;
 
-namespace WDBXEditor.Core.Archives.MPQ
+namespace Acmil.Core.Archives.MPQ
 {
 	public class MpqArchive : IDisposable
 	{
@@ -19,15 +18,21 @@ namespace WDBXEditor.Core.Archives.MPQ
 		public MpqArchive(string filePath, FileAccess accessType)
 		{
 			_accessType = accessType;
-			SFileOpenArchiveFlags flags = SFileOpenArchiveFlags.TypeIsFile;
+			var flags = SFileOpenArchiveFlags.TypeIsFile;
 			if (accessType == FileAccess.Read)
+			{
 				flags |= SFileOpenArchiveFlags.AccessReadOnly;
+			}
 			else
+			{
 				flags |= SFileOpenArchiveFlags.AccessReadWriteShare;
+			}
 
 			// constant 2 = SFILE_OPEN_HARD_DISK_FILE
 			if (!NativeMethods.SFileOpenArchive(filePath, 2, flags, out _handle))
+			{
 				throw new Win32Exception(); // Implicitly calls GetLastError
+			}
 		}
 
 		//public MpqArchive(MemoryMappedFile file, FileAccess accessType)
@@ -51,13 +56,19 @@ namespace WDBXEditor.Core.Archives.MPQ
 		private MpqArchive(string filePath, MpqArchiveVersion version, MpqFileStreamAttributes listfileAttributes, MpqFileStreamAttributes attributesFileAttributes, int maxFileCount)
 		{
 			if (maxFileCount < 0)
-				throw new ArgumentException("maxFileCount");
+			{
+				throw new ArgumentException(nameof(maxFileCount));
+			}
+				
 
 			SFileOpenArchiveFlags flags = SFileOpenArchiveFlags.TypeIsFile | SFileOpenArchiveFlags.AccessReadWriteShare;
 			flags |= (SFileOpenArchiveFlags)version;
 
 			if (!NativeMethods.SFileCreateArchive(filePath, (uint)flags, int.MaxValue, out _handle))
+			{
 				throw new Win32Exception();
+			}
+				
 		}
 
 		public static MpqArchive CreateNew(string mpqPath, MpqArchiveVersion version)
@@ -70,6 +81,7 @@ namespace WDBXEditor.Core.Archives.MPQ
 		{
 			return new MpqArchive(mpqPath, version, listfileAttributes, attributesFileAttributes, maxFileCount);
 		}
+
 		#endregion
 
 		#region Properties
@@ -83,18 +95,26 @@ namespace WDBXEditor.Core.Archives.MPQ
 			set
 			{
 				if (value < 0 || value > uint.MaxValue)
+				{
 					throw new ArgumentException("value");
+				}
+					
 				VerifyHandle();
-
 				if (!NativeMethods.SFileSetMaxFileCount(_handle, unchecked((uint)value)))
+				{
 					throw new Win32Exception();
+				}
+					
 			}
 		}
 
 		private void VerifyHandle()
 		{
-			if (_handle == null || _handle.IsInvalid)
+			if (_handle is null || _handle.IsInvalid)
+			{
 				throw new ObjectDisposedException("MpqArchive");
+			}
+				
 		}
 
 		public bool IsPatchedArchive
@@ -105,13 +125,17 @@ namespace WDBXEditor.Core.Archives.MPQ
 				return NativeMethods.SFileIsPatchedArchive(_handle);
 			}
 		}
+
 		#endregion
 
 		public void Flush()
 		{
 			VerifyHandle();
 			if (!NativeMethods.SFileFlushArchive(_handle))
+			{
 				throw new Win32Exception();
+			}
+				
 		}
 
 		public int AddListFile(string listfileContents)
@@ -125,19 +149,23 @@ namespace WDBXEditor.Core.Archives.MPQ
 			VerifyHandle();
 
 			if (!NativeMethods.SFileAddFile(_handle, filePath, archiveName, 0))
+			{
 				throw new Win32Exception();
+			}
 		}
 
 		public void Compact(string listfile)
 		{
 			VerifyHandle();
 			if (!NativeMethods.SFileCompactArchive(_handle, listfile, false))
+			{
 				throw new Win32Exception();
+			}
 		}
 
 		private void _OnCompact(IntPtr pvUserData, uint dwWorkType, ulong bytesProcessed, ulong totalBytes)
 		{
-			MpqArchiveCompactingEventArgs args = new MpqArchiveCompactingEventArgs(dwWorkType, bytesProcessed, totalBytes);
+			var args = new MpqArchiveCompactingEventArgs(dwWorkType, bytesProcessed, totalBytes);
 			OnCompacting(args);
 		}
 
@@ -156,7 +184,9 @@ namespace WDBXEditor.Core.Archives.MPQ
 				VerifyHandle();
 				_compactCallback = _OnCompact;
 				if (!NativeMethods.SFileSetCompactCallback(_handle, _compactCallback, IntPtr.Zero))
+				{
 					throw new Win32Exception();
+				}
 
 				_compactCallbacks.Add(value);
 			}
@@ -169,7 +199,7 @@ namespace WDBXEditor.Core.Archives.MPQ
 				{
 					if (!NativeMethods.SFileSetCompactCallback(_handle, null, IntPtr.Zero))
 					{
-						// Don't do anything here.  Remove shouldn't fail hard.
+						// Don't do anything here. Remove shouldn't fail hard.
 					}
 				}
 			}
@@ -179,42 +209,50 @@ namespace WDBXEditor.Core.Archives.MPQ
 		public void AddPatchArchive(string patchPath)
 		{
 			VerifyHandle();
-
 			if (!NativeMethods.SFileOpenPatchArchive(_handle, patchPath, null, 0))
+			{
 				throw new Win32Exception();
+			}
+				
 		}
 
 		public void AddPatchArchives(IEnumerable<string> patchPaths)
 		{
-			if (patchPaths == null)
-				throw new ArgumentNullException("patchPaths");
+			if (patchPaths is null)
+			{
+				throw new ArgumentNullException(nameof(patchPaths));
+			}
+				
 
 			VerifyHandle();
-
 			foreach (string path in patchPaths)
 			{
 				// Don't sublet to AddPatchArchive to avoid having to repeatedly call VerifyHandle()
 				if (!NativeMethods.SFileOpenPatchArchive(_handle, path, null, 0))
+				{
 					throw new Win32Exception();
+				}
+					
 			}
 		}
 
 		public bool HasFile(string fileToFind)
 		{
 			VerifyHandle();
-
 			return NativeMethods.SFileHasFile(_handle, fileToFind);
 		}
 
 		public MpqFileStream OpenFile(string fileName)
 		{
 			VerifyHandle();
-
 			MpqFileSafeHandle fileHandle;
 			if (!NativeMethods.SFileOpenFileEx(_handle, fileName, 0, out fileHandle))
+			{
 				throw new Win32Exception();
+			}
+				
 
-			MpqFileStream fs = new MpqFileStream(fileHandle, _accessType, this);
+			var fs = new MpqFileStream(fileHandle, _accessType, this);
 			_openFiles.Add(fs);
 			return fs;
 		}
@@ -222,25 +260,23 @@ namespace WDBXEditor.Core.Archives.MPQ
 		public void ExtractFile(string fileToExtract, string destinationPath)
 		{
 			VerifyHandle();
-
 			if (!NativeMethods.SFileExtractFile(_handle, fileToExtract, destinationPath, 0))
+			{
 				throw new Win32Exception();
+			}
 		}
 
 		public MpqFileVerificationResults VerifyFile(string fileToVerify)
 		{
 			VerifyHandle();
-
 			return (MpqFileVerificationResults)NativeMethods.SFileVerifyFile(_handle, fileToVerify, 0);
 		}
 
 		public MpqArchiveVerificationResult VerifyArchive()
 		{
 			VerifyHandle();
-
 			return (MpqArchiveVerificationResult)NativeMethods.SFileVerifyArchive(_handle);
 		}
-
 
 		#region IDisposable implementation
 		public void Dispose()
@@ -261,7 +297,10 @@ namespace WDBXEditor.Core.Archives.MPQ
 				if (_openFiles != null)
 				{
 					while (_openFiles.Count > 0)
+					{
 						_openFiles[0].Dispose();
+					}
+						
 
 					_openFiles.Clear();
 					_openFiles = null;
@@ -305,42 +344,52 @@ namespace WDBXEditor.Core.Archives.MPQ
 		/// There were no errors with the file.
 		/// </summary>
 		Verified = 0,
+
 		/// <summary>
 		/// Failed to open the file
 		/// </summary>
 		Error = 0x1,
+
 		/// <summary>
 		/// Failed to read all data from the file
 		/// </summary>
 		ReadError = 0x2,
+
 		/// <summary>
 		/// File has sector CRC
 		/// </summary>
 		HasSectorCrc = 0x4,
+
 		/// <summary>
 		/// Sector CRC check failed
 		/// </summary>
 		SectorCrcError = 0x8,
+
 		/// <summary>
 		/// File has CRC32
 		/// </summary>
 		HasChecksum = 0x10,
+
 		/// <summary>
 		/// CRC32 check failed
 		/// </summary>
 		ChecksumError = 0x20,
+
 		/// <summary>
 		/// File has data MD5
 		/// </summary>
 		HasMd5 = 0x40,
+
 		/// <summary>
 		/// MD5 check failed
 		/// </summary>
 		Md5Error = 0x80,
+
 		/// <summary>
 		/// File has raw data MD5
 		/// </summary>
 		HasRawMd5 = 0x100,
+
 		/// <summary>
 		/// Raw MD5 check failed
 		/// </summary>
@@ -353,22 +402,27 @@ namespace WDBXEditor.Core.Archives.MPQ
 		/// There is no signature in the MPQ
 		/// </summary>
 		NoSignature = 0,
+
 		/// <summary>
 		/// There was an error during verifying signature (like no memory)
 		/// </summary>
 		VerificationFailed = 1,
+
 		/// <summary>
 		/// There is a weak signature and sign check passed
 		/// </summary>
 		WeakSignatureVerified = 2,
+
 		/// <summary>
 		/// There is a weak signature but sign check failed
 		/// </summary>
 		WeakSignatureFailed = 3,
+
 		/// <summary>
 		/// There is a strong signature and sign check passed
 		/// </summary>
 		StrongSignatureVerified = 4,
+
 		/// <summary>
 		/// There is a strong signature but sign check failed
 		/// </summary>

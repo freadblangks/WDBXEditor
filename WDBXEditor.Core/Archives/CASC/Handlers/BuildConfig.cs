@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Acmil.Core.Archives.CASC.Misc;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using WDBXEditor.Core.Archives.CASC.Misc;
 
-namespace WDBXEditor.Core.Archives.CASC.Handlers
+namespace Acmil.Core.Archives.CASC.Handlers
 {
 	public class BuildConfig
 	{

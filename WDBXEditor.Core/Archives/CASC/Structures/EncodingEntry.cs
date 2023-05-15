@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Core.Archives.CASC.Structures
+﻿namespace Acmil.Core.Archives.CASC.Structures
 {
 	public struct EncodingEntry
 	{

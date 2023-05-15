@@ -1,6 +1,6 @@
-﻿using WDBXEditor.Core.Archives.CASC.Constants;
+﻿using Acmil.Core.Archives.CASC.Constants;
 
-namespace WDBXEditor.Core.Archives.CASC.Structures
+namespace Acmil.Core.Archives.CASC.Structures
 {
 	public struct RootEntry
 	{

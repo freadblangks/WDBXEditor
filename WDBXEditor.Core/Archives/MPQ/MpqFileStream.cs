@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Acmil.Core.Archives.MPQ.Native;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using WDBXEditor.Core.Archives.MPQ.Native;
 
-namespace WDBXEditor.Core.Archives.MPQ
+namespace Acmil.Core.Archives.MPQ
 {
 	public class MpqFileStream : Stream
 	{

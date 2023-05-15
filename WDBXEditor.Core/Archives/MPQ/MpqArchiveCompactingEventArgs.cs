@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WDBXEditor.Core.Archives.MPQ
+namespace Acmil.Core.Archives.MPQ
 {
 	public delegate void MpqArchiveCompactingEventHandler(MpqArchive sender, MpqArchiveCompactingEventArgs e);
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace WDBXEditor.Core.Archives.MPQ.Native
+namespace Acmil.Core.Archives.MPQ.Native
 {
 	internal static class Win32Methods
 	{

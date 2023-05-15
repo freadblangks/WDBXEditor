@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Acmil.Core.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Common;
 
-namespace WDBXEditor.Core.Reader.FileTypes
+namespace Acmil.Core.Reader.FileTypes
 {
 	public class WDB : DBHeader
 	{

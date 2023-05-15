@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Acmil.Core.Common.Enums;
+using Acmil.Core.Reader;
+using Acmil.Core.Reader.Enums;
+using Acmil.Core.Storage;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Core.Common.Enums;
-using WDBXEditor.Core.Reader.Enums;
-using WDBXEditor.Core.Storage;
 
-namespace WDBXEditor.Core.Reader.FileTypes
+namespace Acmil.Core.Reader.FileTypes
 {
 	class WDC2 : WDC1
 	{
@@ -515,7 +516,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 			// Write the field_structure bits
 			for (int i = 0; i < FieldStructure.Count; i++)
 			{
-				if ((HasIndexTable && i == 0) || (RelationShipData != null && i == FieldStructure.Count - 1))
+				if (HasIndexTable && i == 0 || RelationShipData != null && i == FieldStructure.Count - 1)
 				{
 					continue;
 				}
@@ -610,7 +611,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 				int id = entry.Data.Rows[rowIndex].Field<int>(entry.Key);
 				bool isCopyRecord = copyIdsSet.Contains(id);
 
-				if (HasIndexTable) 
+				if (HasIndexTable)
 				{
 					// Dump the id from the row data.
 					rowData.Dequeue();
@@ -671,7 +672,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 						case CompressionType.PalletArray:
 							{
 								// Enforce int size rule
-								byte[] combined = data.SelectMany(x => x.Concat(new byte[4]).Take(4)).ToArray(); 
+								byte[] combined = data.SelectMany(x => x.Concat(new byte[4]).Take(4)).ToArray();
 
 								int index = ColumnMeta[fieldIndex].PalletValues.FindIndex(x => x.SequenceEqual(combined));
 								if (index > -1)
@@ -702,7 +703,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 				short size = (short)(bitStream.Length - bitOffset);
 
 				// Matches itemsparse padding.
-				if (isSparse) 
+				if (isSparse)
 				{
 					int remaining = size % 8 == 0 ? 0 : 8 - size % 8;
 					if (remaining > 0)

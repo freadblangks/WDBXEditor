@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Acmil.Core.Storage;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WDBXEditor.Common.Utility;
-using WDBXEditor.Core.Storage;
 
-namespace WDBXEditor.Core.Reader.FileTypes
+namespace Acmil.Core.Reader.FileTypes
 {
 	public class HTFX : DBHeader
 	{

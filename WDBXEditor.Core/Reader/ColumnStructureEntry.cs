@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Acmil.Core.Common.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Core.Common.Enums;
 
-namespace WDBXEditor.Core.Reader
+namespace Acmil.Core.Reader
 {
 	public class ColumnStructureEntry
 	{

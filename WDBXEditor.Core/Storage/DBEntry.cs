@@ -1,33 +1,31 @@
-﻿using WDBXEditor.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
-using static WDBXEditor.Core.Common.Constants;
+using static Acmil.Core.Common.Constants;
 using System.Text.RegularExpressions;
-using static WDBXEditor.Common.Extensions;
+using static Acmil.Core.Common.Extensions;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO.MemoryMappedFiles;
-using CompressionType = WDBXEditor.Core.Common.Enums.CompressionType;
+using CompressionType = Acmil.Core.Common.Enums.CompressionType;
 using System.Text.Json;
-using WDBXEditor.Core.Archives.MPQ;
-using WDBXEditor.Core.Common.Enums;
-using WDBXEditor.Core.Reader.FileTypes;
-using WDBXEditor.Core.Reader;
 using WDBXEditor.Data.Contexts;
 using WDBXEditor.Data.Contracts.IO.Enums;
-using WDBXEditor.Core.Common;
 using WDBXEditor.Common.Utility.Interfaces;
 using WDBXEditor.Common.Utility.Logging.Interfaces;
 using WDBXEditor.Common.Utility.Configuration.Interfaces;
-using WDBXEditor.Core.Exceptions;
+using Acmil.Core.Reader.FileTypes;
+using Acmil.Core.Common;
+using Acmil.Core.Common.Enums;
+using Acmil.Core.Reader;
+using Acmil.Core.Exceptions;
 
-namespace WDBXEditor.Core.Storage
+namespace Acmil.Core.Storage
 {
 	public class DBEntry : IDisposable
 	{
@@ -525,7 +523,7 @@ namespace WDBXEditor.Core.Storage
 			sb.AppendLine($"DROP TABLE IF EXISTS `{tableName}`; ");
 			sb.AppendLine($"CREATE TABLE `{tableName}` ({Data.Columns.ToSql(Key)}) ENGINE=MyISAM DEFAULT CHARSET=utf8; ");
 			foreach (DataRow row in Data.Rows)
-				sb.AppendLine($"INSERT INTO `{tableName}` VALUES ({ row.ToSql() }); ");
+				sb.AppendLine($"INSERT INTO `{tableName}` VALUES ({row.ToSql()}); ");
 
 			return sb.ToString();
 		}
@@ -728,7 +726,7 @@ namespace WDBXEditor.Core.Storage
 			bool importSuccessful = false;
 
 			// Clone table structure to help with mapping
-			DataTable importTable = Data.Clone(); 
+			DataTable importTable = Data.Clone();
 
 			var usedIds = new HashSet<int>();
 			int idcolumn = Data.Columns[Key].Ordinal;
@@ -1010,7 +1008,7 @@ namespace WDBXEditor.Core.Storage
 					{
 						source.Rows.Add(r);
 					}
-						
+
 					source.EndLoadData();
 
 					Data.Clear();

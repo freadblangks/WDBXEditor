@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Acmil.Core.Reader;
+using Acmil.Core.Reader.Enums;
+using Acmil.Core.Storage;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Core.Reader.Enums;
-using WDBXEditor.Core.Storage;
-using static WDBXEditor.Core.Common.Constants;
+using static Acmil.Core.Common.Constants;
 
-namespace WDBXEditor.Core.Reader.FileTypes
+namespace Acmil.Core.Reader.FileTypes
 {
 	public class WDB6 : WDB5
 	{
@@ -33,11 +34,11 @@ namespace WDBXEditor.Core.Reader.FileTypes
 			// Ignored if Index Table.
 			if (HasIndexTable)
 			{
-				IdIndex = 0; 
+				IdIndex = 0;
 			}
 
 			//RecordSize header field is not right anymore.
-			InternalRecordSize = RecordSize; 
+			InternalRecordSize = RecordSize;
 
 			// Gather field structures.
 			FieldStructure = new List<FieldStructureEntry>();
@@ -318,7 +319,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 			// Write the field_structure bits.
 			for (int i = 0; i < FieldStructure.Count; i++)
 			{
-				if ((HasIndexTable && i == 0) || FieldStructure[i].CommonDataColumn)
+				if (HasIndexTable && i == 0 || FieldStructure[i].CommonDataColumn)
 				{
 					continue;
 				}

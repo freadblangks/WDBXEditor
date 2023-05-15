@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WDBXEditor.Core.Reader.Enums
+namespace Acmil.Core.Reader.Enums
 {
 	[Flags]
 	public enum HeaderFlags : short

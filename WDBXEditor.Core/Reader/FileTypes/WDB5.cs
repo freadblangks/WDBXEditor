@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using WDBXEditor.Core.Storage;
-using WDBXEditor.Core.Reader.Enums;
+using Acmil.Core.Reader.Enums;
+using Acmil.Core.Storage;
 
-namespace WDBXEditor.Core.Reader.FileTypes
+namespace Acmil.Core.Reader.FileTypes
 {
 	public class WDB5 : DBHeader
 	{
@@ -46,7 +46,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 			if (Flags.HasFlag(HeaderFlags.IndexMap))
 			{
 				// Ignored if Index Table.
-				IdIndex = 0; 
+				IdIndex = 0;
 			}
 
 			//Gather field structures
@@ -271,7 +271,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 			for (int x = minmax.Item1; x <= minmax.Item2; x++)
 			{
 				// Insert the offset map.
-				if (ids.Contains(x)) 
+				if (ids.Contains(x))
 				{
 					Tuple<int, short> kvp = OffsetMap[m];
 					writer.Write(kvp.Item1 + record_offset);
@@ -280,7 +280,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 				}
 
 				// Re-insert our duplicates.
-				else if (duplicates.ContainsKey(x)) 
+				else if (duplicates.ContainsKey(x))
 				{
 					Tuple<int, short> hiddenkvp = OffsetMap[duplicates[x]];
 					writer.Write(hiddenkvp.Item1 + record_offset);
@@ -289,7 +289,7 @@ namespace WDBXEditor.Core.Reader.FileTypes
 				else
 				{
 					// 0 fill.
-					writer.BaseStream.Position += sizeof(int) + sizeof(short); 
+					writer.BaseStream.Position += sizeof(int) + sizeof(short);
 				}
 			}
 
@@ -372,12 +372,12 @@ namespace WDBXEditor.Core.Reader.FileTypes
 			else if (!IsTypeOf<WDB6>() && HasOffsetTable)
 			{
 				// Offset map always has 2 bytes padding.
-				writer.BaseStream.Position += 2; 
+				writer.BaseStream.Position += 2;
 			}
 			else
 			{
 				// Scrub to the end of the record if necessary.
-				base.WriteRecordPadding(writer, entry, offset); 
+				base.WriteRecordPadding(writer, entry, offset);
 			}
 		}
 

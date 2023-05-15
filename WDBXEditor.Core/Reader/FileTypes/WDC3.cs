@@ -1,15 +1,13 @@
+using Acmil.Core.Common.Enums;
+using Acmil.Core.Reader.Enums;
+using Acmil.Core.Storage;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WDBXEditor.Core.Common.Enums;
-using WDBXEditor.Core.Reader.Enums;
-using WDBXEditor.Core.Storage;
 
-namespace WDBXEditor.Core.Reader.FileTypes
+namespace Acmil.Core.Reader.FileTypes
 {
 	class WDC3 : WDC2
 	{

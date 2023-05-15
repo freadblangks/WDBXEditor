@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System;
 
-namespace WDBXEditor.Core.Reader
+namespace Acmil.Core.Reader
 {
 	public class StringTable : IDisposable
 	{
@@ -42,7 +42,7 @@ namespace WDBXEditor.Core.Reader
 
 			// Empty string always 0
 			// WDB2 with MaxId allows duplicates else distinct strings
-			if (str != "" && (duplicates || !_stringlookup.TryGetValue(str, out offset))) 
+			if (str != "" && (duplicates || !_stringlookup.TryGetValue(str, out offset)))
 			{
 				byte[] strBytes = Encoding.UTF8.GetBytes(str);
 				offset = (int)StringStream.Position;
@@ -85,7 +85,7 @@ namespace WDBXEditor.Core.Reader
 					Table[absolute ? pos : index] = dbReader.ReadStringNull();
 				}
 			}
-				
+
 			return retVal;
 		}
 

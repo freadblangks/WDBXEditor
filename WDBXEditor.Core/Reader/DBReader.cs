@@ -4,15 +4,15 @@ using System.Data;
 using System.Linq;
 using System.IO;
 using System.Text;
-using WDBXEditor.Common;
-using static WDBXEditor.Core.Common.Constants;
-using WDBXEditor.Core.Reader.FileTypes;
-using WDBXEditor.Core.Storage;
-using WDBXEditor.Core.Exceptions;
+using static Acmil.Core.Common.Constants;
 using WDBXEditor.Common.Utility.Interfaces;
 using WDBXEditor.Common.Utility.Logging.Interfaces;
+using Acmil.Core.Reader.FileTypes;
+using Acmil.Core.Common;
+using Acmil.Core.Storage;
+using Acmil.Core.Exceptions;
 
-namespace WDBXEditor.Core.Reader
+namespace Acmil.Core.Reader
 {
 	public class DBReader
 	{
@@ -95,7 +95,7 @@ namespace WDBXEditor.Core.Reader
 
 				header?.ReadHeader(ref dbReader, signature);
 			}
-			
+
 			return header;
 		}
 
@@ -129,7 +129,7 @@ namespace WDBXEditor.Core.Reader
 				{
 					throw new MissingDefinitionException("No definition found.");
 				}
-					
+
 
 				if (header is WDC1 wdc1)
 				{
@@ -155,7 +155,7 @@ namespace WDBXEditor.Core.Reader
 					dbReader.Scrub(pos);
 
 					// Read data.
-					ReadIntoTable(ref entry, dbReader, StringTable); 
+					ReadIntoTable(ref entry, dbReader, StringTable);
 
 					// Cleanup.
 					stream.Dispose();
@@ -173,7 +173,7 @@ namespace WDBXEditor.Core.Reader
 					Dictionary<int, string> StringTable = new Dictionary<int, string>();
 
 					// Stringtable is only present if there isn't an offset map.
-					if (!header.HasOffsetTable) 
+					if (!header.HasOffsetTable)
 					{
 						dbReader.Scrub(stringTableStart);
 						StringTable = new StringTable().Read(dbReader, stringTableStart, stringTableStart + header.StringBlockSize);

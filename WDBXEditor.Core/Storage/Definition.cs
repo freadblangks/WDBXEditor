@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using static WDBXEditor.Core.Common.Constants;
+using static Acmil.Core.Common.Constants;
 
-namespace WDBXEditor.Core.Storage
+namespace Acmil.Core.Storage
 {
 	[Serializable]
 	public class Definition
@@ -35,7 +35,7 @@ namespace WDBXEditor.Core.Storage
 						var definition = (Definition)deserializer.Deserialize(reader);
 
 						// If this runs into issues, use the commented out code below.
-						var newTables = definition.Tables.Where(newTable => !this.Tables.Any(existingTable => newTable.Build == existingTable.Build && newTable.Name == existingTable.Name)).ToList();
+						var newTables = definition.Tables.Where(newTable => !Tables.Any(existingTable => newTable.Build == existingTable.Build && newTable.Name == existingTable.Name)).ToList();
 						newTables.ForEach(t => t.Load());
 						Tables.UnionWith(newTables.Where(t => t.Key is not null));
 
@@ -98,7 +98,7 @@ namespace WDBXEditor.Core.Storage
 		//			{
 		//				serializer.Serialize(fs, _def);
 		//			}
-						
+
 		//		}
 
 		//		_loading = false;

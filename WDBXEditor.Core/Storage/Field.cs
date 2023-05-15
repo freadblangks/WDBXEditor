@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace WDBXEditor.Core.Storage
+namespace Acmil.Core.Storage
 {
 	[Serializable]
 	public class Field

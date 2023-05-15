@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Acmil.Core.Common;
+using Acmil.Core.Storage;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Core.Common;
-using WDBXEditor.Core.Storage;
 
-namespace WDBXEditor.Core.ConsoleHandler
+namespace Acmil.Core.ConsoleHandler
 {
 	public static class ConsoleManager
 	{

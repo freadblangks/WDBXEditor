@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Acmil.Core.Archives.CASC.Constants;
+using Acmil.Core.Archives.CASC.Misc;
+using Acmil.Core.Archives.CASC.Structures;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using WDBXEditor.Core.Archives.CASC.Constants;
-using WDBXEditor.Core.Archives.CASC.Misc;
-using WDBXEditor.Core.Archives.CASC.Structures;
 
-namespace WDBXEditor.Core.Archives.CASC.Handlers
+namespace Acmil.Core.Archives.CASC.Handlers
 {
 	public class CASCHandler : IDisposable
 	{
