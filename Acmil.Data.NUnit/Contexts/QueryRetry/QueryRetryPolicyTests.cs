@@ -1,11 +1,11 @@
 ﻿using Acmil.Data.Constants;
 using Acmil.Data.Contexts.QueryRetry;
+using Acmil.Data.NUnit.TestHelpers;
 using NUnit.Framework;
 using System;
 using System.Linq;
-using WDBXEditor.Data.NUnit.TestHelpers;
 
-namespace WDBXEditor.Data.NUnit.Contexts.QueryRetry
+namespace Acmil.Data.NUnit.Contexts.QueryRetry
 {
 	[TestFixture]
 	public class QueryRetryPolicyTests
@@ -66,8 +66,6 @@ namespace WDBXEditor.Data.NUnit.Contexts.QueryRetry
 			Assert.False(string.IsNullOrWhiteSpace(actualUpdatedSql), "Expected retried query text to be populated.");
 			StringAssert.IsMatch(expectedUpdatedSqlPattern, actualUpdatedSql, "Expected retried query to be the same as the original minus query hints.");
 		}
-
-		
 
 		private static Exception GetQueryHintException() => MySqlExceptionBuilder.CreateException("buh", MySqlConstants.QUERY_HINT_ERROR_CODES.ToList()[0], new Exception());
 	}

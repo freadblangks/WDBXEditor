@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace WDBXEditor.Data.NUnit.TestHelpers
+namespace Acmil.Data.NUnit.TestHelpers
 {
 	/// <summary>
 	/// Helper class for creating instances of <see cref="MySqlException"/>.
