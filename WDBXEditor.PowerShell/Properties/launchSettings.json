@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "WDBXEditor.PowerShell": {
-      "commandName": "Project",
-      "commandLineArgs": "-NoLogo -NoExit -Command \"Import-Module  'D:\\Sourcecode\\TestPowerShell\\TestPowerShellModule\\bin\\Debug\\net6.0\\TestPowerShellModule.psd1'\"; Initialize-Module -InputString 'Buh';\""
-    }
-  }
-}
