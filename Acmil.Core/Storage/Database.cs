@@ -8,10 +8,10 @@ using System.Data;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Collections;
-using WDBXEditor.Common.Utility.Interfaces;
-using WDBXEditor.Common.Utility.Logging.Interfaces;
-using WDBXEditor.Common.Utility;
 using Acmil.Core.Reader;
+using Acmil.Common.Utility;
+using Acmil.Common.Utility.Interfaces;
+using Acmil.Common.Utility.Logging.Interfaces;
 
 namespace Acmil.Core.Storage
 {

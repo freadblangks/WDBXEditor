@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WBDXEditor.Common.Utility\WDBXEditor.Common.Utility.csproj" />
+    <ProjectReference Include="..\Acmil.Common.Utility\Acmil.Common.Utility.csproj" />
   </ItemGroup>
 
 </Project>

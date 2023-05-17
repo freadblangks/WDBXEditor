@@ -1,6 +1,6 @@
-﻿using Acmil.Data.Contracts.Attributes;
+﻿using Acmil.Common.Utility.Types.Primitives;
+using Acmil.Data.Contracts.Attributes;
 using Acmil.Data.Contracts.Models.Items.Submodels;
-using WDBXEditor.Common.Utility.Types.Primitives;
 
 namespace Acmil.Data.Contracts.Models.Items
 {

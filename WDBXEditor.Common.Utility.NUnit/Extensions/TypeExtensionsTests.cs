@@ -1,6 +1,6 @@
+using Acmil.Common.Utility.Extensions;
 using NUnit.Framework;
 using System;
-using WDBXEditor.Common.Utility.Extensions;
 
 namespace WDBXEditor.Common.Utility.NUnit.Extensions
 {

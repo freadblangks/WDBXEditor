@@ -5,12 +5,12 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using static Acmil.Core.Common.Constants;
-using WDBXEditor.Common.Utility.Interfaces;
-using WDBXEditor.Common.Utility.Logging.Interfaces;
 using Acmil.Core.Reader.FileTypes;
 using Acmil.Core.Common;
 using Acmil.Core.Storage;
 using Acmil.Core.Exceptions;
+using Acmil.Common.Utility.Interfaces;
+using Acmil.Common.Utility.Logging.Interfaces;
 
 namespace Acmil.Core.Reader
 {

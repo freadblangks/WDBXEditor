@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WDBXEditor.Common.Utility;
+using Acmil.Common.Utility;
 
 namespace Acmil.Core.Reader.FileTypes
 {

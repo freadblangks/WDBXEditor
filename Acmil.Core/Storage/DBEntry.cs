@@ -14,9 +14,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO.MemoryMappedFiles;
 using CompressionType = Acmil.Core.Common.Enums.CompressionType;
 using System.Text.Json;
-using WDBXEditor.Common.Utility.Interfaces;
-using WDBXEditor.Common.Utility.Logging.Interfaces;
-using WDBXEditor.Common.Utility.Configuration.Interfaces;
 using Acmil.Core.Reader.FileTypes;
 using Acmil.Core.Common;
 using Acmil.Core.Common.Enums;
@@ -24,6 +21,9 @@ using Acmil.Core.Reader;
 using Acmil.Core.Exceptions;
 using Acmil.Data.Contexts;
 using Acmil.Data.Contracts.IO.Enums;
+using Acmil.Common.Utility.Interfaces;
+using Acmil.Common.Utility.Configuration.Interfaces;
+using Acmil.Common.Utility.Logging.Interfaces;
 
 namespace Acmil.Core.Storage
 {

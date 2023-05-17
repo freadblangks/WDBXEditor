@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WBDXEditor.Common.Utility\WDBXEditor.Common.Utility.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Models\General\" />
   </ItemGroup>
 
@@ -16,5 +12,9 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
 	    <_Parameter1>Acmil.Data.Repositories</_Parameter1>
     </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Acmil.Common.Utility\Acmil.Common.Utility.csproj" />
   </ItemGroup>
 </Project>

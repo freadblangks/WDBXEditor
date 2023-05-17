@@ -1,4 +1,5 @@
-﻿using Acmil.Data.Constants;
+﻿using Acmil.Common.Utility.Types.Primitives;
+using Acmil.Data.Constants;
 using Acmil.Data.Contexts;
 using Acmil.Data.Contracts.Models.Items;
 using Acmil.Data.Contracts.Models.Items.Submodels;
@@ -10,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security;
-using WDBXEditor.Common.Utility.Types.Primitives;
 using WDBXEditor.Data.Repositories.Interfaces;
 
 namespace WDBXEditor.Data.Repositories
