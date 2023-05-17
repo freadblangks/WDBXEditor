@@ -24,7 +24,7 @@ namespace Acmil.Core
 		/// </summary>
 		public void StartServer()
 		{
-			BackgroundWorker bw = new BackgroundWorker();
+			var bw = new BackgroundWorker();
 			Workers.Add(bw);
 			bw.WorkerSupportsCancellation = true;
 			bw.DoWork += Bw_DoWork;
@@ -45,7 +45,9 @@ namespace Acmil.Core
 				{
 					server.WaitForConnection();
 					using (StreamReader reader = new StreamReader(server))
+					{
 						e.Result = reader.ReadToEnd();
+					}
 				}
 				catch { e.Result = ""; }
 			}
@@ -65,7 +67,7 @@ namespace Acmil.Core
 				ReceiveString?.Invoke(result); //Send signal we've received a new file to open
 			}
 
-			//Dispose background worker
+			// Dispose background worker
 			BackgroundWorker bw = sender as BackgroundWorker;
 			bw.RunWorkerCompleted -= Bw_RunWorkerCompleted;
 			bw.DoWork -= Bw_DoWork;
@@ -77,7 +79,7 @@ namespace Acmil.Core
 		/// </summary>
 		public void StopServer()
 		{
-			for (int i = 0; i < Workers.Count; i++)
+			for (int i = 0; i < Workers.Count; ++i)
 			{
 				BackgroundWorker bw = Workers[i];
 				Write(EXIT_STRING); //Send all pipes the exit command
@@ -95,9 +97,11 @@ namespace Acmil.Core
 				{
 					client.Connect(connectTimeout);
 					if (!client.IsConnected)
+					{
 						return false;
+					}
 
-					using (StreamWriter writer = new StreamWriter(client))
+					using (var writer = new StreamWriter(client))
 					{
 						writer.Write(text);
 						writer.Flush();
