@@ -2,7 +2,7 @@ using Acmil.Common.Utility.Extensions;
 using NUnit.Framework;
 using System;
 
-namespace WDBXEditor.Common.Utility.NUnit.Extensions
+namespace Acmil.Common.Utility.NUnit.Extensions
 {
 	[TestFixture]
 	public class TypeExtensionsTests
