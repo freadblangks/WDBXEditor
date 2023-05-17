@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Acmil.Api.Helpers.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using WDBXEditor.Extended.Api.Helpers.Interfaces;
 
-namespace WDBXEditor.Extended.Api.Helpers
+namespace Acmil.Api.Helpers
 {
 	public class DbcImportExportHelper : IDbcImportExportHelper
 	{

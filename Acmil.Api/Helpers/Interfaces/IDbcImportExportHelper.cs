@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WDBXEditor.Extended.Api.Helpers.Interfaces
+namespace Acmil.Api.Helpers.Interfaces
 {
 	interface IDbcImportExportHelper
 	{

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace WDBXEditor.Extended.Api.Managers.Interfaces
+namespace Acmil.Api.Managers.Interfaces
 {
 	/// <summary>
 	/// Manager for interacting with DBC files.

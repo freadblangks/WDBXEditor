@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using WDBXEditor.Common;
 
-namespace WDBXEditor.Extended.Api.Helpers
+namespace Acmil.Api.Helpers
 {
 	/// <summary>
 	/// Helper class for managing MySQL connections.

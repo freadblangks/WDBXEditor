@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WDBXEditor.Extended.Api.Managers
+namespace Acmil.Api.Managers
 {
 	public class DbcManager
 	{

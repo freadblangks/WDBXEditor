@@ -1,6 +1,7 @@
 ﻿using System;
+using WDBXEditor;
 
-namespace WDBXEditor.Extended.Api.Helpers
+namespace Acmil.Api.Helpers
 {
 	public class InstanceHelper
 	{

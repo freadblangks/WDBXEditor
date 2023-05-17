@@ -3,7 +3,7 @@ using Acmil.Data.Contracts.Models.Items.Enums;
 using System.Collections.Generic;
 using WDBXEditor.Common.Utility.Types.Primitives;
 
-namespace WDBXEditor.Extended.Api.Managers.Interfaces
+namespace Acmil.Api.Managers.Interfaces
 {
 	public interface IItemTemplateManager
 	{

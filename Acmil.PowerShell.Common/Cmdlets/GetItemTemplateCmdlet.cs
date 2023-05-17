@@ -1,11 +1,12 @@
-﻿using Acmil.Data.Contracts.Models.Items;
+﻿using Acmil.Api.Managers;
+using Acmil.Api.Managers.Interfaces;
+using Acmil.Data.Contracts.Models.Items;
 using Acmil.PowerShell.Common.Helpers;
 using Acmil.PowerShell.Common.Helpers.Interfaces;
 using Acmil.PowerShell.Common.OutputTypes;
 using System.Management.Automation;
 using WDBXEditor.Common.Utility.Types.Primitives;
-using WDBXEditor.Extended.Api.Managers;
-using WDBXEditor.Extended.Api.Managers.Interfaces;
+
 
 namespace Acmil.PowerShell.Common.Cmdlets
 {
