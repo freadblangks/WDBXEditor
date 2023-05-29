@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Common.Enums
+﻿namespace Acmil.Common.Enums
 {
 	/// <summary>
 	/// Contains the final client build number for each version of WoW.

@@ -1,17 +1,17 @@
-﻿using WDBXEditor.Reader;
+﻿using Acmil.Reader;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using static WDBXEditor.Common.Constants;
+using static Acmil.Common.Constants;
 using System.Threading.Tasks.Dataflow;
 using System.Data;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace WDBXEditor.Storage
+namespace Acmil.Storage
 {
 	class Database
 	{

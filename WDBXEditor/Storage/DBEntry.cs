@@ -1,7 +1,7 @@
-﻿using WDBXEditor.Common;
-using WDBXEditor.Reader;
+﻿using Acmil.Common;
+using Acmil.Reader;
 using MySql.Data.MySqlClient;
-using WDBXEditor.Archives.MPQ;
+using Acmil.Archives.MPQ;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,22 +9,22 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using static WDBXEditor.Common.Constants;
-using static WDBXEditor.Forms.InputBox;
-using WDBXEditor.Reader.FileTypes;
+using static Acmil.Common.Constants;
+using static Acmil.Forms.InputBox;
+using Acmil.Reader.FileTypes;
 using System.Text.RegularExpressions;
-using static WDBXEditor.Common.Extensions;
+using static Acmil.Common.Extensions;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO.MemoryMappedFiles;
-using CompressionType = WDBXEditor.Common.Enums.CompressionType;
+using CompressionType = Acmil.Common.Enums.CompressionType;
 using System.Configuration;
-using WDBXEditor.Common.Enums;
+using Acmil.Common.Enums;
 using System.Text.Json;
 
-namespace WDBXEditor.Storage
+namespace Acmil.Storage
 {
 	public class DBEntry : IDisposable
 	{

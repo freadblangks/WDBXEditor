@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Common.Enums
+﻿namespace Acmil.Common.Enums
 {
 	/// <summary>
 	/// Import flags used by CSV import.

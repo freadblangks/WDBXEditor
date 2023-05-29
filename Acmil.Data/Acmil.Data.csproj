@@ -1,19 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Exceptions\ExceptionTemplate.cs" />
+    <PackageReference Include="MySql.Data" Version="8.0.33" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MySql.Data" Version="8.0.23" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Acmil.Common.Utility\Acmil.Common.Utility.csproj" />
     <ProjectReference Include="..\Acmil.Data.Contracts\Acmil.Data.Contracts.csproj" />
   </ItemGroup>
 

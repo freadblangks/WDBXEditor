@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WDBXEditor.Storage;
+using Acmil.Storage;
 
-namespace WDBXEditor.Common
+namespace Acmil.Common
 {
     static class FormHandler
     {

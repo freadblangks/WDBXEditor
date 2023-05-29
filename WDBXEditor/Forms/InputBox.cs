@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WDBXEditor.Forms
+namespace Acmil.Forms
 {
     public static class InputBox
     {

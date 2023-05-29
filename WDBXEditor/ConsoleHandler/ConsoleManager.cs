@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Common;
-using WDBXEditor.Storage;
+using Acmil.Common;
+using Acmil.Storage;
 
-namespace WDBXEditor.ConsoleHandler
+namespace Acmil.ConsoleHandler
 {
     public static class ConsoleManager
     {

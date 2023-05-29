@@ -1,6 +1,7 @@
 ﻿using Acmil.Core.Archives.CASC.Handlers;
 using Acmil.Core.Archives.MPQ;
 using Acmil.Core.Storage;
+using Acmil.Data.Contracts.IO.Enums;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -28,24 +29,24 @@ namespace Acmil.Core.ConsoleHandler
 		public static void LoadCommand(string[] args)
 		{
 			Dictionary<string, string> pmap = ConsoleManager.ParseCommand(args);
-			string file = ParamCheck<string>(pmap, "-f");
-			string filename = Path.GetFileName(file);
-			string filenoext = Path.GetFileNameWithoutExtension(file);
+			string filePath = ParamCheck<string>(pmap, "-f");
+			string fileName = Path.GetFileName(filePath);
+			string fileNameNoExtension = Path.GetFileNameWithoutExtension(filePath);
 			string source = ParamCheck<string>(pmap, "-s", false);
 			int build = ParamCheck<int>(pmap, "-b");
 			SourceType sType = GetSourceType(source);
 
 			// Check file exists if loaded from the filesystem.
-			if (!File.Exists(file) && sType == SourceType.File)
+			if (!File.Exists(filePath) && sType == SourceType.File)
 			{
-				throw new Exception($"   File not found '{file}'.");
+				throw new FileNotFoundException($"   File not found '{filePath}'.");
 			}
 
 			// Check the required definition exists.
-			var def = Database.Definitions.Tables.FirstOrDefault(x => x.Build == build && x.Name.Equals(filenoext, IGNORECASE));
-			if (def == null)
+			var def = Database.Definitions.Tables.FirstOrDefault(x => x.Build == build && x.Name.Equals(fileNameNoExtension, IGNORECASE));
+			if (def is null)
 			{
-				throw new Exception($"   Could not find definition for {Path.GetFileName(file)} build {build}.");
+				throw new Exception($"   Could not find definition for {Path.GetFileName(filePath)} build {build}.");
 			}
 
 			Database.BuildNumber = build;
@@ -65,12 +66,12 @@ namespace Acmil.Core.ConsoleHandler
 						{
 							while ((line = sr.ReadLine()) != null && loop)
 							{
-								if (line.EndsWith(filename, IGNORECASE))
+								if (line.EndsWith(fileName, IGNORECASE))
 								{
 									loop = false;
 									var ms = new MemoryStream();
 									archive.OpenFile(line).CopyTo(ms);
-									fileStreams.TryAdd(filename, ms);
+									fileStreams.TryAdd(fileName, ms);
 
 									error = Database.LoadFiles(fileStreams).Result.FirstOrDefault();
 								}
@@ -82,22 +83,22 @@ namespace Acmil.Core.ConsoleHandler
 					Console.WriteLine("Loading from CASC directory...");
 					using (var casc = new CASCHandler(source))
 					{
-						string fullname = filename;
+						string fullname = fileName;
 						if (!fullname.StartsWith("DBFilesClient", IGNORECASE))
 						{
-							fullname = "DBFilesClient\\" + filename; //Ensure we have the current file name structure
+							fullname = "DBFilesClient\\" + fileName; //Ensure we have the current file name structure
 						}
 
 						var stream = casc.ReadFile(fullname);
 						if (stream != null)
 						{
-							fileStreams.TryAdd(filename, stream);
+							fileStreams.TryAdd(fileName, stream);
 							error = Database.LoadFiles(fileStreams).Result.FirstOrDefault();
 						}
 					}
 					break;
 				default:
-					error = Database.LoadFiles(new string[] { file }).Result.FirstOrDefault();
+					error = Database.LoadFiles(new string[] { filePath }).Result.FirstOrDefault();
 					break;
 			}
 
@@ -113,7 +114,7 @@ namespace Acmil.Core.ConsoleHandler
 				throw new Exception("   File could not be loaded.");
 			}
 
-			Console.WriteLine($"{Path.GetFileName(file)} loaded.");
+			Console.WriteLine($"{Path.GetFileName(filePath)} loaded.");
 			Console.WriteLine("");
 		}
 

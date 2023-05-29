@@ -8,15 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using WDBXEditor.Archives.CASC.Handlers;
-using WDBXEditor.Archives.MPQ;
-using WDBXEditor.Common;
-using WDBXEditor.Common.Enums;
-using WDBXEditor.Reader;
-using WDBXEditor.Storage;
-using static WDBXEditor.Common.Constants;
+using Acmil.Archives.CASC.Handlers;
+using Acmil.Archives.MPQ;
+using Acmil.Common;
+using Acmil.Common.Enums;
+using Acmil.Reader;
+using Acmil.Storage;
+using static Acmil.Common.Constants;
 
-namespace WDBXEditor.ConsoleHandler
+namespace Acmil.ConsoleHandler
 {
     /// <summary>
     /// Class containing implementations for console commands.

@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Common.Enums
+﻿namespace Acmil.Common.Enums
 {
 	/// <summary>
 	/// Contains the different update strategies when importing a CSV or SQL table.

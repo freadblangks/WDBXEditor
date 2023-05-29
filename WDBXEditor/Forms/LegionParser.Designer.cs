@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Forms
+﻿namespace Acmil.Forms
 {
     partial class LegionParser
     {
@@ -37,7 +37,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.rdoCASC = new System.Windows.Forms.RadioButton();
             this.rdoFile = new System.Windows.Forms.RadioButton();
-            this.autoProgressBar1 = new WDBXEditor.Common.AutoProgressBar();
+            this.autoProgressBar1 = new Acmil.Common.AutoProgressBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgFiles = new System.Windows.Forms.DataGridView();
             this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();

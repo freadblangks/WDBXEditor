@@ -1,14 +1,14 @@
-﻿using WDBXEditor.Storage;
+﻿using Acmil.Storage;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using static WDBXEditor.Common.Constants;
-using WDBXEditor.Common.Enums;
+using static Acmil.Common.Constants;
+using Acmil.Common.Enums;
 
-namespace WDBXEditor
+namespace Acmil
 {
     public partial class LoadDefinition : Form
     {

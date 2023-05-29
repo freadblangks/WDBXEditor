@@ -5,7 +5,7 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace WDBXEditor.Common
+namespace Acmil.Common
 {
     class ColourWheel : Control
     {

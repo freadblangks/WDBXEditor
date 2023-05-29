@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WDBXEditor.Storage;
-using static WDBXEditor.Common.Constants;
+using Acmil.Storage;
+using static Acmil.Common.Constants;
 
-namespace WDBXEditor.Reader.FileTypes
+namespace Acmil.Reader.FileTypes
 {
     public class WCH5 : DBHeader
     {

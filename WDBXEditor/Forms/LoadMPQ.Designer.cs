@@ -1,6 +1,6 @@
-﻿using WDBXEditor.Common;
+﻿using Acmil.Common;
 
-namespace WDBXEditor
+namespace Acmil
 {
     partial class LoadMPQ
     {
@@ -41,8 +41,8 @@ namespace WDBXEditor
 			this.btnClose = new System.Windows.Forms.Button();
 			this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.cbLocales = new System.Windows.Forms.ComboBox();
-			this.progressBar = new WDBXEditor.Common.AutoProgressBar();
-			this.lstFiles = new WDBXEditor.Common.BufferedListBox();
+			this.progressBar = new Acmil.Common.AutoProgressBar();
+			this.lstFiles = new Acmil.Common.BufferedListBox();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 

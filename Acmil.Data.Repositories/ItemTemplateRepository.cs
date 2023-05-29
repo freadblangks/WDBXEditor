@@ -6,14 +6,14 @@ using Acmil.Data.Contracts.Models.Items.Submodels;
 using Acmil.Data.Contracts.Models.Items.Submodels.Requirements;
 using Acmil.Data.Helpers.Interfaces;
 using Acmil.Data.Helpers.Mapping;
+using Acmil.Data.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security;
-using WDBXEditor.Data.Repositories.Interfaces;
 
-namespace WDBXEditor.Data.Repositories
+namespace Acmil.Data.Repositories
 {
 	/// <summary>
 	/// Repository class for interacting with Item Templates.
@@ -29,7 +29,7 @@ namespace WDBXEditor.Data.Repositories
 				hostname,
 				username,
 				password,
-				AzerothCoreDatabaseConstants.WORLD_DATABASE_NAME
+				AzerothCoreDatabaseConstants.DEFAULT_WORLD_DATABASE_NAME
 			);
 		}
 

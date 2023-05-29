@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Forms
+﻿namespace Acmil.Forms
 {
     partial class ErrorReport
     {

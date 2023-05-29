@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using WDBXEditor.Archives.CASC.Constants;
-using WDBXEditor.Archives.CASC.Structures;
-using WDBXEditor.Archives.FileSystem.Structures;
-using WDBXEditor.Archives.Misc;
+using Acmil.Archives.CASC.Constants;
+using Acmil.Archives.CASC.Structures;
+using Acmil.Archives.FileSystem.Structures;
+using Acmil.Archives.Misc;
 
-namespace WDBXEditor.Archives.CASC.Handlers
+namespace Acmil.Archives.CASC.Handlers
 {
     public class CASCHandler : IDisposable
     {

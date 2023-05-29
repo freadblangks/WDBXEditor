@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Forms
+﻿namespace Acmil.Forms
 {
     partial class ColourConverter
     {
@@ -40,7 +40,7 @@
             this.picColour = new System.Windows.Forms.PictureBox();
             this.txtWoWVal = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.colourWheel = new WDBXEditor.Common.ColourWheel();
+            this.colourWheel = new Acmil.Common.ColourWheel();
             ((System.ComponentModel.ISupportInitialize)(this.picColour)).BeginInit();
             this.SuspendLayout();
             // 

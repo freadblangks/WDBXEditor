@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Archives.CASC.Structures
+﻿namespace Acmil.Archives.CASC.Structures
 {
     public class BLTEEntry
     {

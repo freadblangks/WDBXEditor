@@ -1,20 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\General\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-	    <_Parameter1>Acmil.Data.Repositories</_Parameter1>
-    </AssemblyAttribute>
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Acmil.Common.Utility\Acmil.Common.Utility.csproj" />
   </ItemGroup>
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Acmil.Data.Repositories</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
 </Project>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace WDBXEditor.Archives.MPQ.Native
+namespace Acmil.Archives.MPQ.Native
 {
     internal sealed class MpqArchiveSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
     {

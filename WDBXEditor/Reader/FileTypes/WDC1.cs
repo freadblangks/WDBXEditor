@@ -5,11 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Common.Enums;
-using WDBXEditor.Storage;
-using static WDBXEditor.Common.Constants;
+using Acmil.Common.Enums;
+using Acmil.Storage;
+using static Acmil.Common.Constants;
 
-namespace WDBXEditor.Reader.FileTypes
+namespace Acmil.Reader.FileTypes
 {
 	public class WDC1 : WDB6
 	{

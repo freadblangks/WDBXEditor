@@ -5,7 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 
-namespace WDBXEditor.Common
+namespace Acmil.Common
 {
 	/// <summary>
 	/// Class for creating and managing connections to a MySQL server instance.

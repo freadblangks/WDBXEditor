@@ -1,6 +1,6 @@
-﻿using WDBXEditor.Common;
+﻿using Acmil.Common;
 
-namespace WDBXEditor
+namespace Acmil
 {
     partial class LoadDefinition
     {
@@ -39,7 +39,7 @@ namespace WDBXEditor
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.lblFiles = new System.Windows.Forms.Label();
 			this.chkBuildFilter = new System.Windows.Forms.CheckBox();
-			this.lbDefinitions = new WDBXEditor.Common.BufferedListBox();
+			this.lbDefinitions = new Acmil.Common.BufferedListBox();
 			this.SuspendLayout();
 			// 
 			// btnClose
@@ -77,7 +77,7 @@ namespace WDBXEditor
 			// 
 			// btnNewWindow
 			// 
-			this.btnNewWindow.Image = global::WDBXEditor.Properties.Resources.open_new;
+			this.btnNewWindow.Image = global::Acmil.Properties.Resources.open_new;
 			this.btnNewWindow.Location = new System.Drawing.Point(12, 233);
 			this.btnNewWindow.Name = "btnNewWindow";
 			this.btnNewWindow.Size = new System.Drawing.Size(29, 23);

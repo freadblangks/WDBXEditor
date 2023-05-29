@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Acmil.Data.Contracts.Attributes
+﻿namespace Acmil.Data.Contracts.Attributes
 {
 	/// <summary>
 	/// Specifies the name of the associated column in the MySQL database.

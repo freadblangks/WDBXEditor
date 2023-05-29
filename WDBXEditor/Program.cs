@@ -2,9 +2,9 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using WDBXEditor.ConsoleHandler;
+using Acmil.ConsoleHandler;
 
-namespace WDBXEditor
+namespace Acmil
 {
     static class Program
     {

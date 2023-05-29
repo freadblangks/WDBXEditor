@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Forms
+﻿namespace Acmil.Forms
 {
     partial class LoadHotfix
     {
@@ -31,7 +31,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnLoad = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.lbDefinitions = new WDBXEditor.Common.BufferedListBox();
+            this.lbDefinitions = new Acmil.Common.BufferedListBox();
             this.SuspendLayout();
             // 
             // label3

@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Windows.Forms;
-using WDBXEditor.Archives.MPQ;
+using Acmil.Archives.MPQ;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using static WDBXEditor.Common.Constants;
-using WDBXEditor.Archives.Misc;
-using WDBXEditor.Archives.CASC.Handlers;
+using static Acmil.Common.Constants;
+using Acmil.Archives.Misc;
+using Acmil.Archives.CASC.Handlers;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
-using WDBXEditor.Archives.CASC.Constants;
+using Acmil.Archives.CASC.Constants;
 
-namespace WDBXEditor
+namespace Acmil
 {
 	public partial class LoadMPQ : Form
 	{

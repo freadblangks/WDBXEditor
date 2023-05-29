@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using WDBXEditor.Archives.Misc;
+using Acmil.Archives.Misc;
 
-namespace WDBXEditor.Archives.FileSystem.Structures
+namespace Acmil.Archives.FileSystem.Structures
 {
     public class BuildConfig
     {

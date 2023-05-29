@@ -1,14 +1,14 @@
-﻿using WDBXEditor.Reader.FileTypes;
-using WDBXEditor.Storage;
+﻿using Acmil.Reader.FileTypes;
+using Acmil.Storage;
 using System.IO;
 using System.Linq;
 using System.Text;
-using WDBXEditor.Common;
+using Acmil.Common;
 using System.Collections.Generic;
 using System;
-using static WDBXEditor.Common.Constants;
+using static Acmil.Common.Constants;
 
-namespace WDBXEditor.Reader
+namespace Acmil.Reader
 {
     public class DBHeader
     {

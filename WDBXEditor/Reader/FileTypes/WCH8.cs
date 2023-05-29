@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Storage;
+using Acmil.Storage;
 
-namespace WDBXEditor.Reader.FileTypes
+namespace Acmil.Reader.FileTypes
 {
     class WCH8 : WCH7
     {

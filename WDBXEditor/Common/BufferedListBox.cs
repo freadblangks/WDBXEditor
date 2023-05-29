@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace WDBXEditor.Common
+namespace Acmil.Common
 {
     class BufferedListBox : ListBox
     {

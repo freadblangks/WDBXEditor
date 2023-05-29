@@ -4,13 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Storage;
-using static WDBXEditor.Common.Constants;
-using WDBXEditor.Common;
+using Acmil.Storage;
+using static Acmil.Common.Constants;
+using Acmil.Common;
 using System.Data;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace WDBXEditor.Reader.FileTypes
+namespace Acmil.Reader.FileTypes
 {
     public class WDB5 : DBHeader
     {

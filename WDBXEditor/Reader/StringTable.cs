@@ -1,11 +1,11 @@
-﻿using WDBXEditor.Common;
-using WDBXEditor.Reader;
+﻿using Acmil.Common;
+using Acmil.Reader;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System;
 
-namespace WDBXEditor.Reader
+namespace Acmil.Reader
 {
 	public class StringTable : IDisposable
 	{

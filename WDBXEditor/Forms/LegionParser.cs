@@ -1,6 +1,6 @@
-﻿using WDBXEditor.Reader;
-using WDBXEditor.Reader.FileTypes;
-using WDBXEditor.Storage;
+﻿using Acmil.Reader;
+using Acmil.Reader.FileTypes;
+using Acmil.Storage;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading.Tasks.Dataflow;
 using System.Collections.Concurrent;
-using static WDBXEditor.Common.Constants;
-using WDBXEditor.Common;
-using WDBXEditor.Common.Enums;
+using static Acmil.Common.Constants;
+using Acmil.Common;
+using Acmil.Common.Enums;
 
-namespace WDBXEditor.Forms
+namespace Acmil.Forms
 {
 	public partial class LegionParser : Form
 	{

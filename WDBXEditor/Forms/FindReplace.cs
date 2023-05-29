@@ -1,18 +1,18 @@
 ﻿using ADGV;
-using WDBXEditor.Common;
+using Acmil.Common;
 using System;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WDBXEditor.Storage;
+using Acmil.Storage;
 using System.Linq;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
 
-namespace WDBXEditor
+namespace Acmil
 {
     public partial class FindReplace : Form
     {

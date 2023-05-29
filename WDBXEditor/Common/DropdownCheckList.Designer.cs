@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Common
+﻿namespace Acmil.Common
 {
     partial class DropdownCheckList
     {
@@ -72,7 +72,7 @@
             // btnEmpty
             // 
             this.btnEmpty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEmpty.Image = global::WDBXEditor.Properties.Resources.hide;
+            this.btnEmpty.Image = global::Acmil.Properties.Resources.hide;
             this.btnEmpty.Location = new System.Drawing.Point(217, -1);
             this.btnEmpty.Margin = new System.Windows.Forms.Padding(0);
             this.btnEmpty.Name = "btnEmpty";
@@ -84,7 +84,7 @@
             // btnReset
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReset.Image = global::WDBXEditor.Properties.Resources.close;
+            this.btnReset.Image = global::Acmil.Properties.Resources.close;
             this.btnReset.Location = new System.Drawing.Point(246, -1);
             this.btnReset.Margin = new System.Windows.Forms.Padding(0);
             this.btnReset.Name = "btnReset";

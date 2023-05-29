@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor
+﻿namespace Acmil
 {
     partial class LoadCSV
     {

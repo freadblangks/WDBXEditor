@@ -1,12 +1,12 @@
-﻿using WDBXEditor.Archives.MPQ.Native;
-using WDBXEditor.Archives.MPQ;
+﻿using Acmil.Archives.MPQ.Native;
+using Acmil.Archives.MPQ;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.IO.MemoryMappedFiles;
 
-namespace WDBXEditor.Archives.MPQ
+namespace Acmil.Archives.MPQ
 {
     public class MpqArchive : IDisposable
     {

@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WDBXEditor.Common
+namespace Acmil.Common
 {
     public static class Extensions
     {

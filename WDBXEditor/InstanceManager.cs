@@ -10,9 +10,9 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WDBXEditor.Common;
+using Acmil.Common;
 
-namespace WDBXEditor
+namespace Acmil
 {
     public static class InstanceManager
     {

@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Forms
+﻿namespace Acmil.Forms
 {
     partial class PlayerLocation 
     {
@@ -114,7 +114,7 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Image = global::WDBXEditor.Properties.Resources.reload;
+            this.btnRefresh.Image = global::Acmil.Properties.Resources.reload;
             this.btnRefresh.Location = new System.Drawing.Point(186, 2);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(29, 23);
@@ -427,7 +427,7 @@
             // btnUntarget
             // 
             this.btnUntarget.Enabled = false;
-            this.btnUntarget.Image = global::WDBXEditor.Properties.Resources.close;
+            this.btnUntarget.Image = global::Acmil.Properties.Resources.close;
             this.btnUntarget.Location = new System.Drawing.Point(422, 2);
             this.btnUntarget.Name = "btnUntarget";
             this.btnUntarget.Size = new System.Drawing.Size(29, 23);
@@ -439,7 +439,7 @@
             // btnTarget
             // 
             this.btnTarget.Enabled = false;
-            this.btnTarget.Image = global::WDBXEditor.Properties.Resources.target;
+            this.btnTarget.Image = global::Acmil.Properties.Resources.target;
             this.btnTarget.Location = new System.Drawing.Point(387, 2);
             this.btnTarget.Name = "btnTarget";
             this.btnTarget.Size = new System.Drawing.Size(29, 23);

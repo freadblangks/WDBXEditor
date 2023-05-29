@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WDBXEditor.Archives.MPQ.Native
+namespace Acmil.Archives.MPQ.Native
 {
     internal enum SFileInfoClass
     {

@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Acmil.Common.Utility\Acmil.Common.Utility.csproj" />
+    <ProjectReference Include="..\Acmil.Data.Contracts\Acmil.Data.Contracts.csproj" />
     <ProjectReference Include="..\Acmil.Data.Repositories\Acmil.Data.Repositories.csproj" />
-    <ProjectReference Include="..\Acmil.Data\Acmil.Data.csproj" />
   </ItemGroup>
 
 </Project>

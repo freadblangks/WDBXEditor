@@ -1,6 +1,6 @@
-﻿using WDBXEditor.Reader;
-using WDBXEditor.Storage;
-using WDBXEditor.Archives.MPQ;
+﻿using Acmil.Reader;
+using Acmil.Storage;
+using Acmil.Archives.MPQ;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,18 +8,18 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using static WDBXEditor.Common.Constants;
-using static WDBXEditor.Forms.InputBox;
+using static Acmil.Common.Constants;
+using static Acmil.Forms.InputBox;
 using System.Threading.Tasks;
-using WDBXEditor.Forms;
-using WDBXEditor.Common;
+using Acmil.Forms;
+using Acmil.Common;
 using System.Text.RegularExpressions;
 using System.Net;
 using System.Web.Script.Serialization;
-using WDBXEditor.Reader.FileTypes;
-using WDBXEditor.Common.Enums;
+using Acmil.Reader.FileTypes;
+using Acmil.Common.Enums;
 
-namespace WDBXEditor
+namespace Acmil
 {
 	public partial class Main : Form
 	{

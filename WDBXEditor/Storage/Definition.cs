@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using static WDBXEditor.Common.Constants;
+using static Acmil.Common.Constants;
 
-namespace WDBXEditor.Storage
+namespace Acmil.Storage
 {
     [Serializable]
     public class Definition

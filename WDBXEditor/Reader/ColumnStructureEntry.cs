@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Common.Enums;
-using static WDBXEditor.Common.Constants;
+using Acmil.Common.Enums;
+using static Acmil.Common.Constants;
 
-namespace WDBXEditor.Reader
+namespace Acmil.Reader
 {
 	public class ColumnStructureEntry
 	{

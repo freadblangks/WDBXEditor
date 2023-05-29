@@ -1,6 +1,6 @@
-﻿using WDBXEditor.Common;
+﻿using Acmil.Common;
 
-namespace WDBXEditor
+namespace Acmil
 {
     partial class EditDefinition
     {
@@ -54,7 +54,7 @@ namespace WDBXEditor
 			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.lbFiles = new WDBXEditor.Common.BufferedListBox();
+			this.lbFiles = new Acmil.Common.BufferedListBox();
 			this.colField = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.colType = new System.Windows.Forms.DataGridViewComboBoxColumn();
 			this.colIndex = new System.Windows.Forms.DataGridViewCheckBoxColumn();

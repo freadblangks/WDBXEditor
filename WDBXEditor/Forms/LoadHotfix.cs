@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WDBXEditor.Reader.FileTypes;
-using WDBXEditor.Storage;
+using Acmil.Reader.FileTypes;
+using Acmil.Storage;
 
-namespace WDBXEditor.Forms
+namespace Acmil.Forms
 {
     public partial class LoadHotfix : Form
     {

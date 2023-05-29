@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WDBXEditor.Common
+namespace Acmil.Common
 {
     public class ORowComparer : IEqualityComparer<ORow>
     {

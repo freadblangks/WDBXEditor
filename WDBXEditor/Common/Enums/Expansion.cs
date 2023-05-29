@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Common.Enums
+﻿namespace Acmil.Common.Enums
 {
 	/// <summary>
 	/// Contains the name used to identify each expansion.

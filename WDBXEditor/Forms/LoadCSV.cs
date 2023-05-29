@@ -1,11 +1,11 @@
-﻿using WDBXEditor.Storage;
+﻿using Acmil.Storage;
 using System;
 using System.Windows.Forms;
-using static WDBXEditor.Common.Constants;
+using static Acmil.Common.Constants;
 using System.Threading.Tasks;
-using WDBXEditor.Common.Enums;
+using Acmil.Common.Enums;
 
-namespace WDBXEditor
+namespace Acmil
 {
     public partial class LoadCSV : Form
     {

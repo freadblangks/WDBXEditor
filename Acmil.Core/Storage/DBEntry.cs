@@ -558,9 +558,9 @@ namespace Acmil.Core.Storage
 		/// <summary>
 		/// Uses MysqlBulkCopy to import the data directly into a database.
 		/// </summary>
-		public void ToSQLTable(IDbContext dbContext)
+		public void ToSQLTable(IDbContext dbContext, string tableName = null)
 		{
-			string tableName = $"db_{TableStructure.Name}_{Build}";
+			tableName ??= $"db_{TableStructure.Name}_{Build}";
 
 			var sqlBuilder = new StringBuilder();
 			sqlBuilder.AppendLine("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
@@ -900,6 +900,7 @@ namespace Acmil.Core.Storage
 				}
 
 				// TODO: Figure out what we need to do to have this hit now that we're calling the IDbContext method.
+				// I think it's if you read a file with duplicate IDs.
 				catch (ConstraintException ex)
 				{
 					error = ex.Message;

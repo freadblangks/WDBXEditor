@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Common.Enums
+﻿namespace Acmil.Common.Enums
 {
 	/// <summary>
 	/// The type of compression used to store data in a DBC, DB2, or ADB file.

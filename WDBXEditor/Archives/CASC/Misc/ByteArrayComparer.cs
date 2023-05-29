@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace WDBXEditor.Archives.Misc
+namespace Acmil.Archives.Misc
 {
     public class ByteArrayComparer : IEqualityComparer, IEqualityComparer<object>
     {

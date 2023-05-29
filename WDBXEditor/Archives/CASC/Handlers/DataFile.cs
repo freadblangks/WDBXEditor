@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using WDBXEditor.Archives.CASC.Structures;
-using WDBXEditor.Archives.Misc;
+using Acmil.Archives.CASC.Structures;
+using Acmil.Archives.Misc;
 
-namespace WDBXEditor.Archives.CASC.Handlers
+namespace Acmil.Archives.CASC.Handlers
 {
     public class DataFile
     {

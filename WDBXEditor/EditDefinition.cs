@@ -1,4 +1,4 @@
-﻿using WDBXEditor.Storage;
+﻿using Acmil.Storage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static WDBXEditor.Common.Constants;
+using static Acmil.Common.Constants;
 
-namespace WDBXEditor
+namespace Acmil
 {
     public partial class EditDefinition : Form
     {

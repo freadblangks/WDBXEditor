@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WDBXEditor.Common
+namespace Acmil.Common
 {
     class AutoProgressBar : ProgressBar
     {

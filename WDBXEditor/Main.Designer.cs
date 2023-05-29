@@ -1,7 +1,7 @@
 ﻿using ADGV;
-using WDBXEditor.Common;
+using Acmil.Common;
 
-namespace WDBXEditor
+namespace Acmil
 {
     partial class Main
     {
@@ -109,9 +109,9 @@ namespace WDBXEditor
 			this.cbColumnMode = new System.Windows.Forms.ComboBox();
 			this.label8 = new System.Windows.Forms.Label();
 			this.recentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.columnFilter = new WDBXEditor.Common.DropdownCheckList();
-			this.progressBar = new WDBXEditor.Common.AutoProgressBar();
-			this.lbFiles = new WDBXEditor.Common.BufferedListBox();
+			this.columnFilter = new Acmil.Common.DropdownCheckList();
+			this.progressBar = new Acmil.Common.AutoProgressBar();
+			this.lbFiles = new Acmil.Common.BufferedListBox();
 			this.gbFiles.SuspendLayout();
 			this.gbFilter.SuspendLayout();
 			this.filecontextMenuStrip.SuspendLayout();
@@ -206,7 +206,7 @@ namespace WDBXEditor
 			// 
 			// editToolStripMenuItem1
 			// 
-			this.editToolStripMenuItem1.Image = global::WDBXEditor.Properties.Resources.sqlfile;
+			this.editToolStripMenuItem1.Image = global::Acmil.Properties.Resources.sqlfile;
 			this.editToolStripMenuItem1.Name = "editToolStripMenuItem1";
 			this.editToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
 			this.editToolStripMenuItem1.Text = "Edit";
@@ -214,7 +214,7 @@ namespace WDBXEditor
 			// 
 			// closeToolStripMenuItem1
 			// 
-			this.closeToolStripMenuItem1.Image = global::WDBXEditor.Properties.Resources.close;
+			this.closeToolStripMenuItem1.Image = global::Acmil.Properties.Resources.close;
 			this.closeToolStripMenuItem1.Name = "closeToolStripMenuItem1";
 			this.closeToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
 			this.closeToolStripMenuItem1.Text = "Close";
@@ -352,7 +352,7 @@ namespace WDBXEditor
 			// 
 			// loadFilesToolStripMenuItem
 			// 
-			this.loadFilesToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.open;
+			this.loadFilesToolStripMenuItem.Image = global::Acmil.Properties.Resources.open;
 			this.loadFilesToolStripMenuItem.Name = "loadFilesToolStripMenuItem";
 			this.loadFilesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
 			this.loadFilesToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
@@ -361,7 +361,7 @@ namespace WDBXEditor
 			// 
 			// openFromMPQToolStripMenuItem
 			// 
-			this.openFromMPQToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.open;
+			this.openFromMPQToolStripMenuItem.Image = global::Acmil.Properties.Resources.open;
 			this.openFromMPQToolStripMenuItem.Name = "openFromMPQToolStripMenuItem";
 			this.openFromMPQToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
 			this.openFromMPQToolStripMenuItem.Text = "Open from MPQ";
@@ -369,7 +369,7 @@ namespace WDBXEditor
 			// 
 			// openFromCASCToolStripMenuItem
 			// 
-			this.openFromCASCToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.open;
+			this.openFromCASCToolStripMenuItem.Image = global::Acmil.Properties.Resources.open;
 			this.openFromCASCToolStripMenuItem.Name = "openFromCASCToolStripMenuItem";
 			this.openFromCASCToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
 			this.openFromCASCToolStripMenuItem.Text = "Open from CASC";
@@ -377,7 +377,7 @@ namespace WDBXEditor
 			// 
 			// saveToolStripMenuItem
 			// 
-			this.saveToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.save_file;
+			this.saveToolStripMenuItem.Image = global::Acmil.Properties.Resources.save_file;
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
 			this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
 			this.saveToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
@@ -386,7 +386,7 @@ namespace WDBXEditor
 			// 
 			// saveAsToolStripMenuItem
 			// 
-			this.saveAsToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.save_file;
+			this.saveAsToolStripMenuItem.Image = global::Acmil.Properties.Resources.save_file;
 			this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
 			this.saveAsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
 			this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
@@ -395,7 +395,7 @@ namespace WDBXEditor
 			// 
 			// saveAllToolStripMenuItem
 			// 
-			this.saveAllToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.save_file;
+			this.saveAllToolStripMenuItem.Image = global::Acmil.Properties.Resources.save_file;
 			this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
 			this.saveAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
@@ -405,7 +405,7 @@ namespace WDBXEditor
 			// 
 			// reloadToolStripMenuItem
 			// 
-			this.reloadToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.reload;
+			this.reloadToolStripMenuItem.Image = global::Acmil.Properties.Resources.reload;
 			this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
 			this.reloadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
 			this.reloadToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
@@ -414,7 +414,7 @@ namespace WDBXEditor
 			// 
 			// closeToolStripMenuItem
 			// 
-			this.closeToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.close;
+			this.closeToolStripMenuItem.Image = global::Acmil.Properties.Resources.close;
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
 			this.closeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
 			this.closeToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
@@ -423,7 +423,7 @@ namespace WDBXEditor
 			// 
 			// closeAllToolStripMenuItem
 			// 
-			this.closeAllToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.close;
+			this.closeAllToolStripMenuItem.Image = global::Acmil.Properties.Resources.close;
 			this.closeAllToolStripMenuItem.Name = "closeAllToolStripMenuItem";
 			this.closeAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.W)));
@@ -536,7 +536,7 @@ namespace WDBXEditor
 			// 
 			// toSQLToolStripMenuItem
 			// 
-			this.toSQLToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.sql;
+			this.toSQLToolStripMenuItem.Image = global::Acmil.Properties.Resources.sql;
 			this.toSQLToolStripMenuItem.Name = "toSQLToolStripMenuItem";
 			this.toSQLToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
 			this.toSQLToolStripMenuItem.Text = "To SQL";
@@ -544,7 +544,7 @@ namespace WDBXEditor
 			// 
 			// toSQLFileToolStripMenuItem
 			// 
-			this.toSQLFileToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.sqlfile;
+			this.toSQLFileToolStripMenuItem.Image = global::Acmil.Properties.Resources.sqlfile;
 			this.toSQLFileToolStripMenuItem.Name = "toSQLFileToolStripMenuItem";
 			this.toSQLFileToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
 			this.toSQLFileToolStripMenuItem.Text = "To SQL File";
@@ -552,7 +552,7 @@ namespace WDBXEditor
 			// 
 			// toCSVToolStripMenuItem
 			// 
-			this.toCSVToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.csv;
+			this.toCSVToolStripMenuItem.Image = global::Acmil.Properties.Resources.csv;
 			this.toCSVToolStripMenuItem.Name = "toCSVToolStripMenuItem";
 			this.toCSVToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
 			this.toCSVToolStripMenuItem.Text = "To CSV";
@@ -560,7 +560,7 @@ namespace WDBXEditor
 			// 
 			// toMPQToolStripMenuItem
 			// 
-			this.toMPQToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.sqlfile;
+			this.toMPQToolStripMenuItem.Image = global::Acmil.Properties.Resources.sqlfile;
 			this.toMPQToolStripMenuItem.Name = "toMPQToolStripMenuItem";
 			this.toMPQToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
 			this.toMPQToolStripMenuItem.Text = "To MPQ";
@@ -568,7 +568,7 @@ namespace WDBXEditor
 			// 
 			// toJSONToolStripMenuItem
 			// 
-			this.toJSONToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.sqlfile;
+			this.toJSONToolStripMenuItem.Image = global::Acmil.Properties.Resources.sqlfile;
 			this.toJSONToolStripMenuItem.Name = "toJSONToolStripMenuItem";
 			this.toJSONToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
 			this.toJSONToolStripMenuItem.Text = "To JSON";
@@ -585,7 +585,7 @@ namespace WDBXEditor
 			// 
 			// fromSQLToolStripMenuItem
 			// 
-			this.fromSQLToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.sql;
+			this.fromSQLToolStripMenuItem.Image = global::Acmil.Properties.Resources.sql;
 			this.fromSQLToolStripMenuItem.Name = "fromSQLToolStripMenuItem";
 			this.fromSQLToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
 			this.fromSQLToolStripMenuItem.Text = "From SQL";
@@ -593,7 +593,7 @@ namespace WDBXEditor
 			// 
 			// fromCSVToolStripMenuItem
 			// 
-			this.fromCSVToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.csv;
+			this.fromCSVToolStripMenuItem.Image = global::Acmil.Properties.Resources.csv;
 			this.fromCSVToolStripMenuItem.Name = "fromCSVToolStripMenuItem";
 			this.fromCSVToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
 			this.fromCSVToolStripMenuItem.Text = "From CSV";
@@ -613,7 +613,7 @@ namespace WDBXEditor
 			// 
 			// editDefinitionsToolStripMenuItem
 			// 
-			this.editDefinitionsToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.load_definition;
+			this.editDefinitionsToolStripMenuItem.Image = global::Acmil.Properties.Resources.load_definition;
 			this.editDefinitionsToolStripMenuItem.Name = "editDefinitionsToolStripMenuItem";
 			this.editDefinitionsToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
 			this.editDefinitionsToolStripMenuItem.Text = "Definition Editor";
@@ -622,7 +622,7 @@ namespace WDBXEditor
 			// wotLKItemFixToolStripMenuItem
 			// 
 			this.wotLKItemFixToolStripMenuItem.Enabled = false;
-			this.wotLKItemFixToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.sql;
+			this.wotLKItemFixToolStripMenuItem.Image = global::Acmil.Properties.Resources.sql;
 			this.wotLKItemFixToolStripMenuItem.Name = "wotLKItemFixToolStripMenuItem";
 			this.wotLKItemFixToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
 			this.wotLKItemFixToolStripMenuItem.Text = "WotLK Item Import";
@@ -630,7 +630,7 @@ namespace WDBXEditor
 			// 
 			// wdb5ParserToolStripMenuItem
 			// 
-			this.wdb5ParserToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.table;
+			this.wdb5ParserToolStripMenuItem.Image = global::Acmil.Properties.Resources.table;
 			this.wdb5ParserToolStripMenuItem.Name = "wdb5ParserToolStripMenuItem";
 			this.wdb5ParserToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
 			this.wdb5ParserToolStripMenuItem.Text = "Legion Parser";
@@ -639,7 +639,7 @@ namespace WDBXEditor
 			// 
 			// playerLocationRecorderToolStripMenuItem
 			// 
-			this.playerLocationRecorderToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.target;
+			this.playerLocationRecorderToolStripMenuItem.Image = global::Acmil.Properties.Resources.target;
 			this.playerLocationRecorderToolStripMenuItem.Name = "playerLocationRecorderToolStripMenuItem";
 			this.playerLocationRecorderToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
 			this.playerLocationRecorderToolStripMenuItem.Text = "Player Location Recorder";
@@ -648,7 +648,7 @@ namespace WDBXEditor
 			// colourPickerToolStripMenuItem
 			// 
 			this.colourPickerToolStripMenuItem.Enabled = false;
-			this.colourPickerToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.paintbrush;
+			this.colourPickerToolStripMenuItem.Image = global::Acmil.Properties.Resources.paintbrush;
 			this.colourPickerToolStripMenuItem.Name = "colourPickerToolStripMenuItem";
 			this.colourPickerToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
 			this.colourPickerToolStripMenuItem.Text = "Colour Picker";
@@ -817,7 +817,7 @@ namespace WDBXEditor
 			// 
 			// recentToolStripMenuItem
 			// 
-			this.recentToolStripMenuItem.Image = global::WDBXEditor.Properties.Resources.open;
+			this.recentToolStripMenuItem.Image = global::Acmil.Properties.Resources.open;
 			this.recentToolStripMenuItem.Name = "recentToolStripMenuItem";
 			this.recentToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
 			this.recentToolStripMenuItem.Text = "Recent Files";

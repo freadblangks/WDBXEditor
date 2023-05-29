@@ -1,4 +1,4 @@
-﻿using WDBXEditor.Storage;
+﻿using Acmil.Storage;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,13 +6,13 @@ using System.Linq;
 using System.IO;
 using System.Windows.Forms;
 using System.Text;
-using WDBXEditor.Reader.FileTypes;
-using WDBXEditor.Common;
-using static WDBXEditor.Common.Constants;
+using Acmil.Reader.FileTypes;
+using Acmil.Common;
+using static Acmil.Common.Constants;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace WDBXEditor.Reader
+namespace Acmil.Reader
 {
 	public class DBReader
 	{

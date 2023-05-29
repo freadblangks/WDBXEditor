@@ -4,10 +4,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using WDBXEditor.Storage;
+using Acmil.Storage;
 using static System.Windows.Forms.CheckedListBox;
 
-namespace WDBXEditor.Common
+namespace Acmil.Common
 {
     public partial class DropdownCheckList : UserControl
     {

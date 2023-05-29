@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static WDBXEditor.Common.Constants;
+using static Acmil.Common.Constants;
 
-namespace WDBXEditor.Forms
+namespace Acmil.Forms
 {
     public partial class TextEditor : Form
     {

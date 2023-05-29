@@ -7,9 +7,9 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Windows.Forms;
 using System.Net;
-using WDBXEditor.Common.Enums;
+using Acmil.Common.Enums;
 
-namespace WDBXEditor.Common
+namespace Acmil.Common
 {
 	/// <summary>
 	/// Class for general constants.

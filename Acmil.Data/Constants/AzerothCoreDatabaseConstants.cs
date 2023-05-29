@@ -8,6 +8,6 @@
 		/// <summary>
 		/// The default name of the AzerothCore World database.
 		/// </summary>
-		public const string WORLD_DATABASE_NAME = "acore_world";
+		public const string DEFAULT_WORLD_DATABASE_NAME = "acore_world";
 	}
 }

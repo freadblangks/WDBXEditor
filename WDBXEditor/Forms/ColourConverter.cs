@@ -2,9 +2,9 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using WDBXEditor.Common;
+using Acmil.Common;
 
-namespace WDBXEditor.Forms
+namespace Acmil.Forms
 {
     public partial class ColourConverter : Form
     {

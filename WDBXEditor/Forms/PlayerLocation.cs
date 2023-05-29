@@ -2,15 +2,15 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Linq;
-using static WDBXEditor.Common.Constants;
+using static Acmil.Common.Constants;
 using System.Collections.Generic;
 using System.IO;
 using System.Globalization;
-using WDBXEditor.Reader;
+using Acmil.Reader;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 
-namespace WDBXEditor.Forms
+namespace Acmil.Forms
 {
     public partial class PlayerLocation : Form
     {

@@ -4,11 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WDBXEditor.Storage;
+using Acmil.Storage;
 using System.Data;
 using System.Diagnostics;
 
-namespace WDBXEditor.Reader.FileTypes
+namespace Acmil.Reader.FileTypes
 {
     public class WDB2 : DBHeader
     {

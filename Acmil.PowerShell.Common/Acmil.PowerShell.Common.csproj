@@ -7,13 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
     <PackageReference Include="System.Management.Automation" Version="7.2.11" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Acmil.Api\Acmil.Api.csproj" />
     <ProjectReference Include="..\Acmil.Common.Utility\Acmil.Common.Utility.csproj" />
-    <ProjectReference Include="..\Acmil.Data.Contracts\Acmil.Data.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

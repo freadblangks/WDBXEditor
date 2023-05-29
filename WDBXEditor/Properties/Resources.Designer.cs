@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WDBXEditor.Properties {
+namespace Acmil.Properties {
     using System;
     
     

@@ -1,4 +1,4 @@
-﻿namespace WDBXEditor.Forms
+﻿namespace Acmil.Forms
 {
     partial class TextEditor
     {
@@ -98,7 +98,7 @@
             // btnFind
             // 
             this.btnFind.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnFind.Image = global::WDBXEditor.Properties.Resources.search;
+            this.btnFind.Image = global::Acmil.Properties.Resources.search;
             this.btnFind.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(23, 20);

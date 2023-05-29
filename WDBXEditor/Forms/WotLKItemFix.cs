@@ -1,4 +1,4 @@
-﻿using WDBXEditor.Storage;
+﻿using Acmil.Storage;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -9,10 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static WDBXEditor.Common.Constants;
-using WDBXEditor.Common.Enums;
+using static Acmil.Common.Constants;
+using Acmil.Common.Enums;
 
-namespace WDBXEditor
+namespace Acmil
 {
 	public partial class WotLKItemFix : Form
 	{

@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Text;
 
-namespace WDBXEditor.Archives.Misc
+namespace Acmil.Archives.Misc
 {
     public class  Lookup3
     {

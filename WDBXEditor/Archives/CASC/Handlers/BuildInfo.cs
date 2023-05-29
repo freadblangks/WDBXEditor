@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace WDBXEditor.Archives.CASC.Handlers
+namespace Acmil.Archives.CASC.Handlers
 {
     public class BuildInfo
     {

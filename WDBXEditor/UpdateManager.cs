@@ -5,11 +5,11 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WDBXEditor.Common;
+using Acmil.Common;
 using System.IO.Compression;
 using System.Text.Json;
 
-namespace WDBXEditor
+namespace Acmil
 {
 	static class UpdateManager
 	{

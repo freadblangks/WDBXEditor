@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace WDBXEditor
+namespace Acmil
 {
     public class NamedPipeManager
     {
