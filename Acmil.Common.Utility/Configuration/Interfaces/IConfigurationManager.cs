@@ -9,6 +9,6 @@
 		/// Gets an <see cref="Configuration"/> object containing the configuration values defined in appsettings.json.
 		/// </summary>
 		/// <returns>An <see cref="Configuration"/> object containing the configuration values defined in appsettings.json.</returns>
-		SettingsModels.Configuration GetConfiguration();
+		SettingsModels.ConfigurationModel GetConfiguration();
 	}
 }

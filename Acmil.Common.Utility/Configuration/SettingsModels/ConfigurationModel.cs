@@ -6,7 +6,7 @@ namespace Acmil.Common.Utility.Configuration.SettingsModels
 	/// <summary>
 	/// An object representing the contents of appsettings.json.
 	/// </summary>
-	public class Configuration
+	public class ConfigurationModel
 	{
 		/// <summary>
 		/// An object containing settings relating to logging.

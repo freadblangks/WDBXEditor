@@ -1,4 +1,5 @@
 ﻿using Acmil.Common.Utility.Configuration.Interfaces;
+using Acmil.Common.Utility.Configuration.SettingsModels;
 using System.Text.Json;
 
 namespace Acmil.Common.Utility.Configuration
@@ -8,20 +9,20 @@ namespace Acmil.Common.Utility.Configuration
 	/// </summary>
 	public class ConfigurationManager : IConfigurationManager
 	{
-		private static readonly Lazy<SettingsModels.Configuration> _CONFIGURATION = new Lazy<SettingsModels.Configuration>(() => InitializeConfiguration());
+		private static readonly Lazy<ConfigurationModel> _CONFIGURATION = new Lazy<ConfigurationModel>(() => InitializeConfiguration());
 
 		private static readonly JsonSerializerOptions _SERIALIZER_CONFIG = new JsonSerializerOptions()
 		{
 			PropertyNameCaseInsensitive = true,
 		};
 
-		public SettingsModels.Configuration GetConfiguration() => _CONFIGURATION.Value;
+		public ConfigurationModel GetConfiguration() => _CONFIGURATION.Value;
 
-		private static SettingsModels.Configuration InitializeConfiguration()
+		private static ConfigurationModel InitializeConfiguration()
 		{
 			string configFilePath = GetConfigFilePath();
 
-			SettingsModels.Configuration configuration;
+			ConfigurationModel configuration;
 			if (!File.Exists(configFilePath))
 			{
 				configuration = CreateConfigFile();
@@ -34,19 +35,19 @@ namespace Acmil.Common.Utility.Configuration
 			return configuration;
 		}
 
-		private static SettingsModels.Configuration CreateConfigFile()
+		private static ConfigurationModel CreateConfigFile()
 		{
-			var config = new SettingsModels.Configuration();
+			var config = new ConfigurationModel();
 			string configText = JsonSerializer.Serialize(config);
 			File.WriteAllText(GetConfigFilePath(), configText);
 
 			return config;
 		}
 
-		private static SettingsModels.Configuration ReadConfigFile(string configFilePath)
+		private static ConfigurationModel ReadConfigFile(string configFilePath)
 		{
 			string configText = File.ReadAllText(configFilePath);
-			return JsonSerializer.Deserialize<SettingsModels.Configuration>(configText, _SERIALIZER_CONFIG);
+			return JsonSerializer.Deserialize<ConfigurationModel>(configText, _SERIALIZER_CONFIG);
 		}
 
 		private static string GetConfigFilePath() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".acmil", "config.json");
