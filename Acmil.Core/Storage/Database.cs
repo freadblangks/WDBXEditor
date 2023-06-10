@@ -17,7 +17,7 @@ namespace Acmil.Core.Storage
 {
 	public class Database
 	{
-		public static Definition Definitions { get; set; } = new Definition();
+		public static Definition Definitions { get; set; } = LoadDefinitions().ConfigureAwait(false).GetAwaiter().GetResult();
 		public static List<DBEntry> Entries { get; set; } = new List<DBEntry>();
 		public static int BuildNumber { get; set; }
 
@@ -29,6 +29,10 @@ namespace Acmil.Core.Storage
 		{
 			_utilityHelper = new UtilityHelper();
 			_logger = _utilityHelper.GetLogger();
+			//if (Definitions is null)
+			//{
+			//	LoadDefinitions().ConfigureAwait(false).GetAwaiter().GetResult();
+			//}
 		}
 
 		#region Load
@@ -53,17 +57,17 @@ namespace Acmil.Core.Storage
 			var batchBlock = new BatchBlock<string>(100, new GroupingDataflowBlockOptions { BoundedCapacity = 100 });
 			var actionBlock = new ActionBlock<string[]>(t =>
 			{
-				for (int i = 0; i < t.Length; i++)
+				for (int i = 0; i < t.Length; ++i)
 				{
 					files.TryDequeue(out string file);
 					try
 					{
 						var reader = new DBReader(_utilityHelper);
 						DBEntry entry = reader.Read(file);
-						if (entry != null)
+						if (entry is not null)
 						{
 							var current = Entries.FirstOrDefault(x => x.FileName == entry.FileName && x.Build == entry.Build);
-							if (current != null)
+							if (current is not null)
 							{
 								Entries.Remove(current);
 							}
@@ -119,10 +123,10 @@ namespace Acmil.Core.Storage
 					{
 						var reader = new DBReader(_utilityHelper);
 						DBEntry entry = reader.Read(s.Value, s.Key);
-						if (entry != null)
+						if (entry is not null)
 						{
 							var current = Entries.FirstOrDefault(x => x.FileName == entry.FileName && x.Build == entry.Build);
-							if (current != null)
+							if (current is not null)
 								Entries.Remove(current);
 
 							Entries.Add(entry);
@@ -176,7 +180,7 @@ namespace Acmil.Core.Storage
 			var batchBlock = new BatchBlock<int>(100, new GroupingDataflowBlockOptions { BoundedCapacity = 100 });
 			var actionBlock = new ActionBlock<int[]>(t =>
 			{
-				for (int i = 0; i < t.Length; i++)
+				for (int i = 0; i < t.Length; ++i)
 				{
 					DBEntry file = files.Dequeue();
 					try
@@ -216,7 +220,7 @@ namespace Acmil.Core.Storage
 			// to see if that helps.
 			await Task.Factory.StartNew(() =>
 			{
-				var definitionResourceSet = Resources.Definitions.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.InvariantCulture, false, false);
+				var definitionResourceSet = Resources.Definitions.ResourceManager.GetResourceSet(System.Globalization.CultureInfo.InvariantCulture, true, false);
 				foreach (DictionaryEntry definitionResource in definitionResourceSet)
 				{
 					Definitions.LoadDefinition((string)definitionResource.Value);

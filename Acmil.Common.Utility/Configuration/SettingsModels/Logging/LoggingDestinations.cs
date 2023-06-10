@@ -8,12 +8,11 @@
 		/// <summary>
 		/// Whether logging is configured to write to the console.
 		/// </summary>
-		/// TODO: Figure out what we mean by this.
-		public bool Console { get; set; }
+		public bool Console { get; set; } = true;
 
 		/// <summary>
 		/// Whether logging is configured to write to a log file.
 		/// </summary>
-		public bool File { get; set; }
+		public bool File { get; set; } = false;
 	}
 }

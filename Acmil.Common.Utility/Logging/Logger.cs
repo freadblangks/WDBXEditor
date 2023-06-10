@@ -2,8 +2,6 @@
 using Acmil.Common.Utility.Configuration.SettingsModels.Logging;
 using Acmil.Common.Utility.Logging.Enums;
 using Acmil.Common.Utility.Logging.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Acmil.Common.Utility.Logging
@@ -24,10 +22,10 @@ namespace Acmil.Common.Utility.Logging
 		/// <param name="configurationManager">An implementation of <see cref="IConfigurationManager"/> configure the instance with.</param>
 		internal Logger(IConfigurationManager configurationManager)
 		{
-			LoggingConfiguration loggingSettings = configurationManager.GetAppSettings().Logging;
-			_configuredLoggingDestinations = loggingSettings.LoggingDestinations;
+			LoggingConfiguration loggingSettings = configurationManager.GetConfiguration().Logging;
+			_configuredLoggingDestinations = loggingSettings.Destinations;
 			_isAnyLoggingDestinationSet = _configuredLoggingDestinations.Console || _configuredLoggingDestinations.File;
-			_configuredLoggingLevel = GetLoggingLevelFromConfigurationObject(loggingSettings.LogLevel);
+			_configuredLoggingLevel = Enum.Parse<LoggingLevel>(loggingSettings.Level, ignoreCase: true);
 		}
 
 		public void LogCritical(string message) => Log(message, LoggingLevel.Critical);
@@ -70,7 +68,7 @@ namespace Acmil.Common.Utility.Logging
 				builder.AppendFormat("[{0}] ", loggingLevel.ToString().ToUpper());
 				builder.Append(message);
 
-				if (exception != null)
+				if (exception is not null)
 				{
 					builder.AppendLine();
 					AppendException(builder, exception);
@@ -110,18 +108,6 @@ namespace Acmil.Common.Utility.Logging
 			builder.AppendLine();
 			builder.AppendLine("Full Stack Trace:");
 			builder.Append(ex.StackTrace);
-		}
-
-		private LoggingLevel GetLoggingLevelFromConfigurationObject(LogLevel configuredLogLevel)
-		{
-			LoggingLevel result;
-
-			if (!Enum.TryParse(configuredLogLevel.Override, ignoreCase: true, out result))
-			{
-				result = Enum.Parse<LoggingLevel>(configuredLogLevel.Default, ignoreCase: true);
-			}
-
-			return result;
 		}
 	}
 }

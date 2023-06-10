@@ -14,7 +14,7 @@ namespace Acmil.Data.Helpers.Connections
 
 		public MySqlConnectionInfo GetOrAdd(string key, Func<MySqlConnectionInfo> factory)
 		{
-			if (factory == null)
+			if (factory is null)
 			{
 				throw new ArgumentNullException(nameof(factory));
 			}

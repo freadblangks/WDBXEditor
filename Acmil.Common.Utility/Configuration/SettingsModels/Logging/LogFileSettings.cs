@@ -8,11 +8,11 @@
 		/// <summary>
 		/// The path to the directory where log files should be written to.
 		/// </summary>
-		public string Directory { get; set; }
+		public string Directory { get; set; } = "";
 
 		/// <summary>
 		/// The string template to use for naming log files.
 		/// </summary>
-		public string FileNameTemplate { get; set; }
+		public string FileNameTemplate { get; set; } = "acmil-{timestamp}.log";
 	}
 }

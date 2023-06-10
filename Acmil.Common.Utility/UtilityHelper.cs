@@ -13,7 +13,7 @@ namespace Acmil.Common.Utility
 	{
 		public IConfigurationManager GetConfigurationManager()
 		{
-			return ConfigurationManager.Instance;
+			return new ConfigurationManager();
 		}
 
 		public ILogger GetLogger()

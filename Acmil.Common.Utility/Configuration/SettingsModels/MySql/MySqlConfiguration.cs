@@ -13,6 +13,6 @@
 		/// <remarks>
 		/// This represents the "MySql.SecureFilePrivDirectoryAbsolutePath" property in appsettings.json.
 		/// </remarks>
-		public string SecureFilePrivDirectoryAbsolutePath { get; set; }
+		public string SecureFilePrivDirectoryAbsolutePath { get; set; } = "";
 	}
 }

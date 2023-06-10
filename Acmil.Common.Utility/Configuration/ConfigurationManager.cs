@@ -1,61 +1,54 @@
 ﻿using Acmil.Common.Utility.Configuration.Interfaces;
-using Acmil.Common.Utility.Configuration.SettingsModels;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Text;
+using System.Text.Json;
 
 namespace Acmil.Common.Utility.Configuration
 {
 	/// <summary>
-	/// Manager for interacting with the session configuration values, defined by appsettings.json.
+	/// Manager for interacting with configuration values.
 	/// </summary>
 	public class ConfigurationManager : IConfigurationManager
 	{
-		private static readonly Lazy<ConfigurationManager> _LAZY_INSTANCE = new Lazy<ConfigurationManager>(() => new ConfigurationManager());
+		private static readonly Lazy<SettingsModels.Configuration> _CONFIGURATION = new Lazy<SettingsModels.Configuration>(() => InitializeConfiguration());
 
-		private IConfigurationRoot _configRoot;
-
-		private ConfigurationManager()
+		private static readonly JsonSerializerOptions _SERIALIZER_CONFIG = new JsonSerializerOptions()
 		{
-			string currentExecutableDirectoryPath = GetCurrentExecutableDirectoryPath();
-			var configBuilder = new ConfigurationBuilder()
-				.SetBasePath(currentExecutableDirectoryPath)
-				.AddJsonFile("appsettings.json");
-			_configRoot = configBuilder.Build();
-		}
+			PropertyNameCaseInsensitive = true,
+		};
 
-		public static IConfigurationManager Instance
+		public SettingsModels.Configuration GetConfiguration() => _CONFIGURATION.Value;
+
+		private static SettingsModels.Configuration InitializeConfiguration()
 		{
-			get
+			string configFilePath = GetConfigFilePath();
+
+			SettingsModels.Configuration configuration;
+			if (!File.Exists(configFilePath))
 			{
-				return _LAZY_INSTANCE.Value;
+				configuration = CreateConfigFile();
 			}
-		}
-
-		public AppSettings GetAppSettings()
-		{
-			var appSettings = new AppSettings();
-			_configRoot.Bind(appSettings);
-
-			return appSettings;
-		}
-
-		public string GetCurrentExecutableDirectoryPath()
-		{
-			string executablePathWithFileName = Assembly.GetEntryAssembly()?.Location;
-
-			if (executablePathWithFileName is null)
+			else
 			{
-				string message = "The directory of the current executable could not be found, possibly because the call came from unmanaged code.";
-				message += $" If this error is occurring during test execution, make sure that a Mock of {nameof(IConfigurationManager)} is being used instead of an actual implementation.";
-				throw new InvalidOperationException(message);
+				configuration = ReadConfigFile(configFilePath);
 			}
 
-			// Remove the file name from the path before returning it.
-			return Path.GetDirectoryName(executablePathWithFileName);
+			return configuration;
 		}
+
+		private static SettingsModels.Configuration CreateConfigFile()
+		{
+			var config = new SettingsModels.Configuration();
+			string configText = JsonSerializer.Serialize(config);
+			File.WriteAllText(GetConfigFilePath(), configText);
+
+			return config;
+		}
+
+		private static SettingsModels.Configuration ReadConfigFile(string configFilePath)
+		{
+			string configText = File.ReadAllText(configFilePath);
+			return JsonSerializer.Deserialize<SettingsModels.Configuration>(configText, _SERIALIZER_CONFIG);
+		}
+
+		private static string GetConfigFilePath() => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".acmil", "config.json");
 	}
 }

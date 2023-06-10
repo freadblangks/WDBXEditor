@@ -1,4 +1,6 @@
-﻿namespace Acmil.Common.Utility.Configuration.SettingsModels.Logging
+﻿using Acmil.Common.Utility.Logging.Enums;
+
+namespace Acmil.Common.Utility.Configuration.SettingsModels.Logging
 {
 	/// <summary>
 	/// An object representing the contents of the "Logging" property in appsettings.json.
@@ -11,7 +13,7 @@
 		/// <remarks>
 		/// Represents the "Logging.LogLevel" property in appsettings.json.
 		/// </remarks>
-		public LogLevel LogLevel { get; set; }
+		public string Level { get; set; } = LoggingLevel.Warning.ToString();
 
 		/// <summary>
 		/// An object containing settings relating to writing log files. 
@@ -27,6 +29,6 @@
 		/// <remarks>
 		/// This represents the "Logging.LoggingDestinations" property in appsettings.json.
 		/// </remarks>
-		public LoggingDestinations LoggingDestinations { get; set; }
+		public LoggingDestinations Destinations { get; set; }
 	}
 }
