@@ -1,6 +1,6 @@
 ﻿using Acmil.Common.Utility.Extensions;
-using Acmil.Common.Utility.Types.Primitives;
 using Acmil.Data.Contracts.Attributes;
+using Acmil.Data.Contracts.Types.Primitives;
 using Acmil.Data.Exceptions;
 using MySql.Data.MySqlClient;
 using System;

@@ -1,5 +1,5 @@
 ﻿using Acmil.Data.Contracts.Attributes;
-using Acmil.Common.Utility.Types.Primitives;
+using Acmil.Data.Contracts.Types.Primitives;
 
 namespace Acmil.Data.Contracts.Models.Items
 {

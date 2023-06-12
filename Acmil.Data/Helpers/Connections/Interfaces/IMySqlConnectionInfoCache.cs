@@ -4,7 +4,7 @@ using System;
 namespace Acmil.Data.Helpers.Connections.Interfaces
 {
 	/// <summary>
-	/// Cache for <see cref="MySqlConnectionInfo"/> instances.
+	/// Cache for <see cref="MySqlConnectionInfoInternal"/> instances.
 	/// </summary>
 	internal interface IMySqlConnectionInfoCache
 	{
@@ -20,7 +20,7 @@ namespace Acmil.Data.Helpers.Connections.Interfaces
 		/// the key is already in the cache, or the new value for the key as returned
 		/// by <paramref name="factory"/> if the key was not in the cache.
 		/// </returns>
-		MySqlConnectionInfo GetOrAdd(string key, Func<MySqlConnectionInfo> factory);
+		MySqlConnectionInfoInternal GetOrAdd(string key, Func<MySqlConnectionInfoInternal> factory);
 
 		/// <summary>
 		/// Method to be called when the connection string is updated.

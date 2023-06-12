@@ -1,12 +1,10 @@
-﻿using Acmil.Api.Managers;
-using Acmil.Api.Managers.Interfaces;
-using Acmil.Common.Utility.Types.Primitives;
+﻿using Acmil.Data.Contracts.Connections;
 using Acmil.Data.Contracts.Models.Items;
+using Acmil.Data.Contracts.Types.Primitives;
 using Acmil.PowerShell.Common.Helpers;
 using Acmil.PowerShell.Common.Helpers.Interfaces;
-using Acmil.PowerShell.Common.OutputTypes;
+using Acmil.PowerShell.Engines;
 using System.Management.Automation;
-
 
 namespace Acmil.PowerShell.Common.Cmdlets
 {
@@ -24,26 +22,24 @@ namespace Acmil.PowerShell.Common.Cmdlets
 		private const string PARAMETER_SET_NAME_GET_BY_NAME = "ByName";
 
 		private ICmdletHelper _cmdletHelper;
-		private IItemTemplateManager _itemTemplateManager;
 
 		/// <summary>
 		/// Initializes a new instance of <see cref="GetItemTemplateCmdlet"/> class.
 		/// </summary>
-		public GetItemTemplateCmdlet() : base()
+		public GetItemTemplateCmdlet()
 		{
 			_cmdletHelper = new CmdletHelper();
-			
 		}
 
-		/// <summary>
-		/// Initializes a new instance of <see cref="GetItemTemplateCmdlet"/> class..
-		/// </summary>
-		/// <param name="itemTemplateManager">An implementation of <see cref="IItemTemplateManager"/>.</param>
-		internal GetItemTemplateCmdlet(ICmdletHelper cmdletHelper, IItemTemplateManager itemTemplateManager)
-		{
-			_cmdletHelper = cmdletHelper;
-			_itemTemplateManager = itemTemplateManager;
-		}
+		///// <summary>
+		///// Initializes a new instance of <see cref="GetItemTemplateCmdlet"/> class..
+		///// </summary>
+		///// <param name="itemTemplateManager">An implementation of <see cref="IItemTemplateManager"/>.</param>
+		//internal GetItemTemplateCmdlet(ICmdletHelper cmdletHelper, IItemTemplateManager itemTemplateManager)
+		//{
+		//	_cmdletHelper = cmdletHelper;
+		//	_itemTemplateManager = itemTemplateManager;
+		//}
 
 		[Parameter(Mandatory = true, ParameterSetName = PARAMETER_SET_NAME_GET_BY_ENTRY_ID, Position = 0)]
 		[Parameter(Mandatory = true, ParameterSetName = PARAMETER_SET_NAME_GET_BY_NAME, Position = 0)]
@@ -63,30 +59,40 @@ namespace Acmil.PowerShell.Common.Cmdlets
 
 		protected override void BeginProcessing()
 		{
-			_itemTemplateManager = new ItemTemplateManager(
-				ConnectionInfo.Hostname,
-				ConnectionInfo.Credential.UserName,
-				ConnectionInfo.Credential.Password
-			);
+			//_itemTemplateManager = new ItemTemplateManager(
+			//	ConnectionInfo.Hostname,
+			//	ConnectionInfo.Credential.UserName,
+			//	ConnectionInfo.Credential.Password
+			//
 		}
 
 		protected override void ProcessRecord()
 		{
-			var results = new List<CompleteItemTemplate>();
-			switch (base.ParameterSetName)
+			try
 			{
-				case PARAMETER_SET_NAME_GET_BY_ENTRY_ID:
-					var result = _itemTemplateManager.GetCompleteItemTemplate(EntryId);
-					results = new List<CompleteItemTemplate>() { result };
-					break;
-				case PARAMETER_SET_NAME_GET_BY_NAME:
-					results = _itemTemplateManager.GetCompleteItemTemplates(Name, Class, SubClass);
-					break;
-				default:
-					_cmdletHelper.HandleUnsupportedParameterSet(this);
-					break;
+				using (var itemTemplateEngine = new ItemTemplateEngine())
+				{
+					var results = new List<object>();
+					switch (base.ParameterSetName)
+					{
+						case PARAMETER_SET_NAME_GET_BY_ENTRY_ID:
+							var result = ItemTemplateEngine.GetCompleteItemTemplate(ConnectionInfo, EntryId);
+							results = new List<object>() { result };
+							break;
+						case PARAMETER_SET_NAME_GET_BY_NAME:
+							//results = itemTemplateEngine.GetCompleteItemTemplates(ConnectionInfo, Name, Class, SubClass);
+							break;
+						default:
+							_cmdletHelper.HandleUnsupportedParameterSet(this);
+							break;
+					}
+					WriteObject(results);
+				}
 			}
-			WriteObject(results);
+			catch
+			{
+				throw;
+			}
 		}
 	}
 }

@@ -40,13 +40,10 @@
 //
 //******************************************************************************************************
 
-using System;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Acmil.Common.Utility.Types.Dependencies
+namespace Acmil.Data.Contracts.Types.Dependencies
 {
 	/// <summary>
 	/// Defines extension functions related to <see cref="Array"/> manipulation.

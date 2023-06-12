@@ -6,13 +6,13 @@ using System.Collections.Concurrent;
 namespace Acmil.Data.Helpers.Connections
 {
 	/// <summary>
-	/// Cache for <see cref="MySqlConnectionInfo"/> instances.
+	/// Cache for <see cref="MySqlConnectionInfoInternal"/> instances.
 	/// </summary>
 	internal class MySqlConnectionInfoCache : IMySqlConnectionInfoCache
 	{
-		private readonly ConcurrentDictionary<string, MySqlConnectionInfo> _connectionStringCache = new ConcurrentDictionary<string, MySqlConnectionInfo>();
+		private readonly ConcurrentDictionary<string, MySqlConnectionInfoInternal> _connectionStringCache = new ConcurrentDictionary<string, MySqlConnectionInfoInternal>();
 
-		public MySqlConnectionInfo GetOrAdd(string key, Func<MySqlConnectionInfo> factory)
+		public MySqlConnectionInfoInternal GetOrAdd(string key, Func<MySqlConnectionInfoInternal> factory)
 		{
 			if (factory is null)
 			{

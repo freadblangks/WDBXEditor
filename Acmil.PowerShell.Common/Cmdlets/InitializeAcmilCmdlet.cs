@@ -1,4 +1,4 @@
-﻿using Acmil.PowerShell.Common.OutputTypes;
+﻿using Acmil.Data.Contracts.Connections;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
 using System.Management.Automation.Host;
@@ -7,7 +7,7 @@ namespace Acmil.PowerShell.Common.Cmdlets
 {
 	[Cmdlet(VerbsData.Initialize, "Acmil")]
 	[OutputType(typeof(MySqlConnectionInfo))]
-	public class InitializeACMILCmdlet : PSCmdlet
+	public class InitializeACMILCmdlet : BaseCmdlet
 	{
 		protected override void ProcessRecord()
 		{
@@ -29,16 +29,16 @@ namespace Acmil.PowerShell.Common.Cmdlets
 			return promptResults["Server"].ToString();
 		}
 
-		private PSCredential PromptForMySqlCredential()
+		private Credential PromptForMySqlCredential()
 		{
-			var credential = Host.UI.PromptForCredential(
+			var psCredential = Host.UI.PromptForCredential(
 				"Initializing AzerothCore Mod Installation Library (ACMIL)...",
 				/*"Please enter connection info for your MySQL database."*/"Please enter your MySQL credentials.",
 				null,
 				""
 			);
 
-			return credential;
+			return new Credential() { UserName = psCredential.UserName, Password = psCredential.Password };
 		}
 	}
 }

@@ -1,5 +1,5 @@
-﻿using Acmil.Common.Utility.Types.Primitives;
-using Acmil.Data.Contracts.Models.Items;
+﻿using Acmil.Data.Contracts.Models.Items;
+using Acmil.Data.Contracts.Types.Primitives;
 
 namespace Acmil.Data.Repositories.Interfaces
 {

@@ -1,7 +1,7 @@
-﻿using Acmil.Common.Utility.Types.Primitives;
-using Acmil.Data.Contracts.Attributes;
+﻿using Acmil.Data.Contracts.Attributes;
 using Acmil.Data.Contracts.Models.General.Enums;
 using Acmil.Data.Contracts.Models.Items.Enums;
+using Acmil.Data.Contracts.Types.Primitives;
 
 namespace Acmil.Data.Contracts.Models.Items
 {

@@ -10,7 +10,7 @@ namespace Acmil.Data.Helpers.Connections
 	/// </summary>
 	public class MySqlConnectionProvider : IMySqlConnectionProvider
 	{
-		private MySqlConnectionInfo _connectionInfo;
+		private MySqlConnectionInfoInternal _connectionInfo;
 		private bool _useServerConnections;
 
 		/// <summary>
@@ -18,7 +18,7 @@ namespace Acmil.Data.Helpers.Connections
 		/// </summary>
 		/// <param name="connectionInfo">Fully populated <see cref="MySqlConnectioninfo"/> instance to configure the provider with.</param>
 		/// <param name="useServerConnections">Whether this instance of <see cref="MySqlConnectionProvider"/> should provide server-only (non-database) connections.</param>
-		internal MySqlConnectionProvider(MySqlConnectionInfo connectionInfo, bool useServerConnections)
+		internal MySqlConnectionProvider(MySqlConnectionInfoInternal connectionInfo, bool useServerConnections)
 		{
 			_connectionInfo = connectionInfo ?? throw new ArgumentNullException(nameof(connectionInfo));
 			_useServerConnections = useServerConnections;

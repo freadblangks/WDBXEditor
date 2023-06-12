@@ -63,13 +63,12 @@
 
 #endregion
 
-using Acmil.Common.Utility.Types.Dependencies;
-using System;
+using Acmil.Data.Contracts.Types.Dependencies;
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
-namespace Acmil.Common.Utility.Types.Primitives
+namespace Acmil.Data.Contracts.Types.Primitives
 {
 	/// <summary>Represents a 3-byte, 24-bit signed integer.</summary>
 	/// <remarks>

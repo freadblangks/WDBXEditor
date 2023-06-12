@@ -32,7 +32,7 @@ namespace Acmil.Data.Helpers.Connections
 		/// </summary>
 		public static IMySqlConnectionInfoFactory Instance => _instance.Value;
 
-		public MySqlConnectionInfo GetConnectionInfo(string connectionString)
+		public MySqlConnectionInfoInternal GetConnectionInfo(string connectionString)
 		{
 			return _cache.GetOrAdd(connectionString, () => GetMySqlConnectionInfo(connectionString, null));
 		}
@@ -59,11 +59,11 @@ namespace Acmil.Data.Helpers.Connections
 
 
 
-		private MySqlConnectionInfo GetMySqlConnectionInfo(string connectionString, MySqlConnectionOverrides overrides)
+		private MySqlConnectionInfoInternal GetMySqlConnectionInfo(string connectionString, MySqlConnectionOverrides overrides)
 		{
 			var builder = new MySqlConnectionStringBuilder(connectionString);
 			_enricher.EnsureConnectionString(builder, overrides);
-			return new MySqlConnectionInfo(builder);
+			return new MySqlConnectionInfoInternal(builder);
 		}
 	}
 }

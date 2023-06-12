@@ -17,6 +17,11 @@
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
       "commandLineArgs": "-NoLogo -NoExit"
+    },
+    "No Initialization": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "commandLineArgs": "-NoLogo -NoExit -Command \"Import-Module  'D:\\Sourcecode\\Me\\WDBXEditor\\Acmil.PowerShell.Common\\bin\\Debug\\net6.0\\Acmil.PowerShell.Common.psd1' -Force\";\""
     }
   }
 }

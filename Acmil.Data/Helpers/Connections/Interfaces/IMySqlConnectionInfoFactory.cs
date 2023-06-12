@@ -4,16 +4,16 @@ using Acmil.Data.Helpers.Connections.Dtos;
 namespace Acmil.Data.Helpers.Connections.Interfaces
 {
 	/// <summary>
-	/// Factory for getting and creating <see cref="MySqlConnectionInfo"/> instances.
+	/// Factory for getting and creating <see cref="MySqlConnectionInfoInternal"/> instances.
 	/// </summary>
 	public interface IMySqlConnectionInfoFactory
 	{
 		/// <summary>
-		/// Gets a fully populated instance of <see cref="MySqlConnectionInfo"/> for the connection string.
+		/// Gets a fully populated instance of <see cref="MySqlConnectionInfoInternal"/> for the connection string.
 		/// </summary>
 		/// <param name="connectionString">The connection string.</param>
-		/// <returns>A fully populated instance of <see cref="MySqlConnectionInfo"/> based on the connection string.</returns>
-		MySqlConnectionInfo GetConnectionInfo(string connectionString);
+		/// <returns>A fully populated instance of <see cref="MySqlConnectionInfoInternal"/> based on the connection string.</returns>
+		MySqlConnectionInfoInternal GetConnectionInfo(string connectionString);
 
 
 		/// <summary>

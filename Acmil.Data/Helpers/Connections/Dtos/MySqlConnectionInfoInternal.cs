@@ -7,7 +7,7 @@ namespace Acmil.Data.Helpers.Connections.Dtos
 	/// A class representing parsed information for connecting to a MySQL database.
 	/// </summary>
 	[Serializable]
-	public class MySqlConnectionInfo
+	public class MySqlConnectionInfoInternal
 	{
 		private const string _CONNECTION_DATABASE_PROPERTY_NAME = "Database";
 
@@ -32,11 +32,11 @@ namespace Acmil.Data.Helpers.Connections.Dtos
 		public string ServerOnlyConnectionString { get; }
 
 		/// <summary>
-		/// Initializes a new instance of <see cref="MySqlConnectionInfo"/>.
+		/// Initializes a new instance of <see cref="MySqlConnectionInfoInternal"/>.
 		/// </summary>
 		/// <param name="connectionStringBuilder"><see cref="MySqlConnectionStringBuilder"/> instance fully populated with all information needed to connect.</param>
 		/// <exception cref="ArgumentNullException">Thrown when <paramref name="connectionStringBuilder"/> is null.</exception>
-		public MySqlConnectionInfo(MySqlConnectionStringBuilder connectionStringBuilder)
+		public MySqlConnectionInfoInternal(MySqlConnectionStringBuilder connectionStringBuilder)
 		{
 			if (connectionStringBuilder is null)
 			{

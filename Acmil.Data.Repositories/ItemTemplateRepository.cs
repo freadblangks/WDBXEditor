@@ -1,15 +1,13 @@
-﻿using Acmil.Common.Utility.Types.Primitives;
-using Acmil.Data.Constants;
+﻿using Acmil.Data.Constants;
 using Acmil.Data.Contexts;
 using Acmil.Data.Contracts.Models.Items;
 using Acmil.Data.Contracts.Models.Items.Submodels;
 using Acmil.Data.Contracts.Models.Items.Submodels.Requirements;
+using Acmil.Data.Contracts.Types.Primitives;
 using Acmil.Data.Helpers.Interfaces;
 using Acmil.Data.Helpers.Mapping;
 using Acmil.Data.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security;
 

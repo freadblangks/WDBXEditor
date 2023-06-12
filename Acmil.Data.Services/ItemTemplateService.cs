@@ -3,8 +3,8 @@ using System.Security;
 using Acmil.Data.Repositories.Interfaces;
 using Acmil.Data.Helpers;
 using Acmil.Data.Contracts.Models.Items;
-using Acmil.Common.Utility.Types.Primitives;
 using Acmil.Data.Services.Interfaces;
+using Acmil.Data.Contracts.Types.Primitives;
 
 namespace Acmil.Data.Services
 {

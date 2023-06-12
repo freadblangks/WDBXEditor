@@ -28,6 +28,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acmil.Common.Utility.NUnit"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Acmil.Data.NUnit", "Acmil.Data.NUnit\Acmil.Data.NUnit.csproj", "{11233E4A-3CD0-4995-92F6-2A1B7FDF32D5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9B973D58-B10F-4239-ABC2-15577B38811A}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acmil.PowerShell.Engines", "Acmil.PowerShell.Engine\Acmil.PowerShell.Engines.csproj", "{31143CF0-2DBD-49F5-98FC-0E878E49541D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +123,14 @@ Global
 		{11233E4A-3CD0-4995-92F6-2A1B7FDF32D5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11233E4A-3CD0-4995-92F6-2A1B7FDF32D5}.Release|x64.ActiveCfg = Release|Any CPU
 		{11233E4A-3CD0-4995-92F6-2A1B7FDF32D5}.Release|x64.Build.0 = Release|Any CPU
+		{31143CF0-2DBD-49F5-98FC-0E878E49541D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31143CF0-2DBD-49F5-98FC-0E878E49541D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31143CF0-2DBD-49F5-98FC-0E878E49541D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{31143CF0-2DBD-49F5-98FC-0E878E49541D}.Debug|x64.Build.0 = Debug|Any CPU
+		{31143CF0-2DBD-49F5-98FC-0E878E49541D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31143CF0-2DBD-49F5-98FC-0E878E49541D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31143CF0-2DBD-49F5-98FC-0E878E49541D}.Release|x64.ActiveCfg = Release|Any CPU
+		{31143CF0-2DBD-49F5-98FC-0E878E49541D}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

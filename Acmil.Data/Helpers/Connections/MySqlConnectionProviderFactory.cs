@@ -26,7 +26,7 @@ namespace Acmil.Data.Helpers.Connections
 
 		public IMySqlConnectionProvider GetMySqlConnectionProvider(string connectionString)
 		{
-			MySqlConnectionInfo mySqlconnectionInfo = _mySqlConnectionInfoFactory.GetConnectionInfo(connectionString);
+			MySqlConnectionInfoInternal mySqlconnectionInfo = _mySqlConnectionInfoFactory.GetConnectionInfo(connectionString);
 			return new MySqlConnectionProvider(mySqlconnectionInfo, _toggle());
 		}
 

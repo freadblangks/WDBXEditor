@@ -1,6 +1,6 @@
 ﻿using Acmil.Api.Managers;
 using Acmil.Api.Managers.Interfaces;
-using Acmil.PowerShell.Common.OutputTypes;
+using Acmil.Data.Contracts.Connections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +23,11 @@ namespace Acmil.PowerShell.Common.Cmdlets
 
 		protected override void BeginProcessing()
 		{
-			_dbcManager = new DbcManager(
-				ConnectionInfo.Hostname,
-				ConnectionInfo.Credential.UserName,
-				ConnectionInfo.Credential.Password
-			);
+			//_dbcManager = new DbcManager(
+			//	ConnectionInfo.Hostname,
+			//	ConnectionInfo.Credential.UserName,
+			//	ConnectionInfo.Credential.Password
+			//);
 		}
 
 		protected override void ProcessRecord()

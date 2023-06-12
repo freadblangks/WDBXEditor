@@ -1,6 +1,6 @@
-﻿using Acmil.Common.Utility.Types.Primitives;
-using Acmil.Data.Contracts.Models.Items;
+﻿using Acmil.Data.Contracts.Models.Items;
 using Acmil.Data.Contracts.Models.Items.Enums;
+using Acmil.Data.Contracts.Types.Primitives;
 using System.Collections.Generic;
 
 namespace Acmil.Api.Managers.Interfaces

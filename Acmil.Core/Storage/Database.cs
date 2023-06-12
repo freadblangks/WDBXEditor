@@ -17,7 +17,7 @@ namespace Acmil.Core.Storage
 {
 	public class Database
 	{
-		public static Definition Definitions { get; set; } = LoadDefinitions().ConfigureAwait(false).GetAwaiter().GetResult();
+		public static Definition Definitions { get; set; } //= LoadDefinitions().ConfigureAwait(false).GetAwaiter().GetResult();
 		public static List<DBEntry> Entries { get; set; } = new List<DBEntry>();
 		public static int BuildNumber { get; set; }
 
