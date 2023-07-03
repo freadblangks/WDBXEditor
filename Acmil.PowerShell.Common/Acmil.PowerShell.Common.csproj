@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Acmil.Api\Acmil.Api.csproj" />
+    <ProjectReference Include="..\Acmil.Common.Ioc\Acmil.Common.Ioc.csproj" />
     <ProjectReference Include="..\Acmil.Data.Contracts\Acmil.Data.Contracts.csproj" />
   </ItemGroup>
 

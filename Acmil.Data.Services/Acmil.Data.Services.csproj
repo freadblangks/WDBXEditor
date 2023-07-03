@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Acmil.Common.Ioc\Acmil.Common.Ioc.csproj" />
     <ProjectReference Include="..\Acmil.Data.Contracts\Acmil.Data.Contracts.csproj" />
     <ProjectReference Include="..\Acmil.Data.Repositories\Acmil.Data.Repositories.csproj" />
   </ItemGroup>

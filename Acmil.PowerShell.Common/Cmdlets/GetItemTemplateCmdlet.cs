@@ -25,14 +25,14 @@ namespace Acmil.PowerShell.Common.Cmdlets
 
 		private ICmdletHelper _cmdletHelper;
 		private IItemTemplateManager _itemTemplateManager;
-		private RootDependencyInjector _dependencyInjector;
+		private RootContainerInstaller _dependencyInjector;
 
 		/// <summary>
 		/// Initializes a new instance of <see cref="GetItemTemplateCmdlet"/> class.
 		/// </summary>
 		public GetItemTemplateCmdlet()
 		{
-			_dependencyInjector = new RootDependencyInjector();
+			_dependencyInjector = new RootContainerInstaller();
 			_itemTemplateManager = _dependencyInjector.Resolve<IItemTemplateManager>();
 			_cmdletHelper = _dependencyInjector.Resolve<ICmdletHelper>();
 		}
