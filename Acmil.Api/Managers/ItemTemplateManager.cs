@@ -1,49 +1,38 @@
 using Acmil.Api.Managers.Interfaces;
 using Acmil.Data.Contracts.Models.Items;
-using Acmil.Data.Services;
-using System.Security;
 using Acmil.Data.Services.Interfaces;
 using Acmil.Data.Contracts.Types.Primitives;
+using Acmil.Data.Contracts.Connections;
 
 namespace Acmil.Api.Managers
 {
-	public class ItemTemplateManager : IItemTemplateManager, IDisposable
+	public class ItemTemplateManager : IItemTemplateManager
 	{
 		private IItemTemplateService _itemTemplateService;
 
-		// TODO: Pass these in as a DTO.
-		public ItemTemplateManager(string hostname, string username, SecureString password)
+		public ItemTemplateManager(IItemTemplateService itemTemplateService)
 		{
-			_itemTemplateService = new ItemTemplateService(hostname, username, password);
+			_itemTemplateService = itemTemplateService;
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ItemTemplateManager"/>.
-		/// </summary>
-		public ItemTemplateManager(IItemTemplateService itemTemplateRepository)
+		//public void TestGetItemTemplate()
+		//{
+		//	_itemTemplateService.TestGetItemTemplate();
+		//}
+
+		public CompleteItemTemplate GetCompleteItemTemplate(MySqlConnectionInfo connectionInfo, UInt24 entryId)
 		{
-			_itemTemplateService = itemTemplateRepository;
+			return _itemTemplateService.GetCompleteItemTemplateById(connectionInfo, entryId);
 		}
 
-		public void TestGetItemTemplate()
-		{
-			_itemTemplateService.TestGetItemTemplate();
-		}
-
-		public CompleteItemTemplate GetCompleteItemTemplate(UInt24 entryId)
-		{
-			return _itemTemplateService.GetCompleteItemTemplateById(entryId);
-		}
-
-		public List<CompleteItemTemplate> GetCompleteItemTemplates(string name, byte? itemClass, byte? itemSubclass)
+		public List<CompleteItemTemplate> GetCompleteItemTemplates(
+			MySqlConnectionInfo connectionInfo,
+			string name,
+			byte? itemClass,
+			byte? itemSubclass
+		)
 		{
 			throw new NotImplementedException();
-		}
-
-		public void Dispose()
-		{
-			// TODO: Add disposal logic here.
-			// Do nothing
 		}
 	}
 }

@@ -1,8 +1,6 @@
 ﻿using Acmil.Data.Contexts;
-using System;
-using System.Collections.Generic;
+using Acmil.Data.Contracts.Connections;
 using System.Security;
-using System.Text;
 
 namespace Acmil.Data.Helpers.Interfaces
 {
@@ -20,5 +18,13 @@ namespace Acmil.Data.Helpers.Interfaces
 		/// <param name="database">The name of the database to connect to.</param>
 		/// <returns>An implementation of <see cref="IDbContext"/>.</returns>
 		public IDbContext GetContext(string hostname, string username, SecureString password, string database);
+
+		/// <summary>
+		/// Gets an implementation of <see cref="IDbContext"/>.
+		/// </summary>
+		/// <param name="connectionInfo">An instance of <see cref="MySqlConnectionInfo"/> to use for authentication.</param>
+		/// <param name="database">The name of the database to connect to.</param>
+		/// <returns>An implementation of <see cref="IDbContext"/>.</returns>
+		public IDbContext GetContext(MySqlConnectionInfo connectionInfo, string database);
 	}
 }

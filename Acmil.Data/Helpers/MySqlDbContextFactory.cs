@@ -1,4 +1,5 @@
 ﻿using Acmil.Data.Contexts;
+using Acmil.Data.Contracts.Connections;
 using Acmil.Data.Helpers.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,16 @@ namespace Acmil.Data.Helpers
 		{
 			string connectionString = BuildConnectionStringWithSecuredPassword(hostname, username, password, database);
 			return new MySqlContext(connectionString);
+		}
+
+		public IDbContext GetContext(MySqlConnectionInfo connectionInfo, string database)
+		{
+			return GetContext(
+				connectionInfo.Hostname,
+				connectionInfo.Credential.UserName,
+				connectionInfo.Credential.Password,
+				database
+			);
 		}
 
 		// It would be a good idea to not convert the password to plaintext,

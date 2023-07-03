@@ -1,7 +1,5 @@
-﻿using Acmil.Data.Helpers.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Acmil.Data.Constants;
+using Acmil.Data.Helpers.Interfaces;
 
 namespace Acmil.Data.Helpers
 {
@@ -26,6 +24,24 @@ namespace Acmil.Data.Helpers
 		internal DbConfigHelper(IDbSecurityHelper securityHelper)
 		{
 			_securityHelper = securityHelper;
+		}
+
+		// TODO: Update this to be configurable.
+		public static string CharacterDatabaseName
+		{
+			get
+			{
+				return AzerothCoreDatabaseConstants.DEFAULT_CHARACTER_DATABASE_NAME;
+			}
+		}
+
+		// TODO: Update this to be configurable.
+		public static string WorldDatabaseName
+		{
+			get
+			{
+				return AzerothCoreDatabaseConstants.DEFAULT_WORLD_DATABASE_NAME;
+			}
 		}
 
 		//internal IDictionary Settings

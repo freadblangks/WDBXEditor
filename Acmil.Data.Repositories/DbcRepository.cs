@@ -3,6 +3,7 @@ using Acmil.Core.Managers;
 using Acmil.Core.Managers.Interfaces;
 using Acmil.Data.Constants;
 using Acmil.Data.Contexts;
+using Acmil.Data.Helpers;
 using Acmil.Data.Helpers.Interfaces;
 using Acmil.Data.Repositories.Interfaces;
 using System.Security;
@@ -25,7 +26,7 @@ namespace Acmil.Data.Repositories
 				hostname,
 				username,
 				password,
-				AzerothCoreDatabaseConstants.DEFAULT_WORLD_DATABASE_NAME
+				DbConfigHelper.WorldDatabaseName
 			);
 
 			_worldDbcManager = new DbcManager(new UtilityHelper(), _worldContext);

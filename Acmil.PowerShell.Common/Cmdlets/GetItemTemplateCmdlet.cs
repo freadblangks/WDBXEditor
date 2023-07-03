@@ -1,9 +1,11 @@
-﻿using Acmil.Data.Contracts.Connections;
+﻿using Acmil.Api.Managers;
+using Acmil.Api.Managers.Interfaces;
+using Acmil.Data.Contracts.Connections;
 using Acmil.Data.Contracts.Models.Items;
 using Acmil.Data.Contracts.Types.Primitives;
 using Acmil.PowerShell.Common.Helpers;
 using Acmil.PowerShell.Common.Helpers.Interfaces;
-using Acmil.PowerShell.Engines;
+using Acmil.PowerShell.Common.Ioc;
 using System.Management.Automation;
 
 namespace Acmil.PowerShell.Common.Cmdlets
@@ -22,13 +24,17 @@ namespace Acmil.PowerShell.Common.Cmdlets
 		private const string PARAMETER_SET_NAME_GET_BY_NAME = "ByName";
 
 		private ICmdletHelper _cmdletHelper;
+		private IItemTemplateManager _itemTemplateManager;
+		private RootDependencyInjector _dependencyInjector;
 
 		/// <summary>
 		/// Initializes a new instance of <see cref="GetItemTemplateCmdlet"/> class.
 		/// </summary>
 		public GetItemTemplateCmdlet()
 		{
-			_cmdletHelper = new CmdletHelper();
+			_dependencyInjector = new RootDependencyInjector();
+			_itemTemplateManager = _dependencyInjector.Resolve<IItemTemplateManager>();
+			_cmdletHelper = _dependencyInjector.Resolve<ICmdletHelper>();
 		}
 
 		///// <summary>
@@ -70,24 +76,21 @@ namespace Acmil.PowerShell.Common.Cmdlets
 		{
 			try
 			{
-				using (var itemTemplateEngine = new ItemTemplateEngine())
+				var results = new List<object>();
+				switch (base.ParameterSetName)
 				{
-					var results = new List<object>();
-					switch (base.ParameterSetName)
-					{
-						case PARAMETER_SET_NAME_GET_BY_ENTRY_ID:
-							var result = ItemTemplateEngine.GetCompleteItemTemplate(ConnectionInfo, EntryId);
-							results = new List<object>() { result };
-							break;
-						case PARAMETER_SET_NAME_GET_BY_NAME:
-							//results = itemTemplateEngine.GetCompleteItemTemplates(ConnectionInfo, Name, Class, SubClass);
-							break;
-						default:
-							_cmdletHelper.HandleUnsupportedParameterSet(this);
-							break;
-					}
-					WriteObject(results);
+					case PARAMETER_SET_NAME_GET_BY_ENTRY_ID:
+						var result = _itemTemplateManager.GetCompleteItemTemplate(ConnectionInfo, EntryId);
+						results = new List<object>() { result };
+						break;
+					case PARAMETER_SET_NAME_GET_BY_NAME:
+						//results = itemTemplateEngine.GetCompleteItemTemplates(ConnectionInfo, Name, Class, SubClass);
+						break;
+					default:
+						_cmdletHelper.HandleUnsupportedParameterSet(this);
+						break;
 				}
+				WriteObject(results);
 			}
 			catch
 			{

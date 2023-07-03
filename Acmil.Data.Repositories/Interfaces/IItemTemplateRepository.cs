@@ -1,4 +1,5 @@
-﻿using Acmil.Data.Contracts.Models.Items;
+﻿using Acmil.Data.Contracts.Connections;
+using Acmil.Data.Contracts.Models.Items;
 using Acmil.Data.Contracts.Types.Primitives;
 
 namespace Acmil.Data.Repositories.Interfaces
@@ -8,6 +9,6 @@ namespace Acmil.Data.Repositories.Interfaces
 	/// </summary>
 	public interface IItemTemplateRepository
 	{
-		CompleteItemTemplate ReadItemTemplate(UInt24 entryId);
+		CompleteItemTemplate ReadItemTemplate(MySqlConnectionInfo connectionInfo, UInt24 entryId);
 	}
 }

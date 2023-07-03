@@ -5,6 +5,7 @@ using Acmil.Data.Helpers;
 using Acmil.Data.Contracts.Models.Items;
 using Acmil.Data.Services.Interfaces;
 using Acmil.Data.Contracts.Types.Primitives;
+using Acmil.Data.Contracts.Connections;
 
 namespace Acmil.Data.Services
 {
@@ -13,25 +14,25 @@ namespace Acmil.Data.Services
 		private IItemTemplateRepository _itemTemplateRepository;
 
 		// TODO: Pass these in with a DTO.
-		public ItemTemplateService(string hostname, string username, SecureString password)
+		//public ItemTemplateService(string hostname, string username, SecureString password)
+		//{
+		//	_itemTemplateRepository = new ItemTemplateRepository(hostname, username, password, new MySqlDbContextFactory());
+		//}
+
+		public ItemTemplateService(IItemTemplateRepository itemTemplateRepository)
 		{
-			_itemTemplateRepository = new ItemTemplateRepository(hostname, username, password, new MySqlDbContextFactory());
+			_itemTemplateRepository = itemTemplateRepository;
 		}
 
-		public ItemTemplateService(IItemTemplateRepository itemTemplateService)
-		{
-			_itemTemplateRepository = itemTemplateService;
-		}
+		//public void TestGetItemTemplate()
+		//{
+		//	CompleteItemTemplate result = _itemTemplateRepository.ReadItemTemplate(56810);
+		//	Console.WriteLine(result);
+		//}
 
-		public void TestGetItemTemplate()
+		public CompleteItemTemplate GetCompleteItemTemplateById(MySqlConnectionInfo connectionInfo, UInt24 entryId)
 		{
-			CompleteItemTemplate result = _itemTemplateRepository.ReadItemTemplate(56810);
-			Console.WriteLine(result);
-		}
-
-		public CompleteItemTemplate GetCompleteItemTemplateById(UInt24 entryId)
-		{
-			return _itemTemplateRepository.ReadItemTemplate(entryId);
+			return _itemTemplateRepository.ReadItemTemplate(connectionInfo, entryId);
 		}
 	}
 }
