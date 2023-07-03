@@ -298,7 +298,7 @@ namespace WDBXEditor.Storage
 				foreach (var field in header.ColumnMeta)
 				{
 					Type type = Data.Columns[c].DataType;
-					bool isneeded = field.CompressionType >= CompressionType.Sparse;
+					bool isneeded = field.CompressionType >= Constants.CompressionType.Sparse;
 
 					if (bytecounts.ContainsKey(type) && isneeded)
 					{
@@ -487,7 +487,7 @@ namespace WDBXEditor.Storage
 
 			StringBuilder sb = new StringBuilder();
 			sb.AppendLine($"DROP TABLE IF EXISTS `{tableName}`; ");
-			sb.AppendLine($"CREATE TABLE `{tableName}` ({Data.Columns.ToSql(Key)}) ENGINE=MyISAM DEFAULT CHARSET=utf8; ");
+			sb.AppendLine($"CREATE TABLE `{tableName}` ({Data.Columns.ToSql(Key)}) ENGINE=InnoDB DEFAULT CHARSET=utf8; ");
 			foreach (DataRow row in Data.Rows)
 				sb.AppendLine($"INSERT INTO `{tableName}` VALUES ({ row.ToSql() }); ");
 
@@ -505,7 +505,7 @@ namespace WDBXEditor.Storage
 			StringBuilder sb = new StringBuilder();
 			sb.AppendLine("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
 			sb.AppendLine($"DROP TABLE IF EXISTS `{tableName}`; ");
-			sb.AppendLine($"CREATE TABLE `{tableName}` ({Data.Columns.ToSql(Key)}) ENGINE=MyISAM DEFAULT CHARACTER SET = utf8 COLLATE = utf8_unicode_ci; ");
+			sb.AppendLine($"CREATE TABLE `{tableName}` ({Data.Columns.ToSql(Key)}) ENGINE=InnoDB DEFAULT CHARACTER SET = utf8 COLLATE = utf8_unicode_ci; ");
 
 			using (StreamWriter csv = new StreamWriter(csvName))
 				csv.Write(ToCSV());
@@ -517,20 +517,28 @@ namespace WDBXEditor.Storage
 				using (MySqlCommand command = new MySqlCommand(sb.ToString(), connection))
 					command.ExecuteNonQuery();
 
-				new MySqlBulkLoader(connection)
+                try
+                {
+					new MySqlBulkLoader(connection)
+					{
+						TableName = $"`{tableName}`",
+						FieldTerminator = ",",
+						LineTerminator = "\r\n",
+						NumberOfLinesToSkip = 1,
+						FileName = csvName,
+						FieldQuotationCharacter = '"',
+						CharacterSet = "UTF8"
+					}.Load();
+				}
+				catch (Exception ex)
 				{
-					TableName = $"`{tableName}`",
-					FieldTerminator = ",",
-					LineTerminator = "\r\n",
-					NumberOfLinesToSkip = 1,
-					FileName = csvName,
-					FieldQuotationCharacter = '"',
-					CharacterSet = "UTF8"
-				}.Load();
+					MessageBox.Show(ex.Message);
+					throw;
+				}
 			}
 
 			try { File.Delete(csvName); }
-			catch { }
+			catch (Exception ex) { }
 		}
 
 		/// <summary>
@@ -777,11 +785,22 @@ namespace WDBXEditor.Storage
 			return true;
 		}
 
-		public bool ImportSQL(UpdateMode mode, string connectionstring, string table, out string error, string columns = "*")
+		public bool ImportSQL(UpdateMode mode, string connectionstring, string table, out string error, string columns = "")
 		{
 			error = string.Empty;
 			DataTable importTable = Data.Clone(); //Clone table structure to help with mapping
 			Parallel.For(0, importTable.Columns.Count, c => importTable.Columns[c].AllowDBNull = true); //Allow null values
+
+			if (columns.Length == 0)
+            {
+				Func<string, string> EncodeSql = s => { return string.Concat("`", s.Replace(Environment.NewLine, string.Empty).Replace("\"", "\"\""), "`"); };
+
+				StringBuilder sb = new StringBuilder();
+				IEnumerable<string> columnNames = Data.Columns.Cast<DataColumn>().Select(column => EncodeSql(column.ColumnName));
+				sb.AppendLine(string.Join(",", columnNames));
+
+				columns = sb.ToString();
+			}
 
 			using (MySqlConnection connection = new MySqlConnection(connectionstring))
 			using (MySqlCommand command = new MySqlCommand($"SELECT {columns} FROM `{table}`", connection))
@@ -800,18 +819,17 @@ namespace WDBXEditor.Storage
 				catch (Exception ex)
 				{
 					System.Diagnostics.Debug.WriteLine(ex.Message);
+					error = "Import Failed:\n" + ex.Message;
 					return false;
 				}
 			}
 
 			//Replace DBNulls with default value
 			var defaultVals = importTable.Columns.Cast<DataColumn>().Select(x => x.DefaultValue).ToArray();
-			Parallel.For(0, importTable.Rows.Count, r =>
-			{
+			for (int r = 0; r < importTable.Rows.Count; r++)
 				for (int i = 0; i < importTable.Columns.Count; i++)
 					if (importTable.Rows[r][i] == DBNull.Value)
 						importTable.Rows[r][i] = defaultVals[i];
-			});
 
 			switch (Data.ShallowCompare(importTable))
 			{

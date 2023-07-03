@@ -147,12 +147,14 @@ namespace WDBXEditor
 			Properties.Settings.Default.Save();
 		}
 
-		private void LoadSettings()
+		private bool LoadSettings()
 		{
 			txtHost.Text = Properties.Settings.Default["Host"].ToString();
 			txtPort.Text = Properties.Settings.Default["Port"].ToString();
 			txtUser.Text = Properties.Settings.Default["User"].ToString();
 			txtPass.Text = Properties.Settings.Default["Password"].ToString();
+
+			return txtHost.Text.Length > 0 && txtPort.Text.Length > 0 && txtUser.Text.Length > 0 && txtPass.Text.Length > 0;
 		}
 
 		private void PopulateTable()

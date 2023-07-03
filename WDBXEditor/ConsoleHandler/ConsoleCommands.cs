@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using WDBXEditor.Archives.CASC.Handlers;
 using WDBXEditor.Archives.MPQ;
 using WDBXEditor.Common;
+using WDBXEditor.Reader;
 using WDBXEditor.Storage;
 using static WDBXEditor.Common.Constants;
 
@@ -249,6 +250,38 @@ namespace WDBXEditor.ConsoleHandler
             }
         }
 
+        #endregion
+
+        #region SQL Load
+        /// <summary>
+        /// Imports a file from a SQL database
+        /// <para>-sqlload -f "*.dbc" -b 11802 -c "Server=myServerAddress;Database=myDataBase;Uid=myUsername;Pwd=myPassword;" -m 0"</para>
+        /// </summary>
+        /// <param name="args"></param>
+        public static void SqlLoadArgCommand(string[] args)
+        {
+            var pmap = ConsoleManager.ParseCommand(args);
+            string connection = ParamCheck<string>(pmap, "-c", false);
+            UpdateMode mode = ParamCheck<UpdateMode>(pmap, "-m");
+
+            string connectionFile = ParamCheck<string>(pmap, "-cf");
+            if (connectionFile.Length > 0)
+                connection = File.ReadAllText(connectionFile);
+
+            LoadCommand(args);
+
+            var entry = Database.Entries[0];
+
+            string importError = string.Empty;
+            if (!entry.ImportSQL(mode, connection, $"db_{entry.TableStructure.Name.ToLower()}_{entry.Build}", out importError))
+            {
+                var dbcFileName = ParamCheck<string>(pmap, "-f");
+                throw new Exception($"   Error importing SQL into {dbcFileName}: {importError}");
+            }
+
+            new DBReader().Write(entry, entry.SavePath);
+        }
+
         #endregion  
 
         #region Helpers
@@ -258,6 +291,9 @@ namespace WDBXEditor.ConsoleHandler
             {
                 try
                 {
+                    if (typeof(T).IsEnum)
+                        return (T)Enum.Parse(typeof(T), map[field], true);
+
                     return (T)Convert.ChangeType(map[field], typeof(T));
                 }
                 catch

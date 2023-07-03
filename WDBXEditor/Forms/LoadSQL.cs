@@ -43,7 +43,19 @@ namespace WDBXEditor
                 ddlDatabases.DropDownStyle = ComboBoxStyle.DropDownList;
             }
 
-            LoadSettings();
+            if (LoadSettings())
+            {
+                // load databases
+                btnRefresh_Click(null, new EventArgs());
+
+                // try to select database from settings
+                LoadDatabase();
+
+                // try to select table from current dbc
+                int index = ddlTable.FindStringExact($"db_{Entry.TableStructure.Name.ToLower()}_{Entry.Build}");
+                if (index != -1)
+                    ddlTable.SelectedIndex = index;
+            }
         }
 
         #region Buttons
@@ -73,6 +85,10 @@ namespace WDBXEditor
                 }
             }
             catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (System.TimeoutException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -158,6 +174,9 @@ namespace WDBXEditor
             btnLoad.Enabled = !string.IsNullOrWhiteSpace(ddlDatabases.Text) && //Database selected
                               testedconnection && //Connection works
                               (!string.IsNullOrWhiteSpace(ddlTable.Text) || !ddlTable.Enabled); //Table selected/not applicable
+
+            if (!string.IsNullOrWhiteSpace(ddlDatabases.Text)) //Database selected
+                SaveDatabase();
         }
 
         private void ddlTable_SelectedIndexChanged(object sender, EventArgs e)
@@ -177,12 +196,31 @@ namespace WDBXEditor
             Properties.Settings.Default.Save();
         }
 
-        private void LoadSettings()
+        private bool LoadSettings()
         {
             txtHost.Text = Properties.Settings.Default["Host"].ToString();
             txtPort.Text = Properties.Settings.Default["Port"].ToString();
             txtUser.Text = Properties.Settings.Default["User"].ToString();
             txtPass.Text = Properties.Settings.Default["Password"].ToString();
+
+            return txtHost.Text.Length > 0 && txtPort.Text.Length > 0 && txtUser.Text.Length > 0 && txtPass.Text.Length > 0;
+        }
+
+        private void SaveDatabase()
+        {
+            Properties.Settings.Default["Database"] = ddlDatabases.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private bool LoadDatabase()
+        {
+            string database = Properties.Settings.Default["Database"].ToString();
+            int index = ddlDatabases.FindStringExact(database);
+            if (index == -1)
+                return false;
+
+            ddlDatabases.SelectedIndex = index;
+            return true;
         }
 
     }

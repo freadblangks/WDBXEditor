@@ -377,6 +377,9 @@ namespace ADGV
 
         protected override void OnCellFormatting(DataGridViewCellFormattingEventArgs e)
         {
+            if (e.ColumnIndex == -1)
+                return;
+
             string tag = this.Columns[e.ColumnIndex].DefaultCellStyle.Tag?.ToString() ?? "";
 
             if (e != null && tag.IndexOf('X') == 0)
