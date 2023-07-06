@@ -1,8 +1,6 @@
-﻿using Acmil.Common.Utility.Configuration;
-using Acmil.Common.Utility.Configuration.Interfaces;
+﻿using Acmil.Common.Utility.Configuration.Interfaces;
 using Acmil.Common.Utility.Interfaces;
 using Acmil.Common.Utility.Logging.Interfaces;
-using Acmil.Common.Utility.Logging;
 
 namespace Acmil.Common.Utility
 {
@@ -11,15 +9,13 @@ namespace Acmil.Common.Utility
 	/// </summary>
 	public class UtilityHelper : IUtilityHelper
 	{
-		public IConfigurationManager GetConfigurationManager()
-		{
-			return new ConfigurationManager();
-		}
+		public IConfigurationManager ConfigurationManager { get; private set; }
+		public ILogger Logger { get; private set; }
 
-		public ILogger GetLogger()
+		public UtilityHelper(IConfigurationManager configManager, ILogger logger)
 		{
-			IConfigurationManager configurationManager = GetConfigurationManager();
-			return new Logger(configurationManager);
+			ConfigurationManager = configManager;
+			Logger = logger;
 		}
 	}
 }

@@ -9,15 +9,13 @@ namespace Acmil.Common.Utility.Interfaces
 	public interface IUtilityHelper
 	{
 		/// <summary>
-		/// Gets an implementation of <see cref="IConfigurationManager"/>.
+		/// An implementation of <see cref="IConfigurationManager"/>.
 		/// </summary>
-		/// <returns>An implementation of <see cref="IConfigurationManager"/>.</returns>
-		IConfigurationManager GetConfigurationManager();
+		public IConfigurationManager ConfigurationManager { get; }
 
 		/// <summary>
-		/// Gets an implementation of <see cref="ILogger"/>.
+		/// An implementation of <see cref="ILogger"/>.
 		/// </summary>
-		/// <returns>An implementation of <see cref="ILogger"/>.</returns>
-		ILogger GetLogger();
+		public ILogger Logger { get; }
 	}
 }

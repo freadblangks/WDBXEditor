@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Acmil.Common.Ioc\Acmil.Common.Ioc.csproj" />
+  </ItemGroup>
+
 </Project>

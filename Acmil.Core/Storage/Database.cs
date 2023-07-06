@@ -28,7 +28,7 @@ namespace Acmil.Core.Storage
 		static Database()
 		{
 			_utilityHelper = new UtilityHelper();
-			_logger = _utilityHelper.GetLogger();
+			_logger = _utilityHelper.Logger;
 			//if (Definitions is null)
 			//{
 			//	LoadDefinitions().ConfigureAwait(false).GetAwaiter().GetResult();

@@ -27,7 +27,7 @@ namespace Acmil.Core.Reader
 		public DBReader(IUtilityHelper utilityHelper)
 		{
 			_utilityHelper = utilityHelper;
-			_logger = utilityHelper.GetLogger();
+			_logger = utilityHelper.Logger;
 		}
 
 		#region Read Methods
@@ -89,7 +89,7 @@ namespace Acmil.Core.Reader
 						header = new WDB();
 						break;
 					case "HTFX":
-						header = new HTFX();
+						header = new HTFX(_utilityHelper);
 						break;
 				}
 

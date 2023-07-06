@@ -1,12 +1,6 @@
-﻿using Acmil.Common.Utility;
-using Acmil.Core.Managers;
-using Acmil.Core.Managers.Interfaces;
-using Acmil.Data.Constants;
-using Acmil.Data.Contexts;
-using Acmil.Data.Helpers;
-using Acmil.Data.Helpers.Interfaces;
+﻿using Acmil.Core.Managers.Interfaces;
+using Acmil.Data.Contracts.Connections;
 using Acmil.Data.Repositories.Interfaces;
-using System.Security;
 
 namespace Acmil.Data.Repositories
 {
@@ -15,26 +9,16 @@ namespace Acmil.Data.Repositories
 	/// </summary>
 	public class DbcRepository : IDbcRepository
 	{
-		private IDbContext _worldContext;
+		private IDbcContext _dbcContext;
 
-		private IDbcManager _worldDbcManager;
-
-		// TODO: Refactor this hacky mess to be DI-friendly.
-		public DbcRepository(string hostname, string username, SecureString password, IDbContextFactory dbContextFactory)
+		public DbcRepository(IDbcContext dbcManager)
 		{
-			_worldContext = dbContextFactory.GetContext(
-				hostname,
-				username,
-				password,
-				DbConfigHelper.WorldDatabaseName
-			);
-
-			_worldDbcManager = new DbcManager(new UtilityHelper(), _worldContext);
+			_dbcContext = dbcManager;
 		}
 
-		public void LoadDbcIntoWorldDatabase(string dbcPath, string tableName = null)
+		public void LoadDbcIntoDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName = null)
 		{
-			_worldDbcManager.LoadDbcIntoSql(dbcPath, tableName);
+			_dbcContext.LoadDbcIntoSql(connectionInfo, database, dbcPath, tableName);
 		}
 
 		public void SaveDbcFromWorldDatabase(string dbcPath)

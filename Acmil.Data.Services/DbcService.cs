@@ -22,7 +22,7 @@ namespace Acmil.Data.Services
 
 		public void LoadDbcIntoWorldDatabase(string dbcPath, string tableName = null)
 		{
-			_dbcRepository.LoadDbcIntoWorldDatabase(dbcPath, tableName);
+			_dbcRepository.LoadDbcIntoDatabase(dbcPath, tableName);
 		}
 	}
 }

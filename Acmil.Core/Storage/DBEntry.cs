@@ -54,8 +54,8 @@ namespace Acmil.Core.Storage
 
 		public DBEntry(IUtilityHelper utilityHelper, DBHeader header, string filepath)
 		{
-			_logger = utilityHelper.GetLogger();
-			_configManager = utilityHelper.GetConfigurationManager();
+			_logger = utilityHelper.Logger;
+			_configManager = utilityHelper.ConfigurationManager;
 
 			Header = header;
 			FilePath = filepath;

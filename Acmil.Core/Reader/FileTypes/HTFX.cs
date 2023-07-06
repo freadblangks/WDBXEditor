@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Acmil.Common.Utility;
+using Acmil.Common.Utility.Interfaces;
 
 namespace Acmil.Core.Reader.FileTypes
 {
 	public class HTFX : DBHeader
 	{
+		private IUtilityHelper _utilityHelper;
+
 		public int Build { get; set; }
 		public byte[] Hashes { get; set; }
 		public List<HotfixEntry> Entries { get; private set; } = new List<HotfixEntry>();
@@ -18,6 +21,11 @@ namespace Acmil.Core.Reader.FileTypes
 		public override bool CheckTableStructure => false;
 
 		public WDB6 WDB6CounterPart { get; private set; }
+
+		public HTFX(IUtilityHelper utilityHelper)
+		{
+			_utilityHelper = utilityHelper;
+		}
 
 		public override void ReadHeader(ref BinaryReader dbReader, string signature)
 		{
@@ -70,7 +78,7 @@ namespace Acmil.Core.Reader.FileTypes
 					using (var binaryReader = new BinaryReader(memoryStream))
 					{
 						// TODO: Refactor this to not new up a UtilityHelper.
-						new DBReader(new UtilityHelper()).ReadIntoTable(ref dbentry, binaryReader, new Dictionary<int, string>());
+						new DBReader(_utilityHelper).ReadIntoTable(ref dbentry, binaryReader, new Dictionary<int, string>());
 					}
 
 					retVal = true;
