@@ -1,4 +1,4 @@
-﻿using Acmil.Core.Managers.Interfaces;
+﻿using Acmil.Core.Contexts.Interfaces;
 using Acmil.Data.Contracts.Connections;
 using Acmil.Data.Repositories.Interfaces;
 
@@ -11,9 +11,9 @@ namespace Acmil.Data.Repositories
 	{
 		private IDbcContext _dbcContext;
 
-		public DbcRepository(IDbcContext dbcManager)
+		public DbcRepository(IDbcContext dbcContext)
 		{
-			_dbcContext = dbcManager;
+			_dbcContext = dbcContext;
 		}
 
 		public void LoadDbcIntoDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName = null)

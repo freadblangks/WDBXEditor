@@ -1,10 +1,6 @@
 ﻿using Acmil.Api.Managers.Interfaces;
-using Acmil.Data.Services;
+using Acmil.Data.Contracts.Connections;
 using Acmil.Data.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Security;
-using System.Text;
 
 namespace Acmil.Api.Managers
 {
@@ -12,14 +8,14 @@ namespace Acmil.Api.Managers
 	{
 		IDbcService _dbcService;
 
-		public DbcManager(string hostname, string username, SecureString password)
+		public DbcManager(IDbcService dbcService)
 		{
-			_dbcService = new DbcService(hostname, username, password);
+			_dbcService = dbcService;
 		}
 
-		public void LoadDbcIntoWorldDatabase(string dbcPath, string tableName = null)
+		public void LoadDbcIntoDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName = null)
 		{
-			_dbcService.LoadDbcIntoWorldDatabase(dbcPath, tableName);
+			_dbcService.LoadDbcIntoDatabase(connectionInfo, database, dbcPath, tableName);
 		}
 	}
 }

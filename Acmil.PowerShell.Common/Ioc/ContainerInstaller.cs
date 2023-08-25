@@ -8,14 +8,6 @@ namespace Acmil.PowerShell.Common.Ioc
 {
 	public sealed class ContainerInstaller : BaseDependentContainerInstaller
 	{
-		//private ServiceCollection _services;
-
-		//public ServiceCollection GetServices()
-		//{
-		//	_services ??= GetRegisteredServices();
-		//	return _services;
-		//}
-
 		protected override ServiceCollection GetProjectRegistrations()
 		{
 			var services = new ServiceCollection() { GetDependencyRegistrations() };

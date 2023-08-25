@@ -12,6 +12,7 @@ namespace Acmil.Data.Services.Ioc
 			var services = new ServiceCollection { GetDependencyRegistrations() };
 
 			// SERVICE DEFINITIONS //
+			services.AddTransient<IDbcService, DbcService>();
 			services.AddTransient<IItemTemplateService, ItemTemplateService>();
 			services.AddTransient<IDbcService, DbcService>();
 

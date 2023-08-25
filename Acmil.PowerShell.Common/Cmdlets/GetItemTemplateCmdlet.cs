@@ -25,16 +25,16 @@ namespace Acmil.PowerShell.Common.Cmdlets
 
 		private ICmdletHelper _cmdletHelper;
 		private IItemTemplateManager _itemTemplateManager;
-		private RootContainerInstaller _dependencyInjector;
+		private RootContainerInstaller _rootContainer;
 
 		/// <summary>
 		/// Initializes a new instance of <see cref="GetItemTemplateCmdlet"/> class.
 		/// </summary>
 		public GetItemTemplateCmdlet()
 		{
-			_dependencyInjector = new RootContainerInstaller();
-			_itemTemplateManager = _dependencyInjector.Resolve<IItemTemplateManager>();
-			_cmdletHelper = _dependencyInjector.Resolve<ICmdletHelper>();
+			_rootContainer = new RootContainerInstaller();
+			_itemTemplateManager = _rootContainer.Resolve<IItemTemplateManager>();
+			_cmdletHelper = _rootContainer.Resolve<ICmdletHelper>();
 		}
 
 		///// <summary>
@@ -65,11 +65,7 @@ namespace Acmil.PowerShell.Common.Cmdlets
 
 		protected override void BeginProcessing()
 		{
-			//_itemTemplateManager = new ItemTemplateManager(
-			//	ConnectionInfo.Hostname,
-			//	ConnectionInfo.Credential.UserName,
-			//	ConnectionInfo.Credential.Password
-			//
+
 		}
 
 		protected override void ProcessRecord()

@@ -12,6 +12,7 @@ namespace Acmil.Data.Repositories.Ioc
 			var services = new ServiceCollection() { GetDependencyRegistrations() };
 
 			// SERVICE DEFINITIONS //
+			services.AddTransient<IDbcRepository, DbcRepository>();
 			services.AddTransient<IItemTemplateRepository, ItemTemplateRepository>();
 			services.AddTransient<IDbcRepository, DbcRepository>();
 
@@ -20,8 +21,8 @@ namespace Acmil.Data.Repositories.Ioc
 
 		protected override ServiceCollection GetDependencyRegistrations()
 		{
-			var dataInstaller = new Data.Ioc.ContainerInstaller();
-			return dataInstaller.GetServices();
+			var coreInstaller = new Core.Ioc.ContainerInstaller();
+			return coreInstaller.GetServices();
 		}
 	}
 }

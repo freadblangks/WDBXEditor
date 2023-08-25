@@ -63,7 +63,9 @@ namespace Acmil.Core.Reader
 			RecordCount = dbReader.ReadUInt32();
 
 			if (IsTypeOf<WCH7>())
+			{
 				UnknownWCH7 = dbReader.ReadUInt32();
+			}
 
 			FieldCount = dbReader.ReadUInt32();
 			RecordSize = dbReader.ReadUInt32();
@@ -85,28 +87,42 @@ namespace Acmil.Core.Reader
 
 			//Record count
 			if (IsTypeOf<WDB5>() && !(this as WDB5).HasOffsetTable && entry.Header.CopyTableSize > 0)
+			{
 				bw.Write(entry.GetUniqueRows().Count());
+			}
 			else
+			{
 				bw.Write(entry.Data.Rows.Count);
+			}
 
 			//WCH7 specific field
 			if (IsTypeOf<WCH7>())
+			{
 				bw.Write(UnknownWCH7);
+			}
 
 			//FieldCount
 			if (IsTypeOf<WDB5>() && !IsTypeOf<WDC1>())
+			{
 				bw.Write(((WDB5)this).HasIndexTable ? FieldCount - 1 : FieldCount); //Index Table
+			}
 			else
+			{
 				bw.Write(FieldCount);
+			}
 
 			//Record size
 			bw.Write(RecordSize);
 
 			//StringBlockSize placeholder
 			if (IsTypeOf<WDB5>() || IsTypeOf<WCH7>())
+			{
 				bw.Write((uint)2);
+			}
 			else
+			{
 				bw.Write((uint)1);
+			}
 		}
 
 		public virtual void WriteOffsetMap(BinaryWriter bw, DBEntry entry, List<Tuple<int, short>> OffsetMap, int record_offset = 0) { }
@@ -116,7 +132,9 @@ namespace Acmil.Core.Reader
 		public virtual void WriteRecordPadding(BinaryWriter bw, DBEntry entry, long offset)
 		{
 			if (bw.BaseStream.Position - offset < RecordSize)
+			{
 				bw.BaseStream.Position += RecordSize - (bw.BaseStream.Position - offset);
+			}
 		}
 
 		#endregion

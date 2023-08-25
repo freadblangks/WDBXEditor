@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Acmil.Data.Contracts.Connections;
 
 namespace Acmil.Data.Services.Interfaces
 {
 	public interface IDbcService
 	{
-		public void LoadDbcIntoWorldDatabase(string dbcPath, string tableName = null);
+		public void LoadDbcIntoDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName = null);
 	}
 }

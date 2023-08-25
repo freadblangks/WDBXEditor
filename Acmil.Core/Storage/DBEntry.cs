@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
+﻿using System.Data;
 using System.Text;
 using static Acmil.Core.Common.Constants;
 using System.Text.RegularExpressions;
 using static Acmil.Core.Common.Extensions;
-using System.Threading.Tasks;
 using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO.MemoryMappedFiles;
 using CompressionType = Acmil.Core.Common.Enums.CompressionType;
@@ -24,6 +18,7 @@ using Acmil.Data.Contracts.IO.Enums;
 using Acmil.Common.Utility.Interfaces;
 using Acmil.Common.Utility.Configuration.Interfaces;
 using Acmil.Common.Utility.Logging.Interfaces;
+using Acmil.Common.Utility.GarbageCollection;
 
 namespace Acmil.Core.Storage
 {
@@ -52,7 +47,7 @@ namespace Acmil.Core.Storage
 		private readonly ILogger _logger;
 		private readonly IConfigurationManager _configManager;
 
-		public DBEntry(IUtilityHelper utilityHelper, DBHeader header, string filepath)
+		public DBEntry(IUtilityHelper utilityHelper, DBHeader header, Table tableStructure, string filepath)
 		{
 			_logger = utilityHelper.Logger;
 			_configManager = utilityHelper.ConfigurationManager;
@@ -60,9 +55,7 @@ namespace Acmil.Core.Storage
 			Header = header;
 			FilePath = filepath;
 			SavePath = filepath;
-			Header.TableStructure = Database.Definitions.Tables.FirstOrDefault(x =>
-				x.Name.Equals(Path.GetFileNameWithoutExtension(filepath), IGNORECASE) &&
-				x.Build == Database.BuildNumber);
+			Header.TableStructure = tableStructure;
 
 			LoadDefinition();
 		}
@@ -99,7 +92,7 @@ namespace Acmil.Core.Storage
 			{
 				TableName = Tag,
 				CaseSensitive = false,
-				RemotingFormat = SerializationFormat.Binary
+				RemotingFormat = SerializationFormat.Xml
 			};
 
 			var LocalizationCount = Build <= (int)ExpansionFinalBuild.Classic ? 9 : 17; //Pre TBC had 9 locales
@@ -440,9 +433,9 @@ namespace Acmil.Core.Storage
 
 				var comp = new ORowComparer();
 				_unqiueRowIndices = tempTable.AsEnumerable()
-								 .Select((t, i) => new ORow(i, t.ItemArray))
-								 .Distinct(comp)
-								 .Select(x => x.Index);
+					.Select((t, i) => new ORow(i, t.ItemArray))
+					.Distinct(comp)
+					.Select(x => x.Index);
 			}
 
 			foreach (int u in _unqiueRowIndices)
@@ -465,10 +458,10 @@ namespace Acmil.Core.Storage
 
 			var comp = new OArrayComparer();
 			return tempTable.AsEnumerable()
-					   .Select((Name, Index) => new { Name.ItemArray, Index })
-					   .GroupBy(x => x.ItemArray, comp)
-					   .Select(xg => xg.Select(x => primaryKeys[x.Index]))
-					   .Where(x => x.Count() > 1);
+				.Select((Name, Index) => new { Name.ItemArray, Index })
+				.GroupBy(x => x.ItemArray, comp)
+				.Select(xg => xg.Select(x => primaryKeys[x.Index]))
+				.Where(x => x.Count() > 1);
 		}
 
 		/// <summary>
@@ -479,8 +472,8 @@ namespace Acmil.Core.Storage
 		{
 			var result = new Dictionary<int, short>();
 			IEnumerable<string> columnNames = Data.Columns.Cast<DataColumn>()
-											  .Where(x => x.DataType == typeof(string))
-											  .Select(x => x.ColumnName);
+				.Where(x => x.DataType == typeof(string))
+				.Select(x => x.ColumnName);
 
 			foreach (DataRow row in Data.Rows)
 			{
@@ -508,6 +501,7 @@ namespace Acmil.Core.Storage
 
 
 		#region Exports
+
 		/// <summary>
 		/// Generates a SQL string to DROP and ADD a table then INSERT the records
 		/// </summary>
@@ -567,8 +561,15 @@ namespace Acmil.Core.Storage
 			// This allows the user to get around the "secure_file_priv" setting in MySQL.
 			// If a value has been provided for this appSetting, we load from that directory instead.
 			string mySqlSecureFilePrivDirectory = GetMySqlSecureFilePrivSetting();
-			string stagingDirectory = !string.IsNullOrWhiteSpace(mySqlSecureFilePrivDirectory) ? mySqlSecureFilePrivDirectory : TEMP_FOLDER;
+
+			bool useSecureFilePrivDirectory = !string.IsNullOrWhiteSpace(mySqlSecureFilePrivDirectory);
+			string stagingDirectory = useSecureFilePrivDirectory ? mySqlSecureFilePrivDirectory : TEMP_FOLDER;
 			string csvName = Path.Combine(stagingDirectory, tableName + ".csv");
+
+			if (!useSecureFilePrivDirectory)
+			{
+				EnsureTempFolderExists();
+			}
 
 			// Write data to a temporary CSV file to be loaded into SQL.
 			using (var csv = new StreamWriter(csvName))
@@ -1027,7 +1028,10 @@ namespace Acmil.Core.Storage
 
 					importTable.BeginLoadData();
 					foreach (object[] r in rows2)
+					{
 						importTable.Rows.Add(r);
+					}
+
 					importTable.EndLoadData();
 
 					Data = importTable.Copy();
@@ -1038,7 +1042,7 @@ namespace Acmil.Core.Storage
 
 			importTable.Clear();
 			importTable.Dispose();
-			Database.ForceGC();
+			GarbageCollectionHelper.ForceGC();
 		}
 
 		#endregion
@@ -1053,6 +1057,15 @@ namespace Acmil.Core.Storage
 		private string GetMySqlSecureFilePrivSetting()
 		{
 			return _configManager.GetConfiguration().MySql.SecureFilePrivDirectoryAbsolutePath;
+		}
+
+		private void EnsureTempFolderExists()
+		{
+			var fileInfo = new FileInfo(TEMP_FOLDER);
+			if (!fileInfo.Exists)
+			{
+				Directory.CreateDirectory(TEMP_FOLDER);
+			}
 		}
 	}
 }

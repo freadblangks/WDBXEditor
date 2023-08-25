@@ -1,11 +1,13 @@
-﻿namespace Acmil.Api.Managers.Interfaces
+﻿using Acmil.Data.Contracts.Connections;
+
+namespace Acmil.Api.Managers.Interfaces
 {
 	/// <summary>
 	/// Manager for interacting with DBC files.
 	/// </summary>
 	public interface IDbcManager
 	{
-		public void LoadDbcIntoWorldDatabase(string dbcPath, string tableName = null);
+		public void LoadDbcIntoDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName = null);
 
 		//void LoadDbcIntoSql(string filepath, int buildNumber);
 

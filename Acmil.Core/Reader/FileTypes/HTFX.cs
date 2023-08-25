@@ -77,7 +77,6 @@ namespace Acmil.Core.Reader.FileTypes
 					using (var memoryStream = new MemoryStream(Data.ToArray()))
 					using (var binaryReader = new BinaryReader(memoryStream))
 					{
-						// TODO: Refactor this to not new up a UtilityHelper.
 						new DBReader(_utilityHelper).ReadIntoTable(ref dbentry, binaryReader, new Dictionary<int, string>());
 					}
 

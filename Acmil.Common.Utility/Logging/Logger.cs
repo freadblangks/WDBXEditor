@@ -20,7 +20,7 @@ namespace Acmil.Common.Utility.Logging
 		/// Initializes a new instance of <see cref="Logger"/> using the provided <see cref="IConfigurationManager"/>.
 		/// </summary>
 		/// <param name="configurationManager">An implementation of <see cref="IConfigurationManager"/> configure the instance with.</param>
-		internal Logger(IConfigurationManager configurationManager)
+		public Logger(IConfigurationManager configurationManager)
 		{
 			LoggingConfiguration loggingSettings = configurationManager.GetConfiguration().Logging;
 			_configuredLoggingDestinations = loggingSettings.Destinations;

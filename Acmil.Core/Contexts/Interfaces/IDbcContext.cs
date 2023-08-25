@@ -1,6 +1,6 @@
 ﻿using Acmil.Data.Contracts.Connections;
 
-namespace Acmil.Core.Managers.Interfaces
+namespace Acmil.Core.Contexts.Interfaces
 {
 	/// <summary>
 	/// Interface describing a manager class for interacting with DBC files.

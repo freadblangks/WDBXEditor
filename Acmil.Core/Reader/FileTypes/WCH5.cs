@@ -40,11 +40,17 @@ namespace Acmil.Core.Reader.FileTypes
 		public override void ReadHeader(ref BinaryReader dbReader, string signature)
 		{
 			string _filename = Path.GetFileNameWithoutExtension(FileName).ToLower();
-			WDB5CounterPart = Database.Entries
-							.FirstOrDefault(x => x.Header.IsTypeOf<WDB5>() && Path.GetFileNameWithoutExtension(x.FileName).ToLower() == _filename)?
-							.Header as WDB5;
 
-			if (WDB5CounterPart == null)
+			// DO NOT DELETE THIS COMMENTED OUT CODE.
+			//WDB5CounterPart = Database.Entries
+			//	.FirstOrDefault(x => x.Header.IsTypeOf<WDB5>() && Path.GetFileNameWithoutExtension(x.FileName).ToLower() == _filename)?
+			//	.Header as WDB5;
+
+			// TODO: Figure out how to implemented the commented code above.
+			//
+			// We need to determine what it means for us to have a DB2 counterpart open.
+			WDB5CounterPart = null;
+			if (WDB5CounterPart is null)
 			{
 				throw new InvalidOperationException("You must have the DB2 counterpart open first to be able to read this file.");
 			}

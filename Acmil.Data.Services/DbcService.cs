@@ -1,4 +1,5 @@
-﻿using Acmil.Data.Helpers;
+﻿using Acmil.Data.Contracts.Connections;
+using Acmil.Data.Helpers;
 using Acmil.Data.Repositories;
 using Acmil.Data.Repositories.Interfaces;
 using Acmil.Data.Services.Interfaces;
@@ -15,14 +16,14 @@ namespace Acmil.Data.Services
 	{
 		private IDbcRepository _dbcRepository;
 
-		public DbcService(string hostname, string username, SecureString password)
+		public DbcService(IDbcRepository dbcRepository)
 		{
-			_dbcRepository = new DbcRepository(hostname, username, password, new MySqlDbContextFactory());
+			_dbcRepository = dbcRepository;
 		}
 
-		public void LoadDbcIntoWorldDatabase(string dbcPath, string tableName = null)
+		public void LoadDbcIntoDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName = null)
 		{
-			_dbcRepository.LoadDbcIntoDatabase(dbcPath, tableName);
+			_dbcRepository.LoadDbcIntoDatabase(connectionInfo, database, dbcPath, tableName);
 		}
 	}
 }

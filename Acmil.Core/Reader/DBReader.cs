@@ -99,18 +99,18 @@ namespace Acmil.Core.Reader
 			return header;
 		}
 
-		public DBEntry Read(MemoryStream stream, string dbFile)
+		public DBEntry Read(MemoryStream stream, Table tableStructure, string dbFile)
 		{
 			FileName = dbFile;
 			stream.Position = 0;
 
-			using (var dbReader = new BinaryReader(stream, Encoding.UTF8))
+			using (var binaryReader = new BinaryReader(stream, Encoding.UTF8))
 			{
-				DBHeader header = ExtractHeader(dbReader);
-				long pos = dbReader.BaseStream.Position;
+				DBHeader header = ExtractHeader(binaryReader);
+				long pos = binaryReader.BaseStream.Position;
 
 				//No header - must be invalid
-				if (header == null)
+				if (header is null)
 				{
 					throw new Exception("Unknown file type.");
 				}
@@ -124,20 +124,19 @@ namespace Acmil.Core.Reader
 					throw new InvalidOperationException("File contains no records.");
 				}
 
-				var entry = new DBEntry(_utilityHelper, header, dbFile);
+				var entry = new DBEntry(_utilityHelper, header, tableStructure, dbFile);
 				if (header.CheckTableStructure && entry.TableStructure == null)
 				{
 					throw new MissingDefinitionException("No definition found.");
 				}
 
-
 				if (header is WDC1 wdc1)
 				{
-					Dictionary<int, string> StringTable = wdc1.ReadStringTable(dbReader);
+					Dictionary<int, string> StringTable = wdc1.ReadStringTable(binaryReader);
 					wdc1.LoadDefinitionSizes(entry);
 
 					// Read the data.
-					using (var ms = new MemoryStream(header.ReadData(dbReader, pos)))
+					using (var ms = new MemoryStream(header.ReadData(binaryReader, pos)))
 					using (var dataReader = new BinaryReader(ms, Encoding.UTF8))
 					{
 						wdc1.AddRelationshipColumn(entry);
@@ -150,12 +149,12 @@ namespace Acmil.Core.Reader
 				}
 				else if (header.IsTypeOf<WDBC>() || header.IsTypeOf<WDB2>())
 				{
-					long stringTableStart = dbReader.BaseStream.Position += header.RecordCount * header.RecordSize;
-					Dictionary<int, string> StringTable = new StringTable().Read(dbReader, stringTableStart); //Get stringtable
-					dbReader.Scrub(pos);
+					long stringTableStart = binaryReader.BaseStream.Position += header.RecordCount * header.RecordSize;
+					Dictionary<int, string> StringTable = new StringTable().Read(binaryReader, stringTableStart); //Get stringtable
+					binaryReader.Scrub(pos);
 
 					// Read data.
-					ReadIntoTable(ref entry, dbReader, StringTable);
+					ReadIntoTable(ref entry, binaryReader, StringTable);
 
 					// Cleanup.
 					stream.Dispose();
@@ -166,7 +165,7 @@ namespace Acmil.Core.Reader
 					uint CommonDataTableSize = header.CommonDataTableSize; //Only WDB6 has a CommonDataTable
 
 					// StringTable - only if applicable.
-					long copyTablePos = dbReader.BaseStream.Length - CommonDataTableSize - CopyTableSize;
+					long copyTablePos = binaryReader.BaseStream.Length - CommonDataTableSize - CopyTableSize;
 					long indexTablePos = copyTablePos - (header.HasIndexTable ? header.RecordCount * 4 : 0);
 					long wch7TablePos = indexTablePos - header.UnknownWCH7 * 4;
 					long stringTableStart = wch7TablePos - header.StringBlockSize;
@@ -175,13 +174,13 @@ namespace Acmil.Core.Reader
 					// Stringtable is only present if there isn't an offset map.
 					if (!header.HasOffsetTable)
 					{
-						dbReader.Scrub(stringTableStart);
-						StringTable = new StringTable().Read(dbReader, stringTableStart, stringTableStart + header.StringBlockSize);
-						dbReader.Scrub(pos);
+						binaryReader.Scrub(stringTableStart);
+						StringTable = new StringTable().Read(binaryReader, stringTableStart, stringTableStart + header.StringBlockSize);
+						binaryReader.Scrub(pos);
 					}
 
 					// Read the data.
-					using (var ms = new MemoryStream(header.ReadData(dbReader, pos)))
+					using (var ms = new MemoryStream(header.ReadData(binaryReader, pos)))
 					using (var dataReader = new BinaryReader(ms, Encoding.UTF8))
 					{
 						entry.UpdateColumnTypes();
@@ -195,7 +194,7 @@ namespace Acmil.Core.Reader
 				else if (header.IsTypeOf<WDB>())
 				{
 					WDB wdb = (WDB)header;
-					using (var ms = new MemoryStream(wdb.ReadData(dbReader)))
+					using (var ms = new MemoryStream(wdb.ReadData(binaryReader)))
 					using (var dataReader = new BinaryReader(ms, Encoding.UTF8))
 					{
 						ReadIntoTable(ref entry, dataReader, new Dictionary<int, string>());
@@ -218,9 +217,9 @@ namespace Acmil.Core.Reader
 			}
 		}
 
-		public DBEntry Read(string dbFile)
+		public DBEntry Read(Table tableStructure, string dbFile)
 		{
-			return Read(new MemoryStream(File.ReadAllBytes(dbFile)), dbFile);
+			return Read(new MemoryStream(File.ReadAllBytes(dbFile)), tableStructure, dbFile);
 		}
 
 		public void ReadIntoTable(ref DBEntry entry, BinaryReader dbReader, Dictionary<int, string> StringTable)
@@ -329,7 +328,6 @@ namespace Acmil.Core.Reader
 					{
 						throw new Exception("Definition exceeds record size");
 					}
-
 				}
 
 				entry.Header.Clear();
@@ -345,7 +343,7 @@ namespace Acmil.Core.Reader
 			using (var ms = new MemoryStream())
 			using (var bw = new BinaryWriter(ms))
 			{
-				StringTable st = new StringTable(entry.Header.ExtendedStringTable); //Preloads null byte(s)
+				var st = new StringTable(entry.Header.ExtendedStringTable); //Preloads null byte(s)
 				entry.Header.WriteHeader(bw, entry);
 
 				if (!entry.Header.IsTypeOf<WDC1>())
@@ -422,9 +420,13 @@ namespace Acmil.Core.Reader
 
 			bool duplicates = false;
 			if (entry.Header.IsTypeOf<WDB2>() && entry.Header.MaxId != 0) //WDB2 with MaxId > 0 allows duplicates
+			{
 				duplicates = true;
+			}
 			else if (entry.Header.IsTypeOf<WCH7>() && entry.Header.UnknownWCH7 != 0) //WCH7 with Unknown > 0 allows duplicates
+			{
 				duplicates = true;
+			}
 
 			var lastrow = rows.Last();
 
@@ -435,16 +437,26 @@ namespace Acmil.Core.Reader
 				for (int j = 0; j < entry.Data.Columns.Count; j++)
 				{
 					if (entry.Data.Columns[j].ExtendedProperties.ContainsKey(AUTO_GENERATED)) //Autogenerated so skip
+					{
 						continue;
+					}
 
 					if (entry.Header.HasIndexTable && j == 0) //Inline Id so skip
+					{
 						continue;
+					}
+
 
 					if (entry.Header.IsTypeOf<WCH5>() && entry.Header.HasOffsetTable && j == 0) //Inline Id so skip
+					{
 						continue;
+					}
 
 					if (entry.Header.IsTypeOf<WDB6>() && (bits?[j].CommonDataColumn ?? false))
+					{
 						continue;
+					}
+
 
 					switch (columnTypes[j])
 					{
@@ -482,7 +494,9 @@ namespace Acmil.Core.Reader
 								bw.Write((byte)0);
 							}
 							else
+							{
 								bw.Write(st.Write(row.Field<string>(j), duplicates));
+							}
 							break;
 						default:
 							throw new Exception($"Unknown TypeCode {columnTypes[j].ToString()}");
@@ -496,7 +510,9 @@ namespace Acmil.Core.Reader
 
 				//Store the offset map
 				if (entry.Header.HasOffsetTable)
+				{
 					OffsetMap.Add(new Tuple<int, short>((int)offset, (short)(bw.BaseStream.Position - offset)));
+				}
 
 				//WDB5 + OffsetMap without SecondIndex for the last row pads to next mod 4
 				if (entry.Header.IsTypeOf<WDB5>() && entry.Header.HasOffsetTable && !entry.Header.HasRelationshipData && row == lastrow)
