@@ -19,6 +19,8 @@ using Acmil.Common.Utility.Interfaces;
 using Acmil.Common.Utility.Configuration.Interfaces;
 using Acmil.Common.Utility.Logging.Interfaces;
 using Acmil.Common.Utility.GarbageCollection;
+using MySqlX.XDevAPI.Relational;
+using MySql.Data.MySqlClient;
 
 namespace Acmil.Core.Storage
 {
@@ -236,7 +238,6 @@ namespace Acmil.Core.Storage
 			}
 		}
 
-
 		/// <summary>
 		/// Checks if the file is of Name and Expansion
 		/// </summary>
@@ -381,7 +382,6 @@ namespace Acmil.Core.Storage
 			}
 		}
 
-
 		#region Special Data
 
 		/// <summary>
@@ -502,54 +502,27 @@ namespace Acmil.Core.Storage
 
 		#region Exports
 
-		/// <summary>
-		/// Generates a SQL string to DROP and ADD a table then INSERT the records
-		/// </summary>
-		/// <returns></returns>
-		public string ToSQL()
-		{
-			string tableName = $"db_{TableStructure.Name}_{Build}";
-
-			StringBuilder sb = new StringBuilder();
-			sb.AppendLine($"DROP TABLE IF EXISTS `{tableName}`; ");
-			sb.AppendLine($"CREATE TABLE `{tableName}` ({Data.Columns.ToSql(Key)}) ENGINE=MyISAM DEFAULT CHARSET=utf8; ");
-			foreach (DataRow row in Data.Rows)
-				sb.AppendLine($"INSERT INTO `{tableName}` VALUES ({row.ToSql()}); ");
-
-			return sb.ToString();
-		}
-
 		///// <summary>
-		///// Uses MysqlBulkCopy to import the data directly into a database.
+		///// Generates a SQL string to DROP and ADD a table then INSERT the records
 		///// </summary>
-		///// <param name="connectionString">The connection string used to open the MySQL connection.</param>
-		//public void ToSQLTable(string connectionString)
+		///// <returns></returns>
+		//public string ToSQL()
 		//{
-		//	using (var connection = new MySqlConnection(connectionString))
-		//	{
-		//		try
-		//		{
-		//			connection.Open();
-		//		}
-		//		catch (Exception ex)
-		//		{
-		//			string debugMessage = $"Error opening SQL connection: {ex.Message}";
-		//			Debug.WriteLine(debugMessage, "Error");
+		//	string tableName = $"db_{TableStructure.Name}_{Build}";
 
-		//			// Throwing a different exception message because I didn't write this code
-		//			// and I think it might get displayed in the UI.
-		//			throw new Exception("   Incorrect MySQL login details.");
-		//		}
+		//	StringBuilder sb = new StringBuilder();
+		//	sb.AppendLine($"DROP TABLE IF EXISTS `{tableName}`; ");
+		//	sb.AppendLine($"CREATE TABLE `{tableName}` ({Data.Columns.ToSql(Key)}) ENGINE=MyISAM DEFAULT CHARSET=utf8; ");
+		//	foreach (DataRow row in Data.Rows)
+		//		sb.AppendLine($"INSERT INTO `{tableName}` VALUES ({row.ToSql()}); ");
 
-		//		ToSQLTable(connection);
-		//	}
+		//	return sb.ToString();
 		//}
-
 
 		/// <summary>
 		/// Uses MysqlBulkCopy to import the data directly into a database.
 		/// </summary>
-		public void ToSQLTable(IDbContext dbContext, string tableName = null)
+		public void ImportDbcIntoDatabaseAsTable(IDbContext dbContext, string tableName = null)
 		{
 			tableName ??= $"db_{TableStructure.Name}_{Build}";
 
@@ -873,46 +846,22 @@ namespace Acmil.Core.Storage
 			return importSuccessful;
 		}
 
-		public bool ImportSQL(IDbContext dbContext, UpdateMode mode, string table, out string error, string columns = "*")
+		public void WriteSqlTableToDbc(IDbContext dbContext, UpdateMode mode, string table, out string error, string columns = "*")
+		{
+			ReadSqlTable(dbContext, mode, table, columns);
+		}
+
+		private void ReadSqlTable(IDbContext dbContext, UpdateMode mode, string table, string columns)
 		{
 			// TODO: Determine 2 things:
 			// 1. Do we need to enforce the schema?
 			// 2. Do we need to explicitly allow DB null on all the columns?
-
-			error = "";
-			bool importSuccessful;
-			DataTable importTable = null; /* = Data.Clone(); // Clone table structure to help with mapping.*/
-			//Parallel.For(0, importTable.Columns.Count, c => importTable.Columns[c].AllowDBNull = true); // Allow null values
-
-			//using (var connection = new MySqlConnection(connectionstring))
-			//using (var command = new MySqlCommand($"SELECT {columns} FROM `{table}`", connection))
-			//using (var adapter = new MySqlDataAdapter(command))
+			try
 			{
-				try
-				{
-					string sql = $"SELECT {columns} FROM `{table}`";
-					importTable = dbContext.ExecuteSqlStatementAsDataTable(sql);
-					//adapter.FillSchema(importTable, SchemaType.Source); //Enforce schema
-					//adapter.Fill(importTable);
-					importSuccessful = true;
-				}
+				DataTable importTable = null;
+				string sql = $"SELECT {columns} FROM `{table}`";
+				importTable = dbContext.ExecuteSqlStatementAsDataTable(sql);
 
-				// TODO: Figure out what we need to do to have this hit now that we're calling the IDbContext method.
-				// I think it's if you read a file with duplicate IDs.
-				catch (ConstraintException ex)
-				{
-					error = ex.Message;
-					importSuccessful = false;
-				}
-				catch (Exception ex)
-				{
-					_logger.LogError(ex, "");
-					importSuccessful = false;
-				}
-			}
-
-			if (importSuccessful)
-			{
 				// Replace DBNulls with default value.
 				object[] defaultVals = importTable.Columns.Cast<DataColumn>().Select(x => x.DefaultValue).ToArray();
 				Parallel.For(0, importTable.Rows.Count, r =>
@@ -930,27 +879,97 @@ namespace Acmil.Core.Storage
 				{
 					// TODO: Determine how this could ever happen.
 					case CompareResult.DBNull:
-						error = "Import Failed: Imported data contains NULL values.";
-						importSuccessful = false;
-						break;
+						throw new SqlTableReadException("Table data contains NULL values.");
 					case CompareResult.Type:
-						error = "Import Failed: Imported data has incorrect column types.";
-						importSuccessful = false;
-						break;
+						throw new SqlTableReadException("Table data has incorrect column types.");
 					case CompareResult.Count:
-						error = "Import Failed: Imported data has an incorrect number of columns.";
-						importSuccessful = false;
-						break;
+						throw new SqlTableReadException("Table data has an incorrect number of columns.");
 					default:
 						UpdateData(importTable, mode);
 						break;
 				}
-
-				//if (!ValidateMinMaxValues(importTable, out error))
-				//	return false;
+			}
+			catch (Exception ex)
+			{
+				throw new SqlTableReadException("Error encountered reading from SQL table.", ex);
 			}
 
-			return importSuccessful;
+			#region Old Code (Consider Deleting Eventually)
+
+			//error = "";
+			//bool dbReadSuccessful;
+			//DataTable importTable = null; /* = Data.Clone(); // Clone table structure to help with mapping.*/
+			////Parallel.For(0, importTable.Columns.Count, c => importTable.Columns[c].AllowDBNull = true); // Allow null values
+
+			////using (var connection = new MySqlConnection(connectionstring))
+			////using (var command = new MySqlCommand($"SELECT {columns} FROM `{table}`", connection))
+			////using (var adapter = new MySqlDataAdapter(command))
+			//{
+			//	try
+			//	{
+			//		string sql = $"SELECT {columns} FROM `{table}`";
+			//		importTable = dbContext.ExecuteSqlStatementAsDataTable(sql);
+			//		//adapter.FillSchema(importTable, SchemaType.Source); //Enforce schema
+			//		//adapter.Fill(importTable);
+			//		dbReadSuccessful = true;
+			//	}
+
+			//	// TODO: Figure out what we need to do to have this hit now that we're calling the IDbContext method.
+			//	// I think it's if you read a file with duplicate IDs.
+			//	catch (ConstraintException ex)
+			//	{
+			//		error = ex.Message;
+			//		dbReadSuccessful = false;
+			//	}
+			//	catch (Exception ex)
+			//	{
+			//		_logger.LogError(ex, "");
+			//		dbReadSuccessful = false;
+			//	}
+			//}
+
+			//if (dbReadSuccessful)
+			//{
+			//	// Replace DBNulls with default value.
+			//	object[] defaultVals = importTable.Columns.Cast<DataColumn>().Select(x => x.DefaultValue).ToArray();
+			//	Parallel.For(0, importTable.Rows.Count, r =>
+			//	{
+			//		for (int i = 0; i < importTable.Columns.Count; ++i)
+			//		{
+			//			if (importTable.Rows[r][i] == DBNull.Value)
+			//			{
+			//				importTable.Rows[r][i] = defaultVals[i];
+			//			}
+			//		}
+			//	});
+
+			//	switch (Data.ShallowCompare(importTable))
+			//	{
+			//		// TODO: Determine how this could ever happen.
+			//		case CompareResult.DBNull:
+			//			error = "Table data contains NULL values.";
+			//			dbReadSuccessful = false;
+			//			break;
+			//		case CompareResult.Type:
+			//			error = "Table data has incorrect column types.";
+			//			dbReadSuccessful = false;
+			//			break;
+			//		case CompareResult.Count:
+			//			error = "Table data has an incorrect number of columns.";
+			//			dbReadSuccessful = false;
+			//			break;
+			//		default:
+			//			UpdateData(importTable, mode);
+			//			break;
+			//	}
+
+			//	//if (!ValidateMinMaxValues(importTable, out error))
+			//	//	return false;
+			//}
+
+			//return dbReadSuccessful;
+
+			#endregion
 		}
 
 		private bool ValidateMinMaxValues(DataTable importTable, out string error)

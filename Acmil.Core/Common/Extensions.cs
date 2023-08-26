@@ -182,13 +182,14 @@ namespace Acmil.Core.Common
 		public static void Detach(this DataTable table, string path)
 		{
 			using (FileStream stream = new FileStream(path, FileMode.Create))
+			{
 				new BinaryFormatter().Serialize(stream, table);
+			}
 		}
 
 		public static object DefaultValue<T>(this T type) where T : Type
 		{
 			return type.IsValueType ? Activator.CreateInstance(type) : null;
 		}
-
 	}
 }

@@ -55,7 +55,7 @@ namespace Acmil.Core.Contexts
 			_logger.LogInformation($"Successfully loaded file '{Path.GetFileName(dbcPath)}'.");
 			DBEntry entry = _processDbcDatabase.Entries[0];
 
-			entry.ToSQLTable(dbContext, tableName);
+			entry.ImportDbcIntoDatabaseAsTable(dbContext, tableName);
 		}
 
 		internal enum ErrorType
