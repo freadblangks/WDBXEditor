@@ -15,5 +15,7 @@ namespace Acmil.Core.Contexts.Interfaces
 		/// <param name="dbcPath">The path to the DBC file to load.</param>
 		/// <param name="tableName">The name the table should be created with. Defaults to 'db_{dbc_name}_{build_number}.</param>
 		public void LoadDbcIntoSql(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName = null);
+
+
 	}
 }

@@ -846,7 +846,7 @@ namespace Acmil.Core.Storage
 			return importSuccessful;
 		}
 
-		public void WriteSqlTableToDbc(IDbContext dbContext, UpdateMode mode, string table, out string error, string columns = "*")
+		public void WriteSqlTableToDbc(IDbContext dbContext, UpdateMode mode, string table, string columns = "*")
 		{
 			ReadSqlTable(dbContext, mode, table, columns);
 		}
