@@ -17,5 +17,10 @@ namespace Acmil.Api.Managers
 		{
 			_dbcService.LoadDbcIntoDatabase(connectionInfo, database, dbcPath, tableName);
 		}
+
+		public void WriteDbcDataFromDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName)
+		{
+			_dbcService.WriteDbcDataFromDatabase(connectionInfo, database, dbcPath, tableName);
+		}
 	}
 }

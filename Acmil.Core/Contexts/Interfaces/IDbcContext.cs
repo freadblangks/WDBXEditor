@@ -3,7 +3,7 @@
 namespace Acmil.Core.Contexts.Interfaces
 {
 	/// <summary>
-	/// Interface describing a manager class for interacting with DBC files.
+	/// A context for interacting with DBC files.
 	/// </summary>
 	public interface IDbcContext
 	{
@@ -16,6 +16,8 @@ namespace Acmil.Core.Contexts.Interfaces
 		/// <param name="tableName">The name the table should be created with. Defaults to 'db_{dbc_name}_{build_number}.</param>
 		public void LoadDbcIntoSql(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName = null);
 
+		public void LoadDbcDataFromSql(MySqlConnectionInfo connectionInfo, string database, string dbcDirectoryPath, string dbcName, string tableName);
 
+		public void WriteLoadedDbcToPath(string dbcDirectoryPath, string dbcName);
 	}
 }

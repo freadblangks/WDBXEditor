@@ -27,6 +27,26 @@ namespace Acmil.Core.Storage
 			return Definitions.LoadDefinition(definitionText);
 		}
 
+		/// <summary>
+		/// Gets a <see cref="DBEntry"/> if the instance contains it.
+		/// </summary>
+		/// <param name="name">The name of the entry.</param>
+		/// <returns>The <see cref="DBEntry"/>, if the instance contains it. Otherwise, <see langword="null"/>.</returns>
+		public DBEntry GetDbEntry(string name)
+		{
+			return Entries.FirstOrDefault(entry => string.Compare(entry.EntryName, name, true) == 0);
+		}
+
+		/// <summary>
+		/// Checks whether the instance contains the specified <see cref="DBEntry"/>.
+		/// </summary>
+		/// <param name="name">The name of the entry.</param>
+		/// <returns>True if the instance contains the entry. Otherwise, false.</returns>
+		public bool ContainsDbEntry(string name)
+		{
+			return GetDbEntry(name) != null;
+		}
+
 		// We should refactor this to be passed in with DI.
 		//static Database()
 		//{

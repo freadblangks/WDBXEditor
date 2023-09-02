@@ -16,7 +16,7 @@ namespace Acmil.Data.Repositories.Interfaces
 		/// <param name="tableName">The name of the table to load the DBC into.</param>
 		public void LoadDbcIntoDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName);
 
-		public void WriteToDbcFromDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName);
+		public void WriteDbcDataFromDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcDirectoryPath, string dbcName, string tableName);
 
 		public void DeleteDbcFromDatabase(MySqlConnectionInfo connectionInfo, string database, string tableName);
 

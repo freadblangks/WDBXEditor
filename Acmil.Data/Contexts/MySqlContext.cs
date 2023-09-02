@@ -508,7 +508,7 @@ namespace Acmil.Data.Contexts
 
 		public DataTable ExecuteSqlStatementAsDataTable(string sqlStatement, IEnumerable<MySqlParameter> parameters, int timeoutValue)
 		{
-			return ExecuteSqlStatementAsDataTable(sqlStatement, parameters, timeoutValue);
+			return ExecuteSqlStatementAsDataTable(sqlStatement, parameters, timeoutValue, true);
 		}
 
 		public DataTable ExecuteSqlStatementAsDataTable(string sqlStatement, IEnumerable<MySqlParameter> parameters, int timeoutValue, bool retryWithoutQueryHints)

@@ -9,6 +9,7 @@ namespace Acmil.Api.Managers.Interfaces
 	{
 		public void LoadDbcIntoDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName = null);
 
+		public void WriteDbcDataFromDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName);
 		//void LoadDbcIntoSql(string filepath, int buildNumber);
 
 		//void LoadDbcIntoSql(string dbcDirectory, string dbcFileName, int buildNumber);

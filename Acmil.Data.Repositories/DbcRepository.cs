@@ -25,9 +25,10 @@ namespace Acmil.Data.Repositories
 			_dbcContext.LoadDbcIntoSql(connectionInfo, database, dbcPath, tableName);
 		}
 
-		public void WriteToDbcFromDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcPath, string tableName)
+		public void WriteDbcDataFromDatabase(MySqlConnectionInfo connectionInfo, string database, string dbcDirectoryPath, string dbcName, string tableName)
 		{
-			throw new NotImplementedException();
+			_dbcContext.LoadDbcDataFromSql(connectionInfo, database, dbcDirectoryPath, dbcName, tableName);
+			_dbcContext.WriteLoadedDbcToPath(dbcDirectoryPath, dbcName);
 		}
 
 		public void DeleteDbcFromDatabase(MySqlConnectionInfo connectionInfo, string database, string tableName)

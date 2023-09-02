@@ -12,6 +12,12 @@ using Acmil.Core.Reader;
 using static Acmil.Core.Common.Constants;
 using System.Data;
 using Acmil.Common.Utility.GarbageCollection;
+using Acmil.Data.Contracts.IO.Enums;
+using Acmil.Core.Exceptions;
+using Table = Acmil.Core.Storage.Table;
+using Acmil.Core.Common.Enums;
+using Acmil.Core.Common;
+using System.Linq;
 
 namespace Acmil.Core.Contexts
 {
@@ -53,9 +59,33 @@ namespace Acmil.Core.Contexts
 			}
 
 			_logger.LogInformation($"Successfully loaded file '{Path.GetFileName(dbcPath)}'.");
-			DBEntry entry = _processDbcDatabase.Entries[0];
+			DBEntry entry = _processDbcDatabase.Entries[0];	// TODO: This should probably not work this way.
 
 			entry.ImportDbcIntoDatabaseAsTable(dbContext, tableName);
+		}
+
+		public void LoadDbcDataFromSql(MySqlConnectionInfo connectionInfo, string database, string dbcDirectoryPath, string dbcName, string tableName)
+		{
+			var dbContext = _dbContextFactory.GetContext(connectionInfo, database);
+			var dbEntry = _processDbcDatabase.GetDbEntry(dbcName);
+			if (dbEntry is null)
+			{
+				LoadFileIntoDbcDatabase(Path.Combine(dbcDirectoryPath, $"{dbcName}.dbc"));
+				dbEntry = _processDbcDatabase.GetDbEntry(dbcName);
+			}
+
+			ReadDbcDataFromSql(dbContext, dbEntry, UpdateMode.Replace, tableName);
+		}
+
+		public void WriteLoadedDbcToPath(string dbcDirectoryPath, string dbcName)
+		{
+			var dbEntry = _processDbcDatabase.GetDbEntry(dbcName);
+			if (dbEntry is null)
+			{
+				throw new DbcWriteException($"No DBC with name '{dbcName}' has been loaded.");
+			}
+
+			WriteDbcEntriesToPathAsync(new List<DBEntry>() { dbEntry }, dbcDirectoryPath).ConfigureAwait(false).GetAwaiter().GetResult();
 		}
 
 		internal enum ErrorType
@@ -74,11 +104,6 @@ namespace Acmil.Core.Contexts
 
 		#region Load
 
-		private static string FormatError(string f, ErrorType t, string s)
-		{
-			return $"{t.ToString().ToUpper()} {Path.GetFileName(f)} : {s}";
-		}
-
 		private async Task<List<string>> LoadFiles(IEnumerable<string> filenames)
 		{
 			var errors = new ConcurrentBag<string>();
@@ -91,36 +116,7 @@ namespace Acmil.Core.Contexts
 				for (int i = 0; i < t.Length; ++i)
 				{
 					files.TryDequeue(out string filepath);
-					try
-					{
-						var reader = new DBReader(_utilityHelper);
-						DBEntry entry = reader.Read(GetTableStructureForFile(filepath), filepath);
-						if (entry is not null)
-						{
-							var current = _processDbcDatabase.Entries.FirstOrDefault(x => x.FileName == entry.FileName && x.Build == entry.Build);
-							if (current is not null)
-							{
-								_processDbcDatabase.Entries.Remove(current);
-							}
-
-							_processDbcDatabase.Entries.Add(entry);
-							//if (file != firstFile)
-							//    entry.Detach();
-
-							if (!string.IsNullOrWhiteSpace(reader.ErrorMessage))
-							{
-								errors.Add(FormatError(filepath, ErrorType.Warning, reader.ErrorMessage));
-							}
-						}
-					}
-					catch (ConstraintException)
-					{
-						errors.Add(FormatError(filepath, ErrorType.Error, "Id column contains duplicates."));
-					}
-					catch (Exception ex)
-					{
-						errors.Add(FormatError(filepath, ErrorType.Error, ex.Message));
-					}
+					errors.Concat(LoadFileIntoDbcDatabase(filepath));
 				}
 
 				GarbageCollectionHelper.ForceGC();
@@ -137,6 +133,43 @@ namespace Acmil.Core.Contexts
 
 			files = null;
 			return errors.ToList();
+		}
+
+		private ConcurrentBag<string> LoadFileIntoDbcDatabase(string filepath)
+		{
+			var errors = new ConcurrentBag<string>();
+			try
+			{
+				var reader = new DBReader(_utilityHelper);
+				DBEntry entry = reader.Read(GetTableStructureForFile(filepath), filepath);
+				if (entry is not null)
+				{
+					var current = _processDbcDatabase.Entries.FirstOrDefault(x => x.FileName == entry.FileName && x.Build == entry.Build);
+					if (current is not null)
+					{
+						_processDbcDatabase.Entries.Remove(current);
+					}
+
+					_processDbcDatabase.Entries.Add(entry);
+					//if (file != firstFile)
+					//    entry.Detach();
+
+					if (!string.IsNullOrWhiteSpace(reader.ErrorMessage))
+					{
+						errors.Add(FormatError(filepath, ErrorType.Warning, reader.ErrorMessage));
+					}
+				}
+			}
+			catch (ConstraintException)
+			{
+				errors.Add(FormatError(filepath, ErrorType.Error, "Id column contains duplicates."));
+			}
+			catch (Exception ex)
+			{
+				errors.Add(FormatError(filepath, ErrorType.Error, ex.Message));
+			}
+
+			return errors;
 		}
 
 		private async Task<List<string>> LoadFiles(ConcurrentDictionary<string, MemoryStream> streams)
@@ -207,24 +240,145 @@ namespace Acmil.Core.Contexts
 
 		#region Save
 
-		private async Task<List<string>> SaveFiles(string path)
+		private void ReadDbcDataFromSql(IDbContext dbContext, DBEntry dbEntry, UpdateMode updateMode, string tableName, string columns = "*")
 		{
-			var errors = new List<string>();
-			var files = new Queue<DBEntry>(_processDbcDatabase.Entries);
+			// TODO: Determine 2 things:
+			// 1. Do we need to enforce the schema?
+			// 2. Do we need to explicitly allow DB null on all the columns?
+			try
+			{
+				DataTable importTable = null;
+				string sql = $"SELECT {columns} FROM `{tableName}`";
+				importTable = dbContext.ExecuteSqlStatementAsDataTable(sql);
+
+				// Replace DBNulls with default value.
+				object[] defaultVals = importTable.Columns.Cast<DataColumn>().Select(x => x.DefaultValue).ToArray();
+				Parallel.For(0, importTable.Rows.Count, r =>
+				{
+					for (int i = 0; i < importTable.Columns.Count; ++i)
+					{
+						if (importTable.Rows[r][i] == DBNull.Value)
+						{
+							importTable.Rows[r][i] = defaultVals[i];
+						}
+					}
+				});
+
+				switch (dbEntry.Data.ShallowCompare(importTable))
+				{
+					// TODO: Determine how this could ever happen.
+					case CompareResult.DBNull:
+						throw new SqlTableReadException("Table data contains NULL values.");
+					case CompareResult.Type:
+						throw new SqlTableReadException("Table data has incorrect column types.");
+					case CompareResult.Count:
+						throw new SqlTableReadException("Table data has an incorrect number of columns.");
+					default:
+						dbEntry.UpdateData(importTable, updateMode);
+						break;
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new SqlTableReadException("Error encountered reading from SQL table.", ex);
+			}
+
+			#region Old Code (Consider Deleting Eventually)
+
+			//error = "";
+			//bool dbReadSuccessful;
+			//DataTable importTable = null; /* = Data.Clone(); // Clone table structure to help with mapping.*/
+			////Parallel.For(0, importTable.Columns.Count, c => importTable.Columns[c].AllowDBNull = true); // Allow null values
+
+			////using (var connection = new MySqlConnection(connectionstring))
+			////using (var command = new MySqlCommand($"SELECT {columns} FROM `{table}`", connection))
+			////using (var adapter = new MySqlDataAdapter(command))
+			//{
+			//	try
+			//	{
+			//		string sql = $"SELECT {columns} FROM `{table}`";
+			//		importTable = dbContext.ExecuteSqlStatementAsDataTable(sql);
+			//		//adapter.FillSchema(importTable, SchemaType.Source); //Enforce schema
+			//		//adapter.Fill(importTable);
+			//		dbReadSuccessful = true;
+			//	}
+
+			//	// TODO: Figure out what we need to do to have this hit now that we're calling the IDbContext method.
+			//	// I think it's if you read a file with duplicate IDs.
+			//	catch (ConstraintException ex)
+			//	{
+			//		error = ex.Message;
+			//		dbReadSuccessful = false;
+			//	}
+			//	catch (Exception ex)
+			//	{
+			//		_logger.LogError(ex, "");
+			//		dbReadSuccessful = false;
+			//	}
+			//}
+
+			//if (dbReadSuccessful)
+			//{
+			//	// Replace DBNulls with default value.
+			//	object[] defaultVals = importTable.Columns.Cast<DataColumn>().Select(x => x.DefaultValue).ToArray();
+			//	Parallel.For(0, importTable.Rows.Count, r =>
+			//	{
+			//		for (int i = 0; i < importTable.Columns.Count; ++i)
+			//		{
+			//			if (importTable.Rows[r][i] == DBNull.Value)
+			//			{
+			//				importTable.Rows[r][i] = defaultVals[i];
+			//			}
+			//		}
+			//	});
+
+			//	switch (Data.ShallowCompare(importTable))
+			//	{
+			//		// TODO: Determine how this could ever happen.
+			//		case CompareResult.DBNull:
+			//			error = "Table data contains NULL values.";
+			//			dbReadSuccessful = false;
+			//			break;
+			//		case CompareResult.Type:
+			//			error = "Table data has incorrect column types.";
+			//			dbReadSuccessful = false;
+			//			break;
+			//		case CompareResult.Count:
+			//			error = "Table data has an incorrect number of columns.";
+			//			dbReadSuccessful = false;
+			//			break;
+			//		default:
+			//			UpdateData(importTable, mode);
+			//			break;
+			//	}
+
+			//	//if (!ValidateMinMaxValues(importTable, out error))
+			//	//	return false;
+			//}
+
+			//return dbReadSuccessful;
+
+			#endregion
+		}
+
+		private async Task WriteDbcEntriesToPathAsync(List<DBEntry> entries, string path)
+		{
+			var errors = new List<DbcWriteException>();
+			var entryQueue = new Queue<DBEntry>(entries);
 
 			var batchBlock = new BatchBlock<int>(100, new GroupingDataflowBlockOptions { BoundedCapacity = 100 });
 			var actionBlock = new ActionBlock<int[]>(t =>
 			{
 				for (int i = 0; i < t.Length; ++i)
 				{
-					DBEntry file = files.Dequeue();
+					DBEntry entry = entryQueue.Dequeue();
 					try
 					{
-						new DBReader(_utilityHelper).Write(file, Path.Combine(path, file.FileName));
+						new DBReader(_utilityHelper).Write(entry, Path.Combine(path, entry.FileName));
 					}
 					catch (Exception ex)
 					{
-						errors.Add($"{file} : {ex.Message}");
+						errors.Add(new DbcWriteException($"Error writing entry '{entry.EntryName}'.", ex));
 					}
 				}
 
@@ -241,7 +395,19 @@ namespace Acmil.Core.Contexts
 			batchBlock.Complete();
 			await actionBlock.Completion;
 
-			return errors;
+			if (errors.Count > 0)
+			{
+				Exception exception;
+				if (errors.Count > 1)
+				{
+					exception = new AggregateException(errors);
+				}
+				else
+				{
+					exception = errors[0];
+				}
+				_logger.LogError(exception, "Error(s) writing DBCs to disk");
+			}
 		}
 
 		#endregion
@@ -289,6 +455,11 @@ namespace Acmil.Core.Contexts
 			return _processDbcDatabase.Definitions.Tables.FirstOrDefault(x =>
 				x.Name.Equals(Path.GetFileNameWithoutExtension(filepath), IGNORECASE) &&
 				x.Build == _processDbcDatabase.BuildNumber);
+		}
+
+		private static string FormatError(string f, ErrorType t, string s)
+		{
+			return $"{t.ToString().ToUpper()} {Path.GetFileName(f)} : {s}";
 		}
 	}
 }

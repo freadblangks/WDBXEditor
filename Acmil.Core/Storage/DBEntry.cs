@@ -19,18 +19,18 @@ using Acmil.Common.Utility.Interfaces;
 using Acmil.Common.Utility.Configuration.Interfaces;
 using Acmil.Common.Utility.Logging.Interfaces;
 using Acmil.Common.Utility.GarbageCollection;
-using MySqlX.XDevAPI.Relational;
-using MySql.Data.MySqlClient;
+using Acmil.Common.Utility.Configuration.SettingsModels.Locale.Enums;
 
 namespace Acmil.Core.Storage
 {
-	public class DBEntry : IDisposable
+    public class DBEntry : IDisposable
 	{
 		public DBHeader Header { get; private set; }
 		public DataTable Data { get; set; }
 		public bool Changed { get; set; } = false;
 		public string FilePath { get; private set; }
 		public string FileName => Path.GetFileName(FilePath);
+		public string EntryName => Header.TableStructure.Name;
 		public string SavePath { get; set; }
 		public Table TableStructure => Header.TableStructure;
 
@@ -57,11 +57,11 @@ namespace Acmil.Core.Storage
 			Header = header;
 			FilePath = filepath;
 			SavePath = filepath;
+
 			Header.TableStructure = tableStructure;
 
 			LoadDefinition();
 		}
-
 
 		/// <summary>
 		/// Converts the XML definition to an empty DataTable
@@ -101,7 +101,7 @@ namespace Acmil.Core.Storage
 
 			foreach (var col in TableStructure.Fields)
 			{
-				var languages = new Queue<TextWowEnum>(Enum.GetValues(typeof(TextWowEnum)).Cast<TextWowEnum>());
+				var languages = new Queue<LocaleCode>(Enum.GetValues(typeof(LocaleCode)).Cast<LocaleCode>());
 				string[] columnsNames = col.ColumnNames.Split(',');
 
 				for (int i = 0; i < col.ArraySize; i++)
@@ -846,131 +846,54 @@ namespace Acmil.Core.Storage
 			return importSuccessful;
 		}
 
-		public void WriteSqlTableToDbc(IDbContext dbContext, UpdateMode mode, string table, string columns = "*")
-		{
-			ReadSqlTable(dbContext, mode, table, columns);
-		}
+		//public void WriteSqlTableToDbc(IDbContext dbContext, UpdateMode mode, string table, string columns = "*")
+		//{
+		//	ReadSqlTable(dbContext, mode, table, columns);
+		//}
 
-		private void ReadSqlTable(IDbContext dbContext, UpdateMode mode, string table, string columns)
-		{
-			// TODO: Determine 2 things:
-			// 1. Do we need to enforce the schema?
-			// 2. Do we need to explicitly allow DB null on all the columns?
-			try
-			{
-				DataTable importTable = null;
-				string sql = $"SELECT {columns} FROM `{table}`";
-				importTable = dbContext.ExecuteSqlStatementAsDataTable(sql);
+		//private void ReadSqlTable(IDbContext dbContext, UpdateMode mode, string table, string columns)
+		//{
+		//	// TODO: Determine 2 things:
+		//	// 1. Do we need to enforce the schema?
+		//	// 2. Do we need to explicitly allow DB null on all the columns?
+		//	try
+		//	{
+		//		DataTable importTable = null;
+		//		string sql = $"SELECT {columns} FROM `{table}`";
+		//		importTable = dbContext.ExecuteSqlStatementAsDataTable(sql);
 
-				// Replace DBNulls with default value.
-				object[] defaultVals = importTable.Columns.Cast<DataColumn>().Select(x => x.DefaultValue).ToArray();
-				Parallel.For(0, importTable.Rows.Count, r =>
-				{
-					for (int i = 0; i < importTable.Columns.Count; ++i)
-					{
-						if (importTable.Rows[r][i] == DBNull.Value)
-						{
-							importTable.Rows[r][i] = defaultVals[i];
-						}
-					}
-				});
+		//		// Replace DBNulls with default value.
+		//		object[] defaultVals = importTable.Columns.Cast<DataColumn>().Select(x => x.DefaultValue).ToArray();
+		//		Parallel.For(0, importTable.Rows.Count, r =>
+		//		{
+		//			for (int i = 0; i < importTable.Columns.Count; ++i)
+		//			{
+		//				if (importTable.Rows[r][i] == DBNull.Value)
+		//				{
+		//					importTable.Rows[r][i] = defaultVals[i];
+		//				}
+		//			}
+		//		});
 
-				switch (Data.ShallowCompare(importTable))
-				{
-					// TODO: Determine how this could ever happen.
-					case CompareResult.DBNull:
-						throw new SqlTableReadException("Table data contains NULL values.");
-					case CompareResult.Type:
-						throw new SqlTableReadException("Table data has incorrect column types.");
-					case CompareResult.Count:
-						throw new SqlTableReadException("Table data has an incorrect number of columns.");
-					default:
-						UpdateData(importTable, mode);
-						break;
-				}
-			}
-			catch (Exception ex)
-			{
-				throw new SqlTableReadException("Error encountered reading from SQL table.", ex);
-			}
-
-			#region Old Code (Consider Deleting Eventually)
-
-			//error = "";
-			//bool dbReadSuccessful;
-			//DataTable importTable = null; /* = Data.Clone(); // Clone table structure to help with mapping.*/
-			////Parallel.For(0, importTable.Columns.Count, c => importTable.Columns[c].AllowDBNull = true); // Allow null values
-
-			////using (var connection = new MySqlConnection(connectionstring))
-			////using (var command = new MySqlCommand($"SELECT {columns} FROM `{table}`", connection))
-			////using (var adapter = new MySqlDataAdapter(command))
-			//{
-			//	try
-			//	{
-			//		string sql = $"SELECT {columns} FROM `{table}`";
-			//		importTable = dbContext.ExecuteSqlStatementAsDataTable(sql);
-			//		//adapter.FillSchema(importTable, SchemaType.Source); //Enforce schema
-			//		//adapter.Fill(importTable);
-			//		dbReadSuccessful = true;
-			//	}
-
-			//	// TODO: Figure out what we need to do to have this hit now that we're calling the IDbContext method.
-			//	// I think it's if you read a file with duplicate IDs.
-			//	catch (ConstraintException ex)
-			//	{
-			//		error = ex.Message;
-			//		dbReadSuccessful = false;
-			//	}
-			//	catch (Exception ex)
-			//	{
-			//		_logger.LogError(ex, "");
-			//		dbReadSuccessful = false;
-			//	}
-			//}
-
-			//if (dbReadSuccessful)
-			//{
-			//	// Replace DBNulls with default value.
-			//	object[] defaultVals = importTable.Columns.Cast<DataColumn>().Select(x => x.DefaultValue).ToArray();
-			//	Parallel.For(0, importTable.Rows.Count, r =>
-			//	{
-			//		for (int i = 0; i < importTable.Columns.Count; ++i)
-			//		{
-			//			if (importTable.Rows[r][i] == DBNull.Value)
-			//			{
-			//				importTable.Rows[r][i] = defaultVals[i];
-			//			}
-			//		}
-			//	});
-
-			//	switch (Data.ShallowCompare(importTable))
-			//	{
-			//		// TODO: Determine how this could ever happen.
-			//		case CompareResult.DBNull:
-			//			error = "Table data contains NULL values.";
-			//			dbReadSuccessful = false;
-			//			break;
-			//		case CompareResult.Type:
-			//			error = "Table data has incorrect column types.";
-			//			dbReadSuccessful = false;
-			//			break;
-			//		case CompareResult.Count:
-			//			error = "Table data has an incorrect number of columns.";
-			//			dbReadSuccessful = false;
-			//			break;
-			//		default:
-			//			UpdateData(importTable, mode);
-			//			break;
-			//	}
-
-			//	//if (!ValidateMinMaxValues(importTable, out error))
-			//	//	return false;
-			//}
-
-			//return dbReadSuccessful;
-
-			#endregion
-		}
+		//		switch (Data.ShallowCompare(importTable))
+		//		{
+		//			// TODO: Determine how this could ever happen.
+		//			case CompareResult.DBNull:
+		//				throw new SqlTableReadException("Table data contains NULL values.");
+		//			case CompareResult.Type:
+		//				throw new SqlTableReadException("Table data has incorrect column types.");
+		//			case CompareResult.Count:
+		//				throw new SqlTableReadException("Table data has an incorrect number of columns.");
+		//			default:
+		//				UpdateData(importTable, mode);
+		//				break;
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		throw new SqlTableReadException("Error encountered reading from SQL table.", ex);
+		//	}
+		//}
 
 		private bool ValidateMinMaxValues(DataTable importTable, out string error)
 		{
@@ -1011,7 +934,7 @@ namespace Acmil.Core.Storage
 			return true;
 		}
 
-		private void UpdateData(DataTable importTable, UpdateMode mode)
+		internal void UpdateData(DataTable importTable, UpdateMode mode)
 		{
 			switch (mode)
 			{
