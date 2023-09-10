@@ -212,7 +212,6 @@ for ($i = 0; $i -lt $rowObjects.length; ++$i) {
         "`t`t/// </remarks>" | Out-File -FilePath $OUTPUT_PATH -Append;
     }
 
-    Write-Host $rowObjects[$i].ValueId.getType();
     $valueDeclaration = Get-EnumValueDeclarationString -valueName $valueName -valueIdentifier $rowObjects[$i].ValueId -isLastValue $isLastRow;
     "`t`t$valueDeclaration" | Out-File -FilePath $OUTPUT_PATH -Append;
 
