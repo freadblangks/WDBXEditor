@@ -1,17 +1,12 @@
-﻿using Acmil.Data.Constants;
-using Acmil.Data.Contexts;
-using Acmil.Data.Contracts.Connections;
+﻿using Acmil.Data.Contracts.Connections;
 using Acmil.Data.Contracts.Models.Items;
 using Acmil.Data.Contracts.Models.Items.Submodels;
 using Acmil.Data.Contracts.Models.Items.Submodels.Requirements;
 using Acmil.Data.Contracts.Types.Primitives;
 using Acmil.Data.Helpers;
 using Acmil.Data.Helpers.Interfaces;
-using Acmil.Data.Helpers.Mapping;
 using Acmil.Data.Repositories.Interfaces;
 using MySql.Data.MySqlClient;
-using System.Diagnostics;
-using System.Security;
 
 namespace Acmil.Data.Repositories
 {
@@ -20,19 +15,7 @@ namespace Acmil.Data.Repositories
 	/// </summary>
 	public class ItemTemplateRepository : IItemTemplateRepository
 	{
-		//private IDbContext _worldContext;
 		private IDbContextFactory _dbContextFactory;
-
-		// TODO: Update this to use a DTO instead of individual connection params.
-		//public ItemTemplateRepository(string hostname, string username, SecureString password, IDbContextFactory dbContextFactory)
-		//{
-		//	_worldContext = dbContextFactory.GetContext(
-		//		hostname,
-		//		username,
-		//		password,
-		//		AzerothCoreDatabaseConstants.DEFAULT_WORLD_DATABASE_NAME
-		//	);
-		//}
 
 		public ItemTemplateRepository(IDbContextFactory dbContextFactory)
 		{
@@ -42,6 +25,7 @@ namespace Acmil.Data.Repositories
 		public CompleteItemTemplate ReadItemTemplate(MySqlConnectionInfo connectionInfo, UInt24 entryId)
 		{
 			#region Long Boi
+
 			string sql = @"
 				SELECT
 					`entry`,
@@ -197,7 +181,7 @@ namespace Acmil.Data.Repositories
 			};
 
 			CompleteItemTemplate result = worldContext.ExecuteSqlStatementAsObject(sql, dataReader => ConvertReadResponseToItemTemplate(dataReader), sqlParameters);
-			var mapper = new SqlDataMapper<CompleteItemTemplate>();
+			//var mapper = new SqlDataMapper<CompleteItemTemplate>();
 
 			return result;
 		}
