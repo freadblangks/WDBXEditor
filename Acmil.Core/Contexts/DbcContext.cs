@@ -59,8 +59,12 @@ namespace Acmil.Core.Contexts
 			}
 
 			_logger.LogInformation($"Successfully loaded file '{Path.GetFileName(dbcPath)}'.");
-			DBEntry entry = _processDbcDatabase.Entries[0];	// TODO: This should probably not work this way.
+			DBEntry entry = _processDbcDatabase.GetDbEntry(Path.GetFileNameWithoutExtension(dbcPath));  // TODO: This should probably not work this way.
 
+			if (entry is null)
+			{
+				throw new DbcReadException($"No entry found loaded for DBC at path '{dbcPath}'.");
+			}
 			entry.ImportDbcIntoDatabaseAsTable(dbContext, tableName);
 		}
 

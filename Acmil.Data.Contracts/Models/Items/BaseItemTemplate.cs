@@ -19,8 +19,10 @@ namespace Acmil.Data.Contracts.Models.Items
 
 		/// <summary>
 		/// An ID that indicates which Item Class the Item Template belongs to.
-		/// For supported values see <see cref="ItemClass"/>.
 		/// </summary>
+		/// <remarks>
+		/// For a full list of supported values, see <see cref="ItemClass"/>.
+		/// </remarks>
 		[MySqlColumnName("class")]
 		[EnumType(typeof(ItemClass))]
 		[AllowEnumConversionOverride(true)]
@@ -63,9 +65,12 @@ namespace Acmil.Data.Contracts.Models.Items
 		public UInt24 DisplayId { get; set; } = 0;
 
 		/// <summary>
-		/// An <see cref="ItemQuality"/> value indicating the quality/rarity of the item. This determines
+		/// A value indicating the quality/rarity of the item. This determines
 		/// the color of its name text.
 		/// </summary>
+		/// <remarks>
+		/// For a full list of supported values, see <see cref="ItemQuality"/>.
+		/// </remarks>
 		[MySqlColumnName("Quality")]
 		[EnumType(typeof(ItemQuality))]
 		[AllowEnumConversionOverride(false)]
@@ -168,8 +173,11 @@ namespace Acmil.Data.Contracts.Models.Items
 		public ItemSpell[] Spells { get; set; } = new ItemSpell[5];
 
 		/// <summary>
-		/// A <see cref="ItemBindingType"/> value indicating the item's binding type. This dictates when and if it becomes soulbound.
+		/// A value indicating the item's binding type. This dictates when and if it becomes soulbound.
 		/// </summary>
+		/// <remarks>
+		/// For a full list of known values, see <see cref="<see cref="ItemBindingType"/>"/>.
+		/// </remarks>
 		[MySqlColumnName("bonding")]
 		[EnumType(typeof(ItemBindingType))]
 		[AllowEnumConversionOverride(false)]
@@ -192,9 +200,12 @@ namespace Acmil.Data.Contracts.Models.Items
 		public UInt24 LockId { get; set; } = 0;
 
 		/// <summary>
-		/// The <see cref="ItemMaterial"/> value indicating what the item is made of. This determines the sound
+		/// A value indicating what the item is made of. This determines the sound
 		/// the item makes when moved. Use -1 for consumables.
 		/// </summary>
+		/// <remarks>
+		/// For a full list of known values, see <see cref="ItemMaterial"/>.
+		/// </remarks>
 		[MySqlColumnName("Material")]
 		[EnumType(typeof(ItemMaterial))]
 		[AllowEnumConversionOverride(false)]
@@ -264,6 +275,9 @@ namespace Acmil.Data.Contracts.Models.Items
 		/// <summary>
 		/// The type of food the item is considered to be when a Hunter tries to feed it to their pet.
 		/// </summary>
+		/// <remarks>
+		/// For a full list of known values, see <see cref="ItemFoodType"/>
+		/// </remarks>
 		[MySqlColumnName("FoodType")]
 		[EnumType(typeof(ItemFoodType))]
 		[AllowEnumConversionOverride(false)]

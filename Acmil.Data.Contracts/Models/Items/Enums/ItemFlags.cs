@@ -1,10 +1,9 @@
-﻿using System;
-using Acmil.Data.Contracts.Attributes;
+﻿using Acmil.Data.Contracts.Attributes;
 
 namespace Acmil.Data.Contracts.Models.Items.Enums
 {
 	/// <summary>
-	/// Flags that are used to defined specific aspects of an item's behavior.
+	/// Flags that are used to define specific aspects of an item's behavior.
 	/// </summary>
 	[Flags]
 	public enum ItemFlags : uint
@@ -15,10 +14,10 @@ namespace Acmil.Data.Contracts.Models.Items.Enums
 		[NotImplemented]
 		HasNoPickup = 0x01,
 
+		// TODO: Determine whether this dictates a conjured item's tendency to disappear.
 		/// <summary>
 		/// The item is conjured (e.g. mage food).
 		/// </summary>
-		/// // TODO: Determine whether this dictates a conjured item's tendency to disappear.
 		ConjuredItem = 0x02,
 
 		/// <summary>

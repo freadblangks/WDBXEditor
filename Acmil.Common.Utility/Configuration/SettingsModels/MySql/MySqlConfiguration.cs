@@ -1,7 +1,7 @@
 ﻿namespace Acmil.Common.Utility.Configuration.SettingsModels.MySql
 {
 	/// <summary>
-	/// An object representing the contents of the "MySql" property in appsettings.json.
+	/// An object representing the contents of the "mySql" property in config.json.
 	/// </summary>
 	public class MySqlConfiguration
 	{
@@ -11,7 +11,7 @@
 		/// load to work in MySQL Server 8.0+.
 		/// </summary>
 		/// <remarks>
-		/// This represents the "MySql.SecureFilePrivDirectoryAbsolutePath" property in appsettings.json.
+		/// This represents the "mySql.secureFilePrivDirectoryAbsolutePath" property in config.json.
 		/// </remarks>
 		public string SecureFilePrivDirectoryAbsolutePath { get; set; } = "";
 	}

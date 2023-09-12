@@ -8,13 +8,15 @@ namespace Acmil.Data.Contracts.Models.Items.Submodels
 	/// </summary>
 	public class ItemGeographicRestrictions
 	{
-		// TODO: Figure out where these IDs come from.
 
 		/// <summary>
 		/// The ID of the Zone in which the item can be used.
 		/// If the player leaves the Zone, the item will be deleted from their inventory.
 		/// Set to 0 for no restriction.
 		/// </summary>
+		/// <remarks>
+		/// This ID comes from the `ID` column of `AreaTable.dbc`.
+		/// </remarks>
 		[MySqlColumnName("area")]
 		public UInt24 ZoneId { get; set; } = 0;
 

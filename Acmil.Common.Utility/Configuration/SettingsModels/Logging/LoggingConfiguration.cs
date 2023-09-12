@@ -3,15 +3,16 @@
 namespace Acmil.Common.Utility.Configuration.SettingsModels.Logging
 {
 	/// <summary>
-	/// An object representing the contents of the "Logging" property in appsettings.json.
+	/// An object representing the contents of the "logging" property in config.json.
 	/// </summary>
 	public class LoggingConfiguration
 	{
 		/// <summary>
-		/// An object containing settings relating to logging level for the current session.
+		/// The logging level for the current session.
+		/// Defaults to <see cref="LoggingLevel.Warning"/>.
 		/// </summary>
 		/// <remarks>
-		/// Represents the "Logging.LogLevel" property in appsettings.json.
+		/// Represents the "logging.level" property in config.json.
 		/// </remarks>
 		public string Level { get; set; } = LoggingLevel.Warning.ToString();
 
@@ -19,7 +20,7 @@ namespace Acmil.Common.Utility.Configuration.SettingsModels.Logging
 		/// An object containing settings relating to writing log files. 
 		/// </summary>
 		/// <remarks>
-		/// This represents the "Logging.LogLevel" property in appsettings.json.
+		/// This represents the "logging.logFileSettings" property in config.json.
 		/// </remarks>
 		public LogFileSettings LogFileSettings { get; set; }
 
@@ -27,7 +28,7 @@ namespace Acmil.Common.Utility.Configuration.SettingsModels.Logging
 		/// An object containing settings that configure which destinations logs will be written to.
 		/// </summary>
 		/// <remarks>
-		/// This represents the "Logging.LoggingDestinations" property in appsettings.json.
+		/// This represents the "logging.destinations" property in config.json.
 		/// </remarks>
 		public LoggingDestinations Destinations { get; set; }
 	}

@@ -66,7 +66,7 @@
 		Gnomish = 13,
 
 		/// <summary>
-		/// The language spoken by trolls.
+		/// The language spoken by Trolls.
 		/// </summary>
 		Troll = 14,
 

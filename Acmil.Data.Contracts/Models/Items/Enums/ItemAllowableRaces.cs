@@ -1,5 +1,4 @@
-﻿using System;
-using Acmil.Data.Contracts.Attributes;
+﻿using Acmil.Data.Contracts.Attributes;
 
 namespace Acmil.Data.Contracts.Models.Items.Enums
 {
