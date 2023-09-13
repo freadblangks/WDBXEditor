@@ -1,5 +1,5 @@
 ﻿using Acmil.Api.Managers.Interfaces;
-using Acmil.Data.Contracts.Connections;
+using Acmil.Common.Utility.Connections;
 using Acmil.Data.Services.Interfaces;
 
 namespace Acmil.Api.Managers

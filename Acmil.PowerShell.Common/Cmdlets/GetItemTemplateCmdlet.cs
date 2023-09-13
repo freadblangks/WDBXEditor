@@ -1,11 +1,6 @@
-﻿using Acmil.Api.Managers;
-using Acmil.Api.Managers.Interfaces;
-using Acmil.Data.Contracts.Connections;
+﻿using Acmil.Api.Managers.Interfaces;
 using Acmil.Data.Contracts.Models.Items;
 using Acmil.Data.Contracts.Types.Primitives;
-using Acmil.PowerShell.Common.Helpers;
-using Acmil.PowerShell.Common.Helpers.Interfaces;
-using Acmil.PowerShell.Common.Ioc;
 using System.Management.Automation;
 
 namespace Acmil.PowerShell.Common.Cmdlets
@@ -18,23 +13,19 @@ namespace Acmil.PowerShell.Common.Cmdlets
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "ItemTemplate")]
 	[OutputType(typeof(List<CompleteItemTemplate>))]
-	public class GetItemTemplateCmdlet : PSCmdlet
+	public class GetItemTemplateCmdlet : BaseCmdlet
 	{
 		private const string PARAMETER_SET_NAME_GET_BY_ENTRY_ID = "ByEntryId";
 		private const string PARAMETER_SET_NAME_GET_BY_NAME = "ByName";
 
-		private ICmdletHelper _cmdletHelper;
 		private IItemTemplateManager _itemTemplateManager;
-		private RootContainerInstaller _rootContainer;
 
 		/// <summary>
 		/// Initializes a new instance of <see cref="GetItemTemplateCmdlet"/> class.
 		/// </summary>
-		public GetItemTemplateCmdlet()
+		public GetItemTemplateCmdlet() : base()
 		{
-			_rootContainer = new RootContainerInstaller();
-			_itemTemplateManager = _rootContainer.Resolve<IItemTemplateManager>();
-			_cmdletHelper = _rootContainer.Resolve<ICmdletHelper>();
+			_itemTemplateManager = RootContainer.Resolve<IItemTemplateManager>();
 		}
 
 		///// <summary>
@@ -47,14 +38,11 @@ namespace Acmil.PowerShell.Common.Cmdlets
 		//	_itemTemplateManager = itemTemplateManager;
 		//}
 
-		[Parameter(Mandatory = true, ParameterSetName = PARAMETER_SET_NAME_GET_BY_ENTRY_ID, Position = 0)]
-		[Parameter(Mandatory = true, ParameterSetName = PARAMETER_SET_NAME_GET_BY_NAME, Position = 0)]
-		public MySqlConnectionInfo ConnectionInfo { get; set; }
 
-		[Parameter(Mandatory = true, ParameterSetName = PARAMETER_SET_NAME_GET_BY_ENTRY_ID, Position = 1)]
+		[Parameter(Mandatory = true, ParameterSetName = PARAMETER_SET_NAME_GET_BY_ENTRY_ID, Position = 0)]
 		public UInt24 EntryId { get; set; }
 
-		[Parameter(Mandatory = true, ParameterSetName = PARAMETER_SET_NAME_GET_BY_NAME, Position = 1)]
+		[Parameter(Mandatory = true, ParameterSetName = PARAMETER_SET_NAME_GET_BY_NAME, Position = 0)]
 		public string Name { get; set; }
 
 		[Parameter(Mandatory = false, ParameterSetName = PARAMETER_SET_NAME_GET_BY_NAME)]
@@ -65,7 +53,7 @@ namespace Acmil.PowerShell.Common.Cmdlets
 
 		protected override void BeginProcessing()
 		{
-
+			base.BeginProcessing();
 		}
 
 		protected override void ProcessRecord()
@@ -76,14 +64,14 @@ namespace Acmil.PowerShell.Common.Cmdlets
 				switch (base.ParameterSetName)
 				{
 					case PARAMETER_SET_NAME_GET_BY_ENTRY_ID:
-						var result = _itemTemplateManager.GetCompleteItemTemplate(ConnectionInfo, EntryId);
+						var result = _itemTemplateManager.GetCompleteItemTemplate(EntryId);
 						results = new List<object>() { result };
 						break;
 					case PARAMETER_SET_NAME_GET_BY_NAME:
-						//results = itemTemplateEngine.GetCompleteItemTemplates(ConnectionInfo, Name, Class, SubClass);
+						//results = itemTemplateEngine.GetCompleteItemTemplates(Name, Class, SubClass);
 						break;
 					default:
-						_cmdletHelper.HandleUnsupportedParameterSet(this);
+						CmdletHelper.HandleUnsupportedParameterSet(this);
 						break;
 				}
 				WriteObject(results);

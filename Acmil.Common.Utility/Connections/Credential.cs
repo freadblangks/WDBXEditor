@@ -1,6 +1,6 @@
 ﻿using System.Security;
 
-namespace Acmil.Data.Contracts.Connections
+namespace Acmil.Common.Utility.Connections
 {
 	/// <summary>
 	/// An object representing a credential.

@@ -1,4 +1,4 @@
-﻿using Acmil.Data.Contracts.Connections;
+﻿using Acmil.Common.Utility.Connections;
 
 namespace Acmil.Api.Managers.Interfaces
 {

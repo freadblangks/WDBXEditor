@@ -1,4 +1,5 @@
-﻿using System.Management.Automation;
+﻿using Acmil.Common.Utility.Connections;
+using System.Management.Automation;
 
 namespace Acmil.PowerShell.Common.Helpers.Interfaces
 {

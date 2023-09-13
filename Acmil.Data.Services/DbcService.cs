@@ -1,4 +1,4 @@
-﻿using Acmil.Data.Contracts.Connections;
+﻿using Acmil.Common.Utility.Connections;
 using Acmil.Data.Repositories.Interfaces;
 using Acmil.Data.Services.Interfaces;
 

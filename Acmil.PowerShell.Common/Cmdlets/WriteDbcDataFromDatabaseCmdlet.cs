@@ -1,16 +1,13 @@
 ﻿using Acmil.Api.Managers.Interfaces;
-using Acmil.Data.Contracts.Connections;
-using Acmil.PowerShell.Common.Ioc;
+using Acmil.Common.Utility.Connections;
 using System.Management.Automation;
 
 namespace Acmil.PowerShell.Common.Cmdlets
 {
 	[Cmdlet(VerbsCommunications.Write, "DbcDataFromDatabase")]
-	public class WriteDbcDataFromDatabaseCmdlet : PSCmdlet
+	public class WriteDbcDataFromDatabaseCmdlet : BaseCmdlet
 	{
 		IDbcManager _dbcManager;
-
-		private RootContainerInstaller _rootContainer;
 
 		[Parameter(Mandatory = true)]
 		public MySqlConnectionInfo ConnectionInfo { get; set; }
@@ -26,13 +23,12 @@ namespace Acmil.PowerShell.Common.Cmdlets
 
 		public WriteDbcDataFromDatabaseCmdlet()
 		{
-			_rootContainer = new RootContainerInstaller();
-			_dbcManager = _rootContainer.Resolve<IDbcManager>();
+			_dbcManager = RootContainer.Resolve<IDbcManager>();
 		}
 
 		protected override void BeginProcessing()
 		{
-
+			base.BeginProcessing();
 		}
 
 		protected override void ProcessRecord()

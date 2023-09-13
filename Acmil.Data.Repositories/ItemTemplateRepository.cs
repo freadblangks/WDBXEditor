@@ -1,4 +1,4 @@
-﻿using Acmil.Data.Contracts.Connections;
+﻿using Acmil.Common.Utility.Interfaces;
 using Acmil.Data.Contracts.Models.Items;
 using Acmil.Data.Contracts.Models.Items.Submodels;
 using Acmil.Data.Contracts.Models.Items.Submodels.Requirements;
@@ -16,13 +16,15 @@ namespace Acmil.Data.Repositories
 	public class ItemTemplateRepository : IItemTemplateRepository
 	{
 		private IDbContextFactory _dbContextFactory;
+		private IUtilityHelper _utilityHelper;
 
-		public ItemTemplateRepository(IDbContextFactory dbContextFactory)
+		public ItemTemplateRepository(IDbContextFactory dbContextFactory, IUtilityHelper utilityHelper)
 		{
 			_dbContextFactory = dbContextFactory;
+			_utilityHelper = utilityHelper;
 		}
 
-		public CompleteItemTemplate ReadItemTemplate(MySqlConnectionInfo connectionInfo, UInt24 entryId)
+		public CompleteItemTemplate ReadItemTemplate(UInt24 entryId)
 		{
 			#region Long Boi
 
@@ -173,6 +175,7 @@ namespace Acmil.Data.Repositories
 
 			#endregion
 
+			var connectionInfo = _utilityHelper.ConfigurationManager.GetConnectionInfo();
 			var worldContext = _dbContextFactory.GetContext(connectionInfo, DbConfigHelper.WorldDatabaseName);
 
 			var sqlParameters = new List<MySqlParameter>()

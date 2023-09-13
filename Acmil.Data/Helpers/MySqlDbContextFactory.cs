@@ -1,11 +1,8 @@
-﻿using Acmil.Data.Contexts;
-using Acmil.Data.Contracts.Connections;
+﻿using Acmil.Common.Utility.Connections;
+using Acmil.Data.Contexts;
 using Acmil.Data.Helpers.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
 
 namespace Acmil.Data.Helpers
 {

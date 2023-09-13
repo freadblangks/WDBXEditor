@@ -1,11 +1,8 @@
-﻿using Acmil.Data.Repositories;
-using System.Security;
-using Acmil.Data.Repositories.Interfaces;
-using Acmil.Data.Helpers;
+﻿using Acmil.Data.Repositories.Interfaces;
 using Acmil.Data.Contracts.Models.Items;
 using Acmil.Data.Services.Interfaces;
 using Acmil.Data.Contracts.Types.Primitives;
-using Acmil.Data.Contracts.Connections;
+using Acmil.Common.Utility.Connections;
 
 namespace Acmil.Data.Services
 {
@@ -30,9 +27,9 @@ namespace Acmil.Data.Services
 		//	Console.WriteLine(result);
 		//}
 
-		public CompleteItemTemplate GetCompleteItemTemplateById(MySqlConnectionInfo connectionInfo, UInt24 entryId)
+		public CompleteItemTemplate GetCompleteItemTemplateById(UInt24 entryId)
 		{
-			return _itemTemplateRepository.ReadItemTemplate(connectionInfo, entryId);
+			return _itemTemplateRepository.ReadItemTemplate(entryId);
 		}
 	}
 }

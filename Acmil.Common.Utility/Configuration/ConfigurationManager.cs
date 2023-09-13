@@ -1,5 +1,7 @@
 ﻿using Acmil.Common.Utility.Configuration.Interfaces;
 using Acmil.Common.Utility.Configuration.SettingsModels;
+using Acmil.Common.Utility.Connections;
+using Acmil.Common.Utility.Exceptions;
 using System.Text.Json;
 
 namespace Acmil.Common.Utility.Configuration
@@ -16,7 +18,25 @@ namespace Acmil.Common.Utility.Configuration
 			PropertyNameCaseInsensitive = true,
 		};
 
+		private static MySqlConnectionInfo _connectionInfo;
+
 		public ConfigurationModel GetConfiguration() => _CONFIGURATION.Value;
+
+		public MySqlConnectionInfo GetConnectionInfo()
+		{
+			if (_connectionInfo is null)
+			{
+				string msg = $"Attempted to read connection info from {nameof(ConfigurationManager)}, but none was found.";
+				msg += " This is usually caused by not calling BaseCmdlet.BeginProcessing() from a child cmdlet before requesting SQL data.";
+				throw new NoConnectionInfoSetException(msg);
+			}
+			return _connectionInfo;
+		}
+
+		public void SetConnectionInfo(MySqlConnectionInfo connectionInfo)
+		{
+			_connectionInfo = connectionInfo;
+		}
 
 		private static ConfigurationModel InitializeConfiguration()
 		{

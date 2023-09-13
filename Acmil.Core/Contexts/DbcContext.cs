@@ -3,7 +3,6 @@ using Acmil.Common.Utility.Logging.Interfaces;
 using Acmil.Core.Contexts.Interfaces;
 using Acmil.Core.Storage;
 using Acmil.Data.Contexts;
-using Acmil.Data.Contracts.Connections;
 using Acmil.Data.Helpers.Interfaces;
 using System.Collections.Concurrent;
 using System.Collections;
@@ -17,7 +16,7 @@ using Acmil.Core.Exceptions;
 using Table = Acmil.Core.Storage.Table;
 using Acmil.Core.Common.Enums;
 using Acmil.Core.Common;
-using System.Linq;
+using Acmil.Common.Utility.Connections;
 
 namespace Acmil.Core.Contexts
 {

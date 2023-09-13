@@ -1,5 +1,5 @@
-﻿using Acmil.Data.Contexts;
-using Acmil.Data.Contracts.Connections;
+﻿using Acmil.Common.Utility.Connections;
+using Acmil.Data.Contexts;
 using System.Security;
 
 namespace Acmil.Data.Helpers.Interfaces

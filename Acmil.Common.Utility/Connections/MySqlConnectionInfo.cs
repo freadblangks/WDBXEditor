@@ -1,4 +1,4 @@
-﻿namespace Acmil.Data.Contracts.Connections
+﻿namespace Acmil.Common.Utility.Connections
 {
 	/// <summary>
 	/// Class for storing information needed to connect to a MySQL database.

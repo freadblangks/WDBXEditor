@@ -1,5 +1,5 @@
-﻿using Acmil.Core.Contexts.Interfaces;
-using Acmil.Data.Contracts.Connections;
+﻿using Acmil.Common.Utility.Connections;
+using Acmil.Core.Contexts.Interfaces;
 using Acmil.Data.Repositories.Interfaces;
 
 namespace Acmil.Data.Repositories
