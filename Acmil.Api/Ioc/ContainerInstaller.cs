@@ -13,9 +13,9 @@ namespace Acmil.Api.Ioc
 			var services = new ServiceCollection() { GetDependencyRegistrations() };
 
 			// SERVICE DEFINITIONS //
+			services.AddTransient<IAchievementManager, AchievementManager>();
 			services.AddTransient<IDbcManager, DbcManager>();
 			services.AddTransient<IItemTemplateManager, ItemTemplateManager>();
-			services.AddTransient<IDbcManager, DbcManager>();
 
 			return services;
 		}

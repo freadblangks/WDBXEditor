@@ -9,7 +9,7 @@ namespace Acmil.Data.Contracts.Models.Achievements.Criteria.Deaths
 	/// </summary>
 	public class DeathsFromEnvironmentalDamageAchievementCriteria : BaseAchievementCriteria
 	{
-		public override byte Type { get; internal set; } = (byte)AchievementCriteriaType.DeathsFrom;
+		public override byte Type { get; internal set; } = (byte)AchievementCriteriaType.DeathsFromEnvironmentalDamage;
 
 		/// <summary>
 		/// An ID identifying the source of environmental damage.

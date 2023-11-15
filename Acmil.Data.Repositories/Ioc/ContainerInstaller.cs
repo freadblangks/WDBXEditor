@@ -1,4 +1,6 @@
 ﻿using Acmil.Common.Ioc;
+using Acmil.Data.Repositories.Helpers;
+using Acmil.Data.Repositories.Helpers.Interfaces;
 using Acmil.Data.Repositories.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -12,9 +14,10 @@ namespace Acmil.Data.Repositories.Ioc
 			var services = new ServiceCollection() { GetDependencyRegistrations() };
 
 			// SERVICE DEFINITIONS //
+			services.AddTransient<IAchievementRepository, AchievementRepository>();
 			services.AddTransient<IDbcRepository, DbcRepository>();
 			services.AddTransient<IItemTemplateRepository, ItemTemplateRepository>();
-			services.AddTransient<IDbcRepository, DbcRepository>();
+			services.AddTransient<IAchievementCriteriaFactory, AchievementCriteriaFactory>();
 
 			return services;
 		}

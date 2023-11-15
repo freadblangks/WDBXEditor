@@ -22,6 +22,11 @@ namespace Acmil.Data.Contracts.Models.Achievements
 		public short ParentCategoryId { get; set; }
 
 		/// <summary>
+		/// 
+		/// </summary>
+		public AchievementCategory ParentCategory { get; internal set; }
+
+		/// <summary>
 		/// The localized name of the category.
 		/// </summary>
 		[MySqlColumnName("Name", isLocalized:true)]

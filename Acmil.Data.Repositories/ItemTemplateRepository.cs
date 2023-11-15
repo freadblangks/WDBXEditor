@@ -170,7 +170,7 @@ namespace Acmil.Data.Repositories
 					`flagsCustom`,
 					`VerifiedBuild`
 				FROM `item_template`
-				WHERE `entry` = @EntryId
+				WHERE `entry` = @EntryId;
 				";
 
 			#endregion

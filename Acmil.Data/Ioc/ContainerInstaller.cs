@@ -1,6 +1,8 @@
 ﻿using Acmil.Common.Ioc;
 using Acmil.Data.Helpers;
 using Acmil.Data.Helpers.Interfaces;
+using Acmil.Data.Helpers.Mapping;
+using Acmil.Data.Helpers.Mapping.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Acmil.Data.Ioc
@@ -13,6 +15,7 @@ namespace Acmil.Data.Ioc
 
 			// SERVICE DEFINITIONS //
 			services.AddTransient<IDbContextFactory, MySqlDbContextFactory>();
+			services.AddTransient<IModelCustomAttributeHelper, ModelCustomAttributeHelper>();
 
 			return services;
 		}

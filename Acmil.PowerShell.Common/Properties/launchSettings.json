@@ -22,6 +22,11 @@
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
       "commandLineArgs": "-NoLogo -NoExit -Command \"Import-Module  'D:\\Sourcecode\\Me\\WDBXEditor\\Acmil.PowerShell.Common\\bin\\Debug\\net6.0\\Acmil.PowerShell.Common.psd1' -Force\";\""
+    },
+    "Import All DBCs": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "commandLineArgs": "-NoLogo -NoExit -Command \"Import-Module  'D:\\Sourcecode\\Me\\WDBXEditor\\Acmil.PowerShell.Common\\bin\\Debug\\net6.0\\Acmil.PowerShell.Common.psd1' -Force\"; $connectionInfo = Initialize-Acmil; Get-ChildItem 'D:\\Sourcecode\\AzerothCore\\AzerothCoreWotlkBuild\\bin\\RelWithDebInfo\\Data\\dbc' | Where-Object { @('Cfg_Configs', 'CharVariations', 'component.wow-enUS', 'WorldChunkSounds') -NotContains $_.Basename} | ForEach-Object { Import-DbcIntoDatabase -ConnectionInfo $connectionInfo -DatabaseName acore_world -DbcPath $_.FullName -TableName '$($_.Basename.ToLower())_dbc' }\""
     }
   }
 }

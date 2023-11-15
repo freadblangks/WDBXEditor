@@ -22,7 +22,7 @@ namespace Acmil.Common.Utility.Configuration.SettingsModels.Logging
 		/// <remarks>
 		/// This represents the "logging.logFileSettings" property in config.json.
 		/// </remarks>
-		public LogFileSettings LogFileSettings { get; set; }
+		public LogFileSettings LogFileSettings { get; set; } = new LogFileSettings();
 
 		/// <summary>
 		/// An object containing settings that configure which destinations logs will be written to.
@@ -30,6 +30,6 @@ namespace Acmil.Common.Utility.Configuration.SettingsModels.Logging
 		/// <remarks>
 		/// This represents the "logging.destinations" property in config.json.
 		/// </remarks>
-		public LoggingDestinations Destinations { get; set; }
+		public LoggingDestinations Destinations { get; set; } = new LoggingDestinations();
 	}
 }

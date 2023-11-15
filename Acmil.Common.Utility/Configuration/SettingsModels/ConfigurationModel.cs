@@ -15,7 +15,7 @@ namespace Acmil.Common.Utility.Configuration.SettingsModels
 		/// <remarks>
 		/// Represents the "logging" property in config.json.
 		/// </remarks>
-		public LoggingConfiguration Logging { get; set; }
+		public LoggingConfiguration Logging { get; set; } = new LoggingConfiguration();
 
 		/// <summary>
 		/// An object containing settings relating to MySQL.
@@ -23,7 +23,7 @@ namespace Acmil.Common.Utility.Configuration.SettingsModels
 		/// <remarks>
 		/// Represents the "mySql" property in config.json.
 		/// </remarks>
-		public MySqlConfiguration MySql { get; set; }
+		public MySqlConfiguration MySql { get; set; } = new MySqlConfiguration();
 
 		/// <summary>
 		/// An object containing settings relating to locale.
@@ -31,6 +31,6 @@ namespace Acmil.Common.Utility.Configuration.SettingsModels
 		/// <remarks>
 		/// Represents the "locale" property in config.json.
 		/// </remarks>
-		public LocaleConfiguration Locale { get; set; }
+		public LocaleConfiguration Locale { get; set; } = new LocaleConfiguration();
 	}
 }

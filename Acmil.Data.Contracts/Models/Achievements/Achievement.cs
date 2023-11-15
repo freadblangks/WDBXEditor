@@ -22,9 +22,9 @@ namespace Acmil.Data.Contracts.Models.Achievements
 		/// The faction (Alliance, Horde, or Both) whose players can earn the Achievement.
 		/// </summary>
 		/// <remarks>
-		/// Both = -1,
-		/// Horde Only = 0,
-		/// Alliance Only = 1
+		/// Both : -1,
+		/// Horde Only : 0,
+		/// Alliance Only : 1
 		/// </remarks>
 		[MySqlColumnName("Faction")]
 		[EnumType(typeof(AchievementFaction))]
@@ -68,6 +68,11 @@ namespace Acmil.Data.Contracts.Models.Achievements
 		public ushort CategoryId { get; set; }
 
 		/// <summary>
+		/// The category under which the Achievement can be found in the UI.
+		/// </summary>
+		public AchievementCategory Category { get; internal set; } = null;
+
+		/// <summary>
 		/// The number of Achievement Points the Achievement is worth.
 		/// </summary>
 		[MySqlColumnName("Points")]
@@ -103,7 +108,12 @@ namespace Acmil.Data.Contracts.Models.Achievements
 		/// a description will be generated automatically for the Achievement reward.
 		/// </remarks>
 		[MySqlColumnName("Reward", isLocalized: true)]
-		public string RewardText { get; set; } = null;
+		public string RewardDescription { get; set; } = null;
+
+		/// <summary>
+		/// The reward the player receives for earning the Achievement.
+		/// </summary>
+		public BaseAchievementReward Reward { get; internal set; } = null;
 
 		/// <summary>
 		/// The minimum number of criteria a player needs to meet to earn the Achievement.
@@ -125,13 +135,6 @@ namespace Acmil.Data.Contracts.Models.Achievements
 		/// <summary>
 		/// The criteria that must be met in order for a character to earn the Achievement.
 		/// </summary>
-		[CompoundField]
-		public List<BaseAchievementCriteria> Criteria { get; set; } = new List<BaseAchievementCriteria>();
-
-		/// <summary>
-		/// The reward the player receives for earning the Achievement.
-		/// </summary>
-		[CompoundField]
-		public BaseAchievementReward Reward { get; set; } = null;
+		public List<BaseAchievementCriteria> Criteria { get; internal set; } = null;
 	}
 }

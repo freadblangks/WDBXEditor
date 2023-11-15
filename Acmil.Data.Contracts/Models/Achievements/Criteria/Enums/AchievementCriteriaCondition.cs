@@ -21,9 +21,9 @@
 		Unknown1 = 2,
 
 		/// <summary>
-		/// Requires the character to be in a specific battleground map.
+		/// Requires the character to be in a specific map.
 		/// </summary>
-		BattlegroundMap = 3,
+		Map = 3,
 
 		/// <summary>
 		/// Requires the character not to lose an arena.

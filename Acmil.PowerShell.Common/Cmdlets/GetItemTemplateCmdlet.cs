@@ -5,14 +5,13 @@ using System.Management.Automation;
 
 namespace Acmil.PowerShell.Common.Cmdlets
 {
-	// TODO: Make this return an enumerable.
-	// TODO: Actually, maybe make a separeate cmdlet called "GetItemTemplates"
+	// TODO: Make a separeate cmdlet called "GetItemTemplates"
 	// TODO: Figure out what we want to do for reading the DBC-side stuff for items.
 	/// <summary>
-	/// A PowerShell cmdlet for reading Item Templates.
+	/// A PowerShell cmdlet for reading individual Item Templates.
 	/// </summary>
 	[Cmdlet(VerbsCommon.Get, "ItemTemplate")]
-	[OutputType(typeof(List<CompleteItemTemplate>))]
+	[OutputType(typeof(CompleteItemTemplate))]
 	public class GetItemTemplateCmdlet : BaseCmdlet
 	{
 		private const string PARAMETER_SET_NAME_GET_BY_ENTRY_ID = "ByEntryId";
@@ -28,20 +27,10 @@ namespace Acmil.PowerShell.Common.Cmdlets
 			_itemTemplateManager = RootContainer.Resolve<IItemTemplateManager>();
 		}
 
-		///// <summary>
-		///// Initializes a new instance of <see cref="GetItemTemplateCmdlet"/> class..
-		///// </summary>
-		///// <param name="itemTemplateManager">An implementation of <see cref="IItemTemplateManager"/>.</param>
-		//internal GetItemTemplateCmdlet(ICmdletHelper cmdletHelper, IItemTemplateManager itemTemplateManager)
-		//{
-		//	_cmdletHelper = cmdletHelper;
-		//	_itemTemplateManager = itemTemplateManager;
-		//}
-
-
 		[Parameter(Mandatory = true, ParameterSetName = PARAMETER_SET_NAME_GET_BY_ENTRY_ID, Position = 0)]
 		public UInt24 EntryId { get; set; }
 
+		// TODO: Get rid of this and move its functionality to a new dedicated cmdlet.
 		[Parameter(Mandatory = true, ParameterSetName = PARAMETER_SET_NAME_GET_BY_NAME, Position = 0)]
 		public string Name { get; set; }
 
@@ -58,28 +47,14 @@ namespace Acmil.PowerShell.Common.Cmdlets
 
 		protected override void ProcessRecord()
 		{
-			try
+			// TODO: Remove this if we don't need it after pulling
+			// out the other parameter set.
+			if (base.ParameterSetName != PARAMETER_SET_NAME_GET_BY_ENTRY_ID)
 			{
-				var results = new List<object>();
-				switch (base.ParameterSetName)
-				{
-					case PARAMETER_SET_NAME_GET_BY_ENTRY_ID:
-						var result = _itemTemplateManager.GetCompleteItemTemplate(EntryId);
-						results = new List<object>() { result };
-						break;
-					case PARAMETER_SET_NAME_GET_BY_NAME:
-						//results = itemTemplateEngine.GetCompleteItemTemplates(Name, Class, SubClass);
-						break;
-					default:
-						CmdletHelper.HandleUnsupportedParameterSet(this);
-						break;
-				}
-				WriteObject(results);
+				CmdletHelper.HandleUnsupportedParameterSet(this);
 			}
-			catch
-			{
-				throw;
-			}
+			var result = _itemTemplateManager.GetCompleteItemTemplate(EntryId);
+			WriteObject(result);
 		}
 	}
 }

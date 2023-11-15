@@ -16,6 +16,7 @@ namespace Acmil.Common.Utility.Configuration
 		private static readonly JsonSerializerOptions _SERIALIZER_CONFIG = new JsonSerializerOptions()
 		{
 			PropertyNameCaseInsensitive = true,
+			WriteIndented = true,
 		};
 
 		private static MySqlConnectionInfo _connectionInfo;
@@ -58,7 +59,7 @@ namespace Acmil.Common.Utility.Configuration
 		private static ConfigurationModel CreateConfigFile()
 		{
 			var config = new ConfigurationModel();
-			string configText = JsonSerializer.Serialize(config);
+			string configText = JsonSerializer.Serialize(config, _SERIALIZER_CONFIG);
 			File.WriteAllText(GetConfigFilePath(), configText);
 
 			return config;

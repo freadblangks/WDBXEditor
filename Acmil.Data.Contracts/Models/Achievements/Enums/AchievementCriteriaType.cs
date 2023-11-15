@@ -21,29 +21,80 @@ namespace Acmil.Data.Contracts.Models.Achievements.Enums
 		/// A requirement where the character must reach a particular level.
 		/// </summary>
 		ReachLevel = 5,
+
+		/// <summary>
+		/// A requirement where the character must reach a certain level in a particular skill.
+		/// </summary>
 		ReachSkillLevel = 7,
 
 		/// <summary>
 		/// A requirement where the character must complete a particular Achievement.
 		/// </summary>
 		CompleteAchievement = 8,
+
+		/// <summary>
+		/// A requirement where the character must complete a certain number of total quests.
+		/// </summary>
 		CompleteQuestCount = 9,
+
+		/// <summary>
+		/// A requirement where the character must complete a daily quest once a day for a consecutive number of days.
+		/// </summary>
 		CompleteDailyQuestDaily = 10,
+
+		/// <summary>
+		/// A requirement where the character must complete a certain number of quests in a particular zone.
+		/// </summary>
 		CompleteQuestsInZone = 11,
+
+		/// <summary>
+		/// A requirement where the character must deal a certain total amount of damage.
+		/// </summary>
 		DamageDone = 13,
+
+		/// <summary>
+		/// A requirement where the character must complete a total number of daily quests.
+		/// </summary>
 		CompleteDailyQuest = 14,
+
+		/// <summary>
+		/// A requirement where the character must complete a particular battleground.
+		/// </summary>
 		CompleteBattleground = 15,
+
+		/// <summary>
+		/// A requirement where the character must die in a particular map.
+		/// </summary>
 		DeathAtMap = 16,
+
+		/// <summary>
+		/// A requirement where the character must die in a dungeon or raid with a specific group size.
+		/// </summary>
 		DeathInDungeon = 18,
 
 		/// <summary>
-		/// (NOT IMPLEMENTED) A requirement where the character must complete a particular raid.
+		/// A requirement where the character must complete a dungeon or raid of a specific player count.
 		/// </summary>
-		[NotImplemented]
-		CompleteRaid = 19,
+		CompleteDungeonOrRaidOfMaxPlayerCount = 19,
+
+		/// <summary>
+		/// A requirement where the character must be killed by a creature.
+		/// </summary>
 		KilledByCreature = 20,
+
+		/// <summary>
+		/// A requirement where the character must fall from a specific height without dying.
+		/// </summary>
 		FallWithoutDying = 24,
-		DeathsFrom = 26,
+
+		/// <summary>
+		/// A requirement where the character must die due to a specific kind of environmental damage.
+		/// </summary>
+		DeathsFromEnvironmentalDamage = 26,
+
+		/// <summary>
+		/// A requirement where the character must complete a particular quest a certain number of times.
+		/// </summary>
 		CompleteQuest = 27,
 		BeSpellTarget = 28,
 		CastSpellExtended = 29,

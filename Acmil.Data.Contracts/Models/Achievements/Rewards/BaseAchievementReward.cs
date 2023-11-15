@@ -16,7 +16,7 @@ namespace Acmil.Data.Contracts.Models.Achievements.Rewards
 
 		/// <summary>
 		/// Builds a string to use for the reward description on the associated Achievement
-		/// if no value is provided for the <see cref="Achievement.RewardText"/>.
+		/// if no value is provided for the <see cref="Achievement.RewardDescription"/>.
 		/// </summary>
 		/// <param name="rewardName">The name of the reward (e.g. item, title).</param>
 		/// <returns>A string to use for the reward description on the associated Achievement.</returns>

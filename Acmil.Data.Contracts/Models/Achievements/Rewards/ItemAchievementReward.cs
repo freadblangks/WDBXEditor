@@ -1,4 +1,5 @@
-﻿using Acmil.Data.Contracts.Attributes;
+﻿using Acmil.Common.Utility.Configuration.SettingsModels.Locale.Enums;
+using Acmil.Data.Contracts.Attributes;
 using Acmil.Data.Contracts.Types.Primitives;
 
 namespace Acmil.Data.Contracts.Models.Achievements.Rewards
@@ -22,6 +23,14 @@ namespace Acmil.Data.Contracts.Models.Achievements.Rewards
 		/// </remarks>
 		[MySqlColumnName("Sender")]
 		public UInt24 SenderId { get; set; }
+
+		/// <summary>
+		/// The locale associated with 
+		/// </summary>
+		[MySqlColumnName("Locale")]
+		[EnumType(typeof(LocaleCode))]
+		[AllowEnumConversionOverride(true)]
+		public string Locale { get; set; }
 
 		/// <summary>
 		/// The text in the message's subject line 

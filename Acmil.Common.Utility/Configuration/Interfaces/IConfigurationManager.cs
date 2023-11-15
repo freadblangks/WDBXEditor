@@ -4,7 +4,7 @@ using Acmil.Common.Utility.Exceptions;
 namespace Acmil.Common.Utility.Configuration.Interfaces
 {
 	/// <summary>
-	/// Manager for interacting with the session configuration values, defined by appsettings.json.
+	/// Manager for interacting with the session configuration values, defined in ~/.acmil/config.json.
 	/// </summary>
 	public interface IConfigurationManager
 	{
@@ -12,7 +12,7 @@ namespace Acmil.Common.Utility.Configuration.Interfaces
 		/// Gets the currently configured <see cref="MySqlConnectionInfo"/> object for connecting to SQL.
 		/// </summary>
 		/// <returns>The currently configured <see cref="MySqlConnectionInfo"/> object.</returns>
-		/// Yes I'm aware this probably be on the implementation, but this will never be referenced that way.
+		/// Yes, I'm aware this should probably be on the implementation, but it will never be referenced that way.
 		/// <exception cref="NoConnectionInfoSetException">
 		/// Thrown when this method is called without a connection info object having been set.
 		/// </exception>
@@ -25,11 +25,9 @@ namespace Acmil.Common.Utility.Configuration.Interfaces
 		public void SetConnectionInfo(MySqlConnectionInfo connectionInfo);
 
 		/// <summary>
-		/// Gets an <see cref="Configuration"/> object containing the configuration values defined in appsettings.json.
+		/// Gets an <see cref="Configuration"/> object containing the configuration values defined in in ~/.acmil/config.json.
 		/// </summary>
-		/// <returns>An <see cref="Configuration"/> object containing the configuration values defined in appsettings.json.</returns>
+		/// <returns>An <see cref="Configuration"/> object containing the configuration values defined in in ~/.acmil/config.json.</returns>
 		SettingsModels.ConfigurationModel GetConfiguration();
-
-		
 	}
 }
