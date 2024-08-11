@@ -20,6 +20,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+IsolatedDependencies/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -148,6 +149,9 @@ publish/
 # checkin your Azure Web App publish settings, but sensitive information contained
 # in these scripts will be unencrypted
 PublishScripts/
+
+# Directories used for output from dev scripts.
+DevScripts/ConvertedEnums/
 
 # NuGet Packages
 *.nupkg

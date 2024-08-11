@@ -57,11 +57,10 @@ html,body {
 <BR>
 <P><STRONG>Command Line Arguments</STRONG> </P>
 
-<STRONG>Console Mode</STRONG>
-<P>
-Opens the editor in a console window. Type help to see a list of commands.
-<BR>
-Arguments:
+<!--This is commented out because it seems to no longer be supported.-->
+<!-- <STRONG>Console Mode</STRONG>
+<P>Opens the editor in a console window. Type help to see a list of commands.</P>
+<P>Arguments:</P>
 <UL>
 <LI>
 -console
@@ -69,21 +68,19 @@ Arguments:
 </UL>
 <BR>
 <CODE>Example: -console</CODE>
-</P>
+</P> -->
 
 
 <STRONG>Extract</STRONG>
-<P>
-Extracts files matching the file filter from either an MPQ archive or a CASC directory.
-<BR>
-Arguments:
+<P>Extracts files matching the file filter from either an MPQ archive or a CASC directory.</P>
+<P>Arguments:</P>
 <UL>
 <LI>
 -f : File filter, * is used as a wildcard
 <LI>
 -s : Source, this is the location of the MPQ file or the CASC directory
 <LI>
--o Output directory, this is the folder to export the files to
+-o : Output directory, this is the folder to export the files to
 </LI>
 </UL>
 <BR>
@@ -91,10 +88,8 @@ Arguments:
 </P>
 
 <STRONG>Export</STRONG>
-<P>
-Exports a specific file to either CSV, JSON or a SQL file.
-<BR>
-Arguments:
+<P>Exports a specific file to either CSV, JSON or a SQL file.</P>
+<P>Arguments:</P>
 <UL>
 <LI>
 -f : File, if combined with a source this simply needs to be the filename otherwise the full file path
@@ -103,7 +98,7 @@ Arguments:
 <LI>
 -b : Build number to load the correct definition from
 <LI>
--o Output directory, this is the output file name and location
+-o : Output directory, this is the output file name and location
 </LI>
 </UL>
 <BR>
@@ -111,10 +106,8 @@ Arguments:
 </P>
 
 <STRONG>SQL Dump</STRONG>
-<P>
-Dumps a specific file's data into a MySQL  database.
-<BR>
-Arguments:
+<P>Dumps a specific file's data into a MySQL  database.</P>
+<P>Arguments:</P>
 <UL>
 <LI>
 -f : File, if combined with a source this simply needs to be the filename otherwise the full file path
@@ -123,11 +116,49 @@ Arguments:
 <LI>
 -b : Build number to load the correct definition from
 <LI>
--c Connection string, the MySQL connection string including database name
+-c : Connection string, the MySQL connection string, including database name
 </LI>
 </UL>
 <BR>
 <CODE>Example: -sqldump -f "Achievement.dbc" -s "E:\WoW\Data\Patch-3.mpq" -b 11802 -c "Server=myServerAddress;Database=myDataBase;Uid=myUsername;Pwd=myPassword;"</CODE>
+</P>
+
+<STRONG>SQL Import</STRONG>
+<P>Imports data from a table in a MySQL database with the option of also writing it to a DBC file.</P>
+<P>Arguments:</P>
+<UL>
+<LI>
+	-f : File, The full path to the DBC file.
+</LI>
+<LI>
+	-b : Build number to load the correct definition from.
+</LI>
+<LI>
+	-c : Connection string, the MySQL connection string, including database name.
+</LI>
+<LI>
+	-t : Table name, in the MySQL database to read DBC data from.
+</LI>
+<LI>
+	-u : Update mode, how the changes read from SQL should be applied to the data loaded from the DBC file.
+	<UL>
+		<LI>Valid options are:</LI>
+		<UL>
+			<LI>Insert</LI>
+			<UL><LI>Only import new records ("Import New" in the UI).</LI></UL>
+			<LI>Update</LI>
+			<UL><LI>Import new records and update any existing ones that are different ("Update Existing" in the UI).</LI></UL>
+			<LI>Replace</LI>
+			<UL><LI>Replace all data for the currently loaded DBC ("Override All" in the UI).</LI></UL>
+		</UL>
+	</UL>
+</LI>
+<LI>
+	-w : (Optional) Write changes to original DBC file specified by the <CODE>-f</CODE> argument. Valid options are "true" or "false" (default).
+</LI>
+</UL>
+<BR>
+<CODE>Example: -sqlimport -f "C:\path\to\dbc\Achievement.dbc" -b 11802 -c "Server=myServerAddress;Database=myDataBase;Uid=myUsername;Pwd=myPassword;" -t "db_achievement_11802" -u "replace" -w "true"</CODE>
 </P>
 
 <BR> <BR><BR>

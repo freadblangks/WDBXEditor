@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Management.Automation" Version="7.2.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Acmil.Api\Acmil.Api.csproj" />
+    <ProjectReference Include="..\Acmil.Common.Ioc\Acmil.Common.Ioc.csproj" />
+    <ProjectReference Include="..\Acmil.Data.Contracts\Acmil.Data.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
