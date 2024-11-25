@@ -182,7 +182,7 @@ namespace WDBXEditor.ConsoleHandler
             Console.WriteLine("");
         }
         #endregion
-        
+
         #region Export
         /// <summary>
         /// Exports a file to either SQL, JSON or CSV
@@ -194,6 +194,7 @@ namespace WDBXEditor.ConsoleHandler
             var pmap = ConsoleManager.ParseCommand(args);
             string output = ParamCheck<string>(pmap, "-o");
             OutputType oType = GetOutputType(output);
+            string tableName = ParamCheck<string>(pmap, "-t");
 
             LoadCommand(args);
 
@@ -210,7 +211,8 @@ namespace WDBXEditor.ConsoleHandler
                         data = Encoding.UTF8.GetBytes(entry.ToJSON());
                         break;
                     case OutputType.SQL:
-                        data = Encoding.UTF8.GetBytes(entry.ToSQL());
+                        // Modify this line to pass the table name
+                        data = Encoding.UTF8.GetBytes(entry.ToSQL(tableName));
                         break;
                 }
 
@@ -221,7 +223,7 @@ namespace WDBXEditor.ConsoleHandler
         }
 
         #endregion
-        
+
         #region SQL Dump
         /// <summary>
         /// Exports a file directly into a SQL database

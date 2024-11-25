@@ -481,15 +481,15 @@ namespace WDBXEditor.Storage
 		/// Generates a SQL string to DROP and ADD a table then INSERT the records
 		/// </summary>
 		/// <returns></returns>
-		public string ToSQL()
+		public string ToSQL(string customTableName = null)
 		{
-			string tableName = $"db_{TableStructure.Name}_{Build}";
+			string tableName = customTableName ?? $"db_{TableStructure.Name}_{Build}";
 
 			StringBuilder sb = new StringBuilder();
 			sb.AppendLine($"DROP TABLE IF EXISTS `{tableName}`; ");
 			sb.AppendLine($"CREATE TABLE `{tableName}` ({Data.Columns.ToSql(Key)}) ENGINE=InnoDB DEFAULT CHARSET=utf8; ");
 			foreach (DataRow row in Data.Rows)
-				sb.AppendLine($"INSERT INTO `{tableName}` VALUES ({ row.ToSql() }); ");
+				sb.AppendLine($"INSERT INTO `{tableName}` VALUES ({row.ToSql()}); ");
 
 			return sb.ToString();
 		}

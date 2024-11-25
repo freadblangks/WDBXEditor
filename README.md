@@ -1,16 +1,5 @@
 # WDBX Editor
 
-[![Latest Download](https://img.shields.io/badge/Latest-Download-blue.svg)](https://ci.appveyor.com/api/projects/majorcyto/wdbxeditor/artifacts/WDBXEditor.zip) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=44220492)](https://www.bountysource.com/trackers/44220492-wowdevtools-wdbxeditor?utm_source=44433103&utm_medium=shield&utm_campaign=TRACKER_BADGE)
-[![WoWDevDiscord](https://img.shields.io/badge/Discord-WoWDev-blue.svg)](https://discord.gg/EzKJjtv)
-
-
-### Build Status
-
-CI | Build 
-:------------: | :------------: 
-AppVeyor | [![Build status](https://ci.appveyor.com/api/projects/status/y4sp6sijsdvu2v80/branch/master?svg=true)](https://ci.appveyor.com/project/majorcyto/wdbxeditor/branch/master) | 
-
-
 ### About
 This editor has full support for reading and saving all release versions of DBC, DB2, WDB, ADB and DBCache. This does include support for Legion DB2 and DBCache files and works with all variants (header flags) of these.
 Like the other editors I've used a definition based system whereby definitions tell the editor how to interpret each file's columns - this is a lot more reliable than guessing column types but does mean the definitions must be maintained. So far, I've mapped almost all expansions with MoP being ~50% complete and everything else being 99%+ (excluding column names).
