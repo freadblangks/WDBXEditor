@@ -42,11 +42,11 @@
             this.panel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.txtText);
             this.panel1.Location = new System.Drawing.Point(0, 1);
@@ -54,9 +54,9 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
             this.panel1.Size = new System.Drawing.Size(524, 329);
             this.panel1.TabIndex = 0;
-            // 
+            //
             // txtText
-            // 
+            //
             this.txtText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtText.Location = new System.Drawing.Point(5, 5);
             this.txtText.Multiline = true;
@@ -66,9 +66,9 @@
             this.txtText.TabIndex = 0;
             this.txtText.Enter += new System.EventHandler(this.txtText_Enter);
             this.txtText.Leave += new System.EventHandler(this.txtText_Leave);
-            // 
+            //
             // toolStrip1
-            // 
+            //
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
@@ -82,21 +82,21 @@
             this.toolStrip1.Size = new System.Drawing.Size(524, 33);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
-            // 
+            //
             // toolStripLabel1
-            // 
+            //
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(45, 20);
             this.toolStripLabel1.Text = "Search:";
-            // 
+            //
             // txtFilter
-            // 
+            //
             this.txtFilter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Size = new System.Drawing.Size(150, 23);
-            // 
+            //
             // btnFind
-            // 
+            //
             this.btnFind.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnFind.Image = global::WDBXEditor.Properties.Resources.search;
             this.btnFind.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -104,21 +104,21 @@
             this.btnFind.Size = new System.Drawing.Size(23, 20);
             this.btnFind.Text = "toolStripButton1";
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
-            // 
+            //
             // toolStripSeparator1
-            // 
+            //
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 23);
-            // 
+            //
             // lblFind
-            // 
+            //
             this.lblFind.Name = "lblFind";
             this.lblFind.Size = new System.Drawing.Size(109, 20);
             this.lblFind.Text = "No matches found.";
             this.lblFind.Visible = false;
-            // 
+            //
             // btnSave
-            // 
+            //
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Location = new System.Drawing.Point(356, 333);
             this.btnSave.Name = "btnSave";
@@ -127,9 +127,9 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
+            //
             // btnClose
-            // 
+            //
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Location = new System.Drawing.Point(437, 333);
@@ -139,9 +139,9 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
+            //
             // TextEditor
-            // 
+            //
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

@@ -80,9 +80,9 @@ namespace ADGV
             _textStrings.Add("NODESELECTALL", "(Select All)");
             _textStrings.Add("NODESELECTEMPTY", "(Blanks)");
             _textStrings.Add("HIDECOLUMN", "Hide");
-            
+
             InitializeComponent();
-            
+
             DataType = dataType;
         }
 
@@ -201,7 +201,7 @@ namespace ADGV
         }
 
         #endregion
-        
+
         public void SetLoadedMode(bool enabled)
         {
             cancelFilterMenuItem.Enabled = enabled;

@@ -51,9 +51,9 @@
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
+            //
             // btnLoad
-            // 
+            //
             this.btnLoad.Enabled = false;
             this.btnLoad.Location = new System.Drawing.Point(209, 178);
             this.btnLoad.Name = "btnLoad";
@@ -62,9 +62,9 @@
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            // 
+            //
             // btnClose
-            // 
+            //
             this.btnClose.Location = new System.Drawing.Point(290, 178);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
@@ -72,21 +72,21 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
+            //
             // openFileDialog
-            // 
+            //
             this.openFileDialog.Filter = "CSV files (*.csv)|*.csv|Text files (*.txt)|*.txt";
-            // 
+            //
             // txtFilePath
-            // 
+            //
             this.txtFilePath.Location = new System.Drawing.Point(37, 13);
             this.txtFilePath.Name = "txtFilePath";
             this.txtFilePath.ReadOnly = true;
             this.txtFilePath.Size = new System.Drawing.Size(221, 20);
             this.txtFilePath.TabIndex = 1;
-            // 
+            //
             // btnBrowse
-            // 
+            //
             this.btnBrowse.Location = new System.Drawing.Point(264, 12);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(80, 23);
@@ -94,18 +94,18 @@
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(5, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "File:";
-            // 
+            //
             // chkHeader
-            // 
+            //
             this.chkHeader.AutoSize = true;
             this.chkHeader.Checked = true;
             this.chkHeader.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -116,9 +116,9 @@
             this.chkHeader.Text = "Has Header Row?";
             this.toolTip1.SetToolTip(this.chkHeader, "Will ignore the first row");
             this.chkHeader.UseVisualStyleBackColor = true;
-            // 
+            //
             // radUpdate
-            // 
+            //
             this.radUpdate.AutoSize = true;
             this.radUpdate.Location = new System.Drawing.Point(122, 39);
             this.radUpdate.Name = "radUpdate";
@@ -126,9 +126,9 @@
             this.radUpdate.TabIndex = 4;
             this.radUpdate.Text = "Update Existing";
             this.radUpdate.UseVisualStyleBackColor = true;
-            // 
+            //
             // radOverride
-            // 
+            //
             this.radOverride.AutoSize = true;
             this.radOverride.Location = new System.Drawing.Point(227, 39);
             this.radOverride.Name = "radOverride";
@@ -136,9 +136,9 @@
             this.radOverride.TabIndex = 5;
             this.radOverride.Text = "Override All";
             this.radOverride.UseVisualStyleBackColor = true;
-            // 
+            //
             // radNewOnly
-            // 
+            //
             this.radNewOnly.AutoSize = true;
             this.radNewOnly.Checked = true;
             this.radNewOnly.Location = new System.Drawing.Point(37, 39);
@@ -148,9 +148,9 @@
             this.radNewOnly.TabStop = true;
             this.radNewOnly.Text = "Import New";
             this.radNewOnly.UseVisualStyleBackColor = true;
-            // 
+            //
             // panel1
-            // 
+            //
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
@@ -166,18 +166,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(353, 160);
             this.panel1.TabIndex = 13;
-            // 
+            //
             // panel2
-            // 
+            //
             this.panel2.Controls.Add(this.rdoFixIds);
             this.panel2.Controls.Add(this.rdoNewest);
             this.panel2.Location = new System.Drawing.Point(150, 59);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(160, 22);
             this.panel2.TabIndex = 22;
-            // 
+            //
             // rdoFixIds
-            // 
+            //
             this.rdoFixIds.AutoSize = true;
             this.rdoFixIds.Checked = true;
             this.rdoFixIds.Location = new System.Drawing.Point(3, 3);
@@ -189,9 +189,9 @@
             this.toolTip1.SetToolTip(this.rdoFixIds, "This will increment all Ids so that there are no duplicates");
             this.rdoFixIds.UseVisualStyleBackColor = true;
             this.rdoFixIds.CheckedChanged += new System.EventHandler(this.chkFixIds_CheckedChanged);
-            // 
+            //
             // rdoNewest
-            // 
+            //
             this.rdoNewest.AutoSize = true;
             this.rdoNewest.Location = new System.Drawing.Point(65, 3);
             this.rdoNewest.Name = "rdoNewest";
@@ -201,9 +201,9 @@
             this.toolTip1.SetToolTip(this.rdoNewest, "This will override previous data if a newer row with the same Id is encountered");
             this.rdoNewest.UseVisualStyleBackColor = true;
             this.rdoNewest.CheckedChanged += new System.EventHandler(this.chkNewest_CheckedChanged);
-            // 
+            //
             // label4
-            // 
+            //
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(5, 138);
             this.label4.MaximumSize = new System.Drawing.Size(370, 0);
@@ -211,9 +211,9 @@
             this.label4.Size = new System.Drawing.Size(185, 13);
             this.label4.TabIndex = 19;
             this.label4.Text = "Override All: Replaces all current data";
-            // 
+            //
             // label3
-            // 
+            //
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 107);
             this.label3.MaximumSize = new System.Drawing.Size(350, 0);
@@ -222,9 +222,9 @@
             this.label3.TabIndex = 18;
             this.label3.Text = "Update Existing: Imports new records and updates any existing ones that are diffe" +
     "rent";
-            // 
+            //
             // label2
-            // 
+            //
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 89);
             this.label2.MaximumSize = new System.Drawing.Size(200, 0);
@@ -232,9 +232,9 @@
             this.label2.Size = new System.Drawing.Size(184, 13);
             this.label2.TabIndex = 17;
             this.label2.Text = "Import New: Imports new records only";
-            // 
+            //
             // LoadCSV
-            // 
+            //
             this.AcceptButton = this.btnLoad;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

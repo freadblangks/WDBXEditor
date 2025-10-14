@@ -7,7 +7,7 @@ namespace ADGV
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        
+
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -42,9 +42,9 @@ namespace ADGV
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFilter)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // button_ok
-            // 
+            //
             this.button_ok.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button_ok.Location = new System.Drawing.Point(329, 186);
             this.button_ok.Name = "button_ok";
@@ -53,9 +53,9 @@ namespace ADGV
             this.button_ok.Text = "OK";
             this.button_ok.UseVisualStyleBackColor = true;
             this.button_ok.Click += new System.EventHandler(this.button_ok_Click);
-            // 
+            //
             // button_cancel
-            // 
+            //
             this.button_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button_cancel.Location = new System.Drawing.Point(410, 186);
             this.button_cancel.Name = "button_cancel";
@@ -64,23 +64,23 @@ namespace ADGV
             this.button_cancel.Text = "Cancel";
             this.button_cancel.UseVisualStyleBackColor = true;
             this.button_cancel.Click += new System.EventHandler(this.button_cancel_Click);
-            // 
+            //
             // label_columnName
-            // 
+            //
             this.label_columnName.AutoSize = true;
             this.label_columnName.Location = new System.Drawing.Point(4, 9);
             this.label_columnName.Name = "label_columnName";
             this.label_columnName.Size = new System.Drawing.Size(120, 13);
             this.label_columnName.TabIndex = 2;
             this.label_columnName.Text = "Show rows where value";
-            // 
+            //
             // errorProvider
-            // 
+            //
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
-            // 
+            //
             // dgvFilter
-            // 
+            //
             this.dgvFilter.AllowUserToResizeRows = false;
             this.dgvFilter.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFilter.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -93,21 +93,21 @@ namespace ADGV
             this.dgvFilter.Size = new System.Drawing.Size(478, 155);
             this.dgvFilter.TabIndex = 4;
             this.dgvFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvFilter_MouseDown);
-            // 
+            //
             // Filter
-            // 
+            //
             this.Filter.FillWeight = 119.5431F;
             this.Filter.HeaderText = "Filter Operation";
             this.Filter.Name = "Filter";
-            // 
+            //
             // Value
-            // 
+            //
             this.Value.FillWeight = 119.5431F;
             this.Value.HeaderText = "Value";
             this.Value.Name = "Value";
-            // 
+            //
             // Operator
-            // 
+            //
             this.Operator.FillWeight = 60.9137F;
             this.Operator.HeaderText = "Operator";
             this.Operator.Items.AddRange(new object[] {
@@ -115,9 +115,9 @@ namespace ADGV
             "AND",
             "OR"});
             this.Operator.Name = "Operator";
-            // 
+            //
             // btnReset
-            // 
+            //
             this.btnReset.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnReset.Location = new System.Drawing.Point(7, 186);
             this.btnReset.Name = "btnReset";
@@ -126,9 +126,9 @@ namespace ADGV
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
+            //
             // FormCustomFilter
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button_cancel;

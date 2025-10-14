@@ -183,7 +183,7 @@ namespace WDBXEditor
                 }
                 else if (rdoFlag.Checked && GetHex(txtFind.Text, out findflag))
                 {
-                    cell = _data.SearchFlag(findflag, true, completedCells);                    
+                    cell = _data.SearchFlag(findflag, true, completedCells);
                 }
 
                 if (cell.X == -1 || cell.Y == -1)

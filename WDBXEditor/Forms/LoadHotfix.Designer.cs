@@ -33,18 +33,18 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.lbDefinitions = new WDBXEditor.Common.BufferedListBox();
             this.SuspendLayout();
-            // 
+            //
             // label3
-            // 
+            //
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(9, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(161, 13);
             this.label3.TabIndex = 17;
             this.label3.Text = "Select which hotfix entry to read:";
-            // 
+            //
             // btnLoad
-            // 
+            //
             this.btnLoad.Location = new System.Drawing.Point(116, 233);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(75, 23);
@@ -52,9 +52,9 @@
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            // 
+            //
             // btnClose
-            // 
+            //
             this.btnClose.Location = new System.Drawing.Point(197, 233);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
@@ -62,17 +62,17 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
+            //
             // lbDefinitions
-            // 
+            //
             this.lbDefinitions.FormattingEnabled = true;
             this.lbDefinitions.Location = new System.Drawing.Point(12, 28);
             this.lbDefinitions.Name = "lbDefinitions";
             this.lbDefinitions.Size = new System.Drawing.Size(260, 199);
             this.lbDefinitions.TabIndex = 14;
-            // 
+            //
             // LoadHotfix
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);

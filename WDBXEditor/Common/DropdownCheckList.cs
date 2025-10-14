@@ -32,7 +32,7 @@ namespace WDBXEditor.Common
             {
                 if (i == lbItems.Items.Count - 1)
                 {
-                    //Last item force update                    
+                    //Last item force update
                     lbItems.SetItemChecked(i, false);
                     _loading = false;
                     lbItems.SetItemChecked(i, true);

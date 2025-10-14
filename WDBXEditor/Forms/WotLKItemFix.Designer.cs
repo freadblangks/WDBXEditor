@@ -51,9 +51,9 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchema)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // btnClose
-            // 
+            //
             this.btnClose.Location = new System.Drawing.Point(293, 418);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
@@ -61,9 +61,9 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
+            //
             // ddlTable
-            // 
+            //
             this.ddlTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlTable.FormattingEnabled = true;
             this.ddlTable.Location = new System.Drawing.Point(66, 142);
@@ -71,25 +71,25 @@
             this.ddlTable.Size = new System.Drawing.Size(203, 21);
             this.ddlTable.TabIndex = 26;
             this.ddlTable.SelectedIndexChanged += new System.EventHandler(this.ddlTable_SelectedIndexChanged);
-            // 
+            //
             // label9
-            // 
+            //
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(24, 145);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(37, 13);
             this.label9.TabIndex = 27;
             this.label9.Text = "Table:";
-            // 
+            //
             // txtUser
-            // 
+            //
             this.txtUser.Location = new System.Drawing.Point(67, 63);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(275, 20);
             this.txtUser.TabIndex = 3;
-            // 
+            //
             // panel1
-            // 
+            //
             this.panel1.Controls.Add(this.dgvSchema);
             this.panel1.Controls.Add(this.ddlTemplate);
             this.panel1.Controls.Add(this.label6);
@@ -110,9 +110,9 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(356, 400);
             this.panel1.TabIndex = 13;
-            // 
+            //
             // dgvSchema
-            // 
+            //
             this.dgvSchema.AllowUserToAddRows = false;
             this.dgvSchema.AllowUserToDeleteRows = false;
             this.dgvSchema.AllowUserToOrderColumns = true;
@@ -123,9 +123,9 @@
             this.dgvSchema.Name = "dgvSchema";
             this.dgvSchema.Size = new System.Drawing.Size(332, 201);
             this.dgvSchema.TabIndex = 30;
-            // 
+            //
             // ddlTemplate
-            // 
+            //
             this.ddlTemplate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlTemplate.FormattingEnabled = true;
             this.ddlTemplate.Items.AddRange(new object[] {
@@ -138,18 +138,18 @@
             this.ddlTemplate.Size = new System.Drawing.Size(203, 21);
             this.ddlTemplate.TabIndex = 29;
             this.ddlTemplate.SelectedIndexChanged += new System.EventHandler(this.ddlTemplate_SelectedIndexChanged);
-            // 
+            //
             // label6
-            // 
+            //
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(7, 172);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(54, 13);
             this.label6.TabIndex = 28;
             this.label6.Text = "Template:";
-            // 
+            //
             // btnRefresh
-            // 
+            //
             this.btnRefresh.Location = new System.Drawing.Point(275, 115);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(67, 21);
@@ -157,18 +157,18 @@
             this.btnRefresh.Text = "Connect";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(20, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Server:";
-            // 
+            //
             // ddlDatabases
-            // 
+            //
             this.ddlDatabases.Enabled = false;
             this.ddlDatabases.FormattingEnabled = true;
             this.ddlDatabases.Location = new System.Drawing.Point(67, 115);
@@ -176,68 +176,68 @@
             this.ddlDatabases.Size = new System.Drawing.Size(202, 21);
             this.ddlDatabases.TabIndex = 6;
             this.ddlDatabases.SelectedIndexChanged += new System.EventHandler(this.ddlDatabases_SelectedIndexChanged);
-            // 
+            //
             // label2
-            // 
+            //
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(32, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Port:";
-            // 
+            //
             // label5
-            // 
+            //
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(5, 119);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "Database:";
-            // 
+            //
             // label3
-            // 
+            //
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(3, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Username:";
-            // 
+            //
             // txtPass
-            // 
+            //
             this.txtPass.Location = new System.Drawing.Point(67, 89);
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(275, 20);
             this.txtPass.TabIndex = 4;
             this.txtPass.UseSystemPasswordChar = true;
-            // 
+            //
             // label4
-            // 
+            //
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(5, 92);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "Password:";
-            // 
+            //
             // txtHost
-            // 
+            //
             this.txtHost.Location = new System.Drawing.Point(67, 11);
             this.txtHost.Name = "txtHost";
             this.txtHost.Size = new System.Drawing.Size(275, 20);
             this.txtHost.TabIndex = 1;
-            // 
+            //
             // txtPort
-            // 
+            //
             this.txtPort.Location = new System.Drawing.Point(67, 37);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(275, 20);
             this.txtPort.TabIndex = 2;
             this.txtPort.Text = "3306";
-            // 
+            //
             // btnLoad
-            // 
+            //
             this.btnLoad.Enabled = false;
             this.btnLoad.Location = new System.Drawing.Point(212, 418);
             this.btnLoad.Name = "btnLoad";
@@ -246,9 +246,9 @@
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            // 
+            //
             // WotLKItemFix
-            // 
+            //
             this.AcceptButton = this.btnLoad;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

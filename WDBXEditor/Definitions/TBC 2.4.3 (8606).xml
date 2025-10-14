@@ -113,7 +113,7 @@
   </Table>
   <Table Name="CharacterFacialHairStyles" Build="8606">
     <Field Name="ID" Type="int" IsIndex="true" AutoGenerate="true" />
-    <Field Name="ID" Type="int" IsIndex="true" />
+    <Field Name="Race" Type="int" />
     <Field Name="SexID" Type="int" />
     <Field Name="VariationID" Type="int" />
     <Field Name="Geoset" Type="int" ArraySize="6" />
@@ -614,6 +614,7 @@
     <Field Name="ArenaPoints" Type="int" />
     <Field Name="ItemID" Type="int" ArraySize="5" />
     <Field Name="ItemCount" Type="int" ArraySize="5" />
+    <Field Name="PersonalArenaRating" Type="int" />
   </Table>
   <Table Name="ItemGroupSounds" Build="8606">
     <Field Name="ID" Type="int" IsIndex="true" />
@@ -1252,7 +1253,6 @@
     <Field Name="CastKit" Type="int" />
     <Field Name="ImpactKit" Type="int" />
     <Field Name="StateKit" Type="int" />
-    <Field Name="StateDoneKit" Type="int" />
     <Field Name="ChannelKit" Type="int" />
     <Field Name="HasMissile" Type="int" />
     <Field Name="MissileModel" Type="int" />
@@ -1263,6 +1263,16 @@
     <Field Name="Flags" Type="int" />
     <Field Name="CasterImpactKit" Type="int" />
     <Field Name="TargetImpactKit" Type="int" />
+    <Field Name="MissileAttachment" Type="int" />
+    <Field Name="MissileFollowGroundHeight" Type="int" />
+    <Field Name="MissileFollowGroundDropSpeed" Type="int" />
+    <Field Name="MissileFollowGroundApproach" Type="int" />
+    <Field Name="MissileFollowGroundFlags" Type="int" />
+    <Field Name="MissileMotion" Type="int" />
+    <Field Name="MissileTargetingKit" Type="int" />
+    <Field Name="InstantAreaKit" Type="int" />
+    <Field Name="ImpactAreaKit" Type="int" />
+    <Field Name="PersistentAreaKit" Type="int" />
   </Table>
   <Table Name="SpellVisualEffectName" Build="8606">
     <Field Name="ID" Type="int" IsIndex="true" />

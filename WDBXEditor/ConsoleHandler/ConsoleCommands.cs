@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using WDBXEditor.Archives.CASC.Handlers;
 using WDBXEditor.Archives.MPQ;
 using WDBXEditor.Common;
+using WDBXEditor.Reader;
 using WDBXEditor.Storage;
 using static WDBXEditor.Common.Constants;
 
@@ -23,7 +24,7 @@ namespace WDBXEditor.ConsoleHandler
         /// <para>load -f "*.dbc" -s ".mpq/wow dir" -b 11802</para>
         /// </summary>
         /// <param name="args"></param>
-        /// 
+        ///
         public static void LoadCommand(string[] args)
         {
             var pmap = ConsoleManager.ParseCommand(args);
@@ -114,14 +115,14 @@ namespace WDBXEditor.ConsoleHandler
             string source = ParamCheck<string>(pmap, "-s");
             string output = ParamCheck<string>(pmap, "-o");
             SourceType sType = GetSourceType(source);
-            
+
             if (string.IsNullOrWhiteSpace(filter))
                 filter = "*";
 
             string regexfilter = "(" + Regex.Escape(filter).Replace(@"\*", @".*").Replace(@"\?", ".") + ")";
             Func<string, bool> TypeCheck = t => Path.GetExtension(t).ToLower() == ".dbc" || Path.GetExtension(t).ToLower() == ".db2";
 
-            
+
             var dic = new ConcurrentDictionary<string, MemoryStream>();
             switch (sType)
             {
@@ -181,7 +182,41 @@ namespace WDBXEditor.ConsoleHandler
             Console.WriteLine("");
         }
         #endregion
-        
+
+        #region Import
+        /// <summary>
+        /// Imports a csv into a DBC
+        /// <para>-import -f "foo.dbc" -b 11802 -c "foo.csv" -h true -u replace -i FixIds</para>
+        /// -f name of dbc file
+        /// -b build number to use when loading dbc
+        /// -c name of csv file
+        /// -h sets whether csv has header row
+        /// -u updateMode (0:Insert|1:Update|2:Replace)
+        /// -i idImportMode (1:FixIds|2:TakeNewest)
+        /// </summary>
+        /// <param name="args"></param>
+        public static void ImportArgCommand(string[] args)
+        {
+            LoadCommand(args);
+
+            var pmap = ConsoleManager.ParseCommand(args);
+            var csvFileName = ParamCheck<string>(pmap, "-c");
+            var hasHeader = ParamCheck<bool>(pmap, "-h", false);
+            var updateMode = ParamCheck<UpdateMode>(pmap, "-u");
+            var importMode = ParamCheck<ImportFlags>(pmap, "-i");
+
+            var entry = Database.Entries[0];
+
+            if ( !entry.ImportCSV(csvFileName, hasHeader, updateMode, out var importError, importMode) )
+            {
+                var dbcFileName = ParamCheck<string>(pmap, "-f");
+                throw new Exception($"   Error importing {csvFileName} into {dbcFileName}: {importError}");
+            }
+
+            new DBReader().Write(entry, entry.SavePath);
+        }
+        #endregion
+
         #region Export
         /// <summary>
         /// Exports a file to either SQL, JSON or CSV
@@ -220,7 +255,7 @@ namespace WDBXEditor.ConsoleHandler
         }
 
         #endregion
-        
+
         #region SQL Dump
         /// <summary>
         /// Exports a file directly into a SQL database
@@ -249,7 +284,7 @@ namespace WDBXEditor.ConsoleHandler
             }
         }
 
-        #endregion  
+        #endregion
 
         #region Helpers
         private static T ParamCheck<T>(Dictionary<string, string> map, string field, bool required = true)
@@ -258,6 +293,9 @@ namespace WDBXEditor.ConsoleHandler
             {
                 try
                 {
+                    if (typeof(T).IsEnum)
+                        return (T)Enum.Parse(typeof(T), map[field], true);
+
                     return (T)Convert.ChangeType(map[field], typeof(T));
                 }
                 catch

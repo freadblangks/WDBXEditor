@@ -14,7 +14,7 @@ namespace WDBXEditor.Archives.CASC.Handlers
     public class CASCHandler : IDisposable
     {
         public string BasePath { get; set; }
-        
+
         List<IndexFile> idxFiles = new List<IndexFile>();
         List<string> indexFiles = new List<string>();
         ConcurrentDictionary<uint, DataFile> dataFiles = new ConcurrentDictionary<uint, DataFile>();
@@ -349,7 +349,7 @@ namespace WDBXEditor.Archives.CASC.Handlers
 
         public void Dispose()
         {
-            
+
         }
     }
 }

@@ -45,7 +45,7 @@ namespace ADGV
             // MenuStrip
             //
             this.AutoSize = false;
-            this.Size = new System.Drawing.Size(27, 186);            
+            this.Size = new System.Drawing.Size(27, 186);
             //
             // sortASCMenuItem
             //
@@ -113,9 +113,9 @@ namespace ADGV
                 cancelSortMenuItem,
                 toolStripSeparator1MenuItem,
                 customFilterLastFiltersListMenuItem,
-                cancelFilterMenuItem,                
+                cancelFilterMenuItem,
             });
-            
+
             this.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(MenuStrip_Closed);
             this.LostFocus += new System.EventHandler(MenuStrip_LostFocus);
             this.cancelFilterMenuItem.Click += new System.EventHandler(cancelFilterMenuItem_Click);

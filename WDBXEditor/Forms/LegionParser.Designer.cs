@@ -45,9 +45,9 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgFiles)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // btnSelect
-            // 
+            //
             this.btnSelect.Location = new System.Drawing.Point(262, 1);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(75, 23);
@@ -55,25 +55,25 @@
             this.btnSelect.Text = "Select Files";
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Build Number: ";
-            // 
+            //
             // txtBuild
-            // 
+            //
             this.txtBuild.Location = new System.Drawing.Point(85, 3);
             this.txtBuild.Name = "txtBuild";
             this.txtBuild.Size = new System.Drawing.Size(171, 20);
             this.txtBuild.TabIndex = 2;
-            // 
+            //
             // btnParse
-            // 
+            //
             this.btnParse.Enabled = false;
             this.btnParse.Location = new System.Drawing.Point(343, 1);
             this.btnParse.Name = "btnParse";
@@ -82,9 +82,9 @@
             this.btnParse.Text = "Parse";
             this.btnParse.UseVisualStyleBackColor = true;
             this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
-            // 
+            //
             // btnClose
-            // 
+            //
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Location = new System.Drawing.Point(367, 352);
             this.btnClose.Name = "btnClose";
@@ -92,9 +92,9 @@
             this.btnClose.TabIndex = 4;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
-            // 
+            //
             // btnSave
-            // 
+            //
             this.btnSave.Enabled = false;
             this.btnSave.Location = new System.Drawing.Point(286, 352);
             this.btnSave.Name = "btnSave";
@@ -103,9 +103,9 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
+            //
             // rdoCASC
-            // 
+            //
             this.rdoCASC.AutoSize = true;
             this.rdoCASC.Checked = true;
             this.rdoCASC.Location = new System.Drawing.Point(85, 29);
@@ -115,9 +115,9 @@
             this.rdoCASC.TabStop = true;
             this.rdoCASC.Text = "From CASC";
             this.rdoCASC.UseVisualStyleBackColor = true;
-            // 
+            //
             // rdoFile
-            // 
+            //
             this.rdoFile.AutoSize = true;
             this.rdoFile.Location = new System.Drawing.Point(170, 29);
             this.rdoFile.Name = "rdoFile";
@@ -125,16 +125,16 @@
             this.rdoFile.TabIndex = 9;
             this.rdoFile.Text = "From File";
             this.rdoFile.UseVisualStyleBackColor = true;
-            // 
+            //
             // autoProgressBar1
-            // 
+            //
             this.autoProgressBar1.Location = new System.Drawing.Point(15, 352);
             this.autoProgressBar1.Name = "autoProgressBar1";
             this.autoProgressBar1.Size = new System.Drawing.Size(265, 23);
             this.autoProgressBar1.TabIndex = 6;
-            // 
+            //
             // panel1
-            // 
+            //
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.txtBuild);
             this.panel1.Controls.Add(this.rdoFile);
@@ -145,9 +145,9 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(431, 49);
             this.panel1.TabIndex = 10;
-            // 
+            //
             // dgFiles
-            // 
+            //
             this.dgFiles.AllowUserToAddRows = false;
             this.dgFiles.AllowUserToDeleteRows = false;
             this.dgFiles.AllowUserToResizeColumns = false;
@@ -162,22 +162,22 @@
             this.dgFiles.ReadOnly = true;
             this.dgFiles.Size = new System.Drawing.Size(431, 279);
             this.dgFiles.TabIndex = 11;
-            // 
+            //
             // File
-            // 
+            //
             this.File.FillWeight = 250F;
             this.File.HeaderText = "DB File";
             this.File.Name = "File";
             this.File.ReadOnly = true;
-            // 
+            //
             // Parsed
-            // 
+            //
             this.Parsed.HeaderText = "Parsed";
             this.Parsed.Name = "Parsed";
             this.Parsed.ReadOnly = true;
-            // 
+            //
             // LegionParser
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;

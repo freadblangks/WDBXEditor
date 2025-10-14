@@ -92,7 +92,7 @@ namespace WDBXEditor.Reader
         {
             if (map == null)
                 return br.ReadInt32();
-            
+
             byte[] b = new byte[sizeof(int)];
             for (int i = 0; i < map.ByteCount; i++)
                 b[i] = br.ReadByte();

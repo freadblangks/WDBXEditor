@@ -245,7 +245,6 @@
   </Table>
   <Table Name="Cfg_Configs" Build="12340">
     <Field Name="ID" Type="int" IsIndex="true" AutoGenerate="true" />
-    <Field Name="ID" Type="int" />
     <Field Name="RealmType" Type="int" />
     <Field Name="PlayerKillingAllowed" Type="int" />
     <Field Name="Roleplaying" Type="int" />
@@ -1572,8 +1571,10 @@
     <Field Name="AttributesExE" Type="uint" />
     <Field Name="AttributesExF" Type="uint" />
     <Field Name="AttributesExG" Type="uint" />
-    <Field Name="ShapeshiftMask" Type="ulong" />
-    <Field Name="ShapeshiftExclude" Type="ulong" />
+    <Field Name="Stances" Type="uint" />
+    <Field Name="unk_320_2" Type="uint" />
+    <Field Name="StancesNot" Type="uint" />
+    <Field Name="unk_320_3" Type="uint" />
     <Field Name="Targets" Type="uint" />
     <Field Name="TargetCreatureType" Type="uint" />
     <Field Name="RequiresSpellFocus" Type="uint" />

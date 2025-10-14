@@ -95,22 +95,22 @@ namespace WDBXEditor
             bool db2 = Files.Any(x => Path.GetExtension(x).IndexOf("db2", IGNORECASE) >= 0) || Files.Any(x => Path.GetExtension(x).IndexOf("adb", IGNORECASE) >= 0);
 
             var files = Files.Select(x => Path.GetFileNameWithoutExtension(x).ToLower());
-			var datasource = Database.Definitions.Tables
-												 .Where(x => files.Contains(x.Name.ToLower()))
-												 .Select(x => new { Key = x.Build, Value = x.BuildText })
-												 .Distinct()
-												 .Where(x => db2 ? x.Key > (int)ExpansionFinalBuild.WotLK : true); // filter out non DB2/ADB clients
+            var datasource = Database.Definitions.Tables
+                                                 .Where(x => files.Contains(x.Name.ToLower()))
+                                                 .Select(x => new { Key = x.Build, Value = x.BuildText })
+                                                 .Distinct()
+                                                 .Where(x => db2 ? x.Key > (int)ExpansionFinalBuild.WotLK : true); // filter out non DB2/ADB clients
 
-			// filter to the latest build for each version
-			if (mostRecent)
-				datasource = datasource.GroupBy(x => x.Value.Split('(').First()).Select(x => x.Aggregate((a, b) => a.Key > b.Key ? a : b));
+            // filter to the latest build for each version
+            if (mostRecent)
+                datasource = datasource.GroupBy(x => x.Value.Split('(').First()).Select(x => x.Aggregate((a, b) => a.Key > b.Key ? a : b));
 
-			// order
-			datasource = datasource.OrderBy(x => x.Key);
+            // order
+            datasource = datasource.OrderBy(x => x.Key);
 
 
-			lbDefinitions.BeginUpdate();
-            
+            lbDefinitions.BeginUpdate();
+
             if (datasource.Count() == 0)
             {
                 lbDefinitions.DataSource = null;
@@ -131,9 +131,9 @@ namespace WDBXEditor
             lblFiles.Text = Files.Count() == 1 ? "1 file" : Files.Count() + " files";
         }
 
-		private void chkBuildFilter_CheckedChanged(object sender, EventArgs e)
-		{
-			LoadBuilds(!chkBuildFilter.Checked);
-		}
-	}
+        private void chkBuildFilter_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadBuilds(!chkBuildFilter.Checked);
+        }
+    }
 }

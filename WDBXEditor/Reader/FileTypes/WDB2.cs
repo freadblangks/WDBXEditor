@@ -87,7 +87,7 @@ namespace WDBXEditor.Reader.FileTypes
 
                 //Write the data
                 bw.WriteArray(IndiciesTable.ToArray());
-                bw.WriteArray(StringLengthTable.ToArray());                    
+                bw.WriteArray(StringLengthTable.ToArray());
             }
         }
     }

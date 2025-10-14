@@ -2,12 +2,12 @@
 {
     partial class DropdownCheckList
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -22,8 +22,8 @@
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -35,10 +35,10 @@
             this.btnEmpty = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
+            //
             // lbItems
-            // 
-            this.lbItems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.lbItems.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbItems.CheckOnClick = true;
             this.lbItems.FormattingEnabled = true;
@@ -48,10 +48,10 @@
             this.lbItems.TabIndex = 1;
             this.lbItems.Visible = false;
             this.lbItems.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lbItems_ItemCheck);
-            // 
+            //
             // cbBox
-            // 
-            this.cbBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            //
+            this.cbBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbBox.DropDownHeight = 1;
@@ -68,9 +68,9 @@
             this.cbBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cbBox_DrawItem);
             this.cbBox.DropDown += new System.EventHandler(this.cbBox_DropDown);
             this.cbBox.DropDownClosed += new System.EventHandler(this.cbBox_DropDownClosed);
-            // 
+            //
             // btnEmpty
-            // 
+            //
             this.btnEmpty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEmpty.Image = global::WDBXEditor.Properties.Resources.hide;
             this.btnEmpty.Location = new System.Drawing.Point(217, -1);
@@ -80,9 +80,9 @@
             this.btnEmpty.TabIndex = 3;
             this.toolTip1.SetToolTip(this.btnEmpty, "Hide Empty");
             this.btnEmpty.UseVisualStyleBackColor = true;
-            // 
+            //
             // btnReset
-            // 
+            //
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnReset.Image = global::WDBXEditor.Properties.Resources.close;
             this.btnReset.Location = new System.Drawing.Point(246, -1);
@@ -93,9 +93,9 @@
             this.toolTip1.SetToolTip(this.btnReset, "Reset");
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
+            //
             // DropdownCheckList
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnEmpty);

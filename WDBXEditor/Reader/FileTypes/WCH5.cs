@@ -24,7 +24,7 @@ namespace WDBXEditor.Reader.FileTypes
 
         protected WDB5 WDB5CounterPart;
         protected int OffsetMapOffset = 0x30;
-        
+
         public WCH5()
         {
             HeaderSize = 0x30;
@@ -184,7 +184,7 @@ namespace WDBXEditor.Reader.FileTypes
                 OffsetMapOffset = (int)bw.BaseStream.Position;
                 bw.BaseStream.Position += entry.GetPrimaryKeys().Count() * (sizeof(int) + sizeof(int) + sizeof(short));
             }
-                
+
         }
 
         public override void WriteOffsetMap(BinaryWriter bw, DBEntry entry, List<Tuple<int, short>> OffsetMap, int record_offset = 0)

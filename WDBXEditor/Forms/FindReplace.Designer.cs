@@ -42,43 +42,43 @@
             this.rdoText = new System.Windows.Forms.RadioButton();
             this.rdoFlag = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
-            // 
+            //
             // txtFind
-            // 
+            //
             this.txtFind.Location = new System.Drawing.Point(90, 12);
             this.txtFind.Name = "txtFind";
             this.txtFind.Size = new System.Drawing.Size(204, 20);
             this.txtFind.TabIndex = 0;
             this.txtFind.TextChanged += new System.EventHandler(this.txtFind_TextChanged);
-            // 
+            //
             // label1
-            // 
+            //
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Find what:";
-            // 
+            //
             // label2
-            // 
+            //
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Replace with:";
-            // 
+            //
             // txtReplace
-            // 
+            //
             this.txtReplace.Enabled = false;
             this.txtReplace.Location = new System.Drawing.Point(90, 38);
             this.txtReplace.Name = "txtReplace";
             this.txtReplace.Size = new System.Drawing.Size(204, 20);
             this.txtReplace.TabIndex = 1;
-            // 
+            //
             // btnFind
-            // 
+            //
             this.btnFind.Enabled = false;
             this.btnFind.Location = new System.Drawing.Point(300, 10);
             this.btnFind.Name = "btnFind";
@@ -87,9 +87,9 @@
             this.btnFind.Text = "Find Next";
             this.btnFind.UseVisualStyleBackColor = true;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
-            // 
+            //
             // btnReplace
-            // 
+            //
             this.btnReplace.Enabled = false;
             this.btnReplace.Location = new System.Drawing.Point(300, 39);
             this.btnReplace.Name = "btnReplace";
@@ -98,9 +98,9 @@
             this.btnReplace.Text = "Replace";
             this.btnReplace.UseVisualStyleBackColor = true;
             this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click);
-            // 
+            //
             // btnReplaceAll
-            // 
+            //
             this.btnReplaceAll.Enabled = false;
             this.btnReplaceAll.Location = new System.Drawing.Point(300, 68);
             this.btnReplaceAll.Name = "btnReplaceAll";
@@ -109,9 +109,9 @@
             this.btnReplaceAll.Text = "Replace All";
             this.btnReplaceAll.UseVisualStyleBackColor = true;
             this.btnReplaceAll.Click += new System.EventHandler(this.btnReplaceAll_Click);
-            // 
+            //
             // btnCancel
-            // 
+            //
             this.btnCancel.Location = new System.Drawing.Point(300, 97);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
@@ -119,9 +119,9 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
+            //
             // lblResult
-            // 
+            //
             this.lblResult.AutoSize = true;
             this.lblResult.Location = new System.Drawing.Point(12, 114);
             this.lblResult.Name = "lblResult";
@@ -129,9 +129,9 @@
             this.lblResult.TabIndex = 6;
             this.lblResult.Text = "....";
             this.lblResult.Visible = false;
-            // 
+            //
             // chkCase
-            // 
+            //
             this.chkCase.AutoSize = true;
             this.chkCase.Location = new System.Drawing.Point(137, 64);
             this.chkCase.Name = "chkCase";
@@ -140,9 +140,9 @@
             this.chkCase.Text = "Match Case";
             this.chkCase.UseVisualStyleBackColor = true;
             this.chkCase.CheckedChanged += new System.EventHandler(this.chkCase_CheckedChanged);
-            // 
+            //
             // chkExact
-            // 
+            //
             this.chkExact.AutoSize = true;
             this.chkExact.Location = new System.Drawing.Point(137, 87);
             this.chkExact.Name = "chkExact";
@@ -150,9 +150,9 @@
             this.chkExact.TabIndex = 8;
             this.chkExact.Text = "Match Entire Cell Contents";
             this.chkExact.UseVisualStyleBackColor = true;
-            // 
+            //
             // rdoText
-            // 
+            //
             this.rdoText.AutoSize = true;
             this.rdoText.Checked = true;
             this.rdoText.Location = new System.Drawing.Point(137, 110);
@@ -162,9 +162,9 @@
             this.rdoText.TabStop = true;
             this.rdoText.Text = "Text Mode";
             this.rdoText.UseVisualStyleBackColor = true;
-            // 
+            //
             // rdoFlag
-            // 
+            //
             this.rdoFlag.AutoSize = true;
             this.rdoFlag.Location = new System.Drawing.Point(219, 110);
             this.rdoFlag.Name = "rdoFlag";
@@ -172,9 +172,9 @@
             this.rdoFlag.TabIndex = 11;
             this.rdoFlag.Text = "Flag Mode";
             this.rdoFlag.UseVisualStyleBackColor = true;
-            // 
+            //
             // FindReplace
-            // 
+            //
             this.AcceptButton = this.btnFind;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

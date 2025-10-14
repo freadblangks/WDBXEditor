@@ -8,11 +8,11 @@ namespace WDBXEditor.Archives.CASC.Handlers
 {
     public class RootFile
     {
-		public ILookup<ulong, RootEntry> Entries { get; private set; }
+        public ILookup<ulong, RootEntry> Entries { get; private set; }
 
-		public RootEntry[] this[ulong hash] => Entries.Contains(hash) ? Entries[hash].ToArray() : new RootEntry[0];
+        public RootEntry[] this[ulong hash] => Entries.Contains(hash) ? Entries[hash].ToArray() : new RootEntry[0];
 
-		public void LoadEntries(DataFile file, IndexEntry indexEntry)
+        public void LoadEntries(DataFile file, IndexEntry indexEntry)
         {
             var list = new List<RootEntry>();
             var blteEntry = new BinaryReader(DataFile.LoadBLTEEntry(indexEntry, file.readStream));

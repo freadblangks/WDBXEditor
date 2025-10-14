@@ -60,7 +60,7 @@ namespace WDBXEditor.Reader.FileTypes
 
             if (HasIndexTable)
             {
-				FieldCount++;
+                FieldCount++;
                 FieldStructure.Insert(0, new FieldStructureEntry(0, 0));
 
                 if (FieldCount > 1)
@@ -104,8 +104,8 @@ namespace WDBXEditor.Reader.FileTypes
                 }
             }
 
-			if(HasRelationshipData)
-				dbReader.BaseStream.Position += (MaxId - MinId + 1) * 4;
+            if(HasRelationshipData)
+                dbReader.BaseStream.Position += (MaxId - MinId + 1) * 4;
 
             //Index table
             if (HasIndexTable)

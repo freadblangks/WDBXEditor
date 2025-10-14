@@ -234,7 +234,7 @@ namespace WDBXEditor.Archives.MPQ
 
             return (MpqFileVerificationResults)NativeMethods.SFileVerifyFile(_handle, fileToVerify, 0);
         }
-        
+
         public MpqArchiveVerificationResult VerifyArchive()
         {
             VerifyHandle();
